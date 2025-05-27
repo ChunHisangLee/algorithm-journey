@@ -10,52 +10,52 @@ package class162;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 100001;
-//int n;
+// const int MAXN = 100001;
+// int n;
 //
-//int head[MAXN];
-//int nxt[MAXN << 1];
-//int to[MAXN << 1];
-//int cntg;
+// int head[MAXN];
+// int nxt[MAXN << 1];
+// int to[MAXN << 1];
+// int cntg;
 //
-//int fa[MAXN];
-//int son[MAXN];
-//int len[MAXN];
-//int cntd;
+// int fa[MAXN];
+// int son[MAXN];
+// int len[MAXN];
+// int cntd;
 //
-//int fid[MAXN];
-//int gid[MAXN];
-//long long f[MAXN];
-//long long g[MAXN << 1];
-//long long ans;
+// int fid[MAXN];
+// int gid[MAXN];
+// long long f[MAXN];
+// long long g[MAXN << 1];
+// long long ans;
 //
-//void setf(int u, int i, long long v) {
+// void setf(int u, int i, long long v) {
 //    f[fid[u] + i] = v;
-//}
+// }
 //
-//long long getf(int u, int i) {
+// long long getf(int u, int i) {
 //    return f[fid[u] + i];
-//}
+// }
 //
-//void setg(int u, int i, long long v) {
+// void setg(int u, int i, long long v) {
 //    g[gid[u] + i] = v;
-//}
+// }
 //
-//long long getg(int u, int i) {
+// long long getg(int u, int i) {
 //    return g[gid[u] + i];
-//}
+// }
 //
-//void addEdge(int u, int v) {
+// void addEdge(int u, int v) {
 //    nxt[++cntg] = head[u];
 //    to[cntg] = v;
 //    head[u] = cntg;
-//}
+// }
 //
-//void dfs1(int u, int f) {
+// void dfs1(int u, int f) {
 //    fa[u] = f;
 //    for (int e = head[u], v; e > 0; e = nxt[e]) {
 //        v = to[e];
@@ -72,9 +72,9 @@ package class162;
 //        }
 //    }
 //    len[u] = len[son[u]] + 1;
-//}
+// }
 //
-//void dfs2(int u, int top) {
+// void dfs2(int u, int top) {
 //    fid[u] = cntd++;
 //    if (son[u] == 0) {
 //        gid[u] = fid[top] * 2;
@@ -88,9 +88,9 @@ package class162;
 //        }
 //    }
 //    gid[u] = gid[son[u]] + 1;
-//}
+// }
 //
-//void dfs3(int u) {
+// void dfs3(int u) {
 //    setf(u, 0, 1);
 //    if (son[u] == 0) {
 //        return;
@@ -129,9 +129,9 @@ package class162;
 //        }
 //    }
 //    ans += getg(u, 0);
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n;
@@ -145,4 +145,4 @@ package class162;
 //    dfs3(1);
 //    cout << ans << "\n";
 //    return 0;
-//}
+// }

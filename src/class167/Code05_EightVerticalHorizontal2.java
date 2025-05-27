@@ -13,41 +13,41 @@ package class167;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 501;
-//const int MAXQ = 1001;
-//const int MAXT = 10001;
-//const int BIT  = 999;
+// const int MAXN = 501;
+// const int MAXQ = 1001;
+// const int MAXT = 10001;
+// const int BIT  = 999;
 //
-//typedef bitset<BIT + 1> bs;
+// typedef bitset<BIT + 1> bs;
 //
-//int n, m, q;
-//int x[MAXQ];
-//int y[MAXQ];
-//bs w[MAXQ];
-//int edgeCnt = 0;
-//int last[MAXQ];
+// int n, m, q;
+// int x[MAXQ];
+// int y[MAXQ];
+// bs w[MAXQ];
+// int edgeCnt = 0;
+// int last[MAXQ];
 //
-//bs basis[BIT + 1];
-//int inspos[BIT + 1];
-//int basiz = 0;
+// bs basis[BIT + 1];
+// int inspos[BIT + 1];
+// int basiz = 0;
 //
-//int father[MAXN];
-//bs eor[MAXN];
+// int father[MAXN];
+// bs eor[MAXN];
 //
-//int head[MAXQ << 2];
-//int nxt[MAXT];
-//int tox[MAXT];
-//int toy[MAXT];
-//bs tow[MAXT];
-//int cnt = 0;
+// int head[MAXQ << 2];
+// int nxt[MAXT];
+// int tox[MAXT];
+// int toy[MAXT];
+// bs tow[MAXT];
+// int cnt = 0;
 //
-//bs ans[MAXQ];
+// bs ans[MAXQ];
 //
-//void insert(bs& num) {
+// void insert(bs& num) {
 //    for (int i = BIT; i >= 0; --i) {
 //        if (num[i] == 1) {
 //            if (basis[i][i] == 0) {
@@ -58,9 +58,9 @@ package class167;
 //            num ^= basis[i];
 //        }
 //    }
-//}
+// }
 //
-//bs maxEor() {
+// bs maxEor() {
 //    bs ret;
 //    for (int i = BIT; i >= 0; i--) {
 //        if (ret[i] == 0 && basis[i][i] == 1) {
@@ -68,29 +68,29 @@ package class167;
 //        }
 //    }
 //    return ret;
-//}
+// }
 //
-//void cancel(int oldsiz) {
+// void cancel(int oldsiz) {
 //    while (basiz > oldsiz) {
 //        basis[inspos[--basiz]].reset();
 //    }
-//}
+// }
 //
-//int find(int i) {
+// int find(int i) {
 //    if (i != father[i]) {
 //        int tmp = father[i];
 //        father[i] = find(tmp);
 //        eor[i] ^= eor[tmp];
 //    }
 //    return father[i];
-//}
+// }
 //
-//bs getEor(int i) {
+// bs getEor(int i) {
 //    find(i);
 //    return eor[i];
-//}
+// }
 //
-//void Union(int u, int v, bs& w) {
+// void Union(int u, int v, bs& w) {
 //    int fu = find(u);
 //    int fv = find(v);
 //    bs weight = getEor(u) ^ getEor(v) ^ w;
@@ -100,17 +100,17 @@ package class167;
 //        father[fv] = fu;
 //        eor[fv] = weight;
 //    }
-//}
+// }
 //
-//void addEdge(int i, int u, int v, bs& w) {
+// void addEdge(int i, int u, int v, bs& w) {
 //    nxt[++cnt] = head[i];
 //    tox[cnt] = u;
 //    toy[cnt] = v;
 //    tow[cnt] = w;
 //    head[i] = cnt;
-//}
+// }
 //
-//void add(int jobl, int jobr, int jobx, int joby, bs& jobw, int l, int r, int i) {
+// void add(int jobl, int jobr, int jobx, int joby, bs& jobw, int l, int r, int i) {
 //    if (jobl <= l && r <= jobr) {
 //        addEdge(i, jobx, joby, jobw);
 //    } else {
@@ -122,9 +122,9 @@ package class167;
 //            add(jobl, jobr, jobx, joby, jobw, mid + 1, r, i << 1 | 1);
 //        }
 //    }
-//}
+// }
 //
-//void dfs(int l, int r, int i) {
+// void dfs(int l, int r, int i) {
 //    int oldsiz = basiz;
 //    for (int e = head[i]; e; e = nxt[e]) {
 //        Union(tox[e], toy[e], tow[e]);
@@ -137,9 +137,9 @@ package class167;
 //        dfs(mid + 1, r, i << 1 | 1);
 //    }
 //    cancel(oldsiz);
-//}
+// }
 //
-//void print(const bs& ret) {
+// void print(const bs& ret) {
 //    bool flag = false;
 //    for (int i = BIT; i >= 0; i--) {
 //        if (ret[i] == 1) {
@@ -153,9 +153,9 @@ package class167;
 //        cout << '0';
 //    }
 //    cout << '\n';
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> m >> q;
@@ -204,4 +204,4 @@ package class167;
 //        print(ans[i]);
 //    }
 //    return 0;
-//}
+// }

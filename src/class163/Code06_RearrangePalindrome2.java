@@ -11,33 +11,33 @@ package class163;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 500001;
-//const int MAXV = 22;
-//int n;
-//int head[MAXN];
-//int nxt[MAXN];
-//int to[MAXN];
-//int weight[MAXN];
-//int cnt = 0;
-//int siz[MAXN];
-//int dep[MAXN];
-//int eor[MAXN];
-//int son[MAXN];
-//int maxdep[1 << MAXV];
-//int ans[MAXN];
+// const int MAXN = 500001;
+// const int MAXV = 22;
+// int n;
+// int head[MAXN];
+// int nxt[MAXN];
+// int to[MAXN];
+// int weight[MAXN];
+// int cnt = 0;
+// int siz[MAXN];
+// int dep[MAXN];
+// int eor[MAXN];
+// int son[MAXN];
+// int maxdep[1 << MAXV];
+// int ans[MAXN];
 //
-//void addEdge(int u, int v, int w) {
+// void addEdge(int u, int v, int w) {
 //    nxt[++cnt] = head[u];
 //    to[cnt] = v;
 //    weight[cnt] = w;
 //    head[u] = cnt;
-//}
+// }
 //
-//void dfs1(int u, int d, int x) {
+// void dfs1(int u, int d, int x) {
 //    siz[u] = 1;
 //    dep[u] = d;
 //    eor[u] = x;
@@ -51,23 +51,23 @@ package class163;
 //            son[u] = v;
 //        }
 //    }
-//}
+// }
 //
-//void effect(int u) {
+// void effect(int u) {
 //    maxdep[eor[u]] = max(maxdep[eor[u]], dep[u]);
 //    for (int e = head[u]; e > 0; e = nxt[e]) {
 //        effect(to[e]);
 //    }
-//}
+// }
 //
-//void cancel(int u) {
+// void cancel(int u) {
 //    maxdep[eor[u]] = 0;
 //    for (int e = head[u]; e > 0; e = nxt[e]) {
 //        cancel(to[e]);
 //    }
-//}
+// }
 //
-//void answerFromLight(int light, int u) {
+// void answerFromLight(int light, int u) {
 //    if (maxdep[eor[light]] != 0) {
 //        ans[u] = max(ans[u], maxdep[eor[light]] + dep[light] - dep[u] * 2);
 //    }
@@ -79,9 +79,9 @@ package class163;
 //    for (int e = head[light]; e > 0; e = nxt[e]) {
 //        answerFromLight(to[e], u);
 //    }
-//}
+// }
 //
-//void dfs2(int u, int keep) {
+// void dfs2(int u, int keep) {
 //    for (int e = head[u], v; e > 0; e = nxt[e]) {
 //        v = to[e];
 //        if (v != son[u]) {
@@ -113,9 +113,9 @@ package class163;
 //    if (keep == 0) {
 //        cancel(u);
 //    }
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n;
@@ -135,4 +135,4 @@ package class163;
 //    }
 //    cout << "\n";
 //    return 0;
-//}
+// }

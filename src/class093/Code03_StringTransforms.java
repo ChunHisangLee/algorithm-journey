@@ -10,32 +10,31 @@ import java.util.Arrays;
 // 测试链接 : https://leetcode.cn/problems/string-transforms-into-another-string/
 public class Code03_StringTransforms {
 
-	public static boolean canConvert(String str1, String str2) {
-		if (str1.equals(str2)) {
-			return true;
-		}
-		// map[x] : str2中字符x的词频
-		int[] map = new int[26];
-		// kinds : str2中字符的种类数
-		int kinds = 0;
-		for (int i = 0; i < str2.length(); i++) {
-			if (map[str2.charAt(i) - 'a']++ == 0) {
-				kinds++;
-			}
-		}
-		if (kinds == 26) {
-			return false;
-		}
-		Arrays.fill(map, -1);
-		// map[x] = y : str1中的字符x上次出现在str1中的y位置
-		for (int i = 0, cur; i < str1.length(); i++) {
-			cur = str1.charAt(i) - 'a';
-			if (map[cur] != -1 && str2.charAt(map[cur]) != str2.charAt(i)) {
-				return false;
-			}
-			map[cur] = i;
-		}
-		return true;
-	}
-
+  public static boolean canConvert(String str1, String str2) {
+    if (str1.equals(str2)) {
+      return true;
+    }
+    // map[x] : str2中字符x的词频
+    int[] map = new int[26];
+    // kinds : str2中字符的种类数
+    int kinds = 0;
+    for (int i = 0; i < str2.length(); i++) {
+      if (map[str2.charAt(i) - 'a']++ == 0) {
+        kinds++;
+      }
+    }
+    if (kinds == 26) {
+      return false;
+    }
+    Arrays.fill(map, -1);
+    // map[x] = y : str1中的字符x上次出现在str1中的y位置
+    for (int i = 0, cur; i < str1.length(); i++) {
+      cur = str1.charAt(i) - 'a';
+      if (map[cur] != -1 && str2.charAt(map[cur]) != str2.charAt(i)) {
+        return false;
+      }
+      map[cur] = i;
+    }
+    return true;
+  }
 }

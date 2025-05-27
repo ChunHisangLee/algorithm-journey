@@ -13,50 +13,50 @@ package class166;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 500001;
-//const int MAXK = 51;
-//const int MAXT = 10000001;
-//int n, m, k, q;
+// const int MAXN = 500001;
+// const int MAXK = 51;
+// const int MAXT = 10000001;
+// int n, m, k, q;
 //
-//int u[MAXN];
-//int v[MAXN];
+// int u[MAXN];
+// int v[MAXN];
 //
-//int e[MAXN];
-//int c[MAXN];
-//int post[MAXN];
+// int e[MAXN];
+// int c[MAXN];
+// int post[MAXN];
 //
-//int father[MAXK][MAXN << 1];
-//int siz[MAXK][MAXN << 1];
-//int rollback[MAXN << 1][3];
-//int opsize = 0;
+// int father[MAXK][MAXN << 1];
+// int siz[MAXK][MAXN << 1];
+// int rollback[MAXN << 1][3];
+// int opsize = 0;
 //
-//int head[MAXN << 2];
-//int nxt[MAXT];
-//int qid[MAXT];
-//int cnt = 0;
+// int head[MAXN << 2];
+// int nxt[MAXT];
+// int qid[MAXT];
+// int cnt = 0;
 //
-//int lastColor[MAXN];
+// int lastColor[MAXN];
 //
-//bool ans[MAXN];
+// bool ans[MAXN];
 //
-//void addEdge(int i, int qi) {
+// void addEdge(int i, int qi) {
 //    nxt[++cnt] = head[i];
 //    qid[cnt] = qi;
 //    head[i] = cnt;
-//}
+// }
 //
-//int find(int color, int i) {
+// int find(int color, int i) {
 //    while (i != father[color][i]) {
 //        i = father[color][i];
 //    }
 //    return i;
-//}
+// }
 //
-//void Union(int color, int x, int y) {
+// void Union(int color, int x, int y) {
 //    int fx = find(color, x);
 //    int fy = find(color, y);
 //    if (siz[color][fx] < siz[color][fy]) {
@@ -69,17 +69,17 @@ package class166;
 //    rollback[++opsize][0] = color;
 //    rollback[opsize][1] = fx;
 //    rollback[opsize][2] = fy;
-//}
+// }
 //
-//void undo() {
+// void undo() {
 //    int color = rollback[opsize][0];
 //    int fx = rollback[opsize][1];
 //    int fy = rollback[opsize--][2];
 //    father[color][fy] = fy;
 //    siz[color][fx] -= siz[color][fy];
-//}
+// }
 //
-//void add(int jobl, int jobr, int jobq, int l, int r, int i) {
+// void add(int jobl, int jobr, int jobq, int l, int r, int i) {
 //    if (jobl <= l && r <= jobr) {
 //        addEdge(i, jobq);
 //    } else {
@@ -91,9 +91,9 @@ package class166;
 //            add(jobl, jobr, jobq, mid + 1, r, i << 1 | 1);
 //        }
 //    }
-//}
+// }
 //
-//void dfs(int l, int r, int i) {
+// void dfs(int l, int r, int i) {
 //    int unionCnt = 0;
 //    int color, x, y, xn, yn, fx, fy, fxn, fyn;
 //    for (int ei = head[i]; ei > 0; ei = nxt[ei]) {
@@ -131,9 +131,9 @@ package class166;
 //    for (int j = 1; j <= unionCnt; j++) {
 //        undo();
 //    }
-//}
+// }
 //
-//void prepare() {
+// void prepare() {
 //    for (int color = 1; color <= k; color++) {
 //        for (int i = 1; i <= n; i++) {
 //            father[color][i] = i;
@@ -151,9 +151,9 @@ package class166;
 //        }
 //        post[e[i]] = i;
 //    }
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> m >> k >> q;
@@ -173,4 +173,4 @@ package class166;
 //        }
 //    }
 //    return 0;
-//}
+// }

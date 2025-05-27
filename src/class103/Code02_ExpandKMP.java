@@ -20,63 +20,62 @@ import java.io.PrintWriter;
 
 public class Code02_ExpandKMP {
 
-	public static int MAXN = 20000001;
+  public static int MAXN = 20000001;
 
-	public static int[] z = new int[MAXN];
+  public static int[] z = new int[MAXN];
 
-	public static int[] e = new int[MAXN];
+  public static int[] e = new int[MAXN];
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		char[] a = in.readLine().toCharArray();
-		char[] b = in.readLine().toCharArray();
-		zArray(b, b.length);
-		eArray(a, b, a.length, b.length);
-		out.println(eor(z, b.length));
-		out.println(eor(e, a.length));
-		out.flush();
-		out.close();
-		in.close();
-	}
+  public static void main(String[] args) throws IOException {
+    BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    char[] a = in.readLine().toCharArray();
+    char[] b = in.readLine().toCharArray();
+    zArray(b, b.length);
+    eArray(a, b, a.length, b.length);
+    out.println(eor(z, b.length));
+    out.println(eor(e, a.length));
+    out.flush();
+    out.close();
+    in.close();
+  }
 
-	// 非常像Manacher算法
-	public static void zArray(char[] s, int n) {
-		z[0] = n;
-		for (int i = 1, c = 1, r = 1, len; i < n; i++) {
-			len = r > i ? Math.min(r - i, z[i - c]) : 0;
-			while (i + len < n && s[i + len] == s[len]) {
-				len++;
-			}
-			if (i + len > r) {
-				r = i + len;
-				c = i;
-			}
-			z[i] = len;
-		}
-	}
+  // 非常像Manacher算法
+  public static void zArray(char[] s, int n) {
+    z[0] = n;
+    for (int i = 1, c = 1, r = 1, len; i < n; i++) {
+      len = r > i ? Math.min(r - i, z[i - c]) : 0;
+      while (i + len < n && s[i + len] == s[len]) {
+        len++;
+      }
+      if (i + len > r) {
+        r = i + len;
+        c = i;
+      }
+      z[i] = len;
+    }
+  }
 
-	// 非常像Manacher算法
-	public static void eArray(char[] a, char[] b, int n, int m) {
-		for (int i = 0, c = 0, r = 0, len; i < n; i++) {
-			len = r > i ? Math.min(r - i, z[i - c]) : 0;
-			while (i + len < n && len < m && a[i + len] == b[len]) {
-				len++;
-			}
-			if (i + len > r) {
-				r = i + len;
-				c = i;
-			}
-			e[i] = len;
-		}
-	}
+  // 非常像Manacher算法
+  public static void eArray(char[] a, char[] b, int n, int m) {
+    for (int i = 0, c = 0, r = 0, len; i < n; i++) {
+      len = r > i ? Math.min(r - i, z[i - c]) : 0;
+      while (i + len < n && len < m && a[i + len] == b[len]) {
+        len++;
+      }
+      if (i + len > r) {
+        r = i + len;
+        c = i;
+      }
+      e[i] = len;
+    }
+  }
 
-	public static long eor(int[] arr, int n) {
-		long ans = 0;
-		for (int i = 0; i < n; i++) {
-			ans ^= (long) (i + 1) * (arr[i] + 1);
-		}
-		return ans;
-	}
-
+  public static long eor(int[] arr, int n) {
+    long ans = 0;
+    for (int i = 0; i < n; i++) {
+      ans ^= (long) (i + 1) * (arr[i] + 1);
+    }
+    return ans;
+  }
 }

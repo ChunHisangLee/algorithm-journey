@@ -11,51 +11,51 @@ package class164;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//struct Edge {
+// struct Edge {
 //    int u, v, w, i;
-//};
+// };
 //
-//bool cmp(Edge x, Edge y) {
+// bool cmp(Edge x, Edge y) {
 //    return x.w > y.w;
-//}
+// }
 //
-//const int MAXK = 800001;
-//const int MAXM = 400001;
-//const int MAXH = 20;
-//int n, m, q;
-//Edge edge[MAXM];
-//int edgeToTree[MAXM];
+// const int MAXK = 800001;
+// const int MAXM = 400001;
+// const int MAXH = 20;
+// int n, m, q;
+// Edge edge[MAXM];
+// int edgeToTree[MAXM];
 //
-//int father[MAXK];
+// int father[MAXK];
 //
-//int head[MAXK];
-//int nxt[MAXK];
-//int to[MAXK];
-//int cntg;
-//int nodeKey[MAXK];
-//int cntu;
+// int head[MAXK];
+// int nxt[MAXK];
+// int to[MAXK];
+// int cntg;
+// int nodeKey[MAXK];
+// int cntu;
 //
-//int leafsiz[MAXK];
-//int stjump[MAXK][MAXH];
+// int leafsiz[MAXK];
+// int stjump[MAXK][MAXH];
 //
-//int find(int i) {
+// int find(int i) {
 //    if (i != father[i]) {
 //        father[i] = find(father[i]);
 //    }
 //    return father[i];
-//}
+// }
 //
-//void addEdge(int u, int v) {
+// void addEdge(int u, int v) {
 //    nxt[++cntg] = head[u];
 //    to[cntg] = v;
 //    head[u] = cntg;
-//}
+// }
 //
-//void kruskalRebuild() {
+// void kruskalRebuild() {
 //    for (int i = 1; i <= n; i++) {
 //        father[i] = i;
 //    }
@@ -73,9 +73,9 @@ package class164;
 //            edgeToTree[edge[i].i] = cntu;
 //        }
 //    }
-//}
+// }
 //
-//void dfs(int u, int fa) {
+// void dfs(int u, int fa) {
 //    stjump[u][0] = fa;
 //    for (int p = 1; p < MAXH; p++) {
 //        stjump[u][p] = stjump[stjump[u][p - 1]][p - 1];
@@ -91,18 +91,18 @@ package class164;
 //    for (int e = head[u]; e > 0; e = nxt[e]) {
 //        leafsiz[u] += leafsiz[to[e]];
 //    }
-//}
+// }
 //
-//int query(int u, int limit) {
+// int query(int u, int limit) {
 //    for (int p = MAXH - 1; p >= 0; p--) {
 //        if (stjump[u][p] > 0 && nodeKey[stjump[u][p]] >= limit) {
 //            u = stjump[u][p];
 //        }
 //    }
 //    return leafsiz[u];
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> m >> q;
@@ -132,4 +132,4 @@ package class164;
 //        }
 //    }
 //    return 0;
-//}
+// }

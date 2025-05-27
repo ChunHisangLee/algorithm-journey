@@ -5,17 +5,17 @@ package class022;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 100001;
-//int n;
+// const int MAXN = 100001;
+// int n;
 //
-//int arr[MAXN];
-//int help[MAXN];
+// int arr[MAXN];
+// int help[MAXN];
 //
-//long long merge(int l, int m, int r) {
+// long long merge(int l, int m, int r) {
 //    long long ans = 0;
 //    for (int j = m + 1, i = l, sum = 0; j <= r; j++) {
 //        while (i <= m && arr[i] <= arr[j]) {
@@ -37,17 +37,17 @@ package class022;
 //        arr[i] = help[i];
 //    }
 //    return ans;
-//}
+// }
 //
-//long long smallSum(int l, int r) {
+// long long smallSum(int l, int r) {
 //    if (l == r) {
 //        return 0;
 //    }
 //    int m = (l + r) >> 1;
 //    return smallSum(l, m) + smallSum(m + 1, r) + merge(l, m, r);
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    while (cin >> n) {
@@ -57,4 +57,4 @@ package class022;
 //        cout << smallSum(0, n - 1) << '\n';
 //    }
 //    return 0;
-//}
+// }

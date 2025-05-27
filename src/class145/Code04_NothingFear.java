@@ -25,96 +25,95 @@ import java.util.Arrays;
 
 public class Code04_NothingFear {
 
-	public static int MAXN = 2001;
+  public static int MAXN = 2001;
 
-	public static int MOD = 1000000009;
+  public static int MOD = 1000000009;
 
-	public static int n, k;
+  public static int n, k;
 
-	public static int[] a = new int[MAXN];
+  public static int[] a = new int[MAXN];
 
-	public static int[] b = new int[MAXN];
+  public static int[] b = new int[MAXN];
 
-	public static long[] fac = new long[MAXN];
+  public static long[] fac = new long[MAXN];
 
-	public static long[][] c = new long[MAXN][MAXN];
+  public static long[][] c = new long[MAXN][MAXN];
 
-	public static long[] small = new long[MAXN];
+  public static long[] small = new long[MAXN];
 
-	public static long[][] dp = new long[MAXN][MAXN];
+  public static long[][] dp = new long[MAXN][MAXN];
 
-	public static long[] g = new long[MAXN];
+  public static long[] g = new long[MAXN];
 
-	public static void build() {
-		fac[0] = 1;
-		for (int i = 1; i <= n; i++) {
-			fac[i] = fac[i - 1] * i % MOD;
-		}
-		for (int i = 0; i <= n; i++) {
-			c[i][0] = 1;
-			for (int j = 1; j <= i; j++) {
-				c[i][j] = (c[i - 1][j] + c[i - 1][j - 1]) % MOD;
-			}
-		}
-	}
+  public static void build() {
+    fac[0] = 1;
+    for (int i = 1; i <= n; i++) {
+      fac[i] = fac[i - 1] * i % MOD;
+    }
+    for (int i = 0; i <= n; i++) {
+      c[i][0] = 1;
+      for (int j = 1; j <= i; j++) {
+        c[i][j] = (c[i - 1][j] + c[i - 1][j - 1]) % MOD;
+      }
+    }
+  }
 
-	public static long compute() {
-		build();
-		Arrays.sort(a, 1, n + 1);
-		Arrays.sort(b, 1, n + 1);
-		for (int i = 1, cnt = 0; i <= n; i++) {
-			while (cnt + 1 <= n && b[cnt + 1] < a[i]) {
-				cnt++;
-			}
-			small[i] = cnt;
-		}
-		dp[0][0] = 1;
-		for (int i = 1; i <= n; i++) {
-			dp[i][0] = dp[i - 1][0];
-			for (int j = 1; j <= i; j++) {
-				dp[i][j] = (dp[i - 1][j] + dp[i - 1][j - 1] * (small[i] - j + 1) % MOD) % MOD;
-			}
-		}
-		for (int i = 0; i <= n; i++) {
-			g[i] = fac[n - i] * dp[n][i] % MOD;
-		}
-		long ans = 0;
-		for (int i = k; i <= n; i++) {
-			if (((i - k) & 1) == 0) {
-				ans = (ans + c[i][k] * g[i] % MOD) % MOD;
-			} else {
-				// -1 和 (MOD-1) 同余
-				ans = (ans + c[i][k] * g[i] % MOD * (MOD - 1) % MOD) % MOD;
-			}
-		}
-		return ans;
-	}
+  public static long compute() {
+    build();
+    Arrays.sort(a, 1, n + 1);
+    Arrays.sort(b, 1, n + 1);
+    for (int i = 1, cnt = 0; i <= n; i++) {
+      while (cnt + 1 <= n && b[cnt + 1] < a[i]) {
+        cnt++;
+      }
+      small[i] = cnt;
+    }
+    dp[0][0] = 1;
+    for (int i = 1; i <= n; i++) {
+      dp[i][0] = dp[i - 1][0];
+      for (int j = 1; j <= i; j++) {
+        dp[i][j] = (dp[i - 1][j] + dp[i - 1][j - 1] * (small[i] - j + 1) % MOD) % MOD;
+      }
+    }
+    for (int i = 0; i <= n; i++) {
+      g[i] = fac[n - i] * dp[n][i] % MOD;
+    }
+    long ans = 0;
+    for (int i = k; i <= n; i++) {
+      if (((i - k) & 1) == 0) {
+        ans = (ans + c[i][k] * g[i] % MOD) % MOD;
+      } else {
+        // -1 和 (MOD-1) 同余
+        ans = (ans + c[i][k] * g[i] % MOD * (MOD - 1) % MOD) % MOD;
+      }
+    }
+    return ans;
+  }
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StreamTokenizer in = new StreamTokenizer(br);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		in.nextToken();
-		n = (int) in.nval;
-		in.nextToken();
-		k = (int) in.nval;
-		for (int i = 1; i <= n; i++) {
-			in.nextToken();
-			a[i] = (int) in.nval;
-		}
-		for (int i = 1; i <= n; i++) {
-			in.nextToken();
-			b[i] = (int) in.nval;
-		}
-		if (((n + k) & 1) == 0) {
-			k = (n + k) / 2;
-			out.println(compute());
-		} else {
-			out.println(0);
-		}
-		out.flush();
-		out.close();
-		br.close();
-	}
-
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StreamTokenizer in = new StreamTokenizer(br);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    in.nextToken();
+    n = (int) in.nval;
+    in.nextToken();
+    k = (int) in.nval;
+    for (int i = 1; i <= n; i++) {
+      in.nextToken();
+      a[i] = (int) in.nval;
+    }
+    for (int i = 1; i <= n; i++) {
+      in.nextToken();
+      b[i] = (int) in.nval;
+    }
+    if (((n + k) & 1) == 0) {
+      k = (n + k) / 2;
+      out.println(compute());
+    } else {
+      out.println(0);
+    }
+    out.flush();
+    out.close();
+    br.close();
+  }
 }

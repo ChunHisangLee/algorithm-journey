@@ -9,12 +9,11 @@ package class082;
 // 测试链接 : https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/
 public class Code02_Stock2 {
 
-	public static int maxProfit(int[] prices) {
-		int ans = 0;
-		for (int i = 1; i < prices.length; i++) {
-			ans += Math.max(prices[i] - prices[i - 1], 0);
-		}
-		return ans;
-	}
-
+  public static int maxProfit(int[] prices) {
+    int ans = 0;
+    for (int i = 1; i < prices.length; i++) {
+      ans += Math.max(prices[i] - prices[i - 1], 0);
+    }
+    return ans;
+  }
 }

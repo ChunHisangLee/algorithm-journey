@@ -17,18 +17,17 @@ import java.io.StreamTokenizer;
 
 public class Code05_LargestUnattainable {
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StreamTokenizer in = new StreamTokenizer(br);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		in.nextToken();
-		long a = (long) in.nval;
-		in.nextToken();
-		long b = (long) in.nval;
-		out.println(a * b - a - b);
-		out.flush();
-		out.close();
-		br.close();
-	}
-
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StreamTokenizer in = new StreamTokenizer(br);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    in.nextToken();
+    long a = (long) in.nval;
+    in.nextToken();
+    long b = (long) in.nval;
+    out.println(a * b - a - b);
+    out.flush();
+    out.close();
+    br.close();
+  }
 }

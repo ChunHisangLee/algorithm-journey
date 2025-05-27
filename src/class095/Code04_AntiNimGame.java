@@ -20,43 +20,42 @@ import java.io.StreamTokenizer;
 
 public class Code04_AntiNimGame {
 
-	public static int MAXN = 51;
+  public static int MAXN = 51;
 
-	public static int[] stones = new int[MAXN];
+  public static int[] stones = new int[MAXN];
 
-	public static int t, n;
+  public static int t, n;
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StreamTokenizer in = new StreamTokenizer(br);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		in.nextToken();
-		t = (int) in.nval;
-		for (int i = 0; i < t; i++) {
-			in.nextToken();
-			n = (int) in.nval;
-			for (int j = 0; j < n; j++) {
-				in.nextToken();
-				stones[j] = (int) in.nval;
-			}
-			out.println(compute());
-		}
-		out.flush();
-		out.close();
-		br.close();
-	}
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StreamTokenizer in = new StreamTokenizer(br);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    in.nextToken();
+    t = (int) in.nval;
+    for (int i = 0; i < t; i++) {
+      in.nextToken();
+      n = (int) in.nval;
+      for (int j = 0; j < n; j++) {
+        in.nextToken();
+        stones[j] = (int) in.nval;
+      }
+      out.println(compute());
+    }
+    out.flush();
+    out.close();
+    br.close();
+  }
 
-	public static String compute() {
-		int eor = 0, sum = 0;
-		for (int i = 0; i < n; i++) {
-			eor ^= stones[i];
-			sum += stones[i] == 1 ? 1 : 0;
-		}
-		if (sum == n) {
-			return (n & 1) == 1 ? "Brother" : "John";
-		} else {
-			return eor != 0 ? "John" : "Brother";
-		}
-	}
-
+  public static String compute() {
+    int eor = 0, sum = 0;
+    for (int i = 0; i < n; i++) {
+      eor ^= stones[i];
+      sum += stones[i] == 1 ? 1 : 0;
+    }
+    if (sum == n) {
+      return (n & 1) == 1 ? "Brother" : "John";
+    } else {
+      return eor != 0 ? "John" : "Brother";
+    }
+  }
 }

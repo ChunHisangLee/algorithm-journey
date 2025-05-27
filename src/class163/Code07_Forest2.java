@@ -13,38 +13,38 @@ package class163;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 80001;
-//const int MAXT = MAXN * 110;
-//const int MAXH = 20;
-//int testcase;
-//int n, m, t;
+// const int MAXN = 80001;
+// const int MAXT = MAXN * 110;
+// const int MAXH = 20;
+// int testcase;
+// int n, m, t;
 //
-//int arr[MAXN];
-//int sorted[MAXN];
-//int diff;
+// int arr[MAXN];
+// int sorted[MAXN];
+// int diff;
 //
-//int head[MAXN];
-//int nxt[MAXN << 1];
-//int to[MAXN << 1];
-//int cntg = 0;
+// int head[MAXN];
+// int nxt[MAXN << 1];
+// int to[MAXN << 1];
+// int cntg = 0;
 //
-//int root[MAXN];
-//int ls[MAXT];
-//int rs[MAXT];
-//int siz[MAXT];
-//int cntt = 0;
+// int root[MAXN];
+// int ls[MAXT];
+// int rs[MAXT];
+// int siz[MAXT];
+// int cntt = 0;
 //
-//int dep[MAXN];
-//int stjump[MAXN][MAXH];
+// int dep[MAXN];
+// int stjump[MAXN][MAXH];
 //
-//int treeHead[MAXN];
-//int setSiz[MAXN];
+// int treeHead[MAXN];
+// int setSiz[MAXN];
 //
-//int kth(int num) {
+// int kth(int num) {
 //    int left = 1, right = diff, mid;
 //    while (left <= right) {
 //        mid = (left + right) / 2;
@@ -57,15 +57,15 @@ package class163;
 //        }
 //    }
 //    return -1;
-//}
+// }
 //
-//void addEdge(int u, int v) {
+// void addEdge(int u, int v) {
 //    nxt[++cntg] = head[u];
 //    to[cntg] = v;
 //    head[u] = cntg;
-//}
+// }
 //
-//int insert(int jobi, int l, int r, int i) {
+// int insert(int jobi, int l, int r, int i) {
 //    int rt = ++cntt;
 //    ls[rt] = ls[i];
 //    rs[rt] = rs[i];
@@ -79,9 +79,9 @@ package class163;
 //        }
 //    }
 //    return rt;
-//}
+// }
 //
-//int query(int jobk, int l, int r, int u, int v, int lca_, int lcafa) {
+// int query(int jobk, int l, int r, int u, int v, int lca_, int lcafa) {
 //    if (l == r) {
 //        return l;
 //    }
@@ -92,9 +92,9 @@ package class163;
 //    } else {
 //        return query(jobk - lsize, mid + 1, r, rs[u], rs[v], rs[lca_], rs[lcafa]);
 //    }
-//}
+// }
 //
-//int lca(int a, int b) {
+// int lca(int a, int b) {
 //    if (dep[a] < dep[b]) {
 //        int tmp = a;
 //        a = b;
@@ -115,16 +115,16 @@ package class163;
 //        }
 //    }
 //    return stjump[a][0];
-//}
+// }
 //
-//int queryKth(int x, int y, int k) {
+// int queryKth(int x, int y, int k) {
 //    int xylca = lca(x, y);
 //    int lcafa = stjump[xylca][0];
 //    int i = query(k, 1, diff, root[x], root[y], root[xylca], root[lcafa]);
 //    return sorted[i];
-//}
+// }
 //
-//void dfs(int u, int fa, int treeh) {
+// void dfs(int u, int fa, int treeh) {
 //    root[u] = insert(arr[u], 1, diff, root[fa]);
 //    dep[u] = dep[fa] + 1;
 //    treeHead[u] = treeh;
@@ -138,9 +138,9 @@ package class163;
 //            dfs(to[e], u, treeh);
 //        }
 //    }
-//}
+// }
 //
-//void connect(int x, int y) {
+// void connect(int x, int y) {
 //    addEdge(x, y);
 //    addEdge(y, x);
 //    int fx = treeHead[x];
@@ -150,9 +150,9 @@ package class163;
 //    } else {
 //        dfs(x, y, fy);
 //    }
-//}
+// }
 //
-//void prepare() {
+// void prepare() {
 //    for (int i = 1; i <= n; i++) {
 //        sorted[i] = arr[i];
 //    }
@@ -171,9 +171,9 @@ package class163;
 //            dfs(i, 0, i);
 //        }
 //    }
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> testcase >> n >> m >> t;
@@ -205,4 +205,4 @@ package class163;
 //        }
 //    }
 //    return 0;
-//}
+// }

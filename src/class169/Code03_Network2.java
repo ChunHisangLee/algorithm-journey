@@ -13,49 +13,49 @@ package class169;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 100001;
-//const int MAXM = 200001;
-//const int MAXH = 20;
-//const int INF = 1000000001;
-//int n, m;
+// const int MAXN = 100001;
+// const int MAXM = 200001;
+// const int MAXH = 20;
+// const int INF = 1000000001;
+// int n, m;
 //
-//int head[MAXN];
-//int nxt[MAXN << 1];
-//int to[MAXN << 1];
-//int cntg = 0;
+// int head[MAXN];
+// int nxt[MAXN << 1];
+// int to[MAXN << 1];
+// int cntg = 0;
 //
-//int fa[MAXN];
-//int dep[MAXN];
-//int siz[MAXN];
-//int dfn[MAXN];
-//int stjump[MAXN][MAXH];
-//int cntd = 0;
+// int fa[MAXN];
+// int dep[MAXN];
+// int siz[MAXN];
+// int dfn[MAXN];
+// int stjump[MAXN][MAXH];
+// int cntd = 0;
 //
-//int tree[MAXN];
+// int tree[MAXN];
 //
-//int eid[MAXM];
-//int op[MAXM];
-//int x[MAXM];
-//int y[MAXM];
-//int v[MAXM];
-//int cntq = 0;
+// int eid[MAXM];
+// int op[MAXM];
+// int x[MAXM];
+// int y[MAXM];
+// int v[MAXM];
+// int cntq = 0;
 //
-//int lset[MAXM];
-//int rset[MAXM];
+// int lset[MAXM];
+// int rset[MAXM];
 //
-//int ans[MAXM];
+// int ans[MAXM];
 //
-//void addEdge(int u, int v) {
+// void addEdge(int u, int v) {
 //    nxt[++cntg] = head[u];
 //    to[cntg] = v;
 //    head[u] = cntg;
-//}
+// }
 //
-//void dfs(int u, int f) {
+// void dfs(int u, int f) {
 //    fa[u] = f;
 //    dep[u] = dep[f] + 1;
 //    siz[u] = 1;
@@ -74,9 +74,9 @@ package class169;
 //            siz[u] += siz[to[e]];
 //        }
 //    }
-//}
+// }
 //
-//int lca(int a, int b) {
+// int lca(int a, int b) {
 //    if (dep[a] < dep[b]) {
 //        int tmp = a;
 //        a = b;
@@ -97,29 +97,29 @@ package class169;
 //        }
 //    }
 //    return stjump[a][0];
-//}
+// }
 //
-//int lowbit(int i) {
+// int lowbit(int i) {
 //    return i & -i;
-//}
+// }
 //
-//void add(int i, int v) {
+// void add(int i, int v) {
 //    while (i <= n) {
 //        tree[i] += v;
 //        i += lowbit(i);
 //    }
-//}
+// }
 //
-//int query(int i) {
+// int query(int i) {
 //    int ret = 0;
 //    while (i > 0) {
 //        ret += tree[i];
 //        i -= lowbit(i);
 //    }
 //    return ret;
-//}
+// }
 //
-//void pathAdd(int x, int y, int v) {
+// void pathAdd(int x, int y, int v) {
 //    int xylca = lca(x, y);
 //    int lcafa = fa[xylca];
 //    add(dfn[x], v);
@@ -128,13 +128,13 @@ package class169;
 //    if (lcafa != 0) {
 //        add(dfn[lcafa], -v);
 //    }
-//}
+// }
 //
-//int pointQuery(int x) {
+// int pointQuery(int x) {
 //    return query(dfn[x] + siz[x] - 1) - query(dfn[x] - 1);
-//}
+// }
 //
-//void compute(int el, int er, int vl, int vr) {
+// void compute(int el, int er, int vl, int vr) {
 //    if (el > er) {
 //        return;
 //    }
@@ -192,9 +192,9 @@ package class169;
 //        compute(el, el + lsiz - 1, vl, mid);
 //        compute(el + lsiz, er, mid + 1, vr);
 //    }
-//}
+// }
 //
-//void prepare() {
+// void prepare() {
 //    dfs(1, 0);
 //    for (int i = 1; i <= m; i++) {
 //        if (op[i] == 1) {
@@ -210,9 +210,9 @@ package class169;
 //    for (int i = 1; i <= m; i++) {
 //        eid[i] = i;
 //    }
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> m;
@@ -237,4 +237,4 @@ package class169;
 //        }
 //    }
 //    return 0;
-//}
+// }

@@ -12,52 +12,52 @@ package class167;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//struct Product {
+// struct Product {
 //    int s, v;
-//};
+// };
 //
-//bool ProductCmp(Product a, Product b) {
+// bool ProductCmp(Product a, Product b) {
 //    return a.s < b.s;
-//}
+// }
 //
-//const int MAXN = 100001;
-//const int MAXT = 2000001;
-//const int BIT = 16;
-//int n, m, t;
+// const int MAXN = 100001;
+// const int MAXT = 2000001;
+// const int BIT = 16;
+// int n, m, t;
 //
-//int arr[MAXN];
-//int op[MAXN];
-//int s[MAXN];
-//int v[MAXN];
-//int sl[MAXN];
-//int sr[MAXN];
-//int x[MAXN];
-//int d[MAXN];
-//int tim[MAXN];
+// int arr[MAXN];
+// int op[MAXN];
+// int s[MAXN];
+// int v[MAXN];
+// int sl[MAXN];
+// int sr[MAXN];
+// int x[MAXN];
+// int d[MAXN];
+// int tim[MAXN];
 //
-//int root[MAXN];
-//int tree[MAXT][2];
-//int pass[MAXT];
-//int cntt;
+// int root[MAXN];
+// int tree[MAXT][2];
+// int pass[MAXT];
+// int cntt;
 //
-//int headp[MAXN << 2];
-//int nextp[MAXT];
-//int pid[MAXT];
-//int cntp;
+// int headp[MAXN << 2];
+// int nextp[MAXT];
+// int pid[MAXT];
+// int cntp;
 //
-//int headb[MAXN << 2];
-//int nextb[MAXT];
-//int bid[MAXT];
-//int cntb;
+// int headb[MAXN << 2];
+// int nextb[MAXT];
+// int bid[MAXT];
+// int cntb;
 //
-//Product product[MAXN];
-//int ans[MAXN];
+// Product product[MAXN];
+// int ans[MAXN];
 //
-//int insert(int num, int i) {
+// int insert(int num, int i) {
 //    int rt = ++cntt;
 //    tree[rt][0] = tree[i][0];
 //    tree[rt][1] = tree[i][1];
@@ -72,9 +72,9 @@ package class167;
 //        tree[pre][path] = cur;
 //    }
 //    return rt;
-//}
+// }
 //
-//int query(int num, int u, int v) {
+// int query(int num, int u, int v) {
 //    int ansv = 0;
 //    for (int b = BIT, path, best; b >= 0; b--) {
 //        path = (num >> b) & 1;
@@ -89,21 +89,21 @@ package class167;
 //        }
 //    }
 //    return ansv;
-//}
+// }
 //
-//void addInfoP(int i, int pi) {
+// void addInfoP(int i, int pi) {
 //    nextp[++cntp] = headp[i];
 //    pid[cntp] = pi;
 //    headp[i] = cntp;
-//}
+// }
 //
-//void addInfoB(int i, int bi) {
+// void addInfoB(int i, int bi) {
 //    nextb[++cntb] = headb[i];
 //    bid[cntb] = bi;
 //    headb[i] = cntb;
-//}
+// }
 //
-//void addProduct(int jobi, int pi, int l, int r, int i) {
+// void addProduct(int jobi, int pi, int l, int r, int i) {
 //    addInfoP(i, pi);
 //    if (l < r) {
 //        int mid = (l + r) >> 1;
@@ -113,9 +113,9 @@ package class167;
 //            addProduct(jobi, pi, mid + 1, r, i << 1 | 1);
 //        }
 //    }
-//}
+// }
 //
-//void addBuy(int jobl, int jobr, int bi, int l, int r, int i) {
+// void addBuy(int jobl, int jobr, int bi, int l, int r, int i) {
 //    if (jobl <= l && r <= jobr) {
 //        addInfoB(i, bi);
 //    } else {
@@ -127,9 +127,9 @@ package class167;
 //            addBuy(jobl, jobr, bi, mid + 1, r, i << 1 | 1);
 //        }
 //    }
-//}
+// }
 //
-//int lower(int size, int num) {
+// int lower(int size, int num) {
 //    int l = 1, r = size, ansv = size + 1;
 //    while (l <= r) {
 //        int mid = (l + r) >> 1;
@@ -141,9 +141,9 @@ package class167;
 //        }
 //    }
 //    return ansv;
-//}
+// }
 //
-//int upper(int size, int num) {
+// int upper(int size, int num) {
 //    int l = 1, r = size, ansv = 0;
 //    while (l <= r) {
 //        int mid = (l + r) >> 1;
@@ -155,9 +155,9 @@ package class167;
 //        }
 //    }
 //    return ansv;
-//}
+// }
 //
-//void dfs(int l, int r, int i) {
+// void dfs(int l, int r, int i) {
 //    int pcnt = 0;
 //    for (int e = headp[i]; e > 0; e = nextp[e]) {
 //        product[++pcnt].s = s[pid[e]];
@@ -179,9 +179,9 @@ package class167;
 //        dfs(l, mid, i << 1);
 //        dfs(mid + 1, r, i << 1 | 1);
 //    }
-//}
+// }
 //
-//void prepare() {
+// void prepare() {
 //    for (int i = 1; i <= n; i++) {
 //        root[i] = insert(arr[i], root[i - 1]);
 //    }
@@ -196,9 +196,9 @@ package class167;
 //            }
 //        }
 //    }
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> m;
@@ -224,4 +224,4 @@ package class167;
 //        }
 //    }
 //    return 0;
-//}
+// }

@@ -9,31 +9,31 @@ package class161;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 500001;
-//int n, m, root;
+// const int MAXN = 500001;
+// int n, m, root;
 //
-//int head[MAXN];
-//int nxt[MAXN << 1];
-//int to[MAXN << 1];
-//int cnt = 0;
+// int head[MAXN];
+// int nxt[MAXN << 1];
+// int to[MAXN << 1];
+// int cnt = 0;
 //
-//int fa[MAXN];
-//int dep[MAXN];
-//int siz[MAXN];
-//int son[MAXN];
-//int top[MAXN];
+// int fa[MAXN];
+// int dep[MAXN];
+// int siz[MAXN];
+// int son[MAXN];
+// int top[MAXN];
 //
-//void addEdge(int u, int v) {
+// void addEdge(int u, int v) {
 //    nxt[++cnt] = head[u];
 //    to[cnt] = v;
 //    head[u] = cnt;
-//}
+// }
 //
-//void dfs1(int u, int f) {
+// void dfs1(int u, int f) {
 //    fa[u] = f;
 //    dep[u] = dep[f] + 1;
 //    siz[u] = 1;
@@ -52,9 +52,9 @@ package class161;
 //            }
 //        }
 //    }
-//}
+// }
 //
-//void dfs2(int u, int t) {
+// void dfs2(int u, int t) {
 //    top[u] = t;
 //    if(son[u] == 0) {
 //        return;
@@ -66,9 +66,9 @@ package class161;
 //            dfs2(v, v);
 //        }
 //    }
-//}
+// }
 //
-//int lca(int a, int b) {
+// int lca(int a, int b) {
 //    while (top[a] != top[b]) {
 //        if (dep[top[a]] <= dep[top[b]]) {
 //            b = fa[top[b]];
@@ -77,9 +77,9 @@ package class161;
 //        }
 //    }
 //    return dep[a] <= dep[b] ? a : b;
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> m >> root;
@@ -95,4 +95,4 @@ package class161;
 //        cout << lca(a, b) << "\n";
 //    }
 //    return 0;
-//}
+// }

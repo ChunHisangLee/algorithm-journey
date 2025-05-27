@@ -13,33 +13,33 @@ package class162;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 200001;
-//int n, k;
-//int arr[MAXN];
+// const int MAXN = 200001;
+// int n, k;
+// int arr[MAXN];
 //
-//int head[MAXN];
-//int nxt[MAXN << 1];
-//int to[MAXN << 1];
-//int cnt = 0;
+// int head[MAXN];
+// int nxt[MAXN << 1];
+// int to[MAXN << 1];
+// int cnt = 0;
 //
-//int fa[MAXN];
-//int son[MAXN];
-//int top[MAXN];
-//long long money[MAXN];
+// int fa[MAXN];
+// int son[MAXN];
+// int top[MAXN];
+// long long money[MAXN];
 //
-//long long sorted[MAXN];
+// long long sorted[MAXN];
 //
-//void addEdge(int u, int v) {
+// void addEdge(int u, int v) {
 //    nxt[++cnt] = head[u];
 //    to[cnt] = v;
 //    head[u] = cnt;
-//}
+// }
 //
-//void dfs1(int u, int f) {
+// void dfs1(int u, int f) {
 //    for (int e = head[u], v; e > 0; e = nxt[e]) {
 //        v = to[e];
 //        if (v != f) {
@@ -56,9 +56,9 @@ package class162;
 //    }
 //    fa[u] = f;
 //    money[u] = money[son[u]] + arr[u];
-//}
+// }
 //
-//void dfs2(int u, int t) {
+// void dfs2(int u, int t) {
 //    top[u] = t;
 //    if (son[u] == 0) {
 //        return;
@@ -70,9 +70,9 @@ package class162;
 //            dfs2(v, v);
 //        }
 //    }
-//}
+// }
 //
-//long long compute() {
+// long long compute() {
 //    int len = 0;
 //    for (int i = 1; i <= n; i++) {
 //        if (top[i] == i) {
@@ -85,9 +85,9 @@ package class162;
 //        ans += sorted[j];
 //    }
 //    return ans;
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> k;
@@ -104,4 +104,4 @@ package class162;
 //    dfs2(1, 1);
 //    cout << compute() << "\n";
 //    return 0;
-//}
+// }

@@ -16,41 +16,40 @@ import java.util.ArrayList;
 // 测试链接 : https://leetcode.cn/problems/parallel-courses-iii/
 public class Code03_ParallelCoursesIII {
 
-	public static int minimumTime(int n, int[][] relations, int[] time) {
-		// 点 : 1....n
-		ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
-		for (int i = 0; i <= n; i++) {
-			graph.add(new ArrayList<>());
-		}
-		int[] indegree = new int[n + 1];
-		for (int[] edge : relations) {
-			graph.get(edge[0]).add(edge[1]);
-			indegree[edge[1]]++;
-		}
-		int[] queue = new int[n];
-		int l = 0;
-		int r = 0;
-		for (int i = 1; i <= n; i++) {
-			if (indegree[i] == 0) {
-				queue[r++] = i;
-			}
-		}
-		int[] cost = new int[n + 1];
-		int ans = 0;
-		while (l < r) {
-			int cur = queue[l++];
-			// 1 : time[0]
-			// x : time[x-1]
-			cost[cur] += time[cur - 1];
-			ans = Math.max(ans, cost[cur]);
-			for (int next : graph.get(cur)) {
-				cost[next] = Math.max(cost[next], cost[cur]);
-				if (--indegree[next] == 0) {
-					queue[r++] = next;
-				}
-			}
-		}
-		return ans;
-	}
-
+  public static int minimumTime(int n, int[][] relations, int[] time) {
+    // 点 : 1....n
+    ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
+    for (int i = 0; i <= n; i++) {
+      graph.add(new ArrayList<>());
+    }
+    int[] indegree = new int[n + 1];
+    for (int[] edge : relations) {
+      graph.get(edge[0]).add(edge[1]);
+      indegree[edge[1]]++;
+    }
+    int[] queue = new int[n];
+    int l = 0;
+    int r = 0;
+    for (int i = 1; i <= n; i++) {
+      if (indegree[i] == 0) {
+        queue[r++] = i;
+      }
+    }
+    int[] cost = new int[n + 1];
+    int ans = 0;
+    while (l < r) {
+      int cur = queue[l++];
+      // 1 : time[0]
+      // x : time[x-1]
+      cost[cur] += time[cur - 1];
+      ans = Math.max(ans, cost[cur]);
+      for (int next : graph.get(cur)) {
+        cost[next] = Math.max(cost[next], cost[cur]);
+        if (--indegree[next] == 0) {
+          queue[r++] = next;
+        }
+      }
+    }
+    return ans;
+  }
 }

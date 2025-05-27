@@ -14,55 +14,54 @@ package class056;
 // 测试链接 : https://leetcode.cn/problems/similar-string-groups/
 public class Code04_SimilarStringGroups {
 
-	public static int MAXN = 301;
+  public static int MAXN = 301;
 
-	public static int[] father = new int[MAXN];
+  public static int[] father = new int[MAXN];
 
-	public static int sets;
+  public static int sets;
 
-	public static void build(int n) {
-		for (int i = 0; i < n; i++) {
-			father[i] = i;
-		}
-		sets = n;
-	}
+  public static void build(int n) {
+    for (int i = 0; i < n; i++) {
+      father[i] = i;
+    }
+    sets = n;
+  }
 
-	public static int find(int i) {
-		if (i != father[i]) {
-			father[i] = find(father[i]);
-		}
-		return father[i];
-	}
+  public static int find(int i) {
+    if (i != father[i]) {
+      father[i] = find(father[i]);
+    }
+    return father[i];
+  }
 
-	public static void union(int x, int y) {
-		int fx = find(x);
-		int fy = find(y);
-		if (fx != fy) {
-			father[fx] = fy;
-			sets--;
-		}
-	}
+  public static void union(int x, int y) {
+    int fx = find(x);
+    int fy = find(y);
+    if (fx != fy) {
+      father[fx] = fy;
+      sets--;
+    }
+  }
 
-	public static int numSimilarGroups(String[] strs) {
-		int n = strs.length;
-		int m = strs[0].length();
-		build(n);
-		for (int i = 0; i < n; i++) {
-			for (int j = i + 1; j < n; j++) {
-				if (find(i) != find(j)) {
-					int diff = 0;
-					for (int k = 0; k < m && diff < 3; k++) {
-						if (strs[i].charAt(k) != strs[j].charAt(k)) {
-							diff++;
-						}
-					}
-					if (diff == 0 || diff == 2) {
-						union(i, j);
-					}
-				}
-			}
-		}
-		return sets;
-	}
-
+  public static int numSimilarGroups(String[] strs) {
+    int n = strs.length;
+    int m = strs[0].length();
+    build(n);
+    for (int i = 0; i < n; i++) {
+      for (int j = i + 1; j < n; j++) {
+        if (find(i) != find(j)) {
+          int diff = 0;
+          for (int k = 0; k < m && diff < 3; k++) {
+            if (strs[i].charAt(k) != strs[j].charAt(k)) {
+              diff++;
+            }
+          }
+          if (diff == 0 || diff == 2) {
+            union(i, j);
+          }
+        }
+      }
+    }
+    return sets;
+  }
 }

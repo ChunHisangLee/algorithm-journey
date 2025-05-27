@@ -21,46 +21,47 @@ import java.util.Arrays;
 
 public class Code04_CrossRiver {
 
-	public static int MAXN = 100001;
+  public static int MAXN = 100001;
 
-	public static int[] nums = new int[MAXN];
+  public static int[] nums = new int[MAXN];
 
-	public static int[] dp = new int[MAXN];
+  public static int[] dp = new int[MAXN];
 
-	public static int n;
+  public static int n;
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StreamTokenizer in = new StreamTokenizer(br);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		while (in.nextToken() != StreamTokenizer.TT_EOF) {
-			n = (int) in.nval;
-			for (int i = 0; i < n; i++) {
-				in.nextToken();
-				nums[i] = (int) in.nval;
-			}
-			out.println(minCost());
-		}
-		out.flush();
-		out.close();
-		br.close();
-	}
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StreamTokenizer in = new StreamTokenizer(br);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    while (in.nextToken() != StreamTokenizer.TT_EOF) {
+      n = (int) in.nval;
+      for (int i = 0; i < n; i++) {
+        in.nextToken();
+        nums[i] = (int) in.nval;
+      }
+      out.println(minCost());
+    }
+    out.flush();
+    out.close();
+    br.close();
+  }
 
-	public static int minCost() {
-		Arrays.sort(nums, 0, n);
-		if (n >= 1) {
-			dp[0] = nums[0];
-		}
-		if (n >= 2) {
-			dp[1] = nums[1];
-		}
-		if (n >= 3) {
-			dp[2] = nums[0] + nums[1] + nums[2];
-		}
-		for (int i = 3; i < n; i++) {
-			dp[i] = Math.min(dp[i - 1] + nums[i] + nums[0], dp[i - 2] + nums[1] + nums[1] + nums[i] + nums[0]);
-		}
-		return dp[n - 1];
-	}
-
+  public static int minCost() {
+    Arrays.sort(nums, 0, n);
+    if (n >= 1) {
+      dp[0] = nums[0];
+    }
+    if (n >= 2) {
+      dp[1] = nums[1];
+    }
+    if (n >= 3) {
+      dp[2] = nums[0] + nums[1] + nums[2];
+    }
+    for (int i = 3; i < n; i++) {
+      dp[i] =
+          Math.min(
+              dp[i - 1] + nums[i] + nums[0], dp[i - 2] + nums[1] + nums[1] + nums[i] + nums[0]);
+    }
+    return dp[n - 1];
+  }
 }

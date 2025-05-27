@@ -9,22 +9,22 @@ package class157;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 200001;
-//const int MAXT = MAXN * 22;
-//int n, m, s;
-//int arr[MAXN];
-//int sorted[MAXN];
-//int root[MAXN];
-//int ls[MAXT];
-//int rs[MAXT];
-//int size[MAXT];
-//int cnt;
+// const int MAXN = 200001;
+// const int MAXT = MAXN * 22;
+// int n, m, s;
+// int arr[MAXN];
+// int sorted[MAXN];
+// int root[MAXN];
+// int ls[MAXT];
+// int rs[MAXT];
+// int size[MAXT];
+// int cnt;
 //
-//int kth(int num) {
+// int kth(int num) {
 //    int left = 1, right = s, mid, ans = 0;
 //    while (left <= right) {
 //        mid = (left + right) / 2;
@@ -36,9 +36,9 @@ package class157;
 //        }
 //    }
 //    return ans;
-//}
+// }
 //
-//int build(int l, int r) {
+// int build(int l, int r) {
 //    int rt = ++cnt;
 //    size[rt] = 0;
 //    if (l < r) {
@@ -47,9 +47,9 @@ package class157;
 //        rs[rt] = build(mid + 1, r);
 //    }
 //    return rt;
-//}
+// }
 //
-//int insert(int jobi, int l, int r, int i) {
+// int insert(int jobi, int l, int r, int i) {
 //    int rt = ++cnt;
 //    ls[rt] = ls[i];
 //    rs[rt] = rs[i];
@@ -63,9 +63,9 @@ package class157;
 //        }
 //    }
 //    return rt;
-//}
+// }
 //
-//int query(int jobk, int l, int r, int u, int v) {
+// int query(int jobk, int l, int r, int u, int v) {
 //    if (l == r) {
 //        return l;
 //    }
@@ -76,9 +76,9 @@ package class157;
 //    } else {
 //        return query(jobk - lsize, mid + 1, r, rs[u], rs[v]);
 //    }
-//}
+// }
 //
-//void prepare() {
+// void prepare() {
 //    cnt = 0;
 //    for (int i = 1; i <= n; i++) {
 //        sorted[i] = arr[i];
@@ -95,9 +95,9 @@ package class157;
 //        x = kth(arr[i]);
 //        root[i] = insert(x, 1, s, root[i - 1]);
 //    }
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> m;
@@ -111,4 +111,4 @@ package class157;
 //        cout << sorted[rank] << '\n';
 //    }
 //    return 0;
-//}
+// }

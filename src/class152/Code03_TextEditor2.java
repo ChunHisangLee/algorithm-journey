@@ -13,30 +13,30 @@ package class152;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <iostream>
-//#include <vector>
-//#include <cstdlib>
-//#include <cstring>
-//#include <algorithm>
-//using namespace std;
+// #include <iostream>
+// #include <vector>
+// #include <cstdlib>
+// #include <cstring>
+// #include <algorithm>
+// using namespace std;
 //
-//const int MAXN = 2000001;
+// const int MAXN = 2000001;
 //
-//int head = 0;
-//int cnt = 0;
-//char key[MAXN];
-//int ls[MAXN];
-//int rs[MAXN];
-//int size[MAXN];
-//double priority[MAXN];
-//char ans[MAXN];
-//int ansi;
+// int head = 0;
+// int cnt = 0;
+// char key[MAXN];
+// int ls[MAXN];
+// int rs[MAXN];
+// int size[MAXN];
+// double priority[MAXN];
+// char ans[MAXN];
+// int ansi;
 //
-//void up(int i) {
+// void up(int i) {
 //    size[i] = size[ls[i]] + size[rs[i]] + 1;
-//}
+// }
 //
-//void split(int l, int r, int i, int rank) {
+// void split(int l, int r, int i, int rank) {
 //    if (i == 0) {
 //        rs[l] = ls[r] = 0;
 //    } else {
@@ -49,9 +49,9 @@ package class152;
 //        }
 //        up(i);
 //    }
-//}
+// }
 //
-//int merge(int l, int r) {
+// int merge(int l, int r) {
 //    if (l == 0 || r == 0) {
 //        return l + r;
 //    }
@@ -64,17 +64,17 @@ package class152;
 //        up(r);
 //        return r;
 //    }
-//}
+// }
 //
-//void inorder(int i) {
+// void inorder(int i) {
 //    if (i != 0) {
 //        inorder(ls[i]);
 //        ans[++ansi] = key[i];
 //        inorder(rs[i]);
 //    }
-//}
+// }
 //
-//int main() {
+// int main() {
 //    srand(time(0));
 //    int pos = 0, len, l, m, lm, r;
 //    int n;
@@ -130,4 +130,4 @@ package class152;
 //        }
 //    }
 //    return 0;
-//}
+// }

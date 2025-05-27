@@ -19,97 +19,95 @@ import java.util.StringTokenizer;
 
 public class Code04_DoubleString {
 
-	/*
-输入如下
-5
-10.203E+0000
-5.6920E+0001
-30.888E-0001
-400.20E+0002
-0.2373E-0002
-	 */
-	public static void main(String[] args) throws IOException {
-		// test1();
-		test2();
-	}
+  /*
+  输入如下
+  5
+  10.203E+0000
+  5.6920E+0001
+  30.888E-0001
+  400.20E+0002
+  0.2373E-0002
+  	 */
+  public static void main(String[] args) throws IOException {
+    // test1();
+    test2();
+  }
 
-	// Kattio类IO效率很好，但还是不如StreamTokenizer
-	// 只有StreamTokenizer无法正确处理时，才考虑使用这个类
-	// 参考链接 : https://oi-wiki.org/lang/java-pro/
-	public static class Kattio extends PrintWriter {
-		private BufferedReader r;
-		private StringTokenizer st;
+  // StreamTokenizer无法正确读取
+  public static void test1() throws IOException {
+    System.out.println("测试StreamTokenizer");
+    System.out.println("输入 : ");
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StreamTokenizer in = new StreamTokenizer(br);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    in.nextToken();
+    int n = (int) in.nval;
+    double num;
+    for (int i = 1; i <= n; i++) {
+      in.nextToken();
+      num = (double) in.nval;
+      out.println(num);
+    }
+    out.flush();
+    out.close();
+    br.close();
+  }
 
-		public Kattio() {
-			this(System.in, System.out);
-		}
+  // StringTokenizer可以正确读取
+  public static void test2() throws IOException {
+    System.out.println("测试StringTokenizer");
+    System.out.println("输入 : ");
+    Kattio io = new Kattio();
+    int n = io.nextInt();
+    double num;
+    for (int i = 1; i <= n; i++) {
+      num = io.nextDouble();
+      io.println(num);
+    }
+    io.flush();
+    io.close();
+  }
 
-		public Kattio(InputStream i, OutputStream o) {
-			super(o);
-			r = new BufferedReader(new InputStreamReader(i));
-		}
+  // Kattio类IO效率很好，但还是不如StreamTokenizer
+  // 只有StreamTokenizer无法正确处理时，才考虑使用这个类
+  // 参考链接 : https://oi-wiki.org/lang/java-pro/
+  public static class Kattio extends PrintWriter {
+    private BufferedReader r;
+    private StringTokenizer st;
 
-		public Kattio(String intput, String output) throws IOException {
-			super(output);
-			r = new BufferedReader(new FileReader(intput));
-		}
+    public Kattio() {
+      this(System.in, System.out);
+    }
 
-		public String next() {
-			try {
-				while (st == null || !st.hasMoreTokens())
-					st = new StringTokenizer(r.readLine());
-				return st.nextToken();
-			} catch (Exception e) {
-			}
-			return null;
-		}
+    public Kattio(InputStream i, OutputStream o) {
+      super(o);
+      r = new BufferedReader(new InputStreamReader(i));
+    }
 
-		public int nextInt() {
-			return Integer.parseInt(next());
-		}
+    public Kattio(String intput, String output) throws IOException {
+      super(output);
+      r = new BufferedReader(new FileReader(intput));
+    }
 
-		public double nextDouble() {
-			return Double.parseDouble(next());
-		}
+    public String next() {
+      try {
+        while (st == null || !st.hasMoreTokens()) st = new StringTokenizer(r.readLine());
+        return st.nextToken();
+      } catch (Exception e) {
+      }
+      return null;
+    }
 
-		public long nextLong() {
-			return Long.parseLong(next());
-		}
-	}
+    public int nextInt() {
+      return Integer.parseInt(next());
+    }
 
-	// StreamTokenizer无法正确读取
-	public static void test1() throws IOException {
-		System.out.println("测试StreamTokenizer");
-		System.out.println("输入 : ");
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StreamTokenizer in = new StreamTokenizer(br);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		in.nextToken();
-		int n = (int) in.nval;
-		double num;
-		for (int i = 1; i <= n; i++) {
-			in.nextToken();
-			num = (double) in.nval;
-			out.println(num);
-		}
-		out.flush();
-		out.close();
-		br.close();
-	}
+    public double nextDouble() {
+      return Double.parseDouble(next());
+    }
 
-	// StringTokenizer可以正确读取
-	public static void test2() throws IOException {
-		System.out.println("测试StringTokenizer");
-		System.out.println("输入 : ");
-		Kattio io = new Kattio();
-		int n = io.nextInt();
-		double num;
-		for (int i = 1; i <= n; i++) {
-			num = io.nextDouble();
-			io.println(num);
-		}
-		io.flush();
-		io.close();
-	}
-
+    public long nextLong() {
+      return Long.parseLong(next());
+    }
+  }
 }

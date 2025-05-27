@@ -21,136 +21,135 @@ import java.io.StreamTokenizer;
 
 public class Code01_GamblerBo {
 
-	public static int MOD = 3;
+  public static int MOD = 3;
 
-	public static int MAXS = 1001;
+  public static int MAXS = 1001;
 
-	public static int[][] mat = new int[MAXS][MAXS];
+  public static int[][] mat = new int[MAXS][MAXS];
 
-	public static int[] dir = { 0, -1, 0, 1, 0 };
+  public static int[] dir = {0, -1, 0, 1, 0};
 
-	public static int n, m, s;
+  public static int n, m, s;
 
-	public static int[] inv = new int[MOD];
+  public static int[] inv = new int[MOD];
 
-	public static void inv() {
-		inv[1] = 1;
-		for (int i = 2; i < MOD; i++) {
-			inv[i] = (int) (MOD - (long) inv[MOD % i] * (MOD / i) % MOD);
-		}
-	}
+  public static void inv() {
+    inv[1] = 1;
+    for (int i = 2; i < MOD; i++) {
+      inv[i] = (int) (MOD - (long) inv[MOD % i] * (MOD / i) % MOD);
+    }
+  }
 
-	public static int gcd(int a, int b) {
-		return b == 0 ? a : gcd(b, a % b);
-	}
+  public static int gcd(int a, int b) {
+    return b == 0 ? a : gcd(b, a % b);
+  }
 
-	public static void prepare() {
-		for (int i = 1; i <= s; i++) {
-			for (int j = 1; j <= s + 1; j++) {
-				mat[i][j] = 0;
-			}
-		}
-		int cur, row, col;
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < m; j++) {
-				cur = i * m + j + 1;
-				mat[cur][cur] = 2;
-				for (int d = 0; d <= 3; d++) {
-					row = i + dir[d];
-					col = j + dir[d + 1];
-					if (row >= 0 && row < n && col >= 0 && col < m) {
-						mat[cur][row * m + col + 1] = 1;
-					}
-				}
-			}
-		}
-	}
+  public static void prepare() {
+    for (int i = 1; i <= s; i++) {
+      for (int j = 1; j <= s + 1; j++) {
+        mat[i][j] = 0;
+      }
+    }
+    int cur, row, col;
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        cur = i * m + j + 1;
+        mat[cur][cur] = 2;
+        for (int d = 0; d <= 3; d++) {
+          row = i + dir[d];
+          col = j + dir[d + 1];
+          if (row >= 0 && row < n && col >= 0 && col < m) {
+            mat[cur][row * m + col + 1] = 1;
+          }
+        }
+      }
+    }
+  }
 
-	// 这道题目比较特殊，打印任何一种方案都可以
-	// 于是认为所有自由元的操作次数为0
-	// 也就是认为消元之后，主元不被任何自由元影响
-	// 所以代码可以简化
-	public static void gauss(int n) {
-		for (int i = 1; i <= n; i++) {
-			for (int j = 1; j <= n; j++) {
-				if (j < i && mat[j][j] != 0) {
-					continue;
-				}
-				if (mat[j][i] != 0) {
-					swap(i, j);
-					break;
-				}
-			}
-			if (mat[i][i] != 0) {
-				for (int j = 1; j <= n; j++) {
-					if (i != j && mat[j][i] != 0) {
-						int gcd = gcd(mat[j][i], mat[i][i]);
-						int a = mat[i][i] / gcd;
-						int b = mat[j][i] / gcd;
-						if (j < i && mat[j][j] != 0) {
-							// 只需要调整，j行主元的系数，也就是j行j列的值
-							// 不需要调整，j行，j+1列 ~ i-1列的值，所对应自由元的系数
-							// 因为最终方案默认所有自由元都不操作
-							mat[j][j] = (mat[j][j] * a) % MOD;
-						}
-						// 正常消元
-						for (int k = i; k <= n + 1; k++) {
-							mat[j][k] = ((mat[j][k] * a - mat[i][k] * b) % MOD + MOD) % MOD;
-						}
-					}
-				}
-			}
-		}
-		// 由于本题的特殊性，不需要去管任何自由元的影响
-		// 就当自由元不操作，直接求主元的操作次数即可
-		for (int i = 1; i <= n; i++) {
-			if (mat[i][i] != 0) {
-				mat[i][n + 1] = (mat[i][n + 1] * inv[mat[i][i]]) % MOD;
-			}
-		}
-	}
+  // 这道题目比较特殊，打印任何一种方案都可以
+  // 于是认为所有自由元的操作次数为0
+  // 也就是认为消元之后，主元不被任何自由元影响
+  // 所以代码可以简化
+  public static void gauss(int n) {
+    for (int i = 1; i <= n; i++) {
+      for (int j = 1; j <= n; j++) {
+        if (j < i && mat[j][j] != 0) {
+          continue;
+        }
+        if (mat[j][i] != 0) {
+          swap(i, j);
+          break;
+        }
+      }
+      if (mat[i][i] != 0) {
+        for (int j = 1; j <= n; j++) {
+          if (i != j && mat[j][i] != 0) {
+            int gcd = gcd(mat[j][i], mat[i][i]);
+            int a = mat[i][i] / gcd;
+            int b = mat[j][i] / gcd;
+            if (j < i && mat[j][j] != 0) {
+              // 只需要调整，j行主元的系数，也就是j行j列的值
+              // 不需要调整，j行，j+1列 ~ i-1列的值，所对应自由元的系数
+              // 因为最终方案默认所有自由元都不操作
+              mat[j][j] = (mat[j][j] * a) % MOD;
+            }
+            // 正常消元
+            for (int k = i; k <= n + 1; k++) {
+              mat[j][k] = ((mat[j][k] * a - mat[i][k] * b) % MOD + MOD) % MOD;
+            }
+          }
+        }
+      }
+    }
+    // 由于本题的特殊性，不需要去管任何自由元的影响
+    // 就当自由元不操作，直接求主元的操作次数即可
+    for (int i = 1; i <= n; i++) {
+      if (mat[i][i] != 0) {
+        mat[i][n + 1] = (mat[i][n + 1] * inv[mat[i][i]]) % MOD;
+      }
+    }
+  }
 
-	public static void swap(int a, int b) {
-		int[] tmp = mat[a];
-		mat[a] = mat[b];
-		mat[b] = tmp;
-	}
+  public static void swap(int a, int b) {
+    int[] tmp = mat[a];
+    mat[a] = mat[b];
+    mat[b] = tmp;
+  }
 
-	public static void main(String[] args) throws IOException {
-		inv();
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StreamTokenizer in = new StreamTokenizer(br);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		in.nextToken();
-		int test = (int) in.nval;
-		for (int t = 1; t <= test; t++) {
-			in.nextToken();
-			n = (int) in.nval;
-			in.nextToken();
-			m = (int) in.nval;
-			s = n * m;
-			prepare();
-			for (int i = 1; i <= s; i++) {
-				in.nextToken();
-				mat[i][s + 1] = (3 - (int) in.nval) % MOD;
-			}
-			gauss(s);
-			int ans = 0;
-			for (int i = 1; i <= s; i++) {
-				ans += mat[i][s + 1];
-			}
-			out.println(ans);
-			for (int i = 1, id = 1; i <= n; i++) {
-				for (int j = 1; j <= m; j++, id++) {
-					while (mat[id][s + 1]-- > 0) {
-						out.println(i + " " + j);
-					}
-				}
-			}
-		}
-		out.flush();
-		out.close();
-		br.close();
-	}
-
+  public static void main(String[] args) throws IOException {
+    inv();
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StreamTokenizer in = new StreamTokenizer(br);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    in.nextToken();
+    int test = (int) in.nval;
+    for (int t = 1; t <= test; t++) {
+      in.nextToken();
+      n = (int) in.nval;
+      in.nextToken();
+      m = (int) in.nval;
+      s = n * m;
+      prepare();
+      for (int i = 1; i <= s; i++) {
+        in.nextToken();
+        mat[i][s + 1] = (3 - (int) in.nval) % MOD;
+      }
+      gauss(s);
+      int ans = 0;
+      for (int i = 1; i <= s; i++) {
+        ans += mat[i][s + 1];
+      }
+      out.println(ans);
+      for (int i = 1, id = 1; i <= n; i++) {
+        for (int j = 1; j <= m; j++, id++) {
+          while (mat[id][s + 1]-- > 0) {
+            out.println(i + " " + j);
+          }
+        }
+      }
+    }
+    out.flush();
+    out.close();
+    br.close();
+  }
 }

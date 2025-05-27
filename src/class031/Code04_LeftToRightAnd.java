@@ -6,11 +6,10 @@ package class031;
 // 测试链接 : https://leetcode.cn/problems/bitwise-and-of-numbers-range/
 public class Code04_LeftToRightAnd {
 
-	public static int rangeBitwiseAnd(int left, int right) {
-		while (left < right) {
-			right -= right & -right;
-		}
-		return right;
-	}
-
+  public static int rangeBitwiseAnd(int left, int right) {
+    while (left < right) {
+      right -= right & -right;
+    }
+    return right;
+  }
 }

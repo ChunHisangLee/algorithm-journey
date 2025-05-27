@@ -24,44 +24,43 @@ import java.io.StreamTokenizer;
 
 public class Code05_EDGame2 {
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StreamTokenizer in = new StreamTokenizer(br);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		in.nextToken();
-		int t = (int) in.nval;
-		for (int i = 0; i < t; i++) {
-			in.nextToken();
-			int n = (int) in.nval;
-			int sg = 0;
-			for (int j = 1, a, b; j <= n; j += 2) {
-				in.nextToken();
-				a = (int) in.nval;
-				in.nextToken();
-				b = (int) in.nval;
-				sg ^= lowZero((a - 1) | (b - 1));
-			}
-			if (sg != 0) {
-				out.println("YES");
-			} else {
-				out.println("NO");
-			}
-		}
-		out.flush();
-		out.close();
-		br.close();
-	}
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StreamTokenizer in = new StreamTokenizer(br);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    in.nextToken();
+    int t = (int) in.nval;
+    for (int i = 0; i < t; i++) {
+      in.nextToken();
+      int n = (int) in.nval;
+      int sg = 0;
+      for (int j = 1, a, b; j <= n; j += 2) {
+        in.nextToken();
+        a = (int) in.nval;
+        in.nextToken();
+        b = (int) in.nval;
+        sg ^= lowZero((a - 1) | (b - 1));
+      }
+      if (sg != 0) {
+        out.println("YES");
+      } else {
+        out.println("NO");
+      }
+    }
+    out.flush();
+    out.close();
+    br.close();
+  }
 
-	public static int lowZero(int status) {
-		int ans = 0;
-		while (status > 0) {
-			if ((status & 1) == 0) {
-				break;
-			}
-			status >>= 1;
-			ans++;
-		}
-		return ans;
-	}
-
+  public static int lowZero(int status) {
+    int ans = 0;
+    while (status > 0) {
+      if ((status & 1) == 0) {
+        break;
+      }
+      status >>= 1;
+      ans++;
+    }
+    return ans;
+  }
 }

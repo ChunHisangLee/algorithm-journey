@@ -9,18 +9,18 @@ package class157;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <iostream>
-//#include <cstdio>
-//#include <cstring>
-//#include <algorithm>
-//using namespace std;
+// #include <iostream>
+// #include <cstdio>
+// #include <cstring>
+// #include <algorithm>
+// using namespace std;
 //
-//const int MAXN = 100001;
-//long long arr[MAXN];
-//long long sum[MAXN << 2];
-//long long addTag[MAXN << 2];
+// const int MAXN = 100001;
+// long long arr[MAXN];
+// long long sum[MAXN << 2];
+// long long addTag[MAXN << 2];
 //
-//void build(int l, int r, int i) {
+// void build(int l, int r, int i) {
 //    if (l == r) {
 //        sum[i] = arr[l];
 //    } else {
@@ -30,9 +30,9 @@ package class157;
 //        sum[i] = sum[i << 1] + sum[i << 1 | 1];
 //    }
 //    addTag[i] = 0;
-//}
+// }
 //
-//void add(int jobl, int jobr, long long jobv, int l, int r, int i) {
+// void add(int jobl, int jobr, long long jobv, int l, int r, int i) {
 //    int a = max(jobl, l), b = min(jobr, r);
 //    sum[i] += jobv * (b - a + 1);
 //    if (jobl <= l && r <= jobr) {
@@ -46,9 +46,9 @@ package class157;
 //            add(jobl, jobr, jobv, mid + 1, r, i << 1 | 1);
 //        }
 //    }
-//}
+// }
 //
-//long long query(int jobl, int jobr, long long addHistory, int l, int r, int i) {
+// long long query(int jobl, int jobr, long long addHistory, int l, int r, int i) {
 //    if (jobl <= l && r <= jobr) {
 //        return sum[i] + addHistory * (r - l + 1);
 //    }
@@ -61,9 +61,9 @@ package class157;
 //        ans += query(jobl, jobr, addHistory + addTag[i], mid + 1, r, i << 1 | 1);
 //    }
 //    return ans;
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    int n, m;
@@ -85,4 +85,4 @@ package class157;
 //        }
 //    }
 //    return 0;
-//}
+// }

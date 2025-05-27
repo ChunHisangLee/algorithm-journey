@@ -26,33 +26,33 @@ package class154;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 2000001;
-//int t, w, n, m;
-//long long k;
-//long long num[MAXN];
-//int up[MAXN];
-//int ls[MAXN];
-//int rs[MAXN];
-//int dist[MAXN];
-//int fa[MAXN];
+// const int MAXN = 2000001;
+// int t, w, n, m;
+// long long k;
+// long long num[MAXN];
+// int up[MAXN];
+// int ls[MAXN];
+// int rs[MAXN];
+// int dist[MAXN];
+// int fa[MAXN];
 //
-//void prepare() {
+// void prepare() {
 //    dist[0] = -1;
 //    for (int i = 1; i <= n; i++) {
 //        up[i] = ls[i] = rs[i] = dist[i] = 0;
 //        fa[i] = i;
 //    }
-//}
+// }
 //
-//int find(int i) {
+// int find(int i) {
 //    return fa[i] == i ? i : (fa[i] = find(fa[i]));
-//}
+// }
 //
-//int merge(int i, int j) {
+// int merge(int i, int j) {
 //    if (i == 0 || j == 0) {
 //        return i + j;
 //    }
@@ -67,9 +67,9 @@ package class154;
 //    dist[i] = dist[rs[i]] + 1;
 //    fa[ls[i]] = fa[rs[i]] = i;
 //    return i;
-//}
+// }
 //
-//int remove(int i) {
+// int remove(int i) {
 //    int h = find(i);
 //    fa[ls[i]] = ls[i];
 //    fa[rs[i]] = rs[i];
@@ -93,15 +93,15 @@ package class154;
 //    }
 //    up[i] = ls[i] = rs[i] = dist[i] = 0;
 //    return fa[s];
-//}
+// }
 //
-//void reduce(int i, long long v) {
+// void reduce(int i, long long v) {
 //    int h = remove(i);
 //    num[i] = max(num[i] - v, 0LL);
 //    fa[h] = fa[i] = merge(h, i);
-//}
+// }
 //
-//long long compute() {
+// long long compute() {
 //    long long ans = 0;
 //    long long mx = 0;
 //    for (int i = 1; i <= n; i++) {
@@ -116,9 +116,9 @@ package class154;
 //        ans += mx;
 //    }
 //    return ans;
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(NULL);
 //    cin >> t >> w >> k;
@@ -154,4 +154,4 @@ package class154;
 //        }
 //    }
 //    return 0;
-//}
+// }

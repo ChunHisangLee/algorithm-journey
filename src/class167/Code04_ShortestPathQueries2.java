@@ -13,15 +13,15 @@ package class167;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//struct Event {
+// struct Event {
 //    int x, y, t, w;
-//};
+// };
 //
-//bool EventCmp(Event a, Event b) {
+// bool EventCmp(Event a, Event b) {
 //    if (a.x != b.x) {
 //        return a.x < b.x;
 //    } else if (a.y != b.y) {
@@ -29,41 +29,41 @@ package class167;
 //    } else {
 //        return a.t < b.t;
 //    }
-//}
+// }
 //
-//const int MAXN = 200001;
-//const int MAXT = 5000001;
-//const int BIT = 29;
-//int n, m, q;
+// const int MAXN = 200001;
+// const int MAXT = 5000001;
+// const int BIT = 29;
+// int n, m, q;
 //
-//Event event[MAXN << 1];
-//int eventCnt = 0;
+// Event event[MAXN << 1];
+// int eventCnt = 0;
 //
-//int op[MAXN];
-//int x[MAXN];
-//int y[MAXN];
-//int d[MAXN];
+// int op[MAXN];
+// int x[MAXN];
+// int y[MAXN];
+// int d[MAXN];
 //
-//int basis[BIT + 1];
-//int inspos[BIT + 1];
-//int basiz = 0;
+// int basis[BIT + 1];
+// int inspos[BIT + 1];
+// int basiz = 0;
 //
-//int father[MAXN];
-//int siz[MAXN];
-//int eor[MAXN];
-//int rollback[MAXN][2];
-//int opsize = 0;
+// int father[MAXN];
+// int siz[MAXN];
+// int eor[MAXN];
+// int rollback[MAXN][2];
+// int opsize = 0;
 //
-//int head[MAXN << 2];
-//int nxt[MAXT];
-//int tox[MAXT];
-//int toy[MAXT];
-//int tow[MAXT];
-//int cnt = 0;
+// int head[MAXN << 2];
+// int nxt[MAXT];
+// int tox[MAXT];
+// int toy[MAXT];
+// int tow[MAXT];
+// int cnt = 0;
 //
-//int ans[MAXN];
+// int ans[MAXN];
 //
-//void insert(int num) {
+// void insert(int num) {
 //    for (int i = BIT; i >= 0; --i) {
 //        if (num >> i == 1) {
 //            if (basis[i] == 0) {
@@ -74,38 +74,38 @@ package class167;
 //            num ^= basis[i];
 //        }
 //    }
-//}
+// }
 //
-//int minEor(int num) {
+// int minEor(int num) {
 //    for (int i = BIT; i >= 0; --i) {
 //        num = min(num, num ^ basis[i]);
 //    }
 //    return num;
-//}
+// }
 //
-//void cancel(int oldsiz) {
+// void cancel(int oldsiz) {
 //    while (basiz > oldsiz) {
 //        basis[inspos[--basiz]] = 0;
 //    }
-//}
+// }
 //
-//int find(int i) {
+// int find(int i) {
 //    while (i != father[i]) {
 //        i = father[i];
 //    }
 //    return i;
-//}
+// }
 //
-//int getEor(int i) {
+// int getEor(int i) {
 //    int res = 0;
 //    while (i != father[i]) {
 //        res ^= eor[i];
 //        i = father[i];
 //    }
 //    return res;
-//}
+// }
 //
-//bool Union(int u, int v, int w) {
+// bool Union(int u, int v, int w) {
 //    int fu = find(u);
 //    int fv = find(v);
 //    w = getEor(u) ^ getEor(v) ^ w;
@@ -124,25 +124,25 @@ package class167;
 //    rollback[++opsize][0] = fu;
 //    rollback[opsize][1] = fv;
 //    return true;
-//}
+// }
 //
-//void undo() {
+// void undo() {
 //    int fu = rollback[opsize][0];
 //    int fv = rollback[opsize--][1];
 //    father[fv] = fv;
 //    eor[fv] = 0;
 //    siz[fu] -= siz[fv];
-//}
+// }
 //
-//void addEdge(int idx, int u, int v, int w) {
+// void addEdge(int idx, int u, int v, int w) {
 //    nxt[++cnt] = head[idx];
 //    tox[cnt] = u;
 //    toy[cnt] = v;
 //    tow[cnt] = w;
 //    head[idx] = cnt;
-//}
+// }
 //
-//void add(int jobl, int jobr, int jobx, int joby, int jobw, int l, int r, int i) {
+// void add(int jobl, int jobr, int jobx, int joby, int jobw, int l, int r, int i) {
 //    if (jobl <= l && r <= jobr) {
 //        addEdge(i, jobx, joby, jobw);
 //    } else {
@@ -154,9 +154,9 @@ package class167;
 //            add(jobl, jobr, jobx, joby, jobw, mid + 1, r, i << 1 | 1);
 //        }
 //    }
-//}
+// }
 //
-//void dfs(int l, int r, int i) {
+// void dfs(int l, int r, int i) {
 //    int oldsiz = basiz;
 //    int unionCnt = 0;
 //    for (int e = head[i]; e; e = nxt[e]) {
@@ -177,9 +177,9 @@ package class167;
 //    for (int k = 1; k <= unionCnt; k++) {
 //        undo();
 //    }
-//}
+// }
 //
-//void prepare() {
+// void prepare() {
 //    for (int i = 1; i <= n; i++) {
 //        father[i] = i;
 //        siz[i] = 1;
@@ -199,9 +199,9 @@ package class167;
 //            add(start, end, x, y, d, 0, q, 1);
 //        }
 //    }
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> m;
@@ -231,4 +231,4 @@ package class167;
 //        }
 //    }
 //    return 0;
-//}
+// }

@@ -13,48 +13,48 @@ package class163;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 100001;
-//const int MAXH = 20;
-//int n, m;
-//bool root[MAXN];
+// const int MAXN = 100001;
+// const int MAXH = 20;
+// int n, m;
+// bool root[MAXN];
 //
-//int headg[MAXN];
-//int nextg[MAXN];
-//int tog[MAXN];
-//int cntg;
+// int headg[MAXN];
+// int nextg[MAXN];
+// int tog[MAXN];
+// int cntg;
 //
-//int headq[MAXN];
-//int nextq[MAXN];
-//int ansiq[MAXN];
-//int kq[MAXN];
-//int cntq;
+// int headq[MAXN];
+// int nextq[MAXN];
+// int ansiq[MAXN];
+// int kq[MAXN];
+// int cntq;
 //
-//int siz[MAXN];
-//int dep[MAXN];
-//int son[MAXN];
-//int stjump[MAXN][MAXH];
+// int siz[MAXN];
+// int dep[MAXN];
+// int son[MAXN];
+// int stjump[MAXN][MAXH];
 //
-//int depCnt[MAXN];
-//int ans[MAXN];
+// int depCnt[MAXN];
+// int ans[MAXN];
 //
-//void addEdge(int u, int v) {
+// void addEdge(int u, int v) {
 //    nextg[++cntg] = headg[u];
 //    tog[cntg] = v;
 //    headg[u] = cntg;
-//}
+// }
 //
-//void addQuestion(int u, int i, int k) {
+// void addQuestion(int u, int i, int k) {
 //    nextq[++cntq] = headq[u];
 //    ansiq[cntq] = i;
 //    kq[cntq] = k;
 //    headq[u] = cntq;
-//}
+// }
 //
-//void dfs1(int u, int fa) {
+// void dfs1(int u, int fa) {
 //    siz[u] = 1;
 //    dep[u] = dep[fa] + 1;
 //    stjump[u][0] = fa;
@@ -71,9 +71,9 @@ package class163;
 //            son[u] = v;
 //        }
 //    }
-//}
+// }
 //
-//int kAncestor(int u, int k) {
+// int kAncestor(int u, int k) {
 //    for (int p = MAXH - 1; p >= 0; p--) {
 //        if (k >= (1 << p)) {
 //            k -= (1 << p);
@@ -81,23 +81,23 @@ package class163;
 //        }
 //    }
 //    return u;
-//}
+// }
 //
-//void effect(int u) {
+// void effect(int u) {
 //    depCnt[dep[u]]++;
 //    for (int e = headg[u]; e > 0; e = nextg[e]) {
 //        effect(tog[e]);
 //    }
-//}
+// }
 //
-//void cancel(int u) {
+// void cancel(int u) {
 //    depCnt[dep[u]]--;
 //    for (int e = headg[u]; e > 0; e = nextg[e]) {
 //        cancel(tog[e]);
 //    }
-//}
+// }
 //
-//void dfs2(int u, int keep) {
+// void dfs2(int u, int keep) {
 //    for (int e = headg[u], v; e > 0; e = nextg[e]) {
 //        v = tog[e];
 //        if (v != son[u]) {
@@ -120,9 +120,9 @@ package class163;
 //    if (keep == 0) {
 //        cancel(u);
 //    }
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n;
@@ -161,4 +161,4 @@ package class163;
 //    }
 //    cout << "\n";
 //    return 0;
-//}
+// }

@@ -12,23 +12,23 @@ package class167;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 10000001;
-//const int BIT = 29;
-//const int INF = 1 << 30;
+// const int MAXN = 10000001;
+// const int BIT = 29;
+// const int INF = 1 << 30;
 //
-//int fa[MAXN];
-//int tree[MAXN][2];
-//int pass[MAXN];
-//int cnt = 1;
+// int fa[MAXN];
+// int tree[MAXN][2];
+// int pass[MAXN];
+// int cnt = 1;
 //
-//int mineor[MAXN];
-//int only[MAXN];
+// int mineor[MAXN];
+// int only[MAXN];
 //
-//int change(int x, int changeCnt) {
+// int change(int x, int changeCnt) {
 //    int cur = 1;
 //    pass[cur] += changeCnt;
 //    for (int b = BIT, path; b >= 0; b--) {
@@ -41,9 +41,9 @@ package class167;
 //        pass[cur] += changeCnt;
 //    }
 //    return cur;
-//}
+// }
 //
-//void compute(int x, int changeCnt) {
+// void compute(int x, int changeCnt) {
 //    int bottom = change(x, changeCnt);
 //    mineor[bottom] = pass[bottom] >= 2 ? 0 : INF;
 //    only[bottom] = pass[bottom] == 1 ? x : 0;
@@ -65,9 +65,9 @@ package class167;
 //        	only[i] = 0;
 //        }
 //    }
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    int q;
@@ -86,4 +86,4 @@ package class167;
 //        }
 //    }
 //    return 0;
-//}
+// }

@@ -24,141 +24,140 @@ import java.io.PrintWriter;
 
 public class Code03_TextEditor1 {
 
-	public static int MAXN = 2000001;
+  public static int MAXN = 2000001;
 
-	public static int head = 0;
+  public static int head = 0;
 
-	public static int cnt = 0;
+  public static int cnt = 0;
 
-	public static char[] key = new char[MAXN];
+  public static char[] key = new char[MAXN];
 
-	public static int[] left = new int[MAXN];
+  public static int[] left = new int[MAXN];
 
-	public static int[] right = new int[MAXN];
+  public static int[] right = new int[MAXN];
 
-	public static int[] size = new int[MAXN];
+  public static int[] size = new int[MAXN];
 
-	public static double[] priority = new double[MAXN];
+  public static double[] priority = new double[MAXN];
 
-	public static char[] ans = new char[MAXN];
+  public static char[] ans = new char[MAXN];
 
-	public static int ansi;
+  public static int ansi;
 
-	public static void up(int i) {
-		size[i] = size[left[i]] + size[right[i]] + 1;
-	}
+  public static void up(int i) {
+    size[i] = size[left[i]] + size[right[i]] + 1;
+  }
 
-	public static void split(int l, int r, int i, int rank) {
-		if (i == 0) {
-			right[l] = left[r] = 0;
-		} else {
-			if (size[left[i]] + 1 <= rank) {
-				right[l] = i;
-				split(i, r, right[i], rank - size[left[i]] - 1);
-			} else {
-				left[r] = i;
-				split(l, i, left[i], rank);
-			}
-			up(i);
-		}
-	}
+  public static void split(int l, int r, int i, int rank) {
+    if (i == 0) {
+      right[l] = left[r] = 0;
+    } else {
+      if (size[left[i]] + 1 <= rank) {
+        right[l] = i;
+        split(i, r, right[i], rank - size[left[i]] - 1);
+      } else {
+        left[r] = i;
+        split(l, i, left[i], rank);
+      }
+      up(i);
+    }
+  }
 
-	public static int merge(int l, int r) {
-		if (l == 0 || r == 0) {
-			return l + r;
-		}
-		if (priority[l] >= priority[r]) {
-			right[l] = merge(right[l], r);
-			up(l);
-			return l;
-		} else {
-			left[r] = merge(l, left[r]);
-			up(r);
-			return r;
-		}
-	}
+  public static int merge(int l, int r) {
+    if (l == 0 || r == 0) {
+      return l + r;
+    }
+    if (priority[l] >= priority[r]) {
+      right[l] = merge(right[l], r);
+      up(l);
+      return l;
+    } else {
+      left[r] = merge(l, left[r]);
+      up(r);
+      return r;
+    }
+  }
 
-	public static void inorder(int i) {
-		if (i != 0) {
-			inorder(left[i]);
-			ans[++ansi] = key[i];
-			inorder(right[i]);
-		}
-	}
+  public static void inorder(int i) {
+    if (i != 0) {
+      inorder(left[i]);
+      ans[++ansi] = key[i];
+      inorder(right[i]);
+    }
+  }
 
-	// 我做了很多个版本的IO尝试，空间都无法达标
-	// 以下风格只是其中一种，无所谓了，逻辑是对的
-	// 想通过这个题看C++版本吧，完全一样的逻辑
-	public static void main(String[] args) throws IOException {
-		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		int n = Integer.valueOf(in.readLine());
-		int pos = 0;
-		String str;
-		String op;
-		int x;
-		for (int i = 1; i <= n; i++) {
-			str = in.readLine();
-			if (str.equals("Prev")) {
-				pos--;
-			} else if (str.equals("Next")) {
-				pos++;
-			} else {
-				String[] input = str.split(" ");
-				op = input[0];
-				x = Integer.valueOf(input[1]);
-				if (op.equals("Move")) {
-					pos = x;
-				} else if (op.equals("Insert")) {
-					split(0, 0, head, pos);
-					int l = right[0];
-					int r = left[0];
-					left[0] = right[0] = 0;
-					int add = 0;
-					while (add < x) {
-						char[] insert = in.readLine().toCharArray();
-						for (int j = 0; j < insert.length; j++) {
-							if (insert[j] >= 32 && insert[j] <= 126) {
-								key[++cnt] = insert[j];
-								size[cnt] = 1;
-								priority[cnt] = Math.random();
-								l = merge(l, cnt);
-								add++;
-							}
-						}
-					}
-					head = merge(l, r);
-				} else if (op.equals("Delete")) {
-					split(0, 0, head, pos + x);
-					int r = left[0];
-					int lm = right[0];
-					left[0] = right[0] = 0;
-					split(0, 0, lm, pos);
-					int l = right[0];
-					left[0] = right[0] = 0;
-					head = merge(l, r);
-				} else {
-					split(0, 0, head, pos + x);
-					int r = left[0];
-					int lm = right[0];
-					left[0] = right[0] = 0;
-					split(0, 0, lm, pos);
-					int l = right[0];
-					int m = left[0];
-					left[0] = right[0] = 0;
-					ansi = 0;
-					inorder(m);
-					head = merge(merge(l, m), r);
-					for (int j = 1; j <= ansi; j++) {
-						out.print((char) ans[j]);
-					}
-					out.println();
-				}
-			}
-		}
-		out.flush();
-		out.close();
-		in.close();
-	}
-
+  // 我做了很多个版本的IO尝试，空间都无法达标
+  // 以下风格只是其中一种，无所谓了，逻辑是对的
+  // 想通过这个题看C++版本吧，完全一样的逻辑
+  public static void main(String[] args) throws IOException {
+    BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    int n = Integer.valueOf(in.readLine());
+    int pos = 0;
+    String str;
+    String op;
+    int x;
+    for (int i = 1; i <= n; i++) {
+      str = in.readLine();
+      if (str.equals("Prev")) {
+        pos--;
+      } else if (str.equals("Next")) {
+        pos++;
+      } else {
+        String[] input = str.split(" ");
+        op = input[0];
+        x = Integer.valueOf(input[1]);
+        if (op.equals("Move")) {
+          pos = x;
+        } else if (op.equals("Insert")) {
+          split(0, 0, head, pos);
+          int l = right[0];
+          int r = left[0];
+          left[0] = right[0] = 0;
+          int add = 0;
+          while (add < x) {
+            char[] insert = in.readLine().toCharArray();
+            for (int j = 0; j < insert.length; j++) {
+              if (insert[j] >= 32 && insert[j] <= 126) {
+                key[++cnt] = insert[j];
+                size[cnt] = 1;
+                priority[cnt] = Math.random();
+                l = merge(l, cnt);
+                add++;
+              }
+            }
+          }
+          head = merge(l, r);
+        } else if (op.equals("Delete")) {
+          split(0, 0, head, pos + x);
+          int r = left[0];
+          int lm = right[0];
+          left[0] = right[0] = 0;
+          split(0, 0, lm, pos);
+          int l = right[0];
+          left[0] = right[0] = 0;
+          head = merge(l, r);
+        } else {
+          split(0, 0, head, pos + x);
+          int r = left[0];
+          int lm = right[0];
+          left[0] = right[0] = 0;
+          split(0, 0, lm, pos);
+          int l = right[0];
+          int m = left[0];
+          left[0] = right[0] = 0;
+          ansi = 0;
+          inorder(m);
+          head = merge(merge(l, m), r);
+          for (int j = 1; j <= ansi; j++) {
+            out.print((char) ans[j]);
+          }
+          out.println();
+        }
+      }
+    }
+    out.flush();
+    out.close();
+    in.close();
+  }
 }

@@ -10,36 +10,36 @@ package class162;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 100001;
-//int n, m;
+// const int MAXN = 100001;
+// int n, m;
 //
-//int head[MAXN];
-//int nxt[MAXN << 1];
-//int to[MAXN << 1];
-//int cntg = 0;
+// int head[MAXN];
+// int nxt[MAXN << 1];
+// int to[MAXN << 1];
+// int cntg = 0;
 //
-//int fa[MAXN];
-//int dep[MAXN];
-//int siz[MAXN];
-//int son[MAXN];
-//int top[MAXN];
-//int dfn[MAXN];
-//int cntd = 0;
+// int fa[MAXN];
+// int dep[MAXN];
+// int siz[MAXN];
+// int son[MAXN];
+// int top[MAXN];
+// int dfn[MAXN];
+// int cntd = 0;
 //
-//int sum[MAXN << 2];
-//int addTag[MAXN << 2];
+// int sum[MAXN << 2];
+// int addTag[MAXN << 2];
 //
-//void addEdge(int u, int v) {
+// void addEdge(int u, int v) {
 //    nxt[++cntg] = head[u];
 //    to[cntg] = v;
 //    head[u] = cntg;
-//}
+// }
 //
-//void dfs1(int u, int f) {
+// void dfs1(int u, int f) {
 //    fa[u] = f;
 //    dep[u] = dep[f] + 1;
 //    siz[u] = 1;
@@ -58,9 +58,9 @@ package class162;
 //            }
 //        }
 //    }
-//}
+// }
 //
-//void dfs2(int u, int t) {
+// void dfs2(int u, int t) {
 //    top[u] = t;
 //    dfn[u] = ++cntd;
 //    if (son[u] == 0) {
@@ -73,26 +73,26 @@ package class162;
 //            dfs2(v, v);
 //        }
 //    }
-//}
+// }
 //
-//void up(int i) {
+// void up(int i) {
 //    sum[i] = sum[i << 1] + sum[i << 1 | 1];
-//}
+// }
 //
-//void lazy(int i, int v, int len) {
+// void lazy(int i, int v, int len) {
 //    sum[i] += v * len;
 //    addTag[i] += v;
-//}
+// }
 //
-//void down(int i, int ln, int rn) {
+// void down(int i, int ln, int rn) {
 //    if (addTag[i] != 0) {
 //        lazy(i << 1, addTag[i], ln);
 //        lazy(i << 1 | 1, addTag[i], rn);
 //        addTag[i] = 0;
 //    }
-//}
+// }
 //
-//void add(int jobl, int jobr, int jobv, int l, int r, int i) {
+// void add(int jobl, int jobr, int jobv, int l, int r, int i) {
 //    if (jobl <= l && r <= jobr) {
 //        lazy(i, jobv, r - l + 1);
 //    } else {
@@ -106,9 +106,9 @@ package class162;
 //        }
 //        up(i);
 //    }
-//}
+// }
 //
-//int query(int jobi, int l, int r, int i) {
+// int query(int jobi, int l, int r, int i) {
 //    if (l == r) {
 //        return sum[i];
 //    }
@@ -119,9 +119,9 @@ package class162;
 //    } else {
 //        return query(jobi, mid + 1, r, i << 1 | 1);
 //    }
-//}
+// }
 //
-//void pathAdd(int x, int y, int v) {
+// void pathAdd(int x, int y, int v) {
 //    while (top[x] != top[y]) {
 //        if (dep[top[x]] <= dep[top[y]]) {
 //            add(dfn[top[y]], dfn[y], v, 1, n, 1);
@@ -132,14 +132,14 @@ package class162;
 //        }
 //    }
 //    add(min(dfn[x], dfn[y]) + 1, max(dfn[x], dfn[y]), v, 1, n, 1);
-//}
+// }
 //
-//int edgeQuery(int x, int y) {
+// int edgeQuery(int x, int y) {
 //    int down = max(dfn[x], dfn[y]);
 //    return query(down, 1, n, 1);
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> m;
@@ -161,4 +161,4 @@ package class162;
 //        }
 //    }
 //    return 0;
-//}
+// }

@@ -16,36 +16,35 @@ import java.io.StreamTokenizer;
 
 public class Code04_CongruenceEquation {
 
-	// 扩展欧几里得算法
-	public static long d, x, y, px, py;
+  // 扩展欧几里得算法
+  public static long d, x, y, px, py;
 
-	public static void exgcd(long a, long b) {
-		if (b == 0) {
-			d = a;
-			x = 1;
-			y = 0;
-		} else {
-			exgcd(b, a % b);
-			px = x;
-			py = y;
-			x = py;
-			y = px - py * (a / b);
-		}
-	}
+  public static void exgcd(long a, long b) {
+    if (b == 0) {
+      d = a;
+      x = 1;
+      y = 0;
+    } else {
+      exgcd(b, a % b);
+      px = x;
+      py = y;
+      x = py;
+      y = px - py * (a / b);
+    }
+  }
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StreamTokenizer in = new StreamTokenizer(br);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		in.nextToken();
-		long a = (long) in.nval;
-		in.nextToken();
-		long b = (long) in.nval;
-		exgcd(a, b);
-		out.println((x % b + b) % b);
-		out.flush();
-		out.close();
-		br.close();
-	}
-
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StreamTokenizer in = new StreamTokenizer(br);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    in.nextToken();
+    long a = (long) in.nval;
+    in.nextToken();
+    long b = (long) in.nval;
+    exgcd(a, b);
+    out.println((x % b + b) % b);
+    out.flush();
+    out.close();
+    br.close();
+  }
 }

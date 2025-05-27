@@ -24,54 +24,53 @@ import java.io.StreamTokenizer;
 
 public class Code04_NumberOfSubsetGcdK {
 
-	public static int MOD = 1000000007;
+  public static int MOD = 1000000007;
 
-	public static int LIMIT = 100000;
+  public static int LIMIT = 100000;
 
-	public static long[] dp = new long[LIMIT + 1];
+  public static long[] dp = new long[LIMIT + 1];
 
-	public static long[] cnt = new long[LIMIT + 1];
+  public static long[] cnt = new long[LIMIT + 1];
 
-	public static long[] pow2 = new long[LIMIT + 1];
+  public static long[] pow2 = new long[LIMIT + 1];
 
-	public static void build() {
-		pow2[0] = 1;
-		for (int i = 1; i <= LIMIT; i++) {
-			pow2[i] = (pow2[i - 1] * 2) % MOD;
-		}
-	}
+  public static void build() {
+    pow2[0] = 1;
+    for (int i = 1; i <= LIMIT; i++) {
+      pow2[i] = (pow2[i - 1] * 2) % MOD;
+    }
+  }
 
-	public static void main(String[] args) throws IOException {
-		build();
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StreamTokenizer in = new StreamTokenizer(br);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		while (in.nextToken() != StreamTokenizer.TT_EOF) {
-			int n = (int) in.nval;
-			for (int i = 1; i <= n; i++) {
-				in.nextToken();
-				cnt[(int) in.nval]++;
-			}
-			out.println(compute());
-		}
-		out.flush();
-		out.close();
-		br.close();
-	}
+  public static void main(String[] args) throws IOException {
+    build();
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StreamTokenizer in = new StreamTokenizer(br);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    while (in.nextToken() != StreamTokenizer.TT_EOF) {
+      int n = (int) in.nval;
+      for (int i = 1; i <= n; i++) {
+        in.nextToken();
+        cnt[(int) in.nval]++;
+      }
+      out.println(compute());
+    }
+    out.flush();
+    out.close();
+    br.close();
+  }
 
-	// 时间复杂度O(v * log v)
-	public static long compute() {
-		for (int i = LIMIT; i >= 1; i--) {
-			long counts = 0;
-			for (int j = i; j <= LIMIT; j += i) {
-				counts += cnt[j];
-			}
-			dp[i] = (pow2[(int) counts] - 1 + MOD) % MOD;
-			for (int j = 2 * i; j <= LIMIT; j += i) {
-				dp[i] = (dp[i] - dp[j] + MOD) % MOD;
-			}
-		}
-		return dp[1];
-	}
-
+  // 时间复杂度O(v * log v)
+  public static long compute() {
+    for (int i = LIMIT; i >= 1; i--) {
+      long counts = 0;
+      for (int j = i; j <= LIMIT; j += i) {
+        counts += cnt[j];
+      }
+      dp[i] = (pow2[(int) counts] - 1 + MOD) % MOD;
+      for (int j = 2 * i; j <= LIMIT; j += i) {
+        dp[i] = (dp[i] - dp[j] + MOD) % MOD;
+      }
+    }
+    return dp[1];
+  }
 }

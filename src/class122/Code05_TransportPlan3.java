@@ -11,36 +11,36 @@ package class122;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 300001;
-//const int MAXM = 300001;
-//int n, m;
-//int num[MAXN];
-//int headEdge[MAXN];
-//int edgeNext[MAXN << 1];
-//int edgeTo[MAXN << 1];
-//int edgeWeight[MAXN << 1];
-//int tcnt;
-//int headQuery[MAXN];
-//int queryNext[MAXM << 1];
-//int queryTo[MAXM << 1];
-//int queryIndex[MAXM << 1];
-//int qcnt;
-//bool visited[MAXN];
-//int unionfind[MAXN];
-//int quesu[MAXM];
-//int quesv[MAXM];
-//int dist[MAXN];
-//int lca[MAXM];
-//int cost[MAXM];
-//int maxCost;
-//int atLeast;
-//int beyond;
+// const int MAXN = 300001;
+// const int MAXM = 300001;
+// int n, m;
+// int num[MAXN];
+// int headEdge[MAXN];
+// int edgeNext[MAXN << 1];
+// int edgeTo[MAXN << 1];
+// int edgeWeight[MAXN << 1];
+// int tcnt;
+// int headQuery[MAXN];
+// int queryNext[MAXM << 1];
+// int queryTo[MAXM << 1];
+// int queryIndex[MAXM << 1];
+// int qcnt;
+// bool visited[MAXN];
+// int unionfind[MAXN];
+// int quesu[MAXM];
+// int quesv[MAXM];
+// int dist[MAXN];
+// int lca[MAXM];
+// int cost[MAXM];
+// int maxCost;
+// int atLeast;
+// int beyond;
 //
-//void build() {
+// void build() {
 //    tcnt = 1;
 //    qcnt = 1;
 //    for(int i = 1; i <= n; i++) {
@@ -50,30 +50,30 @@ package class122;
 //        unionfind[i] = i;
 //    }
 //    maxCost = 0;
-//}
+// }
 //
-//void addEdge(int u, int v, int w) {
+// void addEdge(int u, int v, int w) {
 //    edgeNext[tcnt] = headEdge[u];
 //    edgeTo[tcnt] = v;
 //    edgeWeight[tcnt] = w;
 //    headEdge[u] = tcnt++;
-//}
+// }
 //
-//void addQuery(int u, int v, int i) {
+// void addQuery(int u, int v, int i) {
 //    queryNext[qcnt] = headQuery[u];
 //    queryTo[qcnt] = v;
 //    queryIndex[qcnt] = i;
 //    headQuery[u] = qcnt++;
-//}
+// }
 //
-//int find(int i) {
+// int find(int i) {
 //    if(i != unionfind[i]) {
 //        unionfind[i] = find(unionfind[i]);
 //    }
 //    return unionfind[i];
-//}
+// }
 //
-//void tarjan(int u, int f, int w) {
+// void tarjan(int u, int f, int w) {
 //    visited[u] = true;
 //    dist[u] = dist[f] + w;
 //    for(int e = headEdge[u]; e != 0; e = edgeNext[e]) {
@@ -92,9 +92,9 @@ package class122;
 //        }
 //    }
 //    unionfind[u] = f;
-//}
+// }
 //
-//bool dfs(int u, int f, int w) {
+// bool dfs(int u, int f, int w) {
 //    for(int e = headEdge[u]; e != 0; e = edgeNext[e]) {
 //        int v = edgeTo[e];
 //        if(v != f) {
@@ -110,9 +110,9 @@ package class122;
 //        }
 //    }
 //    return (num[u] == beyond && w >= atLeast);
-//}
+// }
 //
-//bool f(int limit) {
+// bool f(int limit) {
 //    atLeast = maxCost - limit;
 //    for(int i = 1; i <= n; i++) {
 //        num[i] = 0;
@@ -128,9 +128,9 @@ package class122;
 //    }
 //    if(beyond == 0) return true;
 //    return dfs(1, 0, 0);
-//}
+// }
 //
-//int compute() {
+// int compute() {
 //    tarjan(1, 0, 0);
 //    int l = 0;
 //    int r = maxCost;
@@ -145,9 +145,9 @@ package class122;
 //        }
 //    }
 //    return ans;
-//}
+// }
 //
-//int main(){
+// int main(){
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n;
@@ -169,4 +169,4 @@ package class122;
 //    }
 //    cout << compute() << "\n";
 //    return 0;
-//}
+// }

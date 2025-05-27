@@ -11,23 +11,23 @@ package class160;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXM = 50001;
-//const int MAXT = MAXM * 230;
-//int n, m, s;
-//int ques[MAXM][4];
-//int sorted[MAXM];
-//int root[MAXM << 2];
-//int ls[MAXT];
-//int rs[MAXT];
-//long long sum[MAXT];
-//int lazy[MAXT];
-//int cnt;
+// const int MAXM = 50001;
+// const int MAXT = MAXM * 230;
+// int n, m, s;
+// int ques[MAXM][4];
+// int sorted[MAXM];
+// int root[MAXM << 2];
+// int ls[MAXT];
+// int rs[MAXT];
+// long long sum[MAXT];
+// int lazy[MAXT];
+// int cnt;
 //
-//int kth(int num) {
+// int kth(int num) {
 //    int l = 1, r = s;
 //    while (l <= r) {
 //        int mid = (l + r) >> 1;
@@ -40,13 +40,13 @@ package class160;
 //        }
 //    }
 //    return -1;
-//}
+// }
 //
-//void up(int i) {
+// void up(int i) {
 //    sum[i] = sum[ls[i]] + sum[rs[i]];
-//}
+// }
 //
-//void down(int i, int ln, int rn) {
+// void down(int i, int ln, int rn) {
 //    if (lazy[i]) {
 //        if (!ls[i]) ls[i] = ++cnt;
 //        if (!rs[i]) rs[i] = ++cnt;
@@ -56,9 +56,9 @@ package class160;
 //        lazy[rs[i]] += lazy[i];
 //        lazy[i] = 0;
 //    }
-//}
+// }
 //
-//int innerAdd(int jobl, int jobr, int l, int r, int i) {
+// int innerAdd(int jobl, int jobr, int l, int r, int i) {
 //    if (!i) i = ++cnt;
 //    if (jobl <= l && r <= jobr) {
 //        sum[i] += (long long)(r - l + 1);
@@ -71,9 +71,9 @@ package class160;
 //        up(i);
 //    }
 //    return i;
-//}
+// }
 //
-//long long innerQuery(int jobl, int jobr, int l, int r, int i) {
+// long long innerQuery(int jobl, int jobr, int l, int r, int i) {
 //    if (!i) return 0;
 //    if (jobl <= l && r <= jobr) {
 //        return sum[i];
@@ -84,9 +84,9 @@ package class160;
 //    if (jobl <= mid) ans += innerQuery(jobl, jobr, l, mid, ls[i]);
 //    if (jobr > mid) ans += innerQuery(jobl, jobr, mid + 1, r, rs[i]);
 //    return ans;
-//}
+// }
 //
-//void outerAdd(int jobl, int jobr, int jobv, int l, int r, int i) {
+// void outerAdd(int jobl, int jobr, int jobv, int l, int r, int i) {
 //    root[i] = innerAdd(jobl, jobr, 1, n, root[i]);
 //    if (l < r) {
 //        int mid = (l + r) >> 1;
@@ -96,9 +96,9 @@ package class160;
 //            outerAdd(jobl, jobr, jobv, mid + 1, r, i << 1 | 1);
 //        }
 //    }
-//}
+// }
 //
-//int outerQuery(int jobl, int jobr, long long jobk, int l, int r, int i) {
+// int outerQuery(int jobl, int jobr, long long jobk, int l, int r, int i) {
 //    if (l == r) {
 //        return l;
 //    }
@@ -109,9 +109,9 @@ package class160;
 //    } else {
 //        return outerQuery(jobl, jobr, jobk, mid + 1, r, i << 1 | 1);
 //    }
-//}
+// }
 //
-//void prepare() {
+// void prepare() {
 //    s = 0;
 //    for (int i = 1; i <= m; i++) {
 //        if (ques[i][0] == 1) {
@@ -131,9 +131,9 @@ package class160;
 //            ques[i][3] = kth(ques[i][3]);
 //        }
 //    }
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> m;
@@ -150,4 +150,4 @@ package class160;
 //        }
 //    }
 //    return 0;
-//}
+// }

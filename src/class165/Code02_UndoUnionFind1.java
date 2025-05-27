@@ -19,128 +19,127 @@ import java.io.StreamTokenizer;
 
 public class Code02_UndoUnionFind1 {
 
-	public static int MAXN = 200001;
-	public static int[][] arr = new int[MAXN][2];
+  public static int MAXN = 200001;
+  public static int[][] arr = new int[MAXN][2];
 
-	public static int[] head = new int[MAXN];
-	public static int[] next = new int[MAXN << 1];
-	public static int[] to = new int[MAXN << 1];
-	public static int cnt;
+  public static int[] head = new int[MAXN];
+  public static int[] next = new int[MAXN << 1];
+  public static int[] to = new int[MAXN << 1];
+  public static int cnt;
 
-	public static int[] father = new int[MAXN];
-	public static int[] siz = new int[MAXN];
-	public static int[] edgeCnt = new int[MAXN];
+  public static int[] father = new int[MAXN];
+  public static int[] siz = new int[MAXN];
+  public static int[] edgeCnt = new int[MAXN];
 
-	public static int[][] rollback = new int[MAXN][2];
-	public static int opsize = 0;
+  public static int[][] rollback = new int[MAXN][2];
+  public static int opsize = 0;
 
-	public static int[] ans = new int[MAXN];
-	public static int ball = 0;
+  public static int[] ans = new int[MAXN];
+  public static int ball = 0;
 
-	public static void addEdge(int u, int v) {
-		next[++cnt] = head[u];
-		to[cnt] = v;
-		head[u] = cnt;
-	}
+  public static void addEdge(int u, int v) {
+    next[++cnt] = head[u];
+    to[cnt] = v;
+    head[u] = cnt;
+  }
 
-	public static int find(int i) {
-		while (i != father[i]) {
-			i = father[i];
-		}
-		return i;
-	}
+  public static int find(int i) {
+    while (i != father[i]) {
+      i = father[i];
+    }
+    return i;
+  }
 
-	public static void union(int x, int y) {
-		int fx = find(x);
-		int fy = find(y);
-		if (siz[fx] < siz[fy]) {
-			int tmp = fx;
-			fx = fy;
-			fy = tmp;
-		}
-		father[fy] = fx;
-		siz[fx] += siz[fy];
-		edgeCnt[fx] += edgeCnt[fy] + 1;
-		rollback[++opsize][0] = fx;
-		rollback[opsize][1] = fy;
-	}
+  public static void union(int x, int y) {
+    int fx = find(x);
+    int fy = find(y);
+    if (siz[fx] < siz[fy]) {
+      int tmp = fx;
+      fx = fy;
+      fy = tmp;
+    }
+    father[fy] = fx;
+    siz[fx] += siz[fy];
+    edgeCnt[fx] += edgeCnt[fy] + 1;
+    rollback[++opsize][0] = fx;
+    rollback[opsize][1] = fy;
+  }
 
-	public static void undo() {
-		int fx = rollback[opsize][0];
-		int fy = rollback[opsize--][1];
-		father[fy] = fy;
-		siz[fx] -= siz[fy];
-		edgeCnt[fx] -= edgeCnt[fy] + 1;
-	}
+  public static void undo() {
+    int fx = rollback[opsize][0];
+    int fy = rollback[opsize--][1];
+    father[fy] = fy;
+    siz[fx] -= siz[fy];
+    edgeCnt[fx] -= edgeCnt[fy] + 1;
+  }
 
-	public static void dfs(int u, int fa) {
-		int fx = find(arr[u][0]);
-		int fy = find(arr[u][1]);
-		boolean added = false;
-		boolean unioned = false;
-		if (fx == fy) {
-			if (edgeCnt[fx] < siz[fx]) {
-				ball++;
-				added = true;
-			}
-			edgeCnt[fx]++;
-		} else {
-			if (edgeCnt[fx] < siz[fx] || edgeCnt[fy] < siz[fy]) {
-				ball++;
-				added = true;
-			}
-			union(fx, fy);
-			unioned = true;
-		}
-		ans[u] = ball;
-		for (int e = head[u]; e > 0; e = next[e]) {
-			if (to[e] != fa) {
-				dfs(to[e], u);
-			}
-		}
-		if (added) {
-			ball--;
-		}
-		if (unioned) {
-			undo();
-		} else {
-			edgeCnt[fx]--;
-		}
-	}
+  public static void dfs(int u, int fa) {
+    int fx = find(arr[u][0]);
+    int fy = find(arr[u][1]);
+    boolean added = false;
+    boolean unioned = false;
+    if (fx == fy) {
+      if (edgeCnt[fx] < siz[fx]) {
+        ball++;
+        added = true;
+      }
+      edgeCnt[fx]++;
+    } else {
+      if (edgeCnt[fx] < siz[fx] || edgeCnt[fy] < siz[fy]) {
+        ball++;
+        added = true;
+      }
+      union(fx, fy);
+      unioned = true;
+    }
+    ans[u] = ball;
+    for (int e = head[u]; e > 0; e = next[e]) {
+      if (to[e] != fa) {
+        dfs(to[e], u);
+      }
+    }
+    if (added) {
+      ball--;
+    }
+    if (unioned) {
+      undo();
+    } else {
+      edgeCnt[fx]--;
+    }
+  }
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StreamTokenizer in = new StreamTokenizer(br);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		in.nextToken();
-		int n = (int) in.nval;
-		for (int i = 1; i <= n; i++) {
-			in.nextToken();
-			arr[i][0] = (int) in.nval;
-			in.nextToken();
-			arr[i][1] = (int) in.nval;
-		}
-		for (int i = 1, u, v; i < n; i++) {
-			in.nextToken();
-			u = (int) in.nval;
-			in.nextToken();
-			v = (int) in.nval;
-			addEdge(u, v);
-			addEdge(v, u);
-		}
-		for (int i = 1; i <= n; i++) {
-			father[i] = i;
-			siz[i] = 1;
-			edgeCnt[i] = 0;
-		}
-		dfs(1, 0);
-		for (int i = 2; i < n; i++) {
-			out.print(ans[i] + " ");
-		}
-		out.println(ans[n]);
-		out.flush();
-		out.close();
-		br.close();
-	}
-
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StreamTokenizer in = new StreamTokenizer(br);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    in.nextToken();
+    int n = (int) in.nval;
+    for (int i = 1; i <= n; i++) {
+      in.nextToken();
+      arr[i][0] = (int) in.nval;
+      in.nextToken();
+      arr[i][1] = (int) in.nval;
+    }
+    for (int i = 1, u, v; i < n; i++) {
+      in.nextToken();
+      u = (int) in.nval;
+      in.nextToken();
+      v = (int) in.nval;
+      addEdge(u, v);
+      addEdge(v, u);
+    }
+    for (int i = 1; i <= n; i++) {
+      father[i] = i;
+      siz[i] = 1;
+      edgeCnt[i] = 0;
+    }
+    dfs(1, 0);
+    for (int i = 2; i < n; i++) {
+      out.print(ans[i] + " ");
+    }
+    out.println(ans[n]);
+    out.flush();
+    out.close();
+    br.close();
+  }
 }

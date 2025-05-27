@@ -10,14 +10,14 @@ package class043;
 // 测试链接 : https://leetcode.cn/problems/super-palindromes/
 // 如下实现是课上讲的superpalindromesInRange1方法的C++版本，提交如下代码可以直接通过
 
-//#include <string>
-//#include <cmath>
-//#include <limits>
+// #include <string>
+// #include <cmath>
+// #include <limits>
 //
-//using namespace std;
+// using namespace std;
 //
-//class Solution {
-//public:
+// class Solution {
+// public:
 //    int superpalindromesInRange(string left, string right) {
 //        long long l = stoll(left);
 //        long long r = stoll(right);
@@ -40,7 +40,7 @@ package class043;
 //        return ans;
 //    }
 //
-//private:
+// private:
 //    bool safeSquare(long long num) {
 //        return num <= static_cast<long long>(sqrt(numeric_limits<long long>::max()));
 //    }
@@ -82,4 +82,4 @@ package class043;
 //        }
 //        return true;
 //    }
-//};
+// };

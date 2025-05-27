@@ -13,20 +13,20 @@ package class159;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 600001;
-//const int MAXT = MAXN * 22;
-//const int BIT = 25;
-//int n, m, eor;
-//int root[MAXN];
-//int tree[MAXT][2];
-//int pass[MAXT];
-//int cnt = 0;
+// const int MAXN = 600001;
+// const int MAXT = MAXN * 22;
+// const int BIT = 25;
+// int n, m, eor;
+// int root[MAXN];
+// int tree[MAXT][2];
+// int pass[MAXT];
+// int cnt = 0;
 //
-//int insert(int num, int i) {
+// int insert(int num, int i) {
 //    int rt = ++cnt;
 //    tree[rt][0] = tree[i][0];
 //    tree[rt][1] = tree[i][1];
@@ -41,9 +41,9 @@ package class159;
 //        tree[pre][path] = cur;
 //    }
 //    return rt;
-//}
+// }
 //
-//int query(int num, int u, int v) {
+// int query(int num, int u, int v) {
 //    int ans = 0;
 //    for (int b = BIT, path, best; b >= 0; b--) {
 //        path = (num >> b) & 1;
@@ -58,9 +58,9 @@ package class159;
 //        }
 //    }
 //    return ans;
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(0);
 //    cin >> n >> m;
@@ -90,4 +90,4 @@ package class159;
 //        }
 //    }
 //    return 0;
-//}
+// }

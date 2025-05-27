@@ -9,36 +9,36 @@ package class112;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <cstdio>
-//using namespace std;
+// #include <cstdio>
+// using namespace std;
 //
-//const int MAXN = 100001;
+// const int MAXN = 100001;
 //
-//double arr[MAXN];
-//double sum1[MAXN << 2];
-//double sum2[MAXN << 2];
-//double addv[MAXN << 2];
+// double arr[MAXN];
+// double sum1[MAXN << 2];
+// double sum2[MAXN << 2];
+// double addv[MAXN << 2];
 //
-//void up(int i) {
+// void up(int i) {
 //    sum1[i] = sum1[i << 1] + sum1[i << 1 | 1];
 //    sum2[i] = sum2[i << 1] + sum2[i << 1 | 1];
-//}
+// }
 //
-//void lazy(int i, double v, int n) {
+// void lazy(int i, double v, int n) {
 //    sum2[i] += sum1[i] * v * 2 + v * v * n;
 //    sum1[i] += v * n;
 //    addv[i] += v;
-//}
+// }
 //
-//void down(int i, int ln, int rn) {
+// void down(int i, int ln, int rn) {
 //    if (addv[i] != 0) {
 //        lazy(i << 1, addv[i], ln);
 //        lazy(i << 1 | 1, addv[i], rn);
 //        addv[i] = 0;
 //    }
-//}
+// }
 //
-//void build(int l, int r, int i) {
+// void build(int l, int r, int i) {
 //    if (l == r) {
 //        sum1[i] = arr[l];
 //        sum2[i] = arr[l] * arr[l];
@@ -49,9 +49,9 @@ package class112;
 //        up(i);
 //    }
 //    addv[i] = 0;
-//}
+// }
 //
-//void add(int jobl, int jobr, double jobv, int l, int r, int i) {
+// void add(int jobl, int jobr, double jobv, int l, int r, int i) {
 //    if (jobl <= l && r <= jobr) {
 //        lazy(i, jobv, r - l + 1);
 //    } else {
@@ -65,9 +65,9 @@ package class112;
 //        }
 //        up(i);
 //    }
-//}
+// }
 //
-//double query(double *sum, int jobl, int jobr, int l, int r, int i) {
+// double query(double *sum, int jobl, int jobr, int l, int r, int i) {
 //    if (jobl <= l && r <= jobr) {
 //        return sum[i];
 //    }
@@ -81,9 +81,9 @@ package class112;
 //        ans += query(sum, jobl, jobr, mid + 1, r, i << 1 | 1);
 //    }
 //    return ans;
-//}
+// }
 //
-//int main() {
+// int main() {
 //    int n, m;
 //    scanf("%d %d", &n, &m);
 //    for (int i = 1; i <= n; i++) {
@@ -111,4 +111,4 @@ package class112;
 //        }
 //    }
 //    return 0;
-//}
+// }

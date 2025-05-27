@@ -12,80 +12,80 @@ package class155;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 50001;
-//const int MAXM = 200001;
-//const int MAXT = 1000001;
-//const int MAXH = 4200001;
-//const double INF = 1e18;
+// const int MAXN = 50001;
+// const int MAXM = 200001;
+// const int MAXT = 1000001;
+// const int MAXH = 4200001;
+// const double INF = 1e18;
 //
-//int n, m;
-//double money;
+// int n, m;
+// double money;
 //
-//int headg[MAXN];
-//int tog[MAXM];
-//int nextg[MAXM];
-//double weightg[MAXM];
-//int cntg = 0;
+// int headg[MAXN];
+// int tog[MAXM];
+// int nextg[MAXM];
+// double weightg[MAXM];
+// int cntg = 0;
 //
-//int headr[MAXN];
-//int tor[MAXM];
-//int nextr[MAXM];
-//double weightr[MAXM];
-//int cntr = 0;
+// int headr[MAXN];
+// int tor[MAXM];
+// int nextr[MAXM];
+// double weightr[MAXM];
+// int cntr = 0;
 //
-//int to[MAXT];
-//double cost[MAXT];
-//int ls[MAXT];
-//int rs[MAXT];
-//int dist[MAXT];
-//int cntt = 0;
+// int to[MAXT];
+// double cost[MAXT];
+// int ls[MAXT];
+// int rs[MAXT];
+// int dist[MAXT];
+// int cntt = 0;
 //
-//int rt[MAXN];
+// int rt[MAXN];
 //
-//int key[MAXH];
-//double val[MAXH];
-//int heap[MAXH];
-//int cntd, cnth;
+// int key[MAXH];
+// double val[MAXH];
+// int heap[MAXH];
+// int cntd, cnth;
 //
-//bool vis[MAXN];
-//int path[MAXN];
-//double dis[MAXN];
+// bool vis[MAXN];
+// int path[MAXN];
+// double dis[MAXN];
 //
-//void addEdgeG(int u, int v, double w){
+// void addEdgeG(int u, int v, double w){
 //    nextg[++cntg] = headg[u];
 //    tog[cntg] = v;
 //    weightg[cntg] = w;
 //    headg[u] = cntg;
-//}
+// }
 //
-//void addEdgeR(int u, int v, double w){
+// void addEdgeR(int u, int v, double w){
 //    nextr[++cntr] = headr[u];
 //    tor[cntr] = v;
 //    weightr[cntr] = w;
 //    headr[u] = cntr;
-//}
+// }
 //
-//int init(int t, double v){
+// int init(int t, double v){
 //    to[++cntt] = t;
 //    cost[cntt] = v;
 //    ls[cntt] = rs[cntt] = dist[cntt] = 0;
 //    return cntt;
-//}
+// }
 //
-//int clone(int i){
+// int clone(int i){
 //    to[++cntt] = to[i];
 //    cost[cntt] = cost[i];
 //    ls[cntt] = ls[i];
 //    rs[cntt] = rs[i];
 //    dist[cntt] = dist[i];
 //    return cntt;
-//}
+// }
 //
-//int merge(int i, int j){
+// int merge(int i, int j){
 //    if(i == 0 || j == 0){
 //        return i + j;
 //    }
@@ -99,9 +99,9 @@ package class155;
 //    }
 //    dist[h] = dist[rs[h]] + 1;
 //    return h;
-//}
+// }
 //
-//void heapAdd(int k, double v){
+// void heapAdd(int k, double v){
 //    key[++cntd] = k;
 //    val[cntd] = v;
 //    heap[++cnth] = cntd;
@@ -111,9 +111,9 @@ package class155;
 //        cur = father;
 //        father = cur / 2;
 //    }
-//}
+// }
 //
-//int heapPop(){
+// int heapPop(){
 //    int ans = heap[1];
 //    heap[1] = heap[cnth--];
 //    int cur = 1, l = cur * 2, r = l + 1, best;
@@ -129,13 +129,13 @@ package class155;
 //        r = l + 1;
 //    }
 //    return ans;
-//}
+// }
 //
-//bool heapEmpty(){
+// bool heapEmpty(){
 //    return cnth == 0;
-//}
+// }
 //
-//void dijkstra(){
+// void dijkstra(){
 //    fill(dis, dis + MAXN, INF);
 //    dis[n] = 0;
 //    cntd = cnth = 0;
@@ -156,9 +156,9 @@ package class155;
 //            }
 //        }
 //    }
-//}
+// }
 //
-//void mergeRoad(){
+// void mergeRoad(){
 //    cntd = cnth = 0;
 //    for(int i = 1; i <= n; i++){
 //        heapAdd(i, dis[i]);
@@ -177,9 +177,9 @@ package class155;
 //            rt[u] = merge(rt[u], rt[tog[path[u]]]);
 //        }
 //    }
-//}
+// }
 //
-//int expand(){
+// int expand(){
 //    int ans = 0;
 //    money -= dis[1];
 //    if(money >= 0){
@@ -209,9 +209,9 @@ package class155;
 //        }
 //    }
 //    return ans;
-//}
+// }
 //
-//int main(){
+// int main(){
 //    ios::sync_with_stdio(false);
 //    cin.tie(NULL);
 //    cin >> n >> m >> money;
@@ -229,4 +229,4 @@ package class155;
 //    int ans = expand();
 //    cout << ans << endl;
 //    return 0;
-//}
+// }

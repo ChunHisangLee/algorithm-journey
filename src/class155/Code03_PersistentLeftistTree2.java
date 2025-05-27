@@ -2,42 +2,42 @@ package class155;
 
 // 可持久化左偏树的实现，利用对数器验证正确性，C++版
 
-//#include <iostream>
-//#include <vector>
-//#include <queue>
-//#include <algorithm>
-//#include <cstdlib>
-//#include <ctime>
+// #include <iostream>
+// #include <vector>
+// #include <queue>
+// #include <algorithm>
+// #include <cstdlib>
+// #include <ctime>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 10000;
-//const int MAXV = 100000;
-//const int MAXT = 2000001;
+// const int MAXN = 10000;
+// const int MAXV = 100000;
+// const int MAXT = 2000001;
 //
-//int rt[MAXN];
-//int num[MAXT];
-//int ls[MAXT];
-//int rs[MAXT];
-//int dist[MAXT];
-//int siz[MAXT];
-//int cnt = 0;
+// int rt[MAXN];
+// int num[MAXT];
+// int ls[MAXT];
+// int rs[MAXT];
+// int dist[MAXT];
+// int siz[MAXT];
+// int cnt = 0;
 //
-//int init(int v) {
+// int init(int v) {
 //    num[++cnt] = v;
 //    ls[cnt] = rs[cnt] = dist[cnt] = 0;
 //    return cnt;
-//}
+// }
 //
-//int clone(int i) {
+// int clone(int i) {
 //    num[++cnt] = num[i];
 //    ls[cnt] = ls[i];
 //    rs[cnt] = rs[i];
 //    dist[cnt] = dist[i];
 //    return cnt;
-//}
+// }
 //
-//int merge(int i, int j) {
+// int merge(int i, int j) {
 //    if (i == 0 || j == 0) {
 //        return i + j;
 //    }
@@ -51,9 +51,9 @@ package class155;
 //    }
 //    dist[h] = dist[rs[h]] + 1;
 //    return h;
-//}
+// }
 //
-//int pop(int i) {
+// int pop(int i) {
 //    if (ls[i] == 0 && rs[i] == 0) {
 //        return 0;
 //    }
@@ -61,14 +61,14 @@ package class155;
 //        return clone(ls[i] + rs[i]);
 //    }
 //    return merge(ls[i], rs[i]);
-//}
+// }
 //
-//void treeAdd(int x, int y, int i) {
+// void treeAdd(int x, int y, int i) {
 //    rt[i] = merge(rt[x], init(y));
 //    siz[rt[i]] = siz[rt[x]] + 1;
-//}
+// }
 //
-//void treeMerge(int x, int y, int i) {
+// void treeMerge(int x, int y, int i) {
 //    if (rt[x] == 0 && rt[y] == 0) {
 //        rt[i] = 0;
 //    } else if (rt[x] == 0 || rt[y] == 0) {
@@ -77,20 +77,20 @@ package class155;
 //        rt[i] = merge(rt[x], rt[y]);
 //    }
 //    siz[rt[i]] = siz[rt[x]] + siz[rt[y]];
-//}
+// }
 //
-//void treePop(int x, int i) {
+// void treePop(int x, int i) {
 //    if (siz[rt[x]] == 0) {
 //        rt[i] = 0;
 //    } else {
 //        rt[i] = pop(rt[x]);
 //        siz[rt[i]] = siz[rt[x]] - 1;
 //    }
-//}
+// }
 //
-//vector<priority_queue<int, vector<int>, greater<int>>> verify;
+// vector<priority_queue<int, vector<int>, greater<int>>> verify;
 //
-//void verifyAdd(int x, int y) {
+// void verifyAdd(int x, int y) {
 //    priority_queue<int, vector<int>, greater<int>> pre = verify[x];
 //    vector<int> tmp;
 //    while (!pre.empty()) {
@@ -103,9 +103,9 @@ package class155;
 //    }
 //    cur.push(y);
 //    verify.push_back(cur);
-//}
+// }
 //
-//void verifyMerge(int x, int y) {
+// void verifyMerge(int x, int y) {
 //    priority_queue<int, vector<int>, greater<int>> h1 = verify[x];
 //    priority_queue<int, vector<int>, greater<int>> h2 = verify[y];
 //    vector<int> tmp;
@@ -130,9 +130,9 @@ package class155;
 //        h2.push(number);
 //    }
 //    verify.push_back(cur);
-//}
+// }
 //
-//void verifyPop(int x) {
+// void verifyPop(int x) {
 //    priority_queue<int, vector<int>, greater<int>> pre = verify[x];
 //    priority_queue<int, vector<int>, greater<int>> cur;
 //    if (pre.empty()) {
@@ -152,9 +152,9 @@ package class155;
 //        pre.push(top);
 //        verify.push_back(cur);
 //    }
-//}
+// }
 //
-//bool check(int i) {
+// bool check(int i) {
 //    int h1 = rt[i];
 //    priority_queue<int, vector<int>, greater<int>> h2 = verify[i];
 //    if (siz[h1] != h2.size()) {
@@ -177,9 +177,9 @@ package class155;
 //        h2.push(v);
 //    }
 //    return ans;
-//}
+// }
 //
-//int main() {
+// int main() {
 //    cout << "test begin" << endl;
 //    dist[0] = -1;
 //    rt[0] = siz[0] = 0;
@@ -213,4 +213,4 @@ package class155;
 //    }
 //    cout << "test finish" << endl;
 //    return 0;
-//}
+// }

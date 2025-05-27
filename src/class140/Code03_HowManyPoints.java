@@ -17,31 +17,30 @@ import java.io.StreamTokenizer;
 
 public class Code03_HowManyPoints {
 
-	public static long gcd(long a, long b) {
-		return b == 0 ? a : gcd(b, a % b);
-	}
+  public static long gcd(long a, long b) {
+    return b == 0 ? a : gcd(b, a % b);
+  }
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StreamTokenizer in = new StreamTokenizer(br);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		in.nextToken();
-		int cases = (int) in.nval;
-		for (int t = 1; t <= cases; t++) {
-			in.nextToken();
-			long x1 = (long) in.nval;
-			in.nextToken();
-			long y1 = (long) in.nval;
-			in.nextToken();
-			long x2 = (long) in.nval;
-			in.nextToken();
-			long y2 = (long) in.nval;
-			long ans = gcd(Math.abs(x1 - x2), Math.abs(y1 - y2)) + 1;
-			out.println("Case " + t + ": " + ans);
-		}
-		out.flush();
-		out.close();
-		br.close();
-	}
-
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StreamTokenizer in = new StreamTokenizer(br);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    in.nextToken();
+    int cases = (int) in.nval;
+    for (int t = 1; t <= cases; t++) {
+      in.nextToken();
+      long x1 = (long) in.nval;
+      in.nextToken();
+      long y1 = (long) in.nval;
+      in.nextToken();
+      long x2 = (long) in.nval;
+      in.nextToken();
+      long y2 = (long) in.nval;
+      long ans = gcd(Math.abs(x1 - x2), Math.abs(y1 - y2)) + 1;
+      out.println("Case " + t + ": " + ans);
+    }
+    out.flush();
+    out.close();
+    br.close();
+  }
 }

@@ -7,32 +7,32 @@ package class153;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <iostream>
-//#include <vector>
-//#include <algorithm>
-//#include <climits>
+// #include <iostream>
+// #include <vector>
+// #include <algorithm>
+// #include <climits>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 2000001;
+// const int MAXN = 2000001;
 //
-//int head = 0;
-//int cnt = 0;
-//int key[MAXN];
-//int fa[MAXN];
-//int ls[MAXN];
-//int rs[MAXN];
-//int size[MAXN];
+// int head = 0;
+// int cnt = 0;
+// int key[MAXN];
+// int fa[MAXN];
+// int ls[MAXN];
+// int rs[MAXN];
+// int size[MAXN];
 //
-//void up(int i) {
+// void up(int i) {
 //    size[i] = size[ls[i]] + size[rs[i]] + 1;
-//}
+// }
 //
-//int lr(int i) {
+// int lr(int i) {
 //    return rs[fa[i]] == i ? 1 : 0;
-//}
+// }
 //
-//void rotate(int i) {
+// void rotate(int i) {
 //    int f = fa[i], g = fa[f], soni = lr(i), sonf = lr(f);
 //    if (soni == 1) {
 //        rs[f] = ls[i];
@@ -58,9 +58,9 @@ package class153;
 //    fa[i] = g;
 //    up(f);
 //    up(i);
-//}
+// }
 //
-//void splay(int i, int goal) {
+// void splay(int i, int goal) {
 //    int f = fa[i], g = fa[f];
 //    while (f != goal) {
 //        if (g != goal) {
@@ -77,9 +77,9 @@ package class153;
 //    if (goal == 0) {
 //        head = i;
 //    }
-//}
+// }
 //
-//int find(int rank) {
+// int find(int rank) {
 //    int i = head;
 //    while (i != 0) {
 //        if (size[ls[i]] + 1 == rank) {
@@ -92,9 +92,9 @@ package class153;
 //        }
 //    }
 //    return 0;
-//}
+// }
 //
-//void add(int num) {
+// void add(int num) {
 //    key[++cnt] = num;
 //    size[cnt] = 1;
 //    if (head == 0) {
@@ -119,9 +119,9 @@ package class153;
 //        fa[cnt] = f;
 //        splay(cnt, 0);
 //    }
-//}
+// }
 //
-//int getRank(int num) {
+// int getRank(int num) {
 //    int i = head, last = head;
 //    int ans = 0;
 //    while (i != 0) {
@@ -135,15 +135,15 @@ package class153;
 //    }
 //    splay(last, 0);
 //    return ans + 1;
-//}
+// }
 //
-//int index(int x) {
+// int index(int x) {
 //    int i = find(x);
 //    splay(i, 0);
 //    return key[i];
-//}
+// }
 //
-//int pre(int num) {
+// int pre(int num) {
 //    int i = head, last = head;
 //    int ans = INT_MIN;
 //    while (i != 0) {
@@ -157,9 +157,9 @@ package class153;
 //    }
 //    splay(last, 0);
 //    return ans;
-//}
+// }
 //
-//int post(int num) {
+// int post(int num) {
 //    int i = head, last = head;
 //    int ans = INT_MAX;
 //    while (i != 0) {
@@ -173,9 +173,9 @@ package class153;
 //    }
 //    splay(last, 0);
 //    return ans;
-//}
+// }
 //
-//void remove(int num) {
+// void remove(int num) {
 //    int kth = getRank(num);
 //    if (kth != getRank(num + 1)) {
 //        int i = find(kth);
@@ -196,9 +196,9 @@ package class153;
 //            fa[head] = 0;
 //        }
 //    }
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    int n, m, lastAns = 0, ans = 0;
@@ -231,4 +231,4 @@ package class153;
 //    }
 //    cout << ans << endl;
 //    return 0;
-//}
+// }

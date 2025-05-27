@@ -10,16 +10,15 @@ package class082;
 // 测试链接 : https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/
 public class Code05_Stack5 {
 
-	public static int maxProfit(int[] prices, int fee) {
-		// prepare : 交易次数无限制情况下，获得收益的同时扣掉了一次购买和手续费之后，最好的情况
-		int prepare = -prices[0] - fee;
-		// done : 交易次数无限制情况下，能获得的最大收益
-		int done = 0;
-		for (int i = 1; i < prices.length; i++) {
-			done = Math.max(done, prepare + prices[i]);
-			prepare = Math.max(prepare, done - prices[i] - fee);
-		}
-		return done;
-	}
-
+  public static int maxProfit(int[] prices, int fee) {
+    // prepare : 交易次数无限制情况下，获得收益的同时扣掉了一次购买和手续费之后，最好的情况
+    int prepare = -prices[0] - fee;
+    // done : 交易次数无限制情况下，能获得的最大收益
+    int done = 0;
+    for (int i = 1; i < prices.length; i++) {
+      done = Math.max(done, prepare + prices[i]);
+      prepare = Math.max(prepare, done - prices[i] - fee);
+    }
+    return done;
+  }
 }

@@ -12,46 +12,46 @@ package class155;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <iostream>
-//#include <algorithm>
+// #include <iostream>
+// #include <algorithm>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 101;
-//const int MAXM = 10001;
-//const int MAXK = 10001;
-//const int MAXT = 1000001;
-//const int INF = 10000001;
+// const int MAXN = 101;
+// const int MAXM = 10001;
+// const int MAXK = 10001;
+// const int MAXT = 1000001;
+// const int INF = 10000001;
 //
-//int n, k;
+// int n, k;
 //
-//int arr[MAXM];
-//int start[MAXN];
-//int boundary[MAXN];
+// int arr[MAXM];
+// int start[MAXN];
+// int boundary[MAXN];
 //
-//int idx[MAXT];
-//int jdx[MAXT];
-//int cost[MAXT];
-//int ls[MAXT];
-//int rs[MAXT];
-//int dist[MAXT];
-//int pre[MAXT];
-//int cnt = 0;
+// int idx[MAXT];
+// int jdx[MAXT];
+// int cost[MAXT];
+// int ls[MAXT];
+// int rs[MAXT];
+// int dist[MAXT];
+// int pre[MAXT];
+// int cnt = 0;
 //
-//int heap[MAXK];
-//int heapSize = 0;
+// int heap[MAXK];
+// int heapSize = 0;
 //
-//int ans[MAXK];
+// int ans[MAXK];
 //
-//int init(int i, int j) {
+// int init(int i, int j) {
 //    idx[++cnt] = i;
 //    jdx[cnt] = j;
 //    cost[cnt] = (j + 1 < boundary[i]) ? (arr[j + 1] - arr[j]) : INF;
 //    ls[cnt] = rs[cnt] = dist[cnt] = 0;
 //    return cnt;
-//}
+// }
 //
-//int clone(int i) {
+// int clone(int i) {
 //    idx[++cnt] = idx[i];
 //    jdx[cnt] = jdx[i];
 //    cost[cnt] = cost[i];
@@ -59,9 +59,9 @@ package class155;
 //    rs[cnt] = rs[i];
 //    dist[cnt] = dist[i];
 //    return cnt;
-//}
+// }
 //
-//int merge(int i, int j) {
+// int merge(int i, int j) {
 //    if (i == 0 || j == 0) return i + j;
 //    if (cost[i] > cost[j]) {
 //        swap(i, j);
@@ -73,19 +73,19 @@ package class155;
 //    }
 //    dist[h] = dist[rs[h]] + 1;
 //    return h;
-//}
+// }
 //
-//int pop(int i) {
+// int pop(int i) {
 //    if (ls[i] == 0 && rs[i] == 0) return 0;
 //    if (ls[i] == 0 || rs[i] == 0) return clone(ls[i] + rs[i]);
 //    return merge(ls[i], rs[i]);
-//}
+// }
 //
-//bool compare(int i, int j) {
+// bool compare(int i, int j) {
 //    return pre[i] + cost[i] < pre[j] + cost[j];
-//}
+// }
 //
-//void heapAdd(int i) {
+// void heapAdd(int i) {
 //    heap[++heapSize] = i;
 //    int cur = heapSize, up = cur / 2;
 //    while (cur > 1 && compare(heap[cur], heap[up])) {
@@ -93,9 +93,9 @@ package class155;
 //        cur = up;
 //        up = cur / 2;
 //    }
-//}
+// }
 //
-//int heapPop() {
+// int heapPop() {
 //    int top = heap[1];
 //    heap[1] = heap[heapSize--];
 //    int cur = 1, l = 2, r = 3, best;
@@ -109,9 +109,9 @@ package class155;
 //        r = l + 1;
 //    }
 //    return top;
-//}
+// }
 //
-//void compute() {
+// void compute() {
 //    int first = 0;
 //    for (int i = 1; i <= n; ++i) {
 //        sort(arr + start[i], arr + boundary[i]);
@@ -139,9 +139,9 @@ package class155;
 //            heapAdd(h2);
 //        }
 //    }
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> k;
@@ -161,4 +161,4 @@ package class155;
 //    }
 //    cout << endl;
 //    return 0;
-//}
+// }

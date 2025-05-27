@@ -16,22 +16,22 @@ package class158;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 200002;
-//const int MAXT = MAXN * 37;
-//int cases, n, m;
-//int arr[MAXN];
-//int pos[MAXN];
-//int root[MAXN];
-//int ls[MAXT];
-//int rs[MAXT];
-//int firstSize[MAXT];
-//int cnt;
+// const int MAXN = 200002;
+// const int MAXT = MAXN * 37;
+// int cases, n, m;
+// int arr[MAXN];
+// int pos[MAXN];
+// int root[MAXN];
+// int ls[MAXT];
+// int rs[MAXT];
+// int firstSize[MAXT];
+// int cnt;
 //
-//int build(int l, int r) {
+// int build(int l, int r) {
 //    int rt = ++cnt;
 //    if (l < r) {
 //        int mid = (l + r) / 2;
@@ -40,9 +40,9 @@ package class158;
 //    }
 //    firstSize[rt] = 0;
 //    return rt;
-//}
+// }
 //
-//int update(int jobi, int jobv, int l, int r, int i) {
+// int update(int jobi, int jobv, int l, int r, int i) {
 //    int rt = ++cnt;
 //    ls[rt] = ls[i];
 //    rs[rt] = rs[i];
@@ -57,9 +57,9 @@ package class158;
 //        rs[rt] = update(jobi, jobv, mid + 1, r, rs[rt]);
 //    }
 //    return rt;
-//}
+// }
 //
-//int querySize(int jobl, int jobr, int l, int r, int i) {
+// int querySize(int jobl, int jobr, int l, int r, int i) {
 //    if (jobl <= l && r <= jobr) {
 //        return firstSize[i];
 //    }
@@ -72,9 +72,9 @@ package class158;
 //        ans += querySize(jobl, jobr, mid + 1, r, rs[i]);
 //    }
 //    return ans;
-//}
+// }
 //
-//int queryKth(int jobk, int l, int r, int i) {
+// int queryKth(int jobk, int l, int r, int i) {
 //    if (l == r) {
 //        return l;
 //    }
@@ -85,9 +85,9 @@ package class158;
 //    } else {
 //        return queryKth(jobk - lsize, mid + 1, r, rs[i]);
 //    }
-//}
+// }
 //
-//void prepare() {
+// void prepare() {
 //    cnt = 0;
 //    memset(pos, 0, sizeof(pos));
 //    root[n + 1] = build(1, n);
@@ -100,9 +100,9 @@ package class158;
 //        }
 //        pos[arr[i]] = i;
 //    }
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> cases;
@@ -126,4 +126,4 @@ package class158;
 //        cout << "\n";
 //    }
 //    return 0;
-//}
+// }

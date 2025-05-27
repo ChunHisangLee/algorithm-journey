@@ -24,74 +24,70 @@ import java.io.StreamTokenizer;
 
 public class Code03_BigFishEatSmallFish {
 
-	public static int MAXN = 100001;
+  public static int MAXN = 100001;
 
-	public static int[] arr = new int[MAXN];
+  public static int[] arr = new int[MAXN];
 
-	public static int n;
+  public static int n;
 
-	public static int[][] stack = new int[MAXN][2];
+  public static int[][] stack = new int[MAXN][2];
 
-	public static int r;
+  public static int r;
+  // 也找到了leetcode测试链接
+  // 测试链接 : https://leetcode.cn/problems/steps-to-make-array-non-decreasing/
+  // 提交如下代码，可以直接通过
+  public static int MAXM = 100001;
+  public static int[][] s = new int[MAXM][2];
+  public static int size;
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StreamTokenizer in = new StreamTokenizer(br);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		while (in.nextToken() != StreamTokenizer.TT_EOF) {
-			n = (int) in.nval;
-			for (int i = 0; i < n; i++) {
-				in.nextToken();
-				arr[i] = (int) in.nval;
-			}
-			out.println(turns());
-		}
-		out.flush();
-		out.close();
-		br.close();
-	}
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StreamTokenizer in = new StreamTokenizer(br);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    while (in.nextToken() != StreamTokenizer.TT_EOF) {
+      n = (int) in.nval;
+      for (int i = 0; i < n; i++) {
+        in.nextToken();
+        arr[i] = (int) in.nval;
+      }
+      out.println(turns());
+    }
+    out.flush();
+    out.close();
+    br.close();
+  }
 
-	// arr[0...n-1]鱼的体重
-	// stack[...]随便用
-	public static int turns() {
-		r = 0;
-		int ans = 0;
-		for (int i = n - 1, curTurns; i >= 0; i--) {
-			// i号鱼，arr[i]
-			// 0轮是初始
-			curTurns = 0;
-			while (r > 0 && stack[r - 1][0] < arr[i]) {
-				curTurns = Math.max(curTurns + 1, stack[--r][1]);
-			}
-			stack[r][0] = arr[i];
-			stack[r++][1] = curTurns;
-			ans = Math.max(ans, curTurns);
-		}
-		return ans;
-	}
+  // arr[0...n-1]鱼的体重
+  // stack[...]随便用
+  public static int turns() {
+    r = 0;
+    int ans = 0;
+    for (int i = n - 1, curTurns; i >= 0; i--) {
+      // i号鱼，arr[i]
+      // 0轮是初始
+      curTurns = 0;
+      while (r > 0 && stack[r - 1][0] < arr[i]) {
+        curTurns = Math.max(curTurns + 1, stack[--r][1]);
+      }
+      stack[r][0] = arr[i];
+      stack[r++][1] = curTurns;
+      ans = Math.max(ans, curTurns);
+    }
+    return ans;
+  }
 
-	// 也找到了leetcode测试链接
-	// 测试链接 : https://leetcode.cn/problems/steps-to-make-array-non-decreasing/
-	// 提交如下代码，可以直接通过
-	public static int MAXM = 100001;
-
-	public static int[][] s = new int[MAXM][2];
-
-	public static int size;
-
-	public static int totalSteps(int[] arr) {
-		size = 0;
-		int ans = 0;
-		for (int i = arr.length - 1, curTurns; i >= 0; i--) {
-			curTurns = 0;
-			while (size > 0 && s[size - 1][0] < arr[i]) {
-				curTurns = Math.max(curTurns + 1, s[--size][1]);
-			}
-			s[size][0] = arr[i];
-			s[size++][1] = curTurns;
-			ans = Math.max(ans, curTurns);
-		}
-		return ans;
-	}
-
+  public static int totalSteps(int[] arr) {
+    size = 0;
+    int ans = 0;
+    for (int i = arr.length - 1, curTurns; i >= 0; i--) {
+      curTurns = 0;
+      while (size > 0 && s[size - 1][0] < arr[i]) {
+        curTurns = Math.max(curTurns + 1, s[--size][1]);
+      }
+      s[size][0] = arr[i];
+      s[size++][1] = curTurns;
+      ans = Math.max(ans, curTurns);
+    }
+    return ans;
+  }
 }

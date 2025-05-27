@@ -14,26 +14,26 @@ package class152;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <iostream>
-//#include <vector>
-//#include <cstdlib>
-//#include <ctime>
-//using namespace std;
+// #include <iostream>
+// #include <vector>
+// #include <cstdlib>
+// #include <ctime>
+// using namespace std;
 //
-//const int MAXN = 200001;
-//const int MAXM = MAXN * 100;
+// const int MAXN = 200001;
+// const int MAXM = MAXN * 100;
 //
-//int cnt = 0;
-//int head[MAXN];
-//int key[MAXM];
-//int ls[MAXM];
-//int rs[MAXM];
-//int size[MAXM];
-//bool rev[MAXM];
-//long long sum[MAXM];
-//double priority[MAXM];
+// int cnt = 0;
+// int head[MAXN];
+// int key[MAXM];
+// int ls[MAXM];
+// int rs[MAXM];
+// int size[MAXM];
+// bool rev[MAXM];
+// long long sum[MAXM];
+// double priority[MAXM];
 //
-//int copy(int i) {
+// int copy(int i) {
 //    key[++cnt] = key[i];
 //    ls[cnt] = ls[i];
 //    rs[cnt] = rs[i];
@@ -42,14 +42,14 @@ package class152;
 //    sum[cnt] = sum[i];
 //    priority[cnt] = priority[i];
 //    return cnt;
-//}
+// }
 //
-//void up(int i) {
+// void up(int i) {
 //    size[i] = size[ls[i]] + size[rs[i]] + 1;
 //    sum[i] = sum[ls[i]] + sum[rs[i]] + key[i];
-//}
+// }
 //
-//void down(int i) {
+// void down(int i) {
 //    if (rev[i]) {
 //        if (ls[i] != 0) {
 //            ls[i] = copy(ls[i]);
@@ -62,9 +62,9 @@ package class152;
 //        swap(ls[i], rs[i]);
 //        rev[i] = false;
 //    }
-//}
+// }
 //
-//void split(int l, int r, int i, int rank) {
+// void split(int l, int r, int i, int rank) {
 //    if (i == 0) {
 //        rs[l] = ls[r] = 0;
 //    } else {
@@ -79,9 +79,9 @@ package class152;
 //        }
 //        up(i);
 //    }
-//}
+// }
 //
-//int merge(int l, int r) {
+// int merge(int l, int r) {
 //    if (l == 0 || r == 0) {
 //        return l + r;
 //    }
@@ -98,9 +98,9 @@ package class152;
 //        up(r);
 //        return r;
 //    }
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    srand(time(0));
@@ -160,4 +160,4 @@ package class152;
 //        }
 //    }
 //    return 0;
-//}
+// }

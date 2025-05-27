@@ -13,50 +13,50 @@ package class164;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//struct Edge {
+// struct Edge {
 //    int u, v, w;
-//};
+// };
 //
-//bool cmp(Edge x, Edge y) {
+// bool cmp(Edge x, Edge y) {
 //    return x.w < y.w;
-//}
+// }
 //
-//const int MAXN = 100001;
-//const int MAXK = 200001;
-//const int MAXM = 500001;
-//const int MAXT = MAXN * 40;
-//const int MAXH = 20;
-//int n, m, q, s;
-//int node[MAXN];
-//int sorted[MAXN];
-//Edge edge[MAXM];
+// const int MAXN = 100001;
+// const int MAXK = 200001;
+// const int MAXM = 500001;
+// const int MAXT = MAXN * 40;
+// const int MAXH = 20;
+// int n, m, q, s;
+// int node[MAXN];
+// int sorted[MAXN];
+// Edge edge[MAXM];
 //
-//int father[MAXK];
+// int father[MAXK];
 //
-//int head[MAXK];
-//int nxt[MAXK];
-//int to[MAXK];
-//int cntg;
-//int nodeKey[MAXK];
-//int cntu;
+// int head[MAXK];
+// int nxt[MAXK];
+// int to[MAXK];
+// int cntg;
+// int nodeKey[MAXK];
+// int cntu;
 //
-//int stjump[MAXK][MAXH];
-//int leafsiz[MAXK];
-//int leafDfnMin[MAXK];
-//int leafseg[MAXK];
-//int cntd;
+// int stjump[MAXK][MAXH];
+// int leafsiz[MAXK];
+// int leafDfnMin[MAXK];
+// int leafseg[MAXK];
+// int cntd;
 //
-//int root[MAXN];
-//int ls[MAXT];
-//int rs[MAXT];
-//int numcnt[MAXT];
-//int cntt;
+// int root[MAXN];
+// int ls[MAXT];
+// int rs[MAXT];
+// int numcnt[MAXT];
+// int cntt;
 //
-//int kth(int num) {
+// int kth(int num) {
 //    int left = 1, right = s;
 //    while (left <= right) {
 //        int mid = (left + right) / 2;
@@ -69,9 +69,9 @@ package class164;
 //        }
 //    }
 //    return -1;
-//}
+// }
 //
-//void prepare() {
+// void prepare() {
 //    for (int i = 1; i <= n; i++) {
 //        sorted[i] = node[i];
 //    }
@@ -85,22 +85,22 @@ package class164;
 //    for (int i = 1; i <= n; i++) {
 //        node[i] = kth(node[i]);
 //    }
-//}
+// }
 //
-//void addEdge(int u, int v) {
+// void addEdge(int u, int v) {
 //    nxt[++cntg] = head[u];
 //    to[cntg] = v;
 //    head[u] = cntg;
-//}
+// }
 //
-//int find(int i) {
+// int find(int i) {
 //    if (i != father[i]) {
 //        father[i] = find(father[i]);
 //    }
 //    return father[i];
-//}
+// }
 //
-//void kruskalRebuild() {
+// void kruskalRebuild() {
 //    for (int i = 1; i <= n; i++) {
 //        father[i] = i;
 //    }
@@ -117,9 +117,9 @@ package class164;
 //            addEdge(cntu, fy);
 //        }
 //    }
-//}
+// }
 //
-//void dfs(int u, int fa) {
+// void dfs(int u, int fa) {
 //    stjump[u][0] = fa;
 //    for (int p = 1; p < MAXH; p++) {
 //        stjump[u][p] = stjump[stjump[u][p - 1]][p - 1];
@@ -139,9 +139,9 @@ package class164;
 //        leafsiz[u] += leafsiz[to[e]];
 //        leafDfnMin[u] = min(leafDfnMin[u], leafDfnMin[to[e]]);
 //    }
-//}
+// }
 //
-//int build(int l, int r) {
+// int build(int l, int r) {
 //    int rt = ++cntt;
 //    numcnt[rt] = 0;
 //    if (l < r) {
@@ -150,9 +150,9 @@ package class164;
 //        rs[rt] = build(mid + 1, r);
 //    }
 //    return rt;
-//}
+// }
 //
-//int insert(int jobi, int l, int r, int i) {
+// int insert(int jobi, int l, int r, int i) {
 //    int rt = ++cntt;
 //    ls[rt] = ls[i];
 //    rs[rt] = rs[i];
@@ -166,9 +166,9 @@ package class164;
 //        }
 //    }
 //    return rt;
-//}
+// }
 //
-//int query(int jobk, int l, int r, int pre, int post) {
+// int query(int jobk, int l, int r, int pre, int post) {
 //    if (l == r) {
 //        return l;
 //    }
@@ -179,9 +179,9 @@ package class164;
 //    } else {
 //        return query(jobk - rsize, l, mid, ls[pre], ls[post]);
 //    }
-//}
+// }
 //
-//int kthMax(int u, int x, int k) {
+// int kthMax(int u, int x, int k) {
 //    for (int p = MAXH - 1; p >= 0; p--) {
 //        if (stjump[u][p] > 0 && nodeKey[stjump[u][p]] <= x) {
 //            u = stjump[u][p];
@@ -192,9 +192,9 @@ package class164;
 //    }
 //    int idx = query(k, 1, s, root[leafDfnMin[u] - 1], root[leafDfnMin[u] + leafsiz[u] - 1]);
 //    return sorted[idx];
-//}
+// }
 //
-//int main(){
+// int main(){
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> m >> q;
@@ -228,4 +228,4 @@ package class164;
 //        }
 //    }
 //    return 0;
-//}
+// }

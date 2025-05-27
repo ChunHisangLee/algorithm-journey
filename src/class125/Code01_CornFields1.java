@@ -21,84 +21,83 @@ import java.io.StreamTokenizer;
 
 public class Code01_CornFields1 {
 
-	public static int MAXN = 12;
+  public static int MAXN = 12;
 
-	public static int MAXM = 12;
+  public static int MAXM = 12;
 
-	public static int MOD = 100000000;
+  public static int MOD = 100000000;
 
-	public static int[][] grid = new int[MAXN][MAXM];
+  public static int[][] grid = new int[MAXN][MAXM];
 
-	public static int[][] dp = new int[MAXN][1 << MAXM];
+  public static int[][] dp = new int[MAXN][1 << MAXM];
 
-	public static int n, m, maxs;
+  public static int n, m, maxs;
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StreamTokenizer in = new StreamTokenizer(br);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		in.nextToken();
-		n = (int) in.nval;
-		in.nextToken();
-		m = (int) in.nval;
-		maxs = 1 << m;
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < m; j++) {
-				in.nextToken();
-				grid[i][j] = (int) in.nval;
-			}
-		}
-		out.println(compute());
-		out.flush();
-		out.close();
-		br.close();
-	}
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StreamTokenizer in = new StreamTokenizer(br);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    in.nextToken();
+    n = (int) in.nval;
+    in.nextToken();
+    m = (int) in.nval;
+    maxs = 1 << m;
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        in.nextToken();
+        grid[i][j] = (int) in.nval;
+      }
+    }
+    out.println(compute());
+    out.flush();
+    out.close();
+    br.close();
+  }
 
-	// 时间复杂度O(n * 2的m次方 * 2的m次方)
-	public static int compute() {
-		for (int i = 0; i < n; i++) {
-			for (int s = 0; s < maxs; s++) {
-				dp[i][s] = -1;
-			}
-		}
-		return f(0, 0);
-	}
+  // 时间复杂度O(n * 2的m次方 * 2的m次方)
+  public static int compute() {
+    for (int i = 0; i < n; i++) {
+      for (int s = 0; s < maxs; s++) {
+        dp[i][s] = -1;
+      }
+    }
+    return f(0, 0);
+  }
 
-	public static int f(int i, int s) {
-		if (i == n) {
-			return 1;
-		}
-		if (dp[i][s] != -1) {
-			return dp[i][s];
-		}
-		int ans = dfs(i, 0, s, 0);
-		dp[i][s] = ans;
-		return ans;
-	}
+  public static int f(int i, int s) {
+    if (i == n) {
+      return 1;
+    }
+    if (dp[i][s] != -1) {
+      return dp[i][s];
+    }
+    int ans = dfs(i, 0, s, 0);
+    dp[i][s] = ans;
+    return ans;
+  }
 
-	// 当前来到i行j列
-	// i-1行每列种草的状况s
-	// i行每列种草的状况ss
-	// 返回后续有几种方法
-	public static int dfs(int i, int j, int s, int ss) {
-		if (j == m) {
-			return f(i + 1, ss);
-		}
-		int ans = dfs(i, j + 1, s, ss);
-		if (grid[i][j] == 1 && (j == 0 || get(ss, j - 1) == 0) && get(s, j) == 0) {
-			ans = (ans + dfs(i, j + 1, s, set(ss, j, 1))) % MOD;
-		}
-		return ans;
-	}
+  // 当前来到i行j列
+  // i-1行每列种草的状况s
+  // i行每列种草的状况ss
+  // 返回后续有几种方法
+  public static int dfs(int i, int j, int s, int ss) {
+    if (j == m) {
+      return f(i + 1, ss);
+    }
+    int ans = dfs(i, j + 1, s, ss);
+    if (grid[i][j] == 1 && (j == 0 || get(ss, j - 1) == 0) && get(s, j) == 0) {
+      ans = (ans + dfs(i, j + 1, s, set(ss, j, 1))) % MOD;
+    }
+    return ans;
+  }
 
-	// 得到状态s中j位的状态
-	public static int get(int s, int j) {
-		return (s >> j) & 1;
-	}
+  // 得到状态s中j位的状态
+  public static int get(int s, int j) {
+    return (s >> j) & 1;
+  }
 
-	// 状态s中j位的状态设置成v，然后把新的值返回
-	public static int set(int s, int j, int v) {
-		return v == 0 ? (s & (~(1 << j))) : (s | (1 << j));
-	}
-
+  // 状态s中j位的状态设置成v，然后把新的值返回
+  public static int set(int s, int j, int v) {
+    return v == 0 ? (s & (~(1 << j))) : (s | (1 << j));
+  }
 }

@@ -13,32 +13,32 @@ package class154;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 100001;
-//int n, m;
-//int num[MAXN];
-//int ls[MAXN];
-//int rs[MAXN];
-//int dist[MAXN];
-//int fa[MAXN];
+// const int MAXN = 100001;
+// int n, m;
+// int num[MAXN];
+// int ls[MAXN];
+// int rs[MAXN];
+// int dist[MAXN];
+// int fa[MAXN];
 //
-//void prepare() {
+// void prepare() {
 //    dist[0] = -1;
 //    for(int i = 1; i <= n; i++) {
 //        ls[i] = rs[i] = dist[i] = 0;
 //        fa[i] = i;
 //    }
-//}
+// }
 //
-//int find(int i) {
+// int find(int i) {
 //    fa[i] = fa[i] == i ? i : find(fa[i]);
 //    return fa[i];
-//}
+// }
 //
-//int merge(int i, int j) {
+// int merge(int i, int j) {
 //    if (i == 0 || j == 0) {
 //        return i + j;
 //    }
@@ -52,17 +52,17 @@ package class154;
 //    dist[i] = dist[rs[i]] + 1;
 //    fa[ls[i]] = fa[rs[i]] = i;
 //    return i;
-//}
+// }
 //
-//int pop(int i) {
+// int pop(int i) {
 //    fa[ls[i]] = ls[i];
 //    fa[rs[i]] = rs[i];
 //    fa[i] = merge(ls[i], rs[i]);
 //    ls[i] = rs[i] = dist[i] = 0;
 //    return fa[i];
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> m;
@@ -97,4 +97,4 @@ package class154;
 //        }
 //    }
 //    return 0;
-//}
+// }

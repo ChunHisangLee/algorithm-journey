@@ -10,51 +10,51 @@ package class165;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//struct Edge {
+// struct Edge {
 //    int u, v, w;
-//};
+// };
 //
-//bool EdgeCmp(Edge x, Edge y) {
+// bool EdgeCmp(Edge x, Edge y) {
 //    return x.w < y.w;
-//}
+// }
 //
-//struct Query {
+// struct Query {
 //    int u, v, w, i;
-//};
+// };
 //
-//bool QueryCmp(Query x, Query y) {
+// bool QueryCmp(Query x, Query y) {
 //    if(x.w != y.w) {
 //        return x.w < y.w;
 //    } else {
 //        return x.i < y.i;
 //    }
-//}
+// }
 //
-//const int MAXN = 500001;
-//int n, m, q, k;
+// const int MAXN = 500001;
+// int n, m, q, k;
 //
-//Edge edge[MAXN];
-//Query queries[MAXN];
+// Edge edge[MAXN];
+// Query queries[MAXN];
 //
-//int father[MAXN];
-//int siz[MAXN];
-//int rollback[MAXN << 1][2];
-//int opsize;
+// int father[MAXN];
+// int siz[MAXN];
+// int rollback[MAXN << 1][2];
+// int opsize;
 //
-//bool ans[MAXN];
+// bool ans[MAXN];
 //
-//int find(int i) {
+// int find(int i) {
 //    while (i != father[i]) {
 //        i = father[i];
 //    }
 //    return i;
-//}
+// }
 //
-//void Union(int x, int y) {
+// void Union(int x, int y) {
 //    int fx = find(x);
 //    int fy = find(y);
 //    if (siz[fx] < siz[fy]) {
@@ -66,16 +66,16 @@ package class165;
 //    siz[fx] += siz[fy];
 //    rollback[++opsize][0] = fx;
 //    rollback[opsize][1] = fy;
-//}
+// }
 //
-//void undo() {
+// void undo() {
 //    int fx = rollback[opsize][0];
 //    int fy = rollback[opsize--][1];
 //    father[fy] = fy;
 //    siz[fx] -= siz[fy];
-//}
+// }
 //
-//void prepare() {
+// void prepare() {
 //    for (int i = 1; i <= n; i++) {
 //        father[i] = i;
 //        siz[i] = 1;
@@ -85,12 +85,13 @@ package class165;
 //    for (int i = 1; i <= q; i++) {
 //        ans[i] = true;
 //    }
-//}
+// }
 //
-//void compute() {
+// void compute() {
 //    int ei = 1, queryId, unionCnt;
 //    for (int l = 1, r = 1; l <= k; l = ++r) {
-//        while (r + 1 <= k && queries[l].w == queries[r + 1].w && queries[l].i == queries[r + 1].i) {
+//        while (r + 1 <= k && queries[l].w == queries[r + 1].w && queries[l].i == queries[r + 1].i)
+// {
 //            r++;
 //        }
 //        for (; ei <= m && edge[ei].w < queries[l].w; ei++) {
@@ -116,9 +117,9 @@ package class165;
 //            undo();
 //        }
 //    }
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> m;
@@ -147,4 +148,4 @@ package class165;
 //        }
 //    }
 //    return 0;
-//}
+// }

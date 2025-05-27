@@ -56,7 +56,7 @@ bool miller_rabin(ll n) {
             if(v == n - 1) break;
             v = v * v % n;
         }
-        if(s > t) return 0; 
+        if(s > t) return 0;
     }
     return 1;
 }
@@ -72,5 +72,3 @@ int main() {
 }
 
 */
-
-

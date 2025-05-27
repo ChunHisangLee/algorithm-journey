@@ -12,44 +12,44 @@ package class166;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 1000001;
-//const int MAXV = 100001;
-//const int MAXT = 30000001;
+// const int MAXN = 1000001;
+// const int MAXV = 100001;
+// const int MAXT = 30000001;
 //
-//int n, m, v;
+// int n, m, v;
 //
-//int father[MAXN];
-//int siz[MAXN];
-//int rollback[MAXN][2];
-//int opsize = 0;
+// int father[MAXN];
+// int siz[MAXN];
+// int rollback[MAXN][2];
+// int opsize = 0;
 //
-//int head[MAXV << 2];
-//int nxt[MAXT];
-//int tox[MAXT];
-//int toy[MAXT];
-//int cnt = 0;
+// int head[MAXV << 2];
+// int nxt[MAXT];
+// int tox[MAXT];
+// int toy[MAXT];
+// int cnt = 0;
 //
-//int part;
+// int part;
 //
-//void addEdge(int i, int x, int y) {
+// void addEdge(int i, int x, int y) {
 //    nxt[++cnt] = head[i];
 //    tox[cnt] = x;
 //    toy[cnt] = y;
 //    head[i] = cnt;
-//}
+// }
 //
-//int find(int i) {
+// int find(int i) {
 //    while (i != father[i]) {
 //        i = father[i];
 //    }
 //    return i;
-//}
+// }
 //
-//void Union(int x, int y) {
+// void Union(int x, int y) {
 //    int fx = find(x);
 //    int fy = find(y);
 //    if (siz[fx] < siz[fy]) {
@@ -61,16 +61,16 @@ package class166;
 //    siz[fx] += siz[fy];
 //    rollback[++opsize][0] = fx;
 //    rollback[opsize][1] = fy;
-//}
+// }
 //
-//void undo() {
+// void undo() {
 //    int fx = rollback[opsize][0];
 //    int fy = rollback[opsize--][1];
 //    father[fy] = fy;
 //    siz[fx] -= siz[fy];
-//}
+// }
 //
-//void add(int jobl, int jobr, int jobx, int joby, int l, int r, int i) {
+// void add(int jobl, int jobr, int jobx, int joby, int l, int r, int i) {
 //    if (jobl <= l && r <= jobr) {
 //        addEdge(i, jobx, joby);
 //    } else {
@@ -82,9 +82,9 @@ package class166;
 //            add(jobl, jobr, jobx, joby, mid + 1, r, i << 1 | 1);
 //        }
 //    }
-//}
+// }
 //
-//int dfs(int l, int r, int i) {
+// int dfs(int l, int r, int i) {
 //    int unionCnt = 0;
 //    for (int ei = head[i]; ei > 0; ei = nxt[ei]) {
 //        int fx = find(tox[ei]);
@@ -112,9 +112,9 @@ package class166;
 //        part++;
 //    }
 //    return ans;
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> m;
@@ -134,4 +134,4 @@ package class166;
 //    part = n;
 //    cout << dfs(0, v, 1) << '\n';
 //    return 0;
-//}
+// }

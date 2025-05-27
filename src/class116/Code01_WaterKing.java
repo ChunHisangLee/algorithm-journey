@@ -7,30 +7,29 @@ package class116;
 // 测试链接 : https://leetcode.cn/problems/majority-element/
 public class Code01_WaterKing {
 
-	public static int majorityElement(int[] nums) {
-		int cand = 0;
-		int hp = 0;
-		for (int num : nums) {
-			if (hp == 0) {
-				cand = num;
-				hp = 1;
-			} else if (num != cand) {
-				hp--;
-			} else {
-				hp++;
-			}
-		}
-		if (hp == 0) {
-			return -1;
-		}
-		// 复用hp，统计真实出现的次数
-		hp = 0;
-		for (int num : nums) {
-			if (num == cand) {
-				hp++;
-			}
-		}
-		return hp > nums.length / 2 ? cand : -1;
-	}
-
+  public static int majorityElement(int[] nums) {
+    int cand = 0;
+    int hp = 0;
+    for (int num : nums) {
+      if (hp == 0) {
+        cand = num;
+        hp = 1;
+      } else if (num != cand) {
+        hp--;
+      } else {
+        hp++;
+      }
+    }
+    if (hp == 0) {
+      return -1;
+    }
+    // 复用hp，统计真实出现的次数
+    hp = 0;
+    for (int num : nums) {
+      if (num == cand) {
+        hp++;
+      }
+    }
+    return hp > nums.length / 2 ? cand : -1;
+  }
 }

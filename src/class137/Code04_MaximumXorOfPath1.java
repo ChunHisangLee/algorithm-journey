@@ -26,140 +26,138 @@ import java.util.StringTokenizer;
 
 public class Code04_MaximumXorOfPath1 {
 
-	public static int MAXN = 50001;
+  public static int MAXN = 50001;
 
-	public static int MAXM = 200002;
+  public static int MAXM = 200002;
 
-	public static int BIT = 60;
+  public static int BIT = 60;
 
-	// 链式前向星
-	public static int[] head = new int[MAXN];
+  // 链式前向星
+  public static int[] head = new int[MAXN];
 
-	public static int[] next = new int[MAXM];
+  public static int[] next = new int[MAXM];
 
-	public static int[] to = new int[MAXM];
+  public static int[] to = new int[MAXM];
 
-	public static long[] weight = new long[MAXM];
+  public static long[] weight = new long[MAXM];
 
-	public static int cnt;
+  public static int cnt;
 
-	// 所有环的异或和构建的线性基
-	public static long[] basis = new long[BIT + 1];
+  // 所有环的异或和构建的线性基
+  public static long[] basis = new long[BIT + 1];
 
-	// 某个节点在dfs过程中是否被访问过
-	public static boolean[] visited = new boolean[MAXN];
+  // 某个节点在dfs过程中是否被访问过
+  public static boolean[] visited = new boolean[MAXN];
 
-	// 从头结点到当前节点的异或和
-	public static long[] path = new long[MAXN];
+  // 从头结点到当前节点的异或和
+  public static long[] path = new long[MAXN];
 
-	public static void prepare(int n) {
-		cnt = 1;
-		Arrays.fill(head, 1, n + 1, 0);
-		Arrays.fill(basis, 0);
-	}
+  public static void prepare(int n) {
+    cnt = 1;
+    Arrays.fill(head, 1, n + 1, 0);
+    Arrays.fill(basis, 0);
+  }
 
-	public static void addEdge(int u, int v, long w) {
-		next[cnt] = head[u];
-		to[cnt] = v;
-		weight[cnt] = w;
-		head[u] = cnt++;
-	}
+  public static void addEdge(int u, int v, long w) {
+    next[cnt] = head[u];
+    to[cnt] = v;
+    weight[cnt] = w;
+    head[u] = cnt++;
+  }
 
-	public static boolean insert(long num) {
-		for (int i = BIT; i >= 0; i--)
-			if (num >> i == 1) {
-				if (basis[i] == 0) {
-					basis[i] = num;
-					return true;
-				}
-				num ^= basis[i];
-			}
-		return false;
-	}
+  public static boolean insert(long num) {
+    for (int i = BIT; i >= 0; i--)
+      if (num >> i == 1) {
+        if (basis[i] == 0) {
+          basis[i] = num;
+          return true;
+        }
+        num ^= basis[i];
+      }
+    return false;
+  }
 
-	public static void dfs(int u, int f, long p) {
-		path[u] = p;
-		visited[u] = true;
-		for (int e = head[u]; e != 0; e = next[e]) {
-			int v = to[e];
-			if (v != f) {
-				long xor = p ^ weight[e];
-				if (visited[v]) {
-					insert(xor ^ path[v]);
-				} else {
-					dfs(v, u, xor);
-				}
-			}
-		}
-	}
+  public static void dfs(int u, int f, long p) {
+    path[u] = p;
+    visited[u] = true;
+    for (int e = head[u]; e != 0; e = next[e]) {
+      int v = to[e];
+      if (v != f) {
+        long xor = p ^ weight[e];
+        if (visited[v]) {
+          insert(xor ^ path[v]);
+        } else {
+          dfs(v, u, xor);
+        }
+      }
+    }
+  }
 
-	public static long query(long init) {
-		for (int i = BIT; i >= 0; i--) {
-			init = Math.max(init, init ^ basis[i]);
-		}
-		return init;
-	}
+  public static long query(long init) {
+    for (int i = BIT; i >= 0; i--) {
+      init = Math.max(init, init ^ basis[i]);
+    }
+    return init;
+  }
 
-	public static void main(String[] args) {
-		Kattio io = new Kattio();
-		int n = io.nextInt();
-		int m = io.nextInt();
-		prepare(n);
-		for (int i = 1; i <= m; i++) {
-			int u = io.nextInt();
-			int v = io.nextInt();
-			long w = io.nextLong();
-			addEdge(u, v, w);
-			addEdge(v, u, w);
-		}
-		dfs(1, 0, 0);
-		io.println(query(path[n]));
-		io.flush();
-		io.close();
-	}
+  public static void main(String[] args) {
+    Kattio io = new Kattio();
+    int n = io.nextInt();
+    int m = io.nextInt();
+    prepare(n);
+    for (int i = 1; i <= m; i++) {
+      int u = io.nextInt();
+      int v = io.nextInt();
+      long w = io.nextLong();
+      addEdge(u, v, w);
+      addEdge(v, u, w);
+    }
+    dfs(1, 0, 0);
+    io.println(query(path[n]));
+    io.flush();
+    io.close();
+  }
 
-	// Kattio类IO效率很好，但还是不如StreamTokenizer
-	// 只有StreamTokenizer无法正确处理时，才考虑使用这个类
-	// 参考链接 : https://oi-wiki.org/lang/java-pro/
-	public static class Kattio extends PrintWriter {
-		private BufferedReader r;
-		private StringTokenizer st;
+  // Kattio类IO效率很好，但还是不如StreamTokenizer
+  // 只有StreamTokenizer无法正确处理时，才考虑使用这个类
+  // 参考链接 : https://oi-wiki.org/lang/java-pro/
+  public static class Kattio extends PrintWriter {
+    private BufferedReader r;
+    private StringTokenizer st;
 
-		public Kattio() {
-			this(System.in, System.out);
-		}
+    public Kattio() {
+      this(System.in, System.out);
+    }
 
-		public Kattio(InputStream i, OutputStream o) {
-			super(o);
-			r = new BufferedReader(new InputStreamReader(i));
-		}
+    public Kattio(InputStream i, OutputStream o) {
+      super(o);
+      r = new BufferedReader(new InputStreamReader(i));
+    }
 
-		public Kattio(String intput, String output) throws IOException {
-			super(output);
-			r = new BufferedReader(new FileReader(intput));
-		}
+    public Kattio(String intput, String output) throws IOException {
+      super(output);
+      r = new BufferedReader(new FileReader(intput));
+    }
 
-		public String next() {
-			try {
-				while (st == null || !st.hasMoreTokens())
-					st = new StringTokenizer(r.readLine());
-				return st.nextToken();
-			} catch (Exception e) {
-			}
-			return null;
-		}
+    public String next() {
+      try {
+        while (st == null || !st.hasMoreTokens()) st = new StringTokenizer(r.readLine());
+        return st.nextToken();
+      } catch (Exception e) {
+      }
+      return null;
+    }
 
-		public int nextInt() {
-			return Integer.parseInt(next());
-		}
+    public int nextInt() {
+      return Integer.parseInt(next());
+    }
 
-		public double nextDouble() {
-			return Double.parseDouble(next());
-		}
+    public double nextDouble() {
+      return Double.parseDouble(next());
+    }
 
-		public long nextLong() {
-			return Long.parseLong(next());
-		}
-	}
-
+    public long nextLong() {
+      return Long.parseLong(next());
+    }
+  }
 }

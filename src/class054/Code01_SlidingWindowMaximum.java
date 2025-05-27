@@ -7,40 +7,39 @@ package class054;
 // 测试链接 : https://leetcode.cn/problems/sliding-window-maximum/
 public class Code01_SlidingWindowMaximum {
 
-	public static int MAXN = 100001;
+  public static int MAXN = 100001;
 
-	public static int[] deque = new int[MAXN];
+  public static int[] deque = new int[MAXN];
 
-	public static int h, t;
+  public static int h, t;
 
-	public static int[] maxSlidingWindow(int[] arr, int k) {
-		h = t = 0;
-		int n = arr.length;
-		// 先形成长度为k-1的窗口
-		for (int i = 0; i < k - 1; i++) {
-			// 大 -> 小
-			while (h < t && arr[deque[t - 1]] <= arr[i]) {
-				t--;
-			}
-			deque[t++] = i;
-		}
-		int m = n - k + 1;
-		int[] ans = new int[m];
-		// 当前窗口k-1长度
-		for (int l = 0, r = k - 1; l < m; l++, r++) {
-			// 少一个，要让r位置的数进来
-			while (h < t && arr[deque[t - 1]] <= arr[r]) {
-				t--;
-			}
-			deque[t++] = r;
-			// 收集答案
-			ans[l] = arr[deque[h]];
-			// l位置的数出去
-			if (deque[h] == l) {
-				h++;
-			}
-		}
-		return ans;
-	}
-
+  public static int[] maxSlidingWindow(int[] arr, int k) {
+    h = t = 0;
+    int n = arr.length;
+    // 先形成长度为k-1的窗口
+    for (int i = 0; i < k - 1; i++) {
+      // 大 -> 小
+      while (h < t && arr[deque[t - 1]] <= arr[i]) {
+        t--;
+      }
+      deque[t++] = i;
+    }
+    int m = n - k + 1;
+    int[] ans = new int[m];
+    // 当前窗口k-1长度
+    for (int l = 0, r = k - 1; l < m; l++, r++) {
+      // 少一个，要让r位置的数进来
+      while (h < t && arr[deque[t - 1]] <= arr[r]) {
+        t--;
+      }
+      deque[t++] = r;
+      // 收集答案
+      ans[l] = arr[deque[h]];
+      // l位置的数出去
+      if (deque[h] == l) {
+        h++;
+      }
+    }
+    return ans;
+  }
 }

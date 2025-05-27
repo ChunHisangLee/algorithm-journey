@@ -18,25 +18,24 @@ import java.io.StreamTokenizer;
 
 public class Code01_BezoutLemma {
 
-	public static int gcd(int a, int b) {
-		return b == 0 ? a : gcd(b, a % b);
-	}
+  public static int gcd(int a, int b) {
+    return b == 0 ? a : gcd(b, a % b);
+  }
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StreamTokenizer in = new StreamTokenizer(br);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		in.nextToken();
-		int n = (int) in.nval;
-		int ans = 0;
-		for (int i = 1; i <= n; i++) {
-			in.nextToken();
-			ans = gcd(Math.abs((int) in.nval), ans);
-		}
-		out.println(ans);
-		out.flush();
-		out.close();
-		br.close();
-	}
-
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StreamTokenizer in = new StreamTokenizer(br);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    in.nextToken();
+    int n = (int) in.nval;
+    int ans = 0;
+    for (int i = 1; i <= n; i++) {
+      in.nextToken();
+      ans = gcd(Math.abs((int) in.nval), ans);
+    }
+    out.println(ans);
+    out.flush();
+    out.close();
+    br.close();
+  }
 }

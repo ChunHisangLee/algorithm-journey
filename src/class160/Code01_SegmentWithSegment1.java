@@ -23,171 +23,169 @@ import java.util.StringTokenizer;
 
 public class Code01_SegmentWithSegment1 {
 
-	// 身高范围内有多少数字
-	public static int n = 101;
+  // 身高范围内有多少数字
+  public static int n = 101;
 
-	// 活泼度范围内有多少数字
-	public static int m = 1001;
+  // 活泼度范围内有多少数字
+  public static int m = 1001;
 
-	// 身高范围对应[MINX, MAXX]，活泼度范围对应[MINY, MAXY]
-	public static int MINX = 100, MAXX = 200, MINY = 0, MAXY = 1000;
+  // 身高范围对应[MINX, MAXX]，活泼度范围对应[MINY, MAXY]
+  public static int MINX = 100, MAXX = 200, MINY = 0, MAXY = 1000;
 
-	// 外层是身高线段树，内层是活泼度线段树
-	// 每一个外层线段树的节点，对应着一棵内层线段树
-	// 内层线段树收集缘分值
-	public static int[][] tree = new int[n << 2][m << 2];
+  // 外层是身高线段树，内层是活泼度线段树
+  // 每一个外层线段树的节点，对应着一棵内层线段树
+  // 内层线段树收集缘分值
+  public static int[][] tree = new int[n << 2][m << 2];
 
-	public static void innerBuild(int yl, int yr, int xi, int yi) {
-		tree[xi][yi] = -1;
-		if (yl < yr) {
-			int mid = (yl + yr) / 2;
-			innerBuild(yl, mid, xi, yi << 1);
-			innerBuild(mid + 1, yr, xi, yi << 1 | 1);
-		}
-	}
+  public static void innerBuild(int yl, int yr, int xi, int yi) {
+    tree[xi][yi] = -1;
+    if (yl < yr) {
+      int mid = (yl + yr) / 2;
+      innerBuild(yl, mid, xi, yi << 1);
+      innerBuild(mid + 1, yr, xi, yi << 1 | 1);
+    }
+  }
 
-	public static void innerUpdate(int jobi, int jobv, int yl, int yr, int xi, int yi) {
-		if (yl == yr) {
-			tree[xi][yi] = Math.max(tree[xi][yi], jobv);
-		} else {
-			int mid = (yl + yr) / 2;
-			if (jobi <= mid) {
-				innerUpdate(jobi, jobv, yl, mid, xi, yi << 1);
-			} else {
-				innerUpdate(jobi, jobv, mid + 1, yr, xi, yi << 1 | 1);
-			}
-			tree[xi][yi] = Math.max(tree[xi][yi << 1], tree[xi][yi << 1 | 1]);
-		}
-	}
+  public static void innerUpdate(int jobi, int jobv, int yl, int yr, int xi, int yi) {
+    if (yl == yr) {
+      tree[xi][yi] = Math.max(tree[xi][yi], jobv);
+    } else {
+      int mid = (yl + yr) / 2;
+      if (jobi <= mid) {
+        innerUpdate(jobi, jobv, yl, mid, xi, yi << 1);
+      } else {
+        innerUpdate(jobi, jobv, mid + 1, yr, xi, yi << 1 | 1);
+      }
+      tree[xi][yi] = Math.max(tree[xi][yi << 1], tree[xi][yi << 1 | 1]);
+    }
+  }
 
-	public static int innerQuery(int jobl, int jobr, int yl, int yr, int xi, int yi) {
-		if (jobl <= yl && yr <= jobr) {
-			return tree[xi][yi];
-		}
-		int mid = (yl + yr) / 2;
-		int ans = -1;
-		if (jobl <= mid) {
-			ans = innerQuery(jobl, jobr, yl, mid, xi, yi << 1);
-		}
-		if (jobr > mid) {
-			ans = Math.max(ans, innerQuery(jobl, jobr, mid + 1, yr, xi, yi << 1 | 1));
-		}
-		return ans;
-	}
+  public static int innerQuery(int jobl, int jobr, int yl, int yr, int xi, int yi) {
+    if (jobl <= yl && yr <= jobr) {
+      return tree[xi][yi];
+    }
+    int mid = (yl + yr) / 2;
+    int ans = -1;
+    if (jobl <= mid) {
+      ans = innerQuery(jobl, jobr, yl, mid, xi, yi << 1);
+    }
+    if (jobr > mid) {
+      ans = Math.max(ans, innerQuery(jobl, jobr, mid + 1, yr, xi, yi << 1 | 1));
+    }
+    return ans;
+  }
 
-	public static void outerBuild(int xl, int xr, int xi) {
-		innerBuild(MINY, MAXY, xi, 1);
-		if (xl < xr) {
-			int mid = (xl + xr) / 2;
-			outerBuild(xl, mid, xi << 1);
-			outerBuild(mid + 1, xr, xi << 1 | 1);
-		}
-	}
+  public static void outerBuild(int xl, int xr, int xi) {
+    innerBuild(MINY, MAXY, xi, 1);
+    if (xl < xr) {
+      int mid = (xl + xr) / 2;
+      outerBuild(xl, mid, xi << 1);
+      outerBuild(mid + 1, xr, xi << 1 | 1);
+    }
+  }
 
-	public static void outerUpdate(int jobx, int joby, int jobv, int xl, int xr, int xi) {
-		innerUpdate(joby, jobv, MINY, MAXY, xi, 1);
-		if (xl < xr) {
-			int mid = (xl + xr) / 2;
-			if (jobx <= mid) {
-				outerUpdate(jobx, joby, jobv, xl, mid, xi << 1);
-			} else {
-				outerUpdate(jobx, joby, jobv, mid + 1, xr, xi << 1 | 1);
-			}
-		}
-	}
+  public static void outerUpdate(int jobx, int joby, int jobv, int xl, int xr, int xi) {
+    innerUpdate(joby, jobv, MINY, MAXY, xi, 1);
+    if (xl < xr) {
+      int mid = (xl + xr) / 2;
+      if (jobx <= mid) {
+        outerUpdate(jobx, joby, jobv, xl, mid, xi << 1);
+      } else {
+        outerUpdate(jobx, joby, jobv, mid + 1, xr, xi << 1 | 1);
+      }
+    }
+  }
 
-	public static int outerQuery(int jobxl, int jobxr, int jobyl, int jobyr, int xl, int xr, int xi) {
-		if (jobxl <= xl && xr <= jobxr) {
-			return innerQuery(jobyl, jobyr, MINY, MAXY, xi, 1);
-		}
-		int mid = (xl + xr) / 2;
-		int ans = -1;
-		if (jobxl <= mid) {
-			ans = outerQuery(jobxl, jobxr, jobyl, jobyr, xl, mid, xi << 1);
-		}
-		if (jobxr > mid) {
-			ans = Math.max(ans, outerQuery(jobxl, jobxr, jobyl, jobyr, mid + 1, xr, xi << 1 | 1));
-		}
-		return ans;
-	}
+  public static int outerQuery(int jobxl, int jobxr, int jobyl, int jobyr, int xl, int xr, int xi) {
+    if (jobxl <= xl && xr <= jobxr) {
+      return innerQuery(jobyl, jobyr, MINY, MAXY, xi, 1);
+    }
+    int mid = (xl + xr) / 2;
+    int ans = -1;
+    if (jobxl <= mid) {
+      ans = outerQuery(jobxl, jobxr, jobyl, jobyr, xl, mid, xi << 1);
+    }
+    if (jobxr > mid) {
+      ans = Math.max(ans, outerQuery(jobxl, jobxr, jobyl, jobyr, mid + 1, xr, xi << 1 | 1));
+    }
+    return ans;
+  }
 
-	public static void main(String[] args) {
-		Kattio io = new Kattio();
-		int q = io.nextInt();
-		String op;
-		int a, b, c, d;
-		while (q != 0) {
-			outerBuild(MINX, MAXX, 1);
-			for (int i = 1; i <= q; i++) {
-				op = io.next();
-				if (op.equals("I")) {
-					a = io.nextInt();
-					b = (int) (io.nextDouble() * 10);
-					c = (int) (io.nextDouble() * 10);
-					outerUpdate(a, b, c, MINX, MAXX, 1);
-				} else {
-					a = io.nextInt();
-					b = io.nextInt();
-					c = (int) (io.nextDouble() * 10);
-					d = (int) (io.nextDouble() * 10);
-					int xl = Math.min(a, b);
-					int xr = Math.max(a, b);
-					int yl = Math.min(c, d);
-					int yr = Math.max(c, d);
-					int ans = outerQuery(xl, xr, yl, yr, MINX, MAXX, 1);
-					if (ans == -1) {
-						io.println(ans);
-					} else {
-						io.println(((double) ans) / 10);
-					}
-				}
-			}
-			q = io.nextInt();
-		}
-		io.flush();
-		io.close();
-	}
+  public static void main(String[] args) {
+    Kattio io = new Kattio();
+    int q = io.nextInt();
+    String op;
+    int a, b, c, d;
+    while (q != 0) {
+      outerBuild(MINX, MAXX, 1);
+      for (int i = 1; i <= q; i++) {
+        op = io.next();
+        if (op.equals("I")) {
+          a = io.nextInt();
+          b = (int) (io.nextDouble() * 10);
+          c = (int) (io.nextDouble() * 10);
+          outerUpdate(a, b, c, MINX, MAXX, 1);
+        } else {
+          a = io.nextInt();
+          b = io.nextInt();
+          c = (int) (io.nextDouble() * 10);
+          d = (int) (io.nextDouble() * 10);
+          int xl = Math.min(a, b);
+          int xr = Math.max(a, b);
+          int yl = Math.min(c, d);
+          int yr = Math.max(c, d);
+          int ans = outerQuery(xl, xr, yl, yr, MINX, MAXX, 1);
+          if (ans == -1) {
+            io.println(ans);
+          } else {
+            io.println(((double) ans) / 10);
+          }
+        }
+      }
+      q = io.nextInt();
+    }
+    io.flush();
+    io.close();
+  }
 
-	// 读写工具类
-	public static class Kattio extends PrintWriter {
-		private BufferedReader r;
-		private StringTokenizer st;
+  // 读写工具类
+  public static class Kattio extends PrintWriter {
+    private BufferedReader r;
+    private StringTokenizer st;
 
-		public Kattio() {
-			this(System.in, System.out);
-		}
+    public Kattio() {
+      this(System.in, System.out);
+    }
 
-		public Kattio(InputStream i, OutputStream o) {
-			super(o);
-			r = new BufferedReader(new InputStreamReader(i));
-		}
+    public Kattio(InputStream i, OutputStream o) {
+      super(o);
+      r = new BufferedReader(new InputStreamReader(i));
+    }
 
-		public Kattio(String intput, String output) throws IOException {
-			super(output);
-			r = new BufferedReader(new FileReader(intput));
-		}
+    public Kattio(String intput, String output) throws IOException {
+      super(output);
+      r = new BufferedReader(new FileReader(intput));
+    }
 
-		public String next() {
-			try {
-				while (st == null || !st.hasMoreTokens())
-					st = new StringTokenizer(r.readLine());
-				return st.nextToken();
-			} catch (Exception e) {
-			}
-			return null;
-		}
+    public String next() {
+      try {
+        while (st == null || !st.hasMoreTokens()) st = new StringTokenizer(r.readLine());
+        return st.nextToken();
+      } catch (Exception e) {
+      }
+      return null;
+    }
 
-		public int nextInt() {
-			return Integer.parseInt(next());
-		}
+    public int nextInt() {
+      return Integer.parseInt(next());
+    }
 
-		public double nextDouble() {
-			return Double.parseDouble(next());
-		}
+    public double nextDouble() {
+      return Double.parseDouble(next());
+    }
 
-		public long nextLong() {
-			return Long.parseLong(next());
-		}
-	}
-
+    public long nextLong() {
+      return Long.parseLong(next());
+    }
+  }
 }

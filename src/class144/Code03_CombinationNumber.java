@@ -22,60 +22,60 @@ import java.io.StreamTokenizer;
 
 public class Code03_CombinationNumber {
 
-	public static int MAXV = 2000;
+  public static int MAXV = 2000;
 
-	public static int MAXN = 2002;
+  public static int MAXN = 2002;
 
-	public static int[][] c = new int[MAXN][MAXN];
+  public static int[][] c = new int[MAXN][MAXN];
 
-	public static int[][] f = new int[MAXN][MAXN];
+  public static int[][] f = new int[MAXN][MAXN];
 
-	public static int[][] sum = new int[MAXN][MAXN];
+  public static int[][] sum = new int[MAXN][MAXN];
 
-	public static int t, k, n, m;
+  public static int t, k, n, m;
 
-	public static void build() {
-		for (int i = 0; i <= MAXV; i++) {
-			c[i][0] = 1;
-			for (int j = 1; j <= i; j++) {
-				c[i][j] = (c[i - 1][j] + c[i - 1][j - 1]) % k;
-			}
-		}
-		for (int i = 1; i <= MAXV; i++) {
-			for (int j = 1; j <= i; j++) {
-				f[i][j] = c[i][j] % k == 0 ? 1 : 0;
-			}
-		}
-		for (int i = 2; i <= MAXV; i++) {
-			for (int j = 1; j <= i; j++) {
-				sum[i][j] = sum[i][j - 1] + sum[i - 1][j] - sum[i - 1][j - 1] + f[i][j];
-			}
-			sum[i][i + 1] = sum[i][i];
-		}
-	}
+  public static void build() {
+    for (int i = 0; i <= MAXV; i++) {
+      c[i][0] = 1;
+      for (int j = 1; j <= i; j++) {
+        c[i][j] = (c[i - 1][j] + c[i - 1][j - 1]) % k;
+      }
+    }
+    for (int i = 1; i <= MAXV; i++) {
+      for (int j = 1; j <= i; j++) {
+        f[i][j] = c[i][j] % k == 0 ? 1 : 0;
+      }
+    }
+    for (int i = 2; i <= MAXV; i++) {
+      for (int j = 1; j <= i; j++) {
+        sum[i][j] = sum[i][j - 1] + sum[i - 1][j] - sum[i - 1][j - 1] + f[i][j];
+      }
+      sum[i][i + 1] = sum[i][i];
+    }
+  }
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StreamTokenizer in = new StreamTokenizer(br);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		in.nextToken();
-		t = (int) in.nval;
-		in.nextToken();
-		k = (int) in.nval;
-		build();
-		for (int i = 1; i <= t; i++) {
-			in.nextToken();
-			n = (int) in.nval;
-			in.nextToken();
-			m = (int) in.nval;
-			if (m > n) {
-				out.println(sum[n][n]);
-			} else {
-				out.println(sum[n][m]);
-			}
-		}
-		out.flush();
-		out.close();
-		br.close();
-	}
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StreamTokenizer in = new StreamTokenizer(br);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    in.nextToken();
+    t = (int) in.nval;
+    in.nextToken();
+    k = (int) in.nval;
+    build();
+    for (int i = 1; i <= t; i++) {
+      in.nextToken();
+      n = (int) in.nval;
+      in.nextToken();
+      m = (int) in.nval;
+      if (m > n) {
+        out.println(sum[n][n]);
+      } else {
+        out.println(sum[n][m]);
+      }
+    }
+    out.flush();
+    out.close();
+    br.close();
+  }
 }

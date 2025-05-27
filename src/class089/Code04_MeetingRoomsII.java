@@ -10,19 +10,18 @@ import java.util.PriorityQueue;
 // 测试链接 : https://leetcode.cn/problems/meeting-rooms-ii/
 public class Code04_MeetingRoomsII {
 
-	public static int minMeetingRooms(int[][] meeting) {
-		int n = meeting.length;
-		Arrays.sort(meeting, (a, b) -> a[0] - b[0]);
-		PriorityQueue<Integer> heap = new PriorityQueue<>();
-		int ans = 0;
-		for (int i = 0; i < n; i++) {
-			while (!heap.isEmpty() && heap.peek() <= meeting[i][0]) {
-				heap.poll();
-			}
-			heap.add(meeting[i][1]);
-			ans = Math.max(ans, heap.size());
-		}
-		return ans;
-	}
-
+  public static int minMeetingRooms(int[][] meeting) {
+    int n = meeting.length;
+    Arrays.sort(meeting, (a, b) -> a[0] - b[0]);
+    PriorityQueue<Integer> heap = new PriorityQueue<>();
+    int ans = 0;
+    for (int i = 0; i < n; i++) {
+      while (!heap.isEmpty() && heap.peek() <= meeting[i][0]) {
+        heap.poll();
+      }
+      heap.add(meeting[i][1]);
+      ans = Math.max(ans, heap.size());
+    }
+    return ans;
+  }
 }

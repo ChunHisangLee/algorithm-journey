@@ -18,29 +18,28 @@ import java.io.StreamTokenizer;
 
 public class Code03_NimGame {
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StreamTokenizer in = new StreamTokenizer(br);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		in.nextToken();
-		int t = (int) in.nval;
-		for (int i = 0; i < t; i++) {
-			in.nextToken();
-			int n = (int) in.nval;
-			int eor = 0;
-			for (int j = 0; j < n; j++) {
-				in.nextToken();
-				eor ^= (int) in.nval;
-			}
-			if (eor != 0) {
-				out.println("Yes");
-			} else {
-				out.println("No");
-			}
-		}
-		out.flush();
-		out.close();
-		br.close();
-	}
-
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StreamTokenizer in = new StreamTokenizer(br);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    in.nextToken();
+    int t = (int) in.nval;
+    for (int i = 0; i < t; i++) {
+      in.nextToken();
+      int n = (int) in.nval;
+      int eor = 0;
+      for (int j = 0; j < n; j++) {
+        in.nextToken();
+        eor ^= (int) in.nval;
+      }
+      if (eor != 0) {
+        out.println("Yes");
+      } else {
+        out.println("No");
+      }
+    }
+    out.flush();
+    out.close();
+    br.close();
+  }
 }

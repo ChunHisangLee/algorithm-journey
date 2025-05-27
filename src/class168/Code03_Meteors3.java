@@ -12,65 +12,65 @@ package class168;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 300001;
-//int n, m, k;
+// const int MAXN = 300001;
+// int n, m, k;
 //
-//int qid[MAXN];
-//int need[MAXN];
+// int qid[MAXN];
+// int need[MAXN];
 //
-//int rainl[MAXN];
-//int rainr[MAXN];
-//int num[MAXN];
+// int rainl[MAXN];
+// int rainr[MAXN];
+// int num[MAXN];
 //
-//int head[MAXN];
-//int nxt[MAXN];
-//int to[MAXN];
-//int cnt = 0;
+// int head[MAXN];
+// int nxt[MAXN];
+// int to[MAXN];
+// int cnt = 0;
 //
-//long long tree[MAXN << 1];
+// long long tree[MAXN << 1];
 //
-//int lset[MAXN];
-//int rset[MAXN];
+// int lset[MAXN];
+// int rset[MAXN];
 //
-//int ans[MAXN];
+// int ans[MAXN];
 //
-//void addEdge(int i, int v) {
+// void addEdge(int i, int v) {
 //    nxt[++cnt] = head[i];
 //    to[cnt] = v;
 //    head[i] = cnt;
-//}
+// }
 //
-//int lowbit(int i) {
+// int lowbit(int i) {
 //    return i & -i;
-//}
+// }
 //
-//void add(int i, int v) {
+// void add(int i, int v) {
 //    int siz = m * 2;
 //    while (i <= siz) {
 //        tree[i] += v;
 //        i += lowbit(i);
 //    }
-//}
+// }
 //
-//void add(int l, int r, int v) {
+// void add(int l, int r, int v) {
 //    add(l, v);
 //    add(r + 1, -v);
-//}
+// }
 //
-//long long query(int i) {
+// long long query(int i) {
 //    long long ret = 0;
 //    while (i > 0) {
 //    	ret += tree[i];
 //        i -= lowbit(i);
 //    }
 //    return ret;
-//}
+// }
 //
-//void compute(int ql, int qr, int vl, int vr) {
+// void compute(int ql, int qr, int vl, int vr) {
 //    if (ql > qr) {
 //        return;
 //    }
@@ -112,9 +112,9 @@ package class168;
 //        compute(ql, ql + lsiz - 1, vl, mid);
 //        compute(ql + lsiz, qr, mid + 1, vr);
 //    }
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> m;
@@ -142,4 +142,4 @@ package class168;
 //        }
 //    }
 //    return 0;
-//}
+// }

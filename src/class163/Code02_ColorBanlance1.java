@@ -20,111 +20,110 @@ import java.io.StreamTokenizer;
 
 public class Code02_ColorBanlance1 {
 
-	public static int MAXN = 200001;
-	public static int n;
-	public static int[] color = new int[MAXN];
+  public static int MAXN = 200001;
+  public static int n;
+  public static int[] color = new int[MAXN];
 
-	public static int[] head = new int[MAXN];
-	public static int[] next = new int[MAXN];
-	public static int[] to = new int[MAXN];
-	public static int cnt = 0;
+  public static int[] head = new int[MAXN];
+  public static int[] next = new int[MAXN];
+  public static int[] to = new int[MAXN];
+  public static int cnt = 0;
 
-	public static int[] siz = new int[MAXN];
-	public static int[] son = new int[MAXN];
+  public static int[] siz = new int[MAXN];
+  public static int[] son = new int[MAXN];
 
-	// colorCnt[i] = j，表示i这种颜色出现了j次
-	public static int[] colorCnt = new int[MAXN];
-	// colorNum[i] = j，表示出现次数为i的颜色一共有j种
-	public static int[] colorNum = new int[MAXN];
-	// 颜色平衡子树的个数
-	public static int ans = 0;
+  // colorCnt[i] = j，表示i这种颜色出现了j次
+  public static int[] colorCnt = new int[MAXN];
+  // colorNum[i] = j，表示出现次数为i的颜色一共有j种
+  public static int[] colorNum = new int[MAXN];
+  // 颜色平衡子树的个数
+  public static int ans = 0;
 
-	public static void addEdge(int u, int v) {
-		next[++cnt] = head[u];
-		to[cnt] = v;
-		head[u] = cnt;
-	}
+  public static void addEdge(int u, int v) {
+    next[++cnt] = head[u];
+    to[cnt] = v;
+    head[u] = cnt;
+  }
 
-	public static void dfs1(int u) {
-		siz[u] = 1;
-		for (int e = head[u]; e > 0; e = next[e]) {
-			dfs1(to[e]);
-		}
-		for (int e = head[u], v; e > 0; e = next[e]) {
-			v = to[e];
-			siz[u] += siz[v];
-			if (son[u] == 0 || siz[son[u]] < siz[v]) {
-				son[u] = v;
-			}
-		}
-	}
+  public static void dfs1(int u) {
+    siz[u] = 1;
+    for (int e = head[u]; e > 0; e = next[e]) {
+      dfs1(to[e]);
+    }
+    for (int e = head[u], v; e > 0; e = next[e]) {
+      v = to[e];
+      siz[u] += siz[v];
+      if (son[u] == 0 || siz[son[u]] < siz[v]) {
+        son[u] = v;
+      }
+    }
+  }
 
-	public static void effect(int u) {
-		colorCnt[color[u]]++;
-		colorNum[colorCnt[color[u]] - 1]--;
-		colorNum[colorCnt[color[u]]]++;
-		for (int e = head[u]; e > 0; e = next[e]) {
-			effect(to[e]);
-		}
-	}
+  public static void effect(int u) {
+    colorCnt[color[u]]++;
+    colorNum[colorCnt[color[u]] - 1]--;
+    colorNum[colorCnt[color[u]]]++;
+    for (int e = head[u]; e > 0; e = next[e]) {
+      effect(to[e]);
+    }
+  }
 
-	public static void cancel(int u) {
-		colorCnt[color[u]]--;
-		colorNum[colorCnt[color[u]] + 1]--;
-		colorNum[colorCnt[color[u]]]++;
-		for (int e = head[u]; e > 0; e = next[e]) {
-			cancel(to[e]);
-		}
-	}
+  public static void cancel(int u) {
+    colorCnt[color[u]]--;
+    colorNum[colorCnt[color[u]] + 1]--;
+    colorNum[colorCnt[color[u]]]++;
+    for (int e = head[u]; e > 0; e = next[e]) {
+      cancel(to[e]);
+    }
+  }
 
-	public static void dfs2(int u, int keep) {
-		for (int e = head[u], v; e > 0; e = next[e]) {
-			v = to[e];
-			if (v != son[u]) {
-				dfs2(v, 0);
-			}
-		}
-		if (son[u] != 0) {
-			dfs2(son[u], 1);
-		}
-		colorCnt[color[u]]++;
-		colorNum[colorCnt[color[u]] - 1]--;
-		colorNum[colorCnt[color[u]]]++;
-		for (int e = head[u], v; e > 0; e = next[e]) {
-			v = to[e];
-			if (v != son[u]) {
-				effect(v);
-			}
-		}
-		if (colorCnt[color[u]] * colorNum[colorCnt[color[u]]] == siz[u]) {
-			ans++;
-		}
-		if (keep == 0) {
-			cancel(u);
-		}
-	}
+  public static void dfs2(int u, int keep) {
+    for (int e = head[u], v; e > 0; e = next[e]) {
+      v = to[e];
+      if (v != son[u]) {
+        dfs2(v, 0);
+      }
+    }
+    if (son[u] != 0) {
+      dfs2(son[u], 1);
+    }
+    colorCnt[color[u]]++;
+    colorNum[colorCnt[color[u]] - 1]--;
+    colorNum[colorCnt[color[u]]]++;
+    for (int e = head[u], v; e > 0; e = next[e]) {
+      v = to[e];
+      if (v != son[u]) {
+        effect(v);
+      }
+    }
+    if (colorCnt[color[u]] * colorNum[colorCnt[color[u]]] == siz[u]) {
+      ans++;
+    }
+    if (keep == 0) {
+      cancel(u);
+    }
+  }
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StreamTokenizer in = new StreamTokenizer(br);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		in.nextToken();
-		n = (int) in.nval;
-		for (int i = 1, father; i <= n; i++) {
-			in.nextToken();
-			color[i] = (int) in.nval;
-			in.nextToken();
-			father = (int) in.nval;
-			if (i != 1) {
-				addEdge(father, i);
-			}
-		}
-		dfs1(1);
-		dfs2(1, 0);
-		out.println(ans);
-		out.flush();
-		out.close();
-		br.close();
-	}
-
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StreamTokenizer in = new StreamTokenizer(br);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    in.nextToken();
+    n = (int) in.nval;
+    for (int i = 1, father; i <= n; i++) {
+      in.nextToken();
+      color[i] = (int) in.nval;
+      in.nextToken();
+      father = (int) in.nval;
+      if (i != 1) {
+        addEdge(father, i);
+      }
+    }
+    dfs1(1);
+    dfs2(1, 0);
+    out.println(ans);
+    out.flush();
+    out.close();
+    br.close();
+  }
 }

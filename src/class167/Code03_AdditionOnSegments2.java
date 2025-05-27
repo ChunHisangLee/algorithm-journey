@@ -12,34 +12,34 @@ package class167;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 10001;
-//const int MAXT = 500001;
-//const int BIT = 10000;
-//const int DEEP = 20;
+// const int MAXN = 10001;
+// const int MAXT = 500001;
+// const int BIT = 10000;
+// const int DEEP = 20;
 //
-//typedef bitset<BIT + 1> bs;
+// typedef bitset<BIT + 1> bs;
 //
-//int n, q;
-//int head[MAXN << 2];
-//int nxt[MAXT];
-//int to[MAXT];
-//int cnt = 0;
+// int n, q;
+// int head[MAXN << 2];
+// int nxt[MAXT];
+// int to[MAXT];
+// int cnt = 0;
 //
-//bs dp;
-//bs backup[DEEP];
-//bs ans;
+// bs dp;
+// bs backup[DEEP];
+// bs ans;
 //
-//void addEdge(int i, int v) {
+// void addEdge(int i, int v) {
 //    nxt[++cnt] = head[i];
 //    to[cnt] = v;
 //    head[i] = cnt;
-//}
+// }
 //
-//void add(int jobl, int jobr, int jobv, int l, int r, int i) {
+// void add(int jobl, int jobr, int jobv, int l, int r, int i) {
 //    if (jobl <= l && r <= jobr) {
 //        addEdge(i, jobv);
 //    } else {
@@ -51,9 +51,9 @@ package class167;
 //            add(jobl, jobr, jobv, mid + 1, r, i << 1 | 1);
 //        }
 //    }
-//}
+// }
 //
-//void dfs(int l, int r, int i, int dep) {
+// void dfs(int l, int r, int i, int dep) {
 //    backup[dep] = dp;
 //    for (int e = head[i]; e > 0; e = nxt[e]) {
 //        dp |= dp << to[e];
@@ -66,9 +66,9 @@ package class167;
 //        dfs(mid + 1, r, i << 1 | 1, dep + 1);
 //    }
 //    dp = backup[dep];
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> q;
@@ -92,4 +92,4 @@ package class167;
 //    }
 //    cout << '\n';
 //    return 0;
-//}
+// }

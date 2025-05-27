@@ -14,43 +14,43 @@ package class153;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 500005;
-//const int INF = 1000000001;
+// const int MAXN = 500005;
+// const int INF = 1000000001;
 //
-//int head = 0;
-//int arr[MAXN];
-//int num[MAXN];
-//int fa[MAXN];
-//int ls[MAXN];
-//int rs[MAXN];
-//int size[MAXN];
-//int space[MAXN], si;
-//int sum[MAXN];
-//int all[MAXN];
-//int pre[MAXN];
-//int suf[MAXN];
-//bool update[MAXN];
-//int change[MAXN];
-//bool rev[MAXN];
+// int head = 0;
+// int arr[MAXN];
+// int num[MAXN];
+// int fa[MAXN];
+// int ls[MAXN];
+// int rs[MAXN];
+// int size[MAXN];
+// int space[MAXN], si;
+// int sum[MAXN];
+// int all[MAXN];
+// int pre[MAXN];
+// int suf[MAXN];
+// bool update[MAXN];
+// int change[MAXN];
+// bool rev[MAXN];
 //
-//void up(int i) {
+// void up(int i) {
 //    int l = ls[i], r = rs[i];
 //    size[i] = size[l] + size[r] + 1;
 //    sum[i] = sum[l] + sum[r] + num[i];
 //    all[i] = max(max(all[l], all[r]), suf[l] + num[i] + pre[r]);
 //    pre[i] = max(pre[l], sum[l] + num[i] + pre[r]);
 //    suf[i] = max(suf[r], suf[l] + num[i] + sum[r]);
-//}
+// }
 //
-//int lr(int i) {
+// int lr(int i) {
 //    return rs[fa[i]] == i ? 1 : 0;
-//}
+// }
 //
-//void rotate(int i) {
+// void rotate(int i) {
 //    int f = fa[i], g = fa[f], soni = lr(i), sonf = lr(f);
 //    if (soni == 1) {
 //        rs[f] = ls[i];
@@ -76,9 +76,9 @@ package class153;
 //    fa[i] = g;
 //    up(f);
 //    up(i);
-//}
+// }
 //
-//void splay(int i, int goal) {
+// void splay(int i, int goal) {
 //    while (fa[i] != goal) {
 //        int f = fa[i], g = fa[f];
 //        if (g != goal) {
@@ -93,9 +93,9 @@ package class153;
 //    if (goal == 0) {
 //        head = i;
 //    }
-//}
+// }
 //
-//void setValue(int i, int val) {
+// void setValue(int i, int val) {
 //    if (i != 0) {
 //        update[i] = true;
 //        change[i] = val;
@@ -105,16 +105,16 @@ package class153;
 //        pre[i] = max(sum[i], 0);
 //        suf[i] = max(sum[i], 0);
 //    }
-//}
+// }
 //
-//void setReverse(int i) {
+// void setReverse(int i) {
 //    if (i != 0) {
 //        swap(pre[i], suf[i]);
 //        rev[i] ^= 1;
 //    }
-//}
+// }
 //
-//void down(int i) {
+// void down(int i) {
 //    if (update[i]) {
 //        setValue(ls[i], change[i]);
 //        setValue(rs[i], change[i]);
@@ -126,9 +126,9 @@ package class153;
 //        setReverse(rs[i]);
 //        rev[i] = false;
 //    }
-//}
+// }
 //
-//int init(int val) {
+// int init(int val) {
 //    int i = space[si--];
 //    size[i] = 1;
 //    num[i] = sum[i] = all[i] = val;
@@ -136,9 +136,9 @@ package class153;
 //    fa[i] = ls[i] = rs[i] = 0;
 //    update[i] = rev[i] = false;
 //    return i;
-//}
+// }
 //
-//int build(int l, int r) {
+// int build(int l, int r) {
 //    int mid = (l + r) / 2;
 //    int root = init(arr[mid]);
 //    if (l < mid) {
@@ -151,9 +151,9 @@ package class153;
 //    }
 //    up(root);
 //    return root;
-//}
+// }
 //
-//int find(int rank) {
+// int find(int rank) {
 //    int i = head;
 //    while (i != 0) {
 //        down(i);
@@ -167,9 +167,9 @@ package class153;
 //        }
 //    }
 //    return 0;
-//}
+// }
 //
-//void insert(int rank, int n) {
+// void insert(int rank, int n) {
 //    if (rank == 0) {
 //        head = build(1, n);
 //    } else {
@@ -182,17 +182,17 @@ package class153;
 //        up(r);
 //        up(l);
 //    }
-//}
+// }
 //
-//void recycle(int i) {
+// void recycle(int i) {
 //    if (i != 0) {
 //        space[++si] = i;
 //        recycle(ls[i]);
 //        recycle(rs[i]);
 //    }
-//}
+// }
 //
-//void remove(int rank, int n) {
+// void remove(int rank, int n) {
 //    int l = find(rank - 1);
 //    int r = find(rank + n);
 //    splay(l, 0);
@@ -201,9 +201,9 @@ package class153;
 //    ls[r] = 0;
 //    up(r);
 //    up(l);
-//}
+// }
 //
-//void reset(int rank, int n, int val) {
+// void reset(int rank, int n, int val) {
 //    int l = find(rank - 1);
 //    int r = find(rank + n);
 //    splay(l, 0);
@@ -211,9 +211,9 @@ package class153;
 //    setValue(ls[r], val);
 //    up(r);
 //    up(l);
-//}
+// }
 //
-//void reverse(int rank, int n) {
+// void reverse(int rank, int n) {
 //    int l = find(rank - 1);
 //    int r = find(rank + n);
 //    splay(l, 0);
@@ -221,21 +221,21 @@ package class153;
 //    setReverse(ls[r]);
 //    up(r);
 //    up(l);
-//}
+// }
 //
-//int querySum(int rank, int n) {
+// int querySum(int rank, int n) {
 //    int l = find(rank - 1);
 //    int r = find(rank + n);
 //    splay(l, 0);
 //    splay(r, l);
 //    return sum[ls[r]];
-//}
+// }
 //
-//int queryMax() {
+// int queryMax() {
 //    return all[head];
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    int n, m;
@@ -276,4 +276,4 @@ package class153;
 //        }
 //    }
 //    return 0;
-//}
+// }

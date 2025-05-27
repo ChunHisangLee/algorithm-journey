@@ -13,53 +13,53 @@ package class160;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 50001;
-//const int MAXT = MAXN * 40;
-//const int INF = INT_MAX;
-//double ALPHA = 0.7;
-//int n, m;
-//int arr[MAXN];
-//int root[MAXN << 2];
-//int key[MAXT];
-//int cnts[MAXT];
-//int ls[MAXT];
-//int rs[MAXT];
-//int siz[MAXT];
-//int diff[MAXT];
-//int cnt;
-//int collect[MAXT];
-//int ci;
-//int top, father, side;
+// const int MAXN = 50001;
+// const int MAXT = MAXN * 40;
+// const int INF = INT_MAX;
+// double ALPHA = 0.7;
+// int n, m;
+// int arr[MAXN];
+// int root[MAXN << 2];
+// int key[MAXT];
+// int cnts[MAXT];
+// int ls[MAXT];
+// int rs[MAXT];
+// int siz[MAXT];
+// int diff[MAXT];
+// int cnt;
+// int collect[MAXT];
+// int ci;
+// int top, father, side;
 //
-//int init(int num) {
+// int init(int num) {
 //    key[++cnt] = num;
 //    ls[cnt] = rs[cnt] = 0;
 //    cnts[cnt] = siz[cnt] = diff[cnt] = 1;
 //    return cnt;
-//}
+// }
 //
-//void up(int i) {
+// void up(int i) {
 //	siz[i] = siz[ls[i]] + siz[rs[i]] + cnts[i];
 //	diff[i] = diff[ls[i]] + diff[rs[i]] + (cnts[i] > 0 ? 1 : 0);
-//}
+// }
 //
-//bool balance(int i) {
+// bool balance(int i) {
 //    return i == 0 || ALPHA * diff[i] >= max(diff[ls[i]], diff[rs[i]]);
-//}
+// }
 //
-//void inorder(int i) {
+// void inorder(int i) {
 //    if (i) {
 //        inorder(ls[i]);
 //        if (cnts[i] > 0) collect[++ci] = i;
 //        inorder(rs[i]);
 //    }
-//}
+// }
 //
-//int innerBuild(int l, int r) {
+// int innerBuild(int l, int r) {
 //    if (l > r) return 0;
 //    int mid = (l + r) >> 1;
 //    int h = collect[mid];
@@ -67,9 +67,9 @@ package class160;
 //    rs[h] = innerBuild(mid + 1, r);
 //    up(h);
 //    return h;
-//}
+// }
 //
-//int innerRebuild(int h) {
+// int innerRebuild(int h) {
 //    if (top) {
 //        ci = 0;
 //        inorder(top);
@@ -84,9 +84,9 @@ package class160;
 //        }
 //    }
 //    return h;
-//}
+// }
 //
-//int innerInsert(int num, int i, int f, int s) {
+// int innerInsert(int num, int i, int f, int s) {
 //    if (!i) {
 //        i = init(num);
 //    } else {
@@ -105,22 +105,22 @@ package class160;
 //        }
 //    }
 //    return i;
-//}
+// }
 //
-//int innerInsert(int num, int i) {
+// int innerInsert(int num, int i) {
 //    top = father = side = 0;
 //    i = innerInsert(num, i, 0, 0);
 //    i = innerRebuild(i);
 //    return i;
-//}
+// }
 //
-//int innerSmall(int num, int i) {
+// int innerSmall(int num, int i) {
 //    if (!i) return 0;
 //    if (key[i] >= num) return innerSmall(num, ls[i]);
 //    return siz[ls[i]] + cnts[i] + innerSmall(num, rs[i]);
-//}
+// }
 //
-//int innerIndex(int index, int i) {
+// int innerIndex(int index, int i) {
 //    int leftsize = siz[ls[i]];
 //    if (leftsize >= index) {
 //        return innerIndex(index, ls[i]);
@@ -128,21 +128,21 @@ package class160;
 //        return innerIndex(index - leftsize - cnts[i], rs[i]);
 //    }
 //    return key[i];
-//}
+// }
 //
-//int innerPre(int num, int i) {
+// int innerPre(int num, int i) {
 //    int kth = innerSmall(num, i) + 1;
 //    if (kth == 1) return -INF;
 //    return innerIndex(kth - 1, i);
-//}
+// }
 //
-//int innerPost(int num, int i) {
+// int innerPost(int num, int i) {
 //    int k = innerSmall(num + 1, i);
 //    if (k == siz[i]) return INF;
 //    return innerIndex(k + 1, i);
-//}
+// }
 //
-//void innerRemove(int num, int i, int f, int s) {
+// void innerRemove(int num, int i, int f, int s) {
 //    if (key[i] == num) {
 //    	cnts[i]--;
 //    } else if (key[i] > num) {
@@ -156,27 +156,27 @@ package class160;
 //        father = f;
 //        side = s;
 //    }
-//}
+// }
 //
-//int innerRemove(int num, int i) {
+// int innerRemove(int num, int i) {
 //    if (innerSmall(num, i) != innerSmall(num + 1, i)) {
 //        top = father = side = 0;
 //        innerRemove(num, i, 0, 0);
 //        i = innerRebuild(i);
 //    }
 //    return i;
-//}
+// }
 //
-//void add(int jobi, int jobv, int l, int r, int i) {
+// void add(int jobi, int jobv, int l, int r, int i) {
 //	root[i] = innerInsert(jobv, root[i]);
 //    if (l < r) {
 //        int mid = (l + r) >> 1;
 //        if (jobi <= mid) add(jobi, jobv, l, mid, i << 1);
 //        else add(jobi, jobv, mid + 1, r, i << 1 | 1);
 //    }
-//}
+// }
 //
-//void update(int jobi, int jobv, int l, int r, int i) {
+// void update(int jobi, int jobv, int l, int r, int i) {
 //    root[i] = innerRemove(arr[jobi], root[i]);
 //    root[i] = innerInsert(jobv, root[i]);
 //    if (l < r) {
@@ -184,17 +184,17 @@ package class160;
 //        if (jobi <= mid) update(jobi, jobv, l, mid, i << 1);
 //        else update(jobi, jobv, mid + 1, r, i << 1 | 1);
 //    }
-//}
+// }
 //
-//int small(int jobl, int jobr, int jobv, int l, int r, int i) {
+// int small(int jobl, int jobr, int jobv, int l, int r, int i) {
 //    if (jobl <= l && r <= jobr) return innerSmall(jobv, root[i]);
 //    int mid = (l + r) >> 1, ans = 0;
 //    if (jobl <= mid) ans += small(jobl, jobr, jobv, l, mid, i << 1);
 //    if (jobr > mid) ans += small(jobl, jobr, jobv, mid + 1, r, i << 1 | 1);
 //    return ans;
-//}
+// }
 //
-//int number(int jobl, int jobr, int jobk) {
+// int number(int jobl, int jobr, int jobk) {
 //    int l = 0, r = 100000000, mid, ans = 0;
 //    while (l <= r) {
 //        mid = (l + r) >> 1;
@@ -206,25 +206,25 @@ package class160;
 //        }
 //    }
 //    return ans;
-//}
+// }
 //
-//int pre(int jobl, int jobr, int jobv, int l, int r, int i) {
+// int pre(int jobl, int jobr, int jobv, int l, int r, int i) {
 //    if (jobl <= l && r <= jobr) return innerPre(jobv, root[i]);
 //    int mid = (l + r) >> 1, ans = -INF;
 //    if (jobl <= mid) ans = max(ans, pre(jobl, jobr, jobv, l, mid, i << 1));
 //    if (jobr > mid) ans = max(ans, pre(jobl, jobr, jobv, mid + 1, r, i << 1 | 1));
 //    return ans;
-//}
+// }
 //
-//int post(int jobl, int jobr, int jobv, int l, int r, int i) {
+// int post(int jobl, int jobr, int jobv, int l, int r, int i) {
 //    if (jobl <= l && r <= jobr) return innerPost(jobv, root[i]);
 //    int mid = (l + r) >> 1, ans = INF;
 //    if (jobl <= mid) ans = min(ans, post(jobl, jobr, jobv, l, mid, i << 1));
 //    if (jobr > mid) ans = min(ans, post(jobl, jobr, jobv, mid + 1, r, i << 1 | 1));
 //    return ans;
-//}
+// }
 //
-//int main(){
+// int main(){
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> m;
@@ -244,4 +244,4 @@ package class160;
 //        }
 //    }
 //    return 0;
-//}
+// }

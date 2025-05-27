@@ -11,37 +11,35 @@ package class103;
 // 测试链接 : https://leetcode.cn/problems/minimum-time-to-revert-word-to-initial-state-ii/
 public class Code03_MinimumTimeToInitialStateII {
 
-	public static int minimumTimeToInitialState(String word, int k) {
-		char[] s = word.toCharArray();
-		int n = s.length;
-		zArray(s, n);
-		for (int i = k; i < n; i += k) {
-			if (z[i] == n - i) {
-				return i / k;
-			}
-		}
-		return (n + k - 1) / k;
-	}
+  // leetcode增加了数据量
+  // 所以把这个值改成10^6规模
+  public static int MAXN = 1000001;
+  public static int[] z = new int[MAXN];
 
-	// leetcode增加了数据量
-	// 所以把这个值改成10^6规模
-	public static int MAXN = 1000001;
+  public static int minimumTimeToInitialState(String word, int k) {
+    char[] s = word.toCharArray();
+    int n = s.length;
+    zArray(s, n);
+    for (int i = k; i < n; i += k) {
+      if (z[i] == n - i) {
+        return i / k;
+      }
+    }
+    return (n + k - 1) / k;
+  }
 
-	public static int[] z = new int[MAXN];
-
-	public static void zArray(char[] s, int n) {
-		z[0] = n;
-		for (int i = 1, c = 1, r = 1, len; i < n; i++) {
-			len = r > i ? Math.min(r - i, z[i - c]) : 0;
-			while (i + len < n && s[i + len] == s[len]) {
-				len++;
-			}
-			if (i + len > r) {
-				r = i + len;
-				c = i;
-			}
-			z[i] = len;
-		}
-	}
-
+  public static void zArray(char[] s, int n) {
+    z[0] = n;
+    for (int i = 1, c = 1, r = 1, len; i < n; i++) {
+      len = r > i ? Math.min(r - i, z[i - c]) : 0;
+      while (i + len < n && s[i + len] == s[len]) {
+        len++;
+      }
+      if (i + len > r) {
+        r = i + len;
+        c = i;
+      }
+      z[i] = len;
+    }
+  }
 }

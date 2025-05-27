@@ -22,105 +22,103 @@ import java.util.StringTokenizer;
 
 public class Code04_Lanterns {
 
-	public static int MAXN = 51;
+  public static int MAXN = 51;
 
-	public static int MOD = 2008;
+  public static int MOD = 2008;
 
-	public static long[] arr = new long[MAXN];
+  public static long[] arr = new long[MAXN];
 
-	public static long[] basis = new long[MAXN];
+  public static long[] basis = new long[MAXN];
 
-	public static int n, m;
+  public static int n, m;
 
-	// 普通消元
-	// 计算线性基的大小
-	public static int compute() {
-		int size = 0;
-		for (int i = 1; i <= m; i++) {
-			if (insert(arr[i])) {
-				size++;
-			}
-		}
-		return size;
-	}
+  // 普通消元
+  // 计算线性基的大小
+  public static int compute() {
+    int size = 0;
+    for (int i = 1; i <= m; i++) {
+      if (insert(arr[i])) {
+        size++;
+      }
+    }
+    return size;
+  }
 
-	// 线性基里插入num，如果线性基增加了返回true，否则返回false
-	public static boolean insert(long num) {
-		for (int i = n; i >= 0; i--) {
-			if (num >> i == 1) {
-				if (basis[i] == 0) {
-					basis[i] = num;
-					return true;
-				}
-				num ^= basis[i];
-			}
-		}
-		return false;
-	}
+  // 线性基里插入num，如果线性基增加了返回true，否则返回false
+  public static boolean insert(long num) {
+    for (int i = n; i >= 0; i--) {
+      if (num >> i == 1) {
+        if (basis[i] == 0) {
+          basis[i] = num;
+          return true;
+        }
+        num ^= basis[i];
+      }
+    }
+    return false;
+  }
 
-	public static void main(String[] args) throws IOException {
-		Kattio io = new Kattio();
-		n = io.nextInt() - 1;
-		m = io.nextInt();
-		char[] s;
-		for (int i = 1; i <= m; i++) {
-			s = io.next().toCharArray();
-			long num = 0;
-			for (int j = 0; j <= n; j++) {
-				if (s[j] == 'O') {
-					num |= 1L << j;
-				}
-			}
-			arr[i] = num;
-		}
-		int size = compute();
-		io.println((1L << size) % MOD);
-		io.flush();
-		io.close();
-	}
+  public static void main(String[] args) throws IOException {
+    Kattio io = new Kattio();
+    n = io.nextInt() - 1;
+    m = io.nextInt();
+    char[] s;
+    for (int i = 1; i <= m; i++) {
+      s = io.next().toCharArray();
+      long num = 0;
+      for (int j = 0; j <= n; j++) {
+        if (s[j] == 'O') {
+          num |= 1L << j;
+        }
+      }
+      arr[i] = num;
+    }
+    int size = compute();
+    io.println((1L << size) % MOD);
+    io.flush();
+    io.close();
+  }
 
-	// Kattio类IO效率很好，但还是不如StreamTokenizer
-	// 只有StreamTokenizer无法正确处理时，才考虑使用这个类
-	// 参考链接 : https://oi-wiki.org/lang/java-pro/
-	public static class Kattio extends PrintWriter {
-		private BufferedReader r;
-		private StringTokenizer st;
+  // Kattio类IO效率很好，但还是不如StreamTokenizer
+  // 只有StreamTokenizer无法正确处理时，才考虑使用这个类
+  // 参考链接 : https://oi-wiki.org/lang/java-pro/
+  public static class Kattio extends PrintWriter {
+    private BufferedReader r;
+    private StringTokenizer st;
 
-		public Kattio() {
-			this(System.in, System.out);
-		}
+    public Kattio() {
+      this(System.in, System.out);
+    }
 
-		public Kattio(InputStream i, OutputStream o) {
-			super(o);
-			r = new BufferedReader(new InputStreamReader(i));
-		}
+    public Kattio(InputStream i, OutputStream o) {
+      super(o);
+      r = new BufferedReader(new InputStreamReader(i));
+    }
 
-		public Kattio(String intput, String output) throws IOException {
-			super(output);
-			r = new BufferedReader(new FileReader(intput));
-		}
+    public Kattio(String intput, String output) throws IOException {
+      super(output);
+      r = new BufferedReader(new FileReader(intput));
+    }
 
-		public String next() {
-			try {
-				while (st == null || !st.hasMoreTokens())
-					st = new StringTokenizer(r.readLine());
-				return st.nextToken();
-			} catch (Exception e) {
-			}
-			return null;
-		}
+    public String next() {
+      try {
+        while (st == null || !st.hasMoreTokens()) st = new StringTokenizer(r.readLine());
+        return st.nextToken();
+      } catch (Exception e) {
+      }
+      return null;
+    }
 
-		public int nextInt() {
-			return Integer.parseInt(next());
-		}
+    public int nextInt() {
+      return Integer.parseInt(next());
+    }
 
-		public double nextDouble() {
-			return Double.parseDouble(next());
-		}
+    public double nextDouble() {
+      return Double.parseDouble(next());
+    }
 
-		public long nextLong() {
-			return Long.parseLong(next());
-		}
-	}
-
+    public long nextLong() {
+      return Long.parseLong(next());
+    }
+  }
 }

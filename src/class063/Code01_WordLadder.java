@@ -15,57 +15,56 @@ import java.util.List;
 // 测试链接 : https://leetcode.cn/problems/word-ladder/
 public class Code01_WordLadder {
 
-	public static int ladderLength(String begin, String end, List<String> wordList) {
-		// 总词表
-		HashSet<String> dict = new HashSet<>(wordList);
-		if (!dict.contains(end)) {
-			return 0;
-		}
-		// 数量小的一侧
-		HashSet<String> smallLevel = new HashSet<>();
-		// 数量大的一侧
-		HashSet<String> bigLevel = new HashSet<>();
-		// 由数量小的一侧，所扩展出的下一层列表
-		HashSet<String> nextLevel = new HashSet<>();
-		smallLevel.add(begin);
-		bigLevel.add(end);
-		for (int len = 2; !smallLevel.isEmpty(); len++) {
-			for (String w : smallLevel) {
-				// 从小侧扩展
-				char[] word = w.toCharArray();
-				for (int j = 0; j < word.length; j++) {
-					// 每一位字符都试
-					char old = word[j];
-					for (char change = 'a'; change <= 'z'; change++) {
-						// // 每一位字符都从a到z换一遍
-						if (change != old) {
-							word[j] = change;
-							String next = String.valueOf(word);
-							if (bigLevel.contains(next)) {
-								return len;
-							}
-							if (dict.contains(next)) {
-								dict.remove(next);
-								nextLevel.add(next);
-							}
-						}
-					}
-					word[j] = old;
-				}
-			}
-			if (nextLevel.size() <= bigLevel.size()) {
-				HashSet<String> tmp = smallLevel;
-				smallLevel = nextLevel;
-				nextLevel = tmp;
-			} else {
-				HashSet<String> tmp = smallLevel;
-				smallLevel = bigLevel;
-				bigLevel = nextLevel;
-				nextLevel = tmp;
-			}
-			nextLevel.clear();
-		}
-		return 0;
-	}
-
+  public static int ladderLength(String begin, String end, List<String> wordList) {
+    // 总词表
+    HashSet<String> dict = new HashSet<>(wordList);
+    if (!dict.contains(end)) {
+      return 0;
+    }
+    // 数量小的一侧
+    HashSet<String> smallLevel = new HashSet<>();
+    // 数量大的一侧
+    HashSet<String> bigLevel = new HashSet<>();
+    // 由数量小的一侧，所扩展出的下一层列表
+    HashSet<String> nextLevel = new HashSet<>();
+    smallLevel.add(begin);
+    bigLevel.add(end);
+    for (int len = 2; !smallLevel.isEmpty(); len++) {
+      for (String w : smallLevel) {
+        // 从小侧扩展
+        char[] word = w.toCharArray();
+        for (int j = 0; j < word.length; j++) {
+          // 每一位字符都试
+          char old = word[j];
+          for (char change = 'a'; change <= 'z'; change++) {
+            // // 每一位字符都从a到z换一遍
+            if (change != old) {
+              word[j] = change;
+              String next = String.valueOf(word);
+              if (bigLevel.contains(next)) {
+                return len;
+              }
+              if (dict.contains(next)) {
+                dict.remove(next);
+                nextLevel.add(next);
+              }
+            }
+          }
+          word[j] = old;
+        }
+      }
+      if (nextLevel.size() <= bigLevel.size()) {
+        HashSet<String> tmp = smallLevel;
+        smallLevel = nextLevel;
+        nextLevel = tmp;
+      } else {
+        HashSet<String> tmp = smallLevel;
+        smallLevel = bigLevel;
+        bigLevel = nextLevel;
+        nextLevel = tmp;
+      }
+      nextLevel.clear();
+    }
+    return 0;
+  }
 }

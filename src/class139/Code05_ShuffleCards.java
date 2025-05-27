@@ -22,78 +22,77 @@ import java.io.StreamTokenizer;
 
 public class Code05_ShuffleCards {
 
-	// 扩展欧几里得算法
-	public static long d, x, y, px, py;
+  // 扩展欧几里得算法
+  public static long d, x, y, px, py;
 
-	public static void exgcd(long a, long b) {
-		if (b == 0) {
-			d = a;
-			x = 1;
-			y = 0;
-		} else {
-			exgcd(b, a % b);
-			px = x;
-			py = y;
-			x = py;
-			y = px - py * (a / b);
-		}
-	}
+  public static void exgcd(long a, long b) {
+    if (b == 0) {
+      d = a;
+      x = 1;
+      y = 0;
+    } else {
+      exgcd(b, a % b);
+      px = x;
+      py = y;
+      x = py;
+      y = px - py * (a / b);
+    }
+  }
 
-	// 原理来自，讲解033，位运算实现乘法
-	// a * b的过程自己实现，每一个中间过程都%mod
-	// 这么写目的是防止溢出，也叫龟速乘
-	public static long multiply(long a, long b, long mod) {
-		// 既然是在%mod的意义下，那么a和b可以都转化成非负的
-		// 本题不转化无所谓，但是其他题目可能需要转化
-		// 尤其是b需要转化，否则while循环会跑不完
-		a = (a % mod + mod) % mod;
-		b = (b % mod + mod) % mod;
-		long ans = 0;
-		while (b != 0) {
-			if ((b & 1) != 0) {
-				ans = (ans + a) % mod;
-			}
-			a = (a + a) % mod;
-			b >>= 1;
-		}
-		return ans;
-	}
+  // 原理来自，讲解033，位运算实现乘法
+  // a * b的过程自己实现，每一个中间过程都%mod
+  // 这么写目的是防止溢出，也叫龟速乘
+  public static long multiply(long a, long b, long mod) {
+    // 既然是在%mod的意义下，那么a和b可以都转化成非负的
+    // 本题不转化无所谓，但是其他题目可能需要转化
+    // 尤其是b需要转化，否则while循环会跑不完
+    a = (a % mod + mod) % mod;
+    b = (b % mod + mod) % mod;
+    long ans = 0;
+    while (b != 0) {
+      if ((b & 1) != 0) {
+        ans = (ans + a) % mod;
+      }
+      a = (a + a) % mod;
+      b >>= 1;
+    }
+    return ans;
+  }
 
-	// 原理来自，讲解098，乘法快速幂
-	// 计算a的b次方，最终 % mod 的结果
-	public static long power(long a, long b, long mod) {
-		long ans = 1;
-		while (b > 0) {
-			if ((b & 1) == 1) {
-				ans = multiply(ans, a, mod);
-			}
-			a = multiply(a, a, mod);
-			b >>= 1;
-		}
-		return ans;
-	}
+  // 原理来自，讲解098，乘法快速幂
+  // 计算a的b次方，最终 % mod 的结果
+  public static long power(long a, long b, long mod) {
+    long ans = 1;
+    while (b > 0) {
+      if ((b & 1) == 1) {
+        ans = multiply(ans, a, mod);
+      }
+      a = multiply(a, a, mod);
+      b >>= 1;
+    }
+    return ans;
+  }
 
-	public static long compute(long n, long m, long l) {
-		long mod = n + 1;
-		exgcd(power(2, m, mod), mod);
-		long x0 = (x % mod + mod) % mod;
-		return multiply(x0, l, mod);
-	}
+  public static long compute(long n, long m, long l) {
+    long mod = n + 1;
+    exgcd(power(2, m, mod), mod);
+    long x0 = (x % mod + mod) % mod;
+    return multiply(x0, l, mod);
+  }
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StreamTokenizer in = new StreamTokenizer(br);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		in.nextToken();
-		long n = (long) in.nval;
-		in.nextToken();
-		long m = (long) in.nval;
-		in.nextToken();
-		long l = (long) in.nval;
-		out.println(compute(n, m, l));
-		out.flush();
-		out.close();
-		br.close();
-	}
-
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StreamTokenizer in = new StreamTokenizer(br);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    in.nextToken();
+    long n = (long) in.nval;
+    in.nextToken();
+    long m = (long) in.nval;
+    in.nextToken();
+    long l = (long) in.nval;
+    out.println(compute(n, m, l));
+    out.flush();
+    out.close();
+    br.close();
+  }
 }

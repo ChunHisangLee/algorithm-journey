@@ -20,75 +20,74 @@ import java.io.StreamTokenizer;
 
 public class Code03_WrongAnswers {
 
-	public static int MAXN = 200002;
+  public static int MAXN = 200002;
 
-	public static int n, m, ans;
+  public static int n, m, ans;
 
-	public static int[] father = new int[MAXN];
+  public static int[] father = new int[MAXN];
 
-	public static int[] dist = new int[MAXN];
+  public static int[] dist = new int[MAXN];
 
-	public static void prepare() {
-		ans = 0;
-		for (int i = 0; i <= n; i++) {
-			father[i] = i;
-			dist[i] = 0;
-		}
-	}
+  public static void prepare() {
+    ans = 0;
+    for (int i = 0; i <= n; i++) {
+      father[i] = i;
+      dist[i] = 0;
+    }
+  }
 
-	public static int find(int i) {
-		if (i != father[i]) {
-			int tmp = father[i];
-			father[i] = find(tmp);
-			dist[i] += dist[tmp];
-		}
-		return father[i];
-	}
+  public static int find(int i) {
+    if (i != father[i]) {
+      int tmp = father[i];
+      father[i] = find(tmp);
+      dist[i] += dist[tmp];
+    }
+    return father[i];
+  }
 
-	public static void union(int l, int r, int v) {
-		int lf = find(l), rf = find(r);
-		if (lf != rf) {
-			father[lf] = rf;
-			dist[lf] = v + dist[r] - dist[l];
-		}
-	}
+  public static void union(int l, int r, int v) {
+    int lf = find(l), rf = find(r);
+    if (lf != rf) {
+      father[lf] = rf;
+      dist[lf] = v + dist[r] - dist[l];
+    }
+  }
 
-	public static boolean check(int l, int r, int v) {
-		if (find(l) == find(r)) {
-			if ((dist[l] - dist[r]) != v) {
-				return false;
-			}
-		}
-		return true;
-	}
+  public static boolean check(int l, int r, int v) {
+    if (find(l) == find(r)) {
+      if ((dist[l] - dist[r]) != v) {
+        return false;
+      }
+    }
+    return true;
+  }
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StreamTokenizer in = new StreamTokenizer(br);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		while (in.nextToken() != StreamTokenizer.TT_EOF) {
-			n = (int) in.nval + 1;
-			in.nextToken();
-			m = (int) in.nval;
-			prepare();
-			for (int i = 1, l, r, v; i <= m; i++) {
-				in.nextToken();
-				l = (int) in.nval;
-				in.nextToken();
-				r = (int) in.nval + 1;
-				in.nextToken();
-				v = (int) in.nval;
-				if (!check(l, r, v)) {
-					ans++;
-				} else {
-					union(l, r, v);
-				}
-			}
-			out.println(ans);
-		}
-		out.flush();
-		out.close();
-		br.close();
-	}
-
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StreamTokenizer in = new StreamTokenizer(br);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    while (in.nextToken() != StreamTokenizer.TT_EOF) {
+      n = (int) in.nval + 1;
+      in.nextToken();
+      m = (int) in.nval;
+      prepare();
+      for (int i = 1, l, r, v; i <= m; i++) {
+        in.nextToken();
+        l = (int) in.nval;
+        in.nextToken();
+        r = (int) in.nval + 1;
+        in.nextToken();
+        v = (int) in.nval;
+        if (!check(l, r, v)) {
+          ans++;
+        } else {
+          union(l, r, v);
+        }
+      }
+      out.println(ans);
+    }
+    out.flush();
+    out.close();
+    br.close();
+  }
 }

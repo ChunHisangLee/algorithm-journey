@@ -14,37 +14,36 @@ import java.util.Arrays;
 // 测试链接 : https://leetcode.cn/problems/minimum-number-of-operations-to-make-arrays-similar/
 public class Code03_MinimumOperationsMakeSimilar {
 
-	public static long makeSimilar(int[] nums, int[] target) {
-		int n = nums.length;
-		int oddSize = split(nums, n);
-		split(target, n);
-		Arrays.sort(nums, 0, oddSize);
-		Arrays.sort(nums, oddSize, n);
-		Arrays.sort(target, 0, oddSize);
-		Arrays.sort(target, oddSize, n);
-		long ans = 0;
-		for (int i = 0; i < n; i++) {
-			ans += Math.abs((long) nums[i] - target[i]);
-		}
-		return ans / 4;
-	}
+  public static long makeSimilar(int[] nums, int[] target) {
+    int n = nums.length;
+    int oddSize = split(nums, n);
+    split(target, n);
+    Arrays.sort(nums, 0, oddSize);
+    Arrays.sort(nums, oddSize, n);
+    Arrays.sort(target, 0, oddSize);
+    Arrays.sort(target, oddSize, n);
+    long ans = 0;
+    for (int i = 0; i < n; i++) {
+      ans += Math.abs((long) nums[i] - target[i]);
+    }
+    return ans / 4;
+  }
 
-	// 把数组分割成左部分全是奇数，右部分全是偶数
-	// 返回左部分的长度
-	public static int split(int[] arr, int n) {
-		int oddSize = 0;
-		for (int i = 0; i < n; i++) {
-			if ((arr[i] & 1) == 1) {
-				swap(arr, i, oddSize++);
-			}
-		}
-		return oddSize;
-	}
+  // 把数组分割成左部分全是奇数，右部分全是偶数
+  // 返回左部分的长度
+  public static int split(int[] arr, int n) {
+    int oddSize = 0;
+    for (int i = 0; i < n; i++) {
+      if ((arr[i] & 1) == 1) {
+        swap(arr, i, oddSize++);
+      }
+    }
+    return oddSize;
+  }
 
-	public static void swap(int[] arr, int i, int j) {
-		int tmp = arr[i];
-		arr[i] = arr[j];
-		arr[j] = tmp;
-	}
-
+  public static void swap(int[] arr, int i, int j) {
+    int tmp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = tmp;
+  }
 }

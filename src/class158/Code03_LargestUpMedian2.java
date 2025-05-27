@@ -15,25 +15,25 @@ package class158;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 20001;
-//const int MAXT = MAXN * 20;
-//const int INF = 10000001;
-//int n, m;
-//vector<pair<int, int>> arr;
-//int root[MAXN];
-//int ls[MAXT];
-//int rs[MAXT];
-//int pre[MAXT];
-//int suf[MAXT];
-//int sum[MAXT];
-//int cnt;
-//int ques[4], info[3];
+// const int MAXN = 20001;
+// const int MAXT = MAXN * 20;
+// const int INF = 10000001;
+// int n, m;
+// vector<pair<int, int>> arr;
+// int root[MAXN];
+// int ls[MAXT];
+// int rs[MAXT];
+// int pre[MAXT];
+// int suf[MAXT];
+// int sum[MAXT];
+// int cnt;
+// int ques[4], info[3];
 //
-//int build(int l, int r) {
+// int build(int l, int r) {
 //    int rt = ++cnt;
 //    pre[rt] = suf[rt] = sum[rt] = r - l + 1;
 //    if (l < r) {
@@ -42,15 +42,15 @@ package class158;
 //        rs[rt] = build(mid + 1, r);
 //    }
 //    return rt;
-//}
+// }
 //
-//void up(int i) {
+// void up(int i) {
 //    pre[i] = max(pre[ls[i]], sum[ls[i]] + pre[rs[i]]);
 //    suf[i] = max(suf[rs[i]], suf[ls[i]] + sum[rs[i]]);
 //    sum[i] = sum[ls[i]] + sum[rs[i]];
-//}
+// }
 //
-//int update(int jobi, int l, int r, int i) {
+// int update(int jobi, int l, int r, int i) {
 //    int rt = ++cnt;
 //    ls[rt] = ls[i];
 //    rs[rt] = rs[i];
@@ -69,20 +69,20 @@ package class158;
 //        up(rt);
 //    }
 //    return rt;
-//}
+// }
 //
-//void initInfo() {
+// void initInfo() {
 //    info[0] = info[1] = -INF;
 //    info[2] = 0;
-//}
+// }
 //
-//void mergeRight(int r) {
+// void mergeRight(int r) {
 //    info[0] = max(info[0], info[2] + pre[r]);
 //    info[1] = max(suf[r], info[1] + sum[r]);
 //    info[2] += sum[r];
-//}
+// }
 //
-//void query(int jobl, int jobr, int l, int r, int i) {
+// void query(int jobl, int jobr, int l, int r, int i) {
 //    if (jobl <= l && r <= jobr) {
 //        mergeRight(i);
 //    } else {
@@ -94,9 +94,9 @@ package class158;
 //            query(jobl, jobr, mid + 1, r, rs[i]);
 //        }
 //    }
-//}
+// }
 //
-//void prepare() {
+// void prepare() {
 //    sort(arr.begin() + 1, arr.end(), [](const pair<int, int>& a, const pair<int, int>& b) {
 //        return a.second < b.second;
 //    });
@@ -105,9 +105,9 @@ package class158;
 //    for (int i = 2; i <= n; i++) {
 //        root[i] = update(arr[i - 1].first, 1, n, root[i - 1]);
 //    }
-//}
+// }
 //
-//bool check(int a, int b, int c, int d, int v) {
+// bool check(int a, int b, int c, int d, int v) {
 //    initInfo();
 //    query(a, b, 1, n, root[v]);
 //    int best = info[1];
@@ -120,9 +120,9 @@ package class158;
 //        best += info[2];
 //    }
 //    return best >= 0;
-//}
+// }
 //
-//int compute(int a, int b, int c, int d) {
+// int compute(int a, int b, int c, int d) {
 //    int left = 1, right = n, mid, ans = 0;
 //    while (left <= right) {
 //        mid = (left + right) / 2;
@@ -134,9 +134,9 @@ package class158;
 //        }
 //    }
 //    return ans;
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n;
@@ -157,4 +157,4 @@ package class158;
 //        cout << lastAns << '\n';
 //    }
 //    return 0;
-//}
+// }

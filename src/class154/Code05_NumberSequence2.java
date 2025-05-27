@@ -10,38 +10,38 @@ package class154;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 1000001;
-//int n;
-//long long arr[MAXN];
-//int ls[MAXN];
-//int rs[MAXN];
-//int dist[MAXN];
-//int fa[MAXN];
-//int from[MAXN];
-//int to[MAXN];
-//int siz[MAXN];
-//int stk[MAXN];
-//long long ans[MAXN];
+// const int MAXN = 1000001;
+// int n;
+// long long arr[MAXN];
+// int ls[MAXN];
+// int rs[MAXN];
+// int dist[MAXN];
+// int fa[MAXN];
+// int from[MAXN];
+// int to[MAXN];
+// int siz[MAXN];
+// int stk[MAXN];
+// long long ans[MAXN];
 //
-//void prepare() {
+// void prepare() {
 //    dist[0] = -1;
 //    for (int i = 1; i <= n; i++) {
 //        ls[i] = rs[i] = dist[i] = 0;
 //        fa[i] = from[i] = to[i] = i;
 //        siz[i] = 1;
 //    }
-//}
+// }
 //
-//int find(int i) {
+// int find(int i) {
 //    fa[i] = fa[i] == i ? i : find(fa[i]);
 //    return fa[i];
-//}
+// }
 //
-//int merge(int i, int j) {
+// int merge(int i, int j) {
 //    if (i == 0 || j == 0) {
 //        return i + j;
 //    }
@@ -55,17 +55,17 @@ package class154;
 //    dist[i] = dist[rs[i]] + 1;
 //    fa[ls[i]] = fa[rs[i]] = i;
 //    return i;
-//}
+// }
 //
-//int pop(int i) {
+// int pop(int i) {
 //    fa[ls[i]] = ls[i];
 //    fa[rs[i]] = rs[i];
 //    fa[i] = merge(ls[i], rs[i]);
 //    ls[i] = rs[i] = dist[i] = 0;
 //    return fa[i];
-//}
+// }
 //
-//long long compute() {
+// long long compute() {
 //    int stackSize = 0;
 //    for (int i = 1, pre, cur, s; i <= n; i++) {
 //        while (stackSize > 0) {
@@ -96,9 +96,9 @@ package class154;
 //        }
 //    }
 //    return sum;
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios_base::sync_with_stdio(false);
 //    cin.tie(NULL);
 //    cin >> n;
@@ -114,4 +114,4 @@ package class154;
 //        cout << ans[i] + i << (i == n ? '\n' : ' ');
 //    }
 //    return 0;
-//}
+// }

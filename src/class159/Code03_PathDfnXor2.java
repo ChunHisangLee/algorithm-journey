@@ -11,41 +11,41 @@ package class159;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 100001;
-//const int MAXT = MAXN * 62;
-//const int MAXH = 16;
-//const int BIT = 29;
-//int n, m;
-//int arr[MAXN];
+// const int MAXN = 100001;
+// const int MAXT = MAXN * 62;
+// const int MAXH = 16;
+// const int BIT = 29;
+// int n, m;
+// int arr[MAXN];
 //
-//int head[MAXN];
-//int nxt[MAXN << 1];
-//int to[MAXN << 1];
-//int cntg = 0;
+// int head[MAXN];
+// int nxt[MAXN << 1];
+// int to[MAXN << 1];
+// int cntg = 0;
 //
-//int deep[MAXN];
-//int size[MAXN];
-//int stjump[MAXN][MAXH];
-//int dfn[MAXN];
-//int cntd = 0;
+// int deep[MAXN];
+// int size[MAXN];
+// int stjump[MAXN][MAXH];
+// int dfn[MAXN];
+// int cntd = 0;
 //
-//int root1[MAXN];
-//int root2[MAXN];
-//int tree[MAXT][2];
-//int pass[MAXT];
-//int cntt = 0;
+// int root1[MAXN];
+// int root2[MAXN];
+// int tree[MAXT][2];
+// int pass[MAXT];
+// int cntt = 0;
 //
-//void addEdge(int u, int v) {
+// void addEdge(int u, int v) {
 //    nxt[++cntg] = head[u];
 //    to[cntg] = v;
 //    head[u] = cntg;
-//}
+// }
 //
-//int insert(int num, int i) {
+// int insert(int num, int i) {
 //    int rt = ++cntt;
 //    tree[rt][0] = tree[i][0];
 //    tree[rt][1] = tree[i][1];
@@ -60,9 +60,9 @@ package class159;
 //        tree[pre][path] = cur;
 //    }
 //    return rt;
-//}
+// }
 //
-//int query(int num, int u, int v) {
+// int query(int num, int u, int v) {
 //    int ans = 0;
 //    for (int b = BIT, path, best; b >= 0; b--) {
 //        path = (num >> b) & 1;
@@ -77,9 +77,9 @@ package class159;
 //        }
 //    }
 //    return ans;
-//}
+// }
 //
-//void dfs1(int u, int fa) {
+// void dfs1(int u, int fa) {
 //    deep[u] = deep[fa] + 1;
 //    size[u] = 1;
 //    stjump[u][0] = fa;
@@ -94,9 +94,9 @@ package class159;
 //            size[u] += size[v];
 //        }
 //    }
-//}
+// }
 //
-//void dfs2(int u, int fa) {
+// void dfs2(int u, int fa) {
 //    root1[dfn[u]] = insert(arr[u], root1[dfn[u] - 1]);
 //    root2[u] = insert(arr[u], root2[fa]);
 //    for (int ei = head[u]; ei > 0; ei = nxt[ei]) {
@@ -104,9 +104,9 @@ package class159;
 //            dfs2(to[ei], u);
 //        }
 //    }
-//}
+// }
 //
-//int lca(int a, int b) {
+// int lca(int a, int b) {
 //    if (deep[a] < deep[b]) {
 //        swap(a, b);
 //    }
@@ -125,9 +125,9 @@ package class159;
 //        }
 //    }
 //    return stjump[a][0];
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> m;
@@ -153,4 +153,4 @@ package class159;
 //        }
 //    }
 //    return 0;
-//}
+// }

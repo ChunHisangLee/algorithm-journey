@@ -10,21 +10,21 @@ package class158;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 200001;
-//const int MAXT = MAXN * 22;
-//int n, m;
-//int arr[MAXN];
-//int root[MAXN];
-//int ls[MAXT];
-//int rs[MAXT];
-//int lateLeft[MAXT];
-//int cnt;
+// const int MAXN = 200001;
+// const int MAXT = MAXN * 22;
+// int n, m;
+// int arr[MAXN];
+// int root[MAXN];
+// int ls[MAXT];
+// int rs[MAXT];
+// int lateLeft[MAXT];
+// int cnt;
 //
-//int build(int l, int r) {
+// int build(int l, int r) {
 //    int rt = ++cnt;
 //    lateLeft[rt] = 0;
 //    if (l < r) {
@@ -33,9 +33,9 @@ package class158;
 //        rs[rt] = build(mid + 1, r);
 //    }
 //    return rt;
-//}
+// }
 //
-//int update(int jobi, int jobv, int l, int r, int i) {
+// int update(int jobi, int jobv, int l, int r, int i) {
 //    int rt = ++cnt;
 //    ls[rt] = ls[i];
 //    rs[rt] = rs[i];
@@ -52,9 +52,9 @@ package class158;
 //        lateLeft[rt] = min(lateLeft[ls[rt]], lateLeft[rs[rt]]);
 //    }
 //    return rt;
-//}
+// }
 //
-//int query(int pos, int l, int r, int i) {
+// int query(int pos, int l, int r, int i) {
 //    if (l == r) {
 //        return l;
 //    }
@@ -64,9 +64,9 @@ package class158;
 //    } else {
 //        return query(pos, mid + 1, r, rs[i]);
 //    }
-//}
+// }
 //
-//void prepare() {
+// void prepare() {
 //    cnt = 0;
 //    root[0] = build(0, n);
 //    for (int i = 1; i <= n; i++) {
@@ -76,9 +76,9 @@ package class158;
 //            root[i] = update(arr[i], i, 0, n, root[i - 1]);
 //        }
 //    }
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> m;
@@ -91,4 +91,4 @@ package class158;
 //        cout << query(l, 0, n, root[r]) << "\n";
 //    }
 //    return 0;
-//}
+// }

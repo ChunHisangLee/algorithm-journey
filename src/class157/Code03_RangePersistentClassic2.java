@@ -14,40 +14,40 @@ package class157;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
-// 
-//const int MAXN = 100001;
-//const int MAXT = MAXN * 70;
-//int n, m, t = 0;
-//int arr[MAXN];
-//int root[MAXN];
-//int ls[MAXT];
-//int rs[MAXT];
-//long long sum[MAXT];
-//long long add[MAXT];
-//int cnt = 0;
-// 
-//int clone(int i) {
+// using namespace std;
+//
+// const int MAXN = 100001;
+// const int MAXT = MAXN * 70;
+// int n, m, t = 0;
+// int arr[MAXN];
+// int root[MAXN];
+// int ls[MAXT];
+// int rs[MAXT];
+// long long sum[MAXT];
+// long long add[MAXT];
+// int cnt = 0;
+//
+// int clone(int i) {
 //    int rt = ++cnt;
 //    ls[rt] = ls[i];
 //    rs[rt] = rs[i];
 //    sum[rt] = sum[i];
 //    add[rt] = add[i];
 //    return rt;
-//}
-// 
-//void up(int i) {
+// }
+//
+// void up(int i) {
 //    sum[i] = sum[ls[i]] + sum[rs[i]];
-//}
-// 
-//void lazy(int i, long long v, int n) {
+// }
+//
+// void lazy(int i, long long v, int n) {
 //    sum[i] += v * n;
 //    add[i] += v;
-//}
-// 
-//void down(int i, int ln, int rn) {
+// }
+//
+// void down(int i, int ln, int rn) {
 //    if (add[i] != 0) {
 //        ls[i] = clone(ls[i]);
 //        rs[i] = clone(rs[i]);
@@ -55,9 +55,9 @@ package class157;
 //        lazy(rs[i], add[i], rn);
 //        add[i] = 0;
 //    }
-//}
-// 
-//int build(int l, int r) {
+// }
+//
+// int build(int l, int r) {
 //    int rt = ++cnt;
 //    add[rt] = 0;
 //    if (l == r) {
@@ -69,9 +69,9 @@ package class157;
 //        up(rt);
 //    }
 //    return rt;
-//}
-// 
-//int addRange(int jobl, int jobr, long long jobv, int l, int r, int i) {
+// }
+//
+// int addRange(int jobl, int jobr, long long jobv, int l, int r, int i) {
 //    int rt = clone(i);
 //    if (jobl <= l && r <= jobr) {
 //        lazy(rt, jobv, r - l + 1);
@@ -87,9 +87,9 @@ package class157;
 //        up(rt);
 //    }
 //    return rt;
-//}
-// 
-//long long query(int jobl, int jobr, int l, int r, int i) {
+// }
+//
+// long long query(int jobl, int jobr, int l, int r, int i) {
 //    if (jobl <= l && r <= jobr) {
 //        return sum[i];
 //    }
@@ -103,9 +103,9 @@ package class157;
 //        ans += query(jobl, jobr, mid + 1, r, rs[i]);
 //    }
 //    return ans;
-//}
-// 
-//int main() {
+// }
+//
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> m;
@@ -133,4 +133,4 @@ package class157;
 //        }
 //    }
 //    return 0;
-//}
+// }

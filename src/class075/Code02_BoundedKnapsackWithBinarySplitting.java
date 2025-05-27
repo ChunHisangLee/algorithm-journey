@@ -20,67 +20,69 @@ import java.util.Arrays;
 
 public class Code02_BoundedKnapsackWithBinarySplitting {
 
-	public static int MAXN = 1001;
+  public static int MAXN = 1001;
 
-	public static int MAXW = 40001;
+  public static int MAXW = 40001;
 
-	// 把每一种货物根据个数做二进制分组，去生成衍生商品
-	// 衍生出来的每一种商品，价值放入v、重量放入w
-	public static int[] v = new int[MAXN];
+  // 把每一种货物根据个数做二进制分组，去生成衍生商品
+  // 衍生出来的每一种商品，价值放入v、重量放入w
+  public static int[] v = new int[MAXN];
 
-	public static int[] w = new int[MAXN];
+  public static int[] w = new int[MAXN];
 
-	public static int[] dp = new int[MAXW];
+  public static int[] dp = new int[MAXW];
 
-	public static int n, t, m;
+  public static int n, t, m;
 
-	// 时间复杂度O(t * (log(第1种商品的个数) + log(第2种商品的个数) + ... + log(第n种商品的个数)))
-	// 对每一种商品的个数取log，所以时间复杂度虽然大于O(n * t)，但也不会大多少
-	// 多重背包最常用的方式
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StreamTokenizer in = new StreamTokenizer(br);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		while (in.nextToken() != StreamTokenizer.TT_EOF) {
-			n = (int) in.nval;
-			in.nextToken();
-			t = (int) in.nval;
-			m = 0;
-			for (int i = 1, value, weight, cnt; i <= n; i++) {
-				in.nextToken(); value = (int) in.nval;
-				in.nextToken(); weight = (int) in.nval;
-				in.nextToken(); cnt = (int) in.nval;
-				// 整个文件最重要的逻辑 : 二进制分组
-				// 一般都使用这种技巧，这段代码非常重要
-				// 虽然时间复杂度不如单调队列优化的版本
-				// 但是好写，而且即便是比赛，时间复杂度也达标
-				// 二进制分组的时间复杂度为O(log cnt)
-				for (int k = 1; k <= cnt; k <<= 1) {
-					v[++m] = k * value;
-					w[m] = k * weight;
-					cnt -= k;
-				}
-				if (cnt > 0) {
-					v[++m] = cnt * value;
-					w[m] = cnt * weight;
-				}
-			}
-			out.println(compute());
-		}
-		out.flush();
-		out.close();
-		br.close();
-	}
+  // 时间复杂度O(t * (log(第1种商品的个数) + log(第2种商品的个数) + ... + log(第n种商品的个数)))
+  // 对每一种商品的个数取log，所以时间复杂度虽然大于O(n * t)，但也不会大多少
+  // 多重背包最常用的方式
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StreamTokenizer in = new StreamTokenizer(br);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    while (in.nextToken() != StreamTokenizer.TT_EOF) {
+      n = (int) in.nval;
+      in.nextToken();
+      t = (int) in.nval;
+      m = 0;
+      for (int i = 1, value, weight, cnt; i <= n; i++) {
+        in.nextToken();
+        value = (int) in.nval;
+        in.nextToken();
+        weight = (int) in.nval;
+        in.nextToken();
+        cnt = (int) in.nval;
+        // 整个文件最重要的逻辑 : 二进制分组
+        // 一般都使用这种技巧，这段代码非常重要
+        // 虽然时间复杂度不如单调队列优化的版本
+        // 但是好写，而且即便是比赛，时间复杂度也达标
+        // 二进制分组的时间复杂度为O(log cnt)
+        for (int k = 1; k <= cnt; k <<= 1) {
+          v[++m] = k * value;
+          w[m] = k * weight;
+          cnt -= k;
+        }
+        if (cnt > 0) {
+          v[++m] = cnt * value;
+          w[m] = cnt * weight;
+        }
+      }
+      out.println(compute());
+    }
+    out.flush();
+    out.close();
+    br.close();
+  }
 
-	// 01背包的空间压缩代码(模版)
-	public static int compute() {
-		Arrays.fill(dp, 0, t + 1, 0);
-		for (int i = 1; i <= m; i++) {
-			for (int j = t; j >= w[i]; j--) {
-				dp[j] = Math.max(dp[j], dp[j - w[i]] + v[i]);
-			}
-		}
-		return dp[t];
-	}
-
+  // 01背包的空间压缩代码(模版)
+  public static int compute() {
+    Arrays.fill(dp, 0, t + 1, 0);
+    for (int i = 1; i <= m; i++) {
+      for (int j = t; j >= w[i]; j--) {
+        dp[j] = Math.max(dp[j], dp[j - w[i]] + v[i]);
+      }
+    }
+    return dp[t];
+  }
 }

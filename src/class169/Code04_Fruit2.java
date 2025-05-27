@@ -13,55 +13,55 @@ package class169;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//struct Event {
+// struct Event {
 //    int op, x, yl, yr, v, y, k, i;
-//};
+// };
 //
-//bool EventCmp(Event e1, Event e2) {
+// bool EventCmp(Event e1, Event e2) {
 //    if (e1.x != e2.x) {
 //        return e1.x < e2.x;
 //    }
 //    return e1.op < e2.op;
-//}
+// }
 //
-//const int MAXN = 40001;
-//const int MAXH = 16;
-//const int INF = 1000000001;
-//int n, p, q;
+// const int MAXN = 40001;
+// const int MAXH = 16;
+// const int INF = 1000000001;
+// int n, p, q;
 //
-//int head[MAXN];
-//int nxt[MAXN << 1];
-//int to[MAXN << 1];
-//int cntg = 0;
+// int head[MAXN];
+// int nxt[MAXN << 1];
+// int to[MAXN << 1];
+// int cntg = 0;
 //
-//int dep[MAXN];
-//int ldfn[MAXN];
-//int rdfn[MAXN];
-//int stjump[MAXN][MAXH];
-//int cntd = 0;
+// int dep[MAXN];
+// int ldfn[MAXN];
+// int rdfn[MAXN];
+// int stjump[MAXN][MAXH];
+// int cntd = 0;
 //
-//int tree[MAXN];
+// int tree[MAXN];
 //
-//int eid[MAXN << 3];
-//Event event[MAXN << 3];
-//int cnte = 0;
+// int eid[MAXN << 3];
+// Event event[MAXN << 3];
+// int cnte = 0;
 //
-//int lset[MAXN << 3];
-//int rset[MAXN << 3];
+// int lset[MAXN << 3];
+// int rset[MAXN << 3];
 //
-//int ans[MAXN];
+// int ans[MAXN];
 //
-//void addEdge(int u, int v) {
+// void addEdge(int u, int v) {
 //    nxt[++cntg] = head[u];
 //    to[cntg] = v;
 //    head[u] = cntg;
-//}
+// }
 //
-//void dfs(int u, int fa) {
+// void dfs(int u, int fa) {
 //    dep[u] = dep[fa] + 1;
 //    ldfn[u] = ++cntd;
 //    stjump[u][0] = fa;
@@ -74,9 +74,9 @@ package class169;
 //        }
 //    }
 //    rdfn[u] = cntd;
-//}
+// }
 //
-//int lca(int a, int b) {
+// int lca(int a, int b) {
 //    if (dep[a] < dep[b]) {
 //        int tmp = a;
 //        a = b;
@@ -97,9 +97,9 @@ package class169;
 //        }
 //    }
 //    return stjump[a][0];
-//}
+// }
 //
-//int lcaSon(int a, int b) {
+// int lcaSon(int a, int b) {
 //    if (dep[a] < dep[b]) {
 //        int tmp = a;
 //        a = b;
@@ -111,58 +111,58 @@ package class169;
 //        }
 //    }
 //    return a;
-//}
+// }
 //
-//int lowbit(int i) {
+// int lowbit(int i) {
 //    return i & -i;
-//}
+// }
 //
-//void add(int i, int v) {
+// void add(int i, int v) {
 //    while (i <= n) {
 //        tree[i] += v;
 //        i += lowbit(i);
 //    }
-//}
+// }
 //
-//void add(int l, int r, int v) {
+// void add(int l, int r, int v) {
 //    add(l, v);
 //    add(r + 1, -v);
-//}
+// }
 //
-//int query(int i) {
+// int query(int i) {
 //    int ret = 0;
 //    while (i > 0) {
 //        ret += tree[i];
 //        i -= lowbit(i);
 //    }
 //    return ret;
-//}
+// }
 //
-//void addPlate(int x, int yl, int yr, int v) {
+// void addPlate(int x, int yl, int yr, int v) {
 //    event[++cnte].op = 1;
 //    event[cnte].x = x;
 //    event[cnte].yl = yl;
 //    event[cnte].yr = yr;
 //    event[cnte].v = v;
-//}
+// }
 //
-//void delPlate(int x, int yl, int yr, int v) {
+// void delPlate(int x, int yl, int yr, int v) {
 //    event[++cnte].op = 2;
 //    event[cnte].x = x;
 //    event[cnte].yl = yl;
 //    event[cnte].yr = yr;
 //    event[cnte].v = v;
-//}
+// }
 //
-//void addFruit(int x, int y, int k, int i) {
+// void addFruit(int x, int y, int k, int i) {
 //    event[++cnte].op = 3;
 //    event[cnte].x = x;
 //    event[cnte].y = y;
 //    event[cnte].k = k;
 //    event[cnte].i = i;
-//}
+// }
 //
-//void compute(int el, int er, int vl, int vr) {
+// void compute(int el, int er, int vl, int vr) {
 //    if (el > er) {
 //        return;
 //    }
@@ -211,9 +211,9 @@ package class169;
 //        compute(el, el + lsiz - 1, vl, mid);
 //        compute(el + lsiz, er, mid + 1, vr);
 //    }
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> p >> q;
@@ -255,4 +255,4 @@ package class169;
 //        cout << ans[i] << '\n';
 //    }
 //    return 0;
-//}
+// }

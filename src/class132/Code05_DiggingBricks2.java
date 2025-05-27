@@ -24,64 +24,63 @@ import java.io.StreamTokenizer;
 
 public class Code05_DiggingBricks2 {
 
-	public static int MAXN = 51;
+  public static int MAXN = 51;
 
-	public static int MAXM = 1301;
+  public static int MAXM = 1301;
 
-	public static int[][] grid = new int[MAXN][MAXN];
+  public static int[][] grid = new int[MAXN][MAXN];
 
-	public static int[][] dp = new int[MAXN][MAXM];
+  public static int[][] dp = new int[MAXN][MAXM];
 
-	public static int[][] max = new int[MAXN][MAXM];
+  public static int[][] max = new int[MAXN][MAXM];
 
-	public static int n, m;
+  public static int n, m;
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StreamTokenizer in = new StreamTokenizer(br);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		in.nextToken();
-		n = (int) in.nval;
-		in.nextToken();
-		m = (int) in.nval;
-		for (int j = 1; j <= n; j++) {
-			for (int i = n; i >= j; i--) {
-				in.nextToken();
-				grid[i][j] = (int) in.nval;
-			}
-		}
-		out.println(compute());
-		out.flush();
-		out.close();
-		br.close();
-	}
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StreamTokenizer in = new StreamTokenizer(br);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    in.nextToken();
+    n = (int) in.nval;
+    in.nextToken();
+    m = (int) in.nval;
+    for (int j = 1; j <= n; j++) {
+      for (int i = n; i >= j; i--) {
+        in.nextToken();
+        grid[i][j] = (int) in.nval;
+      }
+    }
+    out.println(compute());
+    out.flush();
+    out.close();
+    br.close();
+  }
 
-	// 优化枚举 + 空间压缩
-	// 时间复杂度O(n^2 * m)
-	public static int compute() {
-		int ans = 0;
-		for (int i = 1, cur; i <= n; i++) {
-			prepare(i - 1);
-			cur = 0;
-			for (int j = 0; j <= i; j++) {
-				cur += grid[i][j];
-				for (int k = (j + 1) * j / 2; k <= m; k++) {
-					dp[j][k] = max[Math.max(0, j - 1)][k - j] + cur;
-					ans = Math.max(ans, dp[j][k]);
-				}
-			}
-		}
-		return ans;
-	}
+  // 优化枚举 + 空间压缩
+  // 时间复杂度O(n^2 * m)
+  public static int compute() {
+    int ans = 0;
+    for (int i = 1, cur; i <= n; i++) {
+      prepare(i - 1);
+      cur = 0;
+      for (int j = 0; j <= i; j++) {
+        cur += grid[i][j];
+        for (int k = (j + 1) * j / 2; k <= m; k++) {
+          dp[j][k] = max[Math.max(0, j - 1)][k - j] + cur;
+          ans = Math.max(ans, dp[j][k]);
+        }
+      }
+    }
+    return ans;
+  }
 
-	// 预处理结构优化枚举
-	public static void prepare(int rowLimit) {
-		for (int col = 0; col <= m; col++) {
-			for (int row = rowLimit, suf = 0; row >= 0; row--) {
-				suf = Math.max(suf, dp[row][col]);
-				max[row][col] = suf;
-			}
-		}
-	}
-
+  // 预处理结构优化枚举
+  public static void prepare(int rowLimit) {
+    for (int col = 0; col <= m; col++) {
+      for (int row = rowLimit, suf = 0; row >= 0; row--) {
+        suf = Math.max(suf, dp[row][col]);
+        max[row][col] = suf;
+      }
+    }
+  }
 }

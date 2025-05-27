@@ -12,14 +12,14 @@ package class140;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <iostream>
-//#include <cstdio>
+// #include <iostream>
+// #include <cstdio>
 //
-//using namespace std;
+// using namespace std;
 //
-//long long d, x, y, px, py;
+// long long d, x, y, px, py;
 //
-//void exgcd(long long a, long long b) {
+// void exgcd(long long a, long long b) {
 //    if (b == 0) {
 //        d = a;
 //        x = 1;
@@ -31,11 +31,11 @@ package class140;
 //        x = py;
 //        y = px - py * (a / b);
 //    }
-//}
+// }
 //
-//long long a, b, c, xd, yd, times;
+// long long a, b, c, xd, yd, times;
 //
-//int main() {
+// int main() {
 //    int cases;
 //    scanf("%d", &cases);
 //    for (int t = 1; t <= cases; t++) {
@@ -70,4 +70,4 @@ package class140;
 //        }
 //    }
 //    return 0;
-//}
+// }

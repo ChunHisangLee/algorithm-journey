@@ -16,27 +16,27 @@ package class152;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <iostream>
-//#include <cstdio>
-//#include <cstdlib>
-//#include <cstring>
-//#include <algorithm>
-//#include <climits>
+// #include <iostream>
+// #include <cstdio>
+// #include <cstdlib>
+// #include <cstring>
+// #include <algorithm>
+// #include <climits>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 500001;
-//const int MAXM = MAXN * 50;
+// const int MAXN = 500001;
+// const int MAXM = MAXN * 50;
 //
-//int cnt = 0;
-//int head[MAXN];
-//int key[MAXM];
-//int ls[MAXM];
-//int rs[MAXM];
-//int size[MAXM];
-//double priority[MAXM];
+// int cnt = 0;
+// int head[MAXN];
+// int key[MAXM];
+// int ls[MAXM];
+// int rs[MAXM];
+// int size[MAXM];
+// double priority[MAXM];
 //
-//int copy(int i) {
+// int copy(int i) {
 //    ++cnt;
 //    key[cnt] = key[i];
 //    ls[cnt] = ls[i];
@@ -44,13 +44,13 @@ package class152;
 //    size[cnt] = size[i];
 //    priority[cnt] = priority[i];
 //    return cnt;
-//}
+// }
 //
-//void up(int i) {
+// void up(int i) {
 //    size[i] = size[ls[i]] + size[rs[i]] + 1;
-//}
+// }
 //
-//void split(int l, int r, int i, int num) {
+// void split(int l, int r, int i, int num) {
 //    if (i == 0) {
 //        rs[l] = ls[r] = 0;
 //    } else {
@@ -64,9 +64,9 @@ package class152;
 //        }
 //        up(i);
 //    }
-//}
+// }
 //
-//int merge(int l, int r) {
+// int merge(int l, int r) {
 //    if (l == 0 || r == 0) {
 //        return l + r;
 //    }
@@ -81,9 +81,9 @@ package class152;
 //        up(r);
 //        return r;
 //    }
-//}
+// }
 //
-//void add(int v, int i, int num) {
+// void add(int v, int i, int num) {
 //    split(0, 0, i, num);
 //    int l = rs[0];
 //    int r = ls[0];
@@ -93,9 +93,9 @@ package class152;
 //    size[cnt] = 1;
 //    priority[cnt] = (double)rand() / RAND_MAX;
 //    head[v] = merge(merge(l, cnt), r);
-//}
+// }
 //
-//void remove(int v, int i, int num) {
+// void remove(int v, int i, int num) {
 //    split(0, 0, i, num);
 //    int lm = rs[0];
 //    int r = ls[0];
@@ -104,9 +104,9 @@ package class152;
 //    int m = ls[0];
 //    ls[0] = rs[0] = 0;
 //    head[v] = merge(merge(l, merge(ls[m], rs[m])), r);
-//}
+// }
 //
-//int small(int i, int num) {
+// int small(int i, int num) {
 //    if (i == 0) {
 //        return 0;
 //    }
@@ -115,9 +115,9 @@ package class152;
 //    } else {
 //        return size[ls[i]] + 1 + small(rs[i], num);
 //    }
-//}
+// }
 //
-//int index(int i, int x) {
+// int index(int i, int x) {
 //    if (size[ls[i]] >= x) {
 //        return index(ls[i], x);
 //    } else if (size[ls[i]] + 1 < x) {
@@ -125,9 +125,9 @@ package class152;
 //    } else {
 //        return key[i];
 //    }
-//}
+// }
 //
-//int pre(int i, int num) {
+// int pre(int i, int num) {
 //    if (i == 0) {
 //        return INT_MIN + 1;
 //    }
@@ -136,9 +136,9 @@ package class152;
 //    } else {
 //        return max(key[i], pre(rs[i], num));
 //    }
-//}
+// }
 //
-//int post(int i, int num) {
+// int post(int i, int num) {
 //    if (i == 0) {
 //        return INT_MAX;
 //    }
@@ -147,9 +147,9 @@ package class152;
 //    } else {
 //        return min(key[i], post(ls[i], num));
 //    }
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    srand(time(0));
@@ -176,4 +176,4 @@ package class152;
 //        }
 //    }
 //    return 0;
-//}
+// }

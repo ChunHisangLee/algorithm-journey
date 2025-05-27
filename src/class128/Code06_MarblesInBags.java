@@ -15,20 +15,19 @@ import java.util.Arrays;
 // 测试链接 : https://leetcode.cn/problems/put-marbles-in-bags/
 public class Code06_MarblesInBags {
 
-	public static long putMarbles(int[] weights, int k) {
-		int n = weights.length;
-		long[] split = new long[n - 1];
-		for (int i = 1; i < n; i++) {
-			split[i - 1] = (long) weights[i - 1] + weights[i];
-		}
-		Arrays.sort(split);
-		long small = 0;
-		long big = 0;
-		for (int i = 0, j = n - 2, p = 1; p < k; i++, j--, p++) {
-			small += split[i];
-			big += split[j];
-		}
-		return big - small;
-	}
-
+  public static long putMarbles(int[] weights, int k) {
+    int n = weights.length;
+    long[] split = new long[n - 1];
+    for (int i = 1; i < n; i++) {
+      split[i - 1] = (long) weights[i - 1] + weights[i];
+    }
+    Arrays.sort(split);
+    long small = 0;
+    long big = 0;
+    for (int i = 0, j = n - 2, p = 1; p < k; i++, j--, p++) {
+      small += split[i];
+      big += split[j];
+    }
+    return big - small;
+  }
 }

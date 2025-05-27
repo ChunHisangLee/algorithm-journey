@@ -12,23 +12,23 @@ package class159;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 50002;
-//const int MAXT = MAXN * 32;
-//const int BIT = 30;
-//int n;
-//vector<pair<int, int>> arr;
-//int root[MAXN];
-//int tree[MAXT][2];
-//int pass[MAXT];
-//int cnt;
-//int last[MAXN];
-//int nxt[MAXN];
+// const int MAXN = 50002;
+// const int MAXT = MAXN * 32;
+// const int BIT = 30;
+// int n;
+// vector<pair<int, int>> arr;
+// int root[MAXN];
+// int tree[MAXT][2];
+// int pass[MAXT];
+// int cnt;
+// int last[MAXN];
+// int nxt[MAXN];
 //
-//int insert(int num, int i) {
+// int insert(int num, int i) {
 //    int rt = ++cnt;
 //    tree[rt][0] = tree[i][0];
 //    tree[rt][1] = tree[i][1];
@@ -43,9 +43,9 @@ package class159;
 //        tree[pre][path] = cur;
 //    }
 //    return rt;
-//}
+// }
 //
-//int query(int num, int u, int v) {
+// int query(int num, int u, int v) {
 //    int ans = 0;
 //    for (int b = BIT, path, best; b >= 0; b--) {
 //        path = (num >> b) & 1;
@@ -60,9 +60,9 @@ package class159;
 //        }
 //    }
 //    return ans;
-//}
+// }
 //
-//void prepare() {
+// void prepare() {
 //    last[0] = 0;
 //    nxt[0] = 1;
 //    last[n + 1] = n;
@@ -75,9 +75,9 @@ package class159;
 //    sort(arr.begin() + 1, arr.end(), [](const pair<int, int>& a, const pair<int, int>& b) {
 //        return a.second < b.second;
 //    });
-//}
+// }
 //
-//int compute() {
+// int compute() {
 //    int ans = 0;
 //    for (int i = 1, index, value, l1, l2, r1, r2; i <= n; i++) {
 //        index = arr[i].first;
@@ -96,9 +96,9 @@ package class159;
 //        last[r1] = l1;
 //    }
 //    return ans;
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n;
@@ -110,4 +110,4 @@ package class159;
 //    prepare();
 //    cout << compute() << "\n";
 //    return 0;
-//}
+// }

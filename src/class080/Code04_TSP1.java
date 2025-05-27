@@ -28,65 +28,64 @@ import java.io.StreamTokenizer;
 // 完全能通过的版本看Code04_TSP2的实现
 public class Code04_TSP1 {
 
-	public static int MAXN = 19;
+  public static int MAXN = 19;
 
-	public static int[][] graph = new int[MAXN][MAXN];
+  public static int[][] graph = new int[MAXN][MAXN];
 
-	public static int[][] dp = new int[1 << MAXN][MAXN];
+  public static int[][] dp = new int[1 << MAXN][MAXN];
 
-	public static int n;
+  public static int n;
 
-	public static void build() {
-		for (int s = 0; s < (1 << n); s++) {
-			for (int i = 0; i < n; i++) {
-				dp[s][i] = -1;
-			}
-		}
-	}
+  public static void build() {
+    for (int s = 0; s < (1 << n); s++) {
+      for (int i = 0; i < n; i++) {
+        dp[s][i] = -1;
+      }
+    }
+  }
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StreamTokenizer in = new StreamTokenizer(br);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		while (in.nextToken() != StreamTokenizer.TT_EOF) {
-			n = (int) in.nval;
-			build();
-			for (int i = 0; i < n; i++) {
-				for (int j = 0; j < n; j++) {
-					in.nextToken();
-					graph[i][j] = (int) in.nval;
-				}
-			}
-			out.println(compute());
-		}
-		out.flush();
-		out.close();
-		br.close();
-	}
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StreamTokenizer in = new StreamTokenizer(br);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    while (in.nextToken() != StreamTokenizer.TT_EOF) {
+      n = (int) in.nval;
+      build();
+      for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+          in.nextToken();
+          graph[i][j] = (int) in.nval;
+        }
+      }
+      out.println(compute());
+    }
+    out.flush();
+    out.close();
+    br.close();
+  }
 
-	public static int compute() {
-		return f(1, 0);
-	}
+  public static int compute() {
+    return f(1, 0);
+  }
 
-	// s : 村里走没走过的状态，1走过了不要再走了，0可以走
-	// i : 目前在哪个村
-	public static int f(int s, int i) {
-		if (s == (1 << n) - 1) {
-			// n : 000011111
-			return graph[i][0];
-		}
-		if (dp[s][i] != -1) {
-			return dp[s][i];
-		}
-		int ans = Integer.MAX_VALUE;
-		for (int j = 0; j < n; j++) {
-			// 0...n-1这些村，都看看是不是下一个落脚点
-			if ((s & (1 << j)) == 0) {
-				ans = Math.min(ans, graph[i][j] + f(s | (1 << j), j));
-			}
-		}
-		dp[s][i] = ans;
-		return ans;
-	}
-
+  // s : 村里走没走过的状态，1走过了不要再走了，0可以走
+  // i : 目前在哪个村
+  public static int f(int s, int i) {
+    if (s == (1 << n) - 1) {
+      // n : 000011111
+      return graph[i][0];
+    }
+    if (dp[s][i] != -1) {
+      return dp[s][i];
+    }
+    int ans = Integer.MAX_VALUE;
+    for (int j = 0; j < n; j++) {
+      // 0...n-1这些村，都看看是不是下一个落脚点
+      if ((s & (1 << j)) == 0) {
+        ans = Math.min(ans, graph[i][j] + f(s | (1 << j), j));
+      }
+    }
+    dp[s][i] = ans;
+    return ans;
+  }
 }

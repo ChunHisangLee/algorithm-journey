@@ -10,50 +10,50 @@ package class159;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//static const int MAXN = 100001;
-//static const int MAXT = 1000001;
-//static const int MAXH = 20;
-//int n, m;
+// static const int MAXN = 100001;
+// static const int MAXT = 1000001;
+// static const int MAXH = 20;
+// int n, m;
 //
-//int head[MAXN];
-//int nxt[MAXN << 1];
-//int to[MAXN << 1];
-//string weight[MAXN << 1];
-//int cntg = 0;
+// int head[MAXN];
+// int nxt[MAXN << 1];
+// int to[MAXN << 1];
+// string weight[MAXN << 1];
+// int cntg = 0;
 //
-//int root[MAXN];
-//int tree[MAXT][27];
-//int pass[MAXT];
-//int cntt = 0;
+// int root[MAXN];
+// int tree[MAXT][27];
+// int pass[MAXT];
+// int cntt = 0;
 //
-//int deep[MAXN];
-//int stjump[MAXN][MAXH];
+// int deep[MAXN];
+// int stjump[MAXN][MAXH];
 //
-//void addEdge(int u, int v, const string &w) {
+// void addEdge(int u, int v, const string &w) {
 //	nxt[++cntg] = head[u];
 //    to[cntg] = v;
 //    weight[cntg] = w;
 //    head[u] = cntg;
-//}
+// }
 //
-//int num(char c) {
+// int num(char c) {
 //    return c - 'a' + 1;
-//}
+// }
 //
-//int clone(int i) {
+// int clone(int i) {
 //    int rt = ++cntt;
 //    for (int c = 1; c <= 26; c++) {
 //        tree[rt][c] = tree[i][c];
 //    }
 //    pass[rt] = pass[i];
 //    return rt;
-//}
+// }
 //
-//int insert(const string &str, int i) {
+// int insert(const string &str, int i) {
 //    int rt = clone(i);
 //    pass[rt]++;
 //    int pre = rt;
@@ -66,18 +66,18 @@ package class159;
 //        pre = cur;
 //    }
 //    return rt;
-//}
+// }
 //
-//int query(const string &str, int i) {
+// int query(const string &str, int i) {
 //    for (int j = 0; j < (int)str.size(); j++) {
 //        int path = num(str[j]);
 //        i = tree[i][path];
 //        if (!i) return 0;
 //    }
 //    return pass[i];
-//}
+// }
 //
-//void dfs(int u, int fa, const string &path) {
+// void dfs(int u, int fa, const string &path) {
 //    root[u] = insert(path, root[fa]);
 //    deep[u] = deep[fa] + 1;
 //    stjump[u][0] = fa;
@@ -89,9 +89,9 @@ package class159;
 //            dfs(to[e], u, weight[e]);
 //        }
 //    }
-//}
+// }
 //
-//int lca(int a, int b) {
+// int lca(int a, int b) {
 //    if (deep[a] < deep[b]) swap(a, b);
 //    for (int p = MAXH - 1; p >= 0; p--) {
 //        if (deep[stjump[a][p]] >= deep[b]) {
@@ -106,13 +106,13 @@ package class159;
 //        }
 //    }
 //    return stjump[a][0];
-//}
+// }
 //
-//int compute(int u, int v, const string &s) {
+// int compute(int u, int v, const string &s) {
 //    return query(s, root[u]) + query(s, root[v]) - 2 * query(s, root[lca(u, v)]);
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n;
@@ -132,4 +132,4 @@ package class159;
 //        cout << compute(u, v, s) << "\n";
 //    }
 //    return 0;
-//}
+// }

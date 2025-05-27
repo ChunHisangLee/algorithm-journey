@@ -13,46 +13,46 @@ package class165;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//struct CrossEdge {
+// struct CrossEdge {
 //    int u, uteam, v, vteam;
-//};
+// };
 //
-//bool CrossEdgeCmp(CrossEdge x, CrossEdge y) {
+// bool CrossEdgeCmp(CrossEdge x, CrossEdge y) {
 //    if(x.uteam != y.uteam) {
 //    	return x.uteam < y.uteam;
 //    } else {
 //    	return x.vteam < y.vteam;
 //    }
-//}
+// }
 //
-//const int MAXN = 500001;
-//int n, m, k;
+// const int MAXN = 500001;
+// int n, m, k;
 //
-//int team[MAXN];
-//int edge[MAXN][2];
+// int team[MAXN];
+// int edge[MAXN][2];
 //
-//CrossEdge crossEdge[MAXN];
-//int cnt = 0;
+// CrossEdge crossEdge[MAXN];
+// int cnt = 0;
 //
-//bool conflict[MAXN];
+// bool conflict[MAXN];
 //
-//int father[MAXN << 1];
-//int siz[MAXN << 1];
-//int rollback[MAXN << 1][2];
-//int opsize;
+// int father[MAXN << 1];
+// int siz[MAXN << 1];
+// int rollback[MAXN << 1][2];
+// int opsize;
 //
-//int find(int i) {
+// int find(int i) {
 //    while (i != father[i]) {
 //        i = father[i];
 //    }
 //    return i;
-//}
+// }
 //
-//void Union(int x, int y) {
+// void Union(int x, int y) {
 //    int fx = find(x);
 //    int fy = find(y);
 //    if (siz[fx] < siz[fy]) {
@@ -64,16 +64,16 @@ package class165;
 //    siz[fx] += siz[fy];
 //    rollback[++opsize][0] = fx;
 //    rollback[opsize][1] = fy;
-//}
+// }
 //
-//void undo() {
+// void undo() {
 //    int fx = rollback[opsize][0];
 //    int fy = rollback[opsize--][1];
 //    father[fy] = fy;
 //    siz[fx] -= siz[fy];
-//}
+// }
 //
-//void filter() {
+// void filter() {
 //    for (int i = 1; i <= 2 * n; ++i) {
 //        father[i] = i;
 //        siz[i] = 1;
@@ -104,16 +104,17 @@ package class165;
 //            }
 //        }
 //    }
-//}
+// }
 //
-//long long compute() {
+// long long compute() {
 //    sort(crossEdge + 1, crossEdge + cnt + 1, CrossEdgeCmp);
 //    long long ans = (long long)k * (k - 1) / 2;
 //    int u, uteam, v, vteam, unionCnt;
 //    for (int l = 1, r = 1; l <= cnt; l = ++r) {
 //        uteam = crossEdge[l].uteam;
 //        vteam = crossEdge[l].vteam;
-//        while (r + 1 <= cnt && crossEdge[r + 1].uteam == uteam && crossEdge[r + 1].vteam == vteam) {
+//        while (r + 1 <= cnt && crossEdge[r + 1].uteam == uteam && crossEdge[r + 1].vteam == vteam)
+// {
 //            r++;
 //        }
 //        if (conflict[uteam] || conflict[vteam]) {
@@ -137,9 +138,9 @@ package class165;
 //        }
 //    }
 //    return ans;
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> m >> k;
@@ -152,4 +153,4 @@ package class165;
 //    filter();
 //    cout << compute() << "\n";
 //    return 0;
-//}
+// }

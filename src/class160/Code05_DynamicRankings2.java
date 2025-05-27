@@ -10,27 +10,27 @@ package class160;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 100001;
-//const int MAXT = MAXN * 130;
-//int n, m, s;
-//int arr[MAXN];
-//int ques[MAXN][4];
-//int sorted[MAXN * 2];
-//int root[MAXN];
-//int sum[MAXT];
-//int ls[MAXT];
-//int rs[MAXT];
-//int cntt = 0;
-//int addTree[MAXN];
-//int minusTree[MAXN];
-//int cntadd;
-//int cntminus;
+// const int MAXN = 100001;
+// const int MAXT = MAXN * 130;
+// int n, m, s;
+// int arr[MAXN];
+// int ques[MAXN][4];
+// int sorted[MAXN * 2];
+// int root[MAXN];
+// int sum[MAXT];
+// int ls[MAXT];
+// int rs[MAXT];
+// int cntt = 0;
+// int addTree[MAXN];
+// int minusTree[MAXN];
+// int cntadd;
+// int cntminus;
 //
-//int kth(int num) {
+// int kth(int num) {
 //    int l = 1, r = s, mid;
 //    while (l <= r) {
 //        mid = (l + r) / 2;
@@ -43,13 +43,13 @@ package class160;
 //        }
 //    }
 //    return -1;
-//}
+// }
 //
-//int lowbit(int i) {
+// int lowbit(int i) {
 //    return i & -i;
-//}
+// }
 //
-//int innerAdd(int jobi, int jobv, int l, int r, int i) {
+// int innerAdd(int jobi, int jobv, int l, int r, int i) {
 //    if (i == 0) {
 //        i = ++cntt;
 //    }
@@ -65,9 +65,9 @@ package class160;
 //        sum[i] = sum[ls[i]] + sum[rs[i]];
 //    }
 //    return i;
-//}
+// }
 //
-//int innerQuery(int jobk, int l, int r) {
+// int innerQuery(int jobk, int l, int r) {
 //    if (l == r) {
 //        return l;
 //    }
@@ -96,21 +96,21 @@ package class160;
 //        }
 //        return innerQuery(jobk - leftsum, mid + 1, r);
 //    }
-//}
+// }
 //
-//void add(int i, int cnt) {
+// void add(int i, int cnt) {
 //    for (int j = i; j <= n; j += lowbit(j)) {
 //        root[j] = innerAdd(arr[i], cnt, 1, s, root[j]);
 //    }
-//}
+// }
 //
-//void update(int i, int v) {
+// void update(int i, int v) {
 //    add(i, -1);
 //    arr[i] = kth(v);
 //    add(i, 1);
-//}
+// }
 //
-//int number(int l, int r, int k) {
+// int number(int l, int r, int k) {
 //    cntadd = cntminus = 0;
 //    for (int i = r; i > 0; i -= lowbit(i)) {
 //        addTree[++cntadd] = root[i];
@@ -119,9 +119,9 @@ package class160;
 //        minusTree[++cntminus] = root[i];
 //    }
 //    return sorted[innerQuery(k, 1, s)];
-//}
+// }
 //
-//void prepare() {
+// void prepare() {
 //    s = 0;
 //    for (int i = 1; i <= n; i++) {
 //    	sorted[++s] = arr[i];
@@ -143,9 +143,9 @@ package class160;
 //        arr[i] = kth(arr[i]);
 //        add(i, 1);
 //    }
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> m;
@@ -179,4 +179,4 @@ package class160;
 //        }
 //    }
 //    return 0;
-//}
+// }

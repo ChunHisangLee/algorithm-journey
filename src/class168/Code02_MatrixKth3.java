@@ -10,52 +10,52 @@ package class168;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//struct Number {
+// struct Number {
 //    int x, y, v;
-//};
+// };
 //
-//bool NumberCmp(Number a, Number b) {
+// bool NumberCmp(Number a, Number b) {
 //    return a.v < b.v;
-//}
+// }
 //
-//const int MAXN = 501;
-//const int MAXQ = 1000001;
-//int n, q;
+// const int MAXN = 501;
+// const int MAXQ = 1000001;
+// int n, q;
 //
-//Number xyv[MAXN * MAXN];
-//int cntv = 0;
+// Number xyv[MAXN * MAXN];
+// int cntv = 0;
 //
-//int qid[MAXQ];
-//int a[MAXQ];
-//int b[MAXQ];
-//int c[MAXQ];
-//int d[MAXQ];
-//int k[MAXQ];
+// int qid[MAXQ];
+// int a[MAXQ];
+// int b[MAXQ];
+// int c[MAXQ];
+// int d[MAXQ];
+// int k[MAXQ];
 //
-//int tree[MAXN][MAXN];
+// int tree[MAXN][MAXN];
 //
-//int lset[MAXQ];
-//int rset[MAXQ];
+// int lset[MAXQ];
+// int rset[MAXQ];
 //
-//int ans[MAXQ];
+// int ans[MAXQ];
 //
-//int lowbit(int i) {
+// int lowbit(int i) {
 //    return i & -i;
-//}
+// }
 //
-//void add(int x, int y, int v) {
+// void add(int x, int y, int v) {
 //    for (int i = x; i <= n; i += lowbit(i)) {
 //        for (int j = y; j <= n; j += lowbit(j)) {
 //            tree[i][j] += v;
 //        }
 //    }
-//}
+// }
 //
-//int sum(int x, int y) {
+// int sum(int x, int y) {
 //    int ret = 0;
 //    for (int i = x; i > 0; i -= lowbit(i)) {
 //        for (int j = y; j > 0; j -= lowbit(j)) {
@@ -63,13 +63,13 @@ package class168;
 //        }
 //    }
 //    return ret;
-//}
+// }
 //
-//int query(int a, int b, int c, int d) {
+// int query(int a, int b, int c, int d) {
 //    return sum(c, d) - sum(a - 1, d) - sum(c, b - 1) + sum(a - 1, b - 1);
-//}
+// }
 //
-//void compute(int ql, int qr, int vl, int vr) {
+// void compute(int ql, int qr, int vl, int vr) {
 //    if (ql > qr) {
 //        return;
 //    }
@@ -105,9 +105,9 @@ package class168;
 //        compute(ql, ql + lsiz - 1, vl, mid);
 //        compute(ql + lsiz, qr, mid + 1, vr);
 //    }
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> q;
@@ -128,4 +128,4 @@ package class168;
 //        cout << ans[i] << '\n';
 //    }
 //    return 0;
-//}
+// }

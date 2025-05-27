@@ -23,46 +23,45 @@ import java.io.StreamTokenizer;
 
 public class Code02_FrogToSchool {
 
-	public static int MAXN = 100001;
+  public static int MAXN = 100001;
 
-	public static int[] arr = new int[MAXN];
+  public static int[] arr = new int[MAXN];
 
-	public static int n, x;
+  public static int n, x;
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StreamTokenizer in = new StreamTokenizer(br);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		in.nextToken();
-		n = (int) in.nval;
-		in.nextToken();
-		x = (int) in.nval;
-		for (int i = 1; i < n; i++) {
-			in.nextToken();
-			arr[i] = (int) in.nval;
-		}
-		// 认为学校所在的位置n，有足够的高度
-		arr[n] = 2 * x;
-		out.println(compute());
-		out.flush();
-		out.close();
-		br.close();
-	}
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StreamTokenizer in = new StreamTokenizer(br);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    in.nextToken();
+    n = (int) in.nval;
+    in.nextToken();
+    x = (int) in.nval;
+    for (int i = 1; i < n; i++) {
+      in.nextToken();
+      arr[i] = (int) in.nval;
+    }
+    // 认为学校所在的位置n，有足够的高度
+    arr[n] = 2 * x;
+    out.println(compute());
+    out.flush();
+    out.close();
+    br.close();
+  }
 
-	public static int compute() {
-		int ans = 0;
-		// 窗口[l,r)，左闭右开！左闭右开！左闭右开！
-		// 窗口内的累加和是sum
-		// 当r来到n+1位置，那么窗口一定无法继续右扩了，因为n位置有足够的高度
-		long sum = arr[1];
-		for (int l = 1, r = 2; l <= n; l++) {
-			while (sum < x * 2) {
-				sum += arr[r++];
-			}
-			ans = Math.max(ans, r - l);
-			sum -= arr[l];
-		}
-		return ans;
-	}
-
+  public static int compute() {
+    int ans = 0;
+    // 窗口[l,r)，左闭右开！左闭右开！左闭右开！
+    // 窗口内的累加和是sum
+    // 当r来到n+1位置，那么窗口一定无法继续右扩了，因为n位置有足够的高度
+    long sum = arr[1];
+    for (int l = 1, r = 2; l <= n; l++) {
+      while (sum < x * 2) {
+        sum += arr[r++];
+      }
+      ans = Math.max(ans, r - l);
+      sum -= arr[l];
+    }
+    return ans;
+  }
 }

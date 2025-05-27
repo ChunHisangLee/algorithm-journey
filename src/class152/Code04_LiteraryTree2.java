@@ -9,42 +9,42 @@ package class152;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <iostream>
-//#include <cstdio>
-//#include <cstdlib>
-//#include <cmath>
-//#include <ctime>
-//#include <cstring>
-//#include <algorithm>
-//using namespace std;
+// #include <iostream>
+// #include <cstdio>
+// #include <cstdlib>
+// #include <cmath>
+// #include <ctime>
+// #include <cstring>
+// #include <algorithm>
+// using namespace std;
 //
-//const int MAXN = 100001;
+// const int MAXN = 100001;
 //
-//int head = 0;
-//int cnt = 0;
-//int key[MAXN];
-//int ls[MAXN];
-//int rs[MAXN];
-//int size[MAXN];
-//double priority[MAXN];
-//bool rev[MAXN];
-//int ans[MAXN];
-//int ansi;
+// int head = 0;
+// int cnt = 0;
+// int key[MAXN];
+// int ls[MAXN];
+// int rs[MAXN];
+// int size[MAXN];
+// double priority[MAXN];
+// bool rev[MAXN];
+// int ans[MAXN];
+// int ansi;
 //
-//void up(int i) {
+// void up(int i) {
 //    size[i] = size[ls[i]] + size[rs[i]] + 1;
-//}
+// }
 //
-//void down(int i) {
+// void down(int i) {
 //    if (rev[i]) {
 //        swap(ls[i], rs[i]);
 //        rev[ls[i]] ^= 1;
 //        rev[rs[i]] ^= 1;
 //        rev[i] = false;
 //    }
-//}
+// }
 //
-//void split(int l, int r, int i, int rank) {
+// void split(int l, int r, int i, int rank) {
 //    if (i == 0) {
 //        rs[l] = ls[r] = 0;
 //    } else {
@@ -58,9 +58,9 @@ package class152;
 //        }
 //        up(i);
 //    }
-//}
+// }
 //
-//int merge(int l, int r) {
+// int merge(int l, int r) {
 //    if (l == 0 || r == 0) {
 //        return l + r;
 //    }
@@ -75,18 +75,18 @@ package class152;
 //        up(r);
 //        return r;
 //    }
-//}
+// }
 //
-//void inorder(int i) {
+// void inorder(int i) {
 //    if (i != 0) {
 //        down(i);
 //        inorder(ls[i]);
 //        ans[++ansi] = key[i];
 //        inorder(rs[i]);
 //    }
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    srand(time(0));
@@ -116,4 +116,4 @@ package class152;
 //    }
 //    cout << endl;
 //    return 0;
-//}
+// }

@@ -17,152 +17,150 @@ import java.util.Arrays;
 
 public class Code01_RangeKth2 {
 
-	public static int MAXN = 200001;
-	public static int n, m;
+  public static int MAXN = 200001;
+  public static int n, m;
 
-	public static int[][] arr = new int[MAXN][2];
+  public static int[][] arr = new int[MAXN][2];
 
-	public static int[] qid = new int[MAXN];
-	public static int[] l = new int[MAXN];
-	public static int[] r = new int[MAXN];
-	public static int[] k = new int[MAXN];
+  public static int[] qid = new int[MAXN];
+  public static int[] l = new int[MAXN];
+  public static int[] r = new int[MAXN];
+  public static int[] k = new int[MAXN];
 
-	public static int[] tree = new int[MAXN];
-	// 数据的使用数量
-	public static int used = 0;
+  public static int[] tree = new int[MAXN];
+  // 数据的使用数量
+  public static int used = 0;
 
-	public static int[] lset = new int[MAXN];
-	public static int[] rset = new int[MAXN];
+  public static int[] lset = new int[MAXN];
+  public static int[] rset = new int[MAXN];
 
-	public static int[] ans = new int[MAXN];
+  public static int[] ans = new int[MAXN];
 
-	public static int lowbit(int i) {
-		return i & -i;
-	}
+  public static int lowbit(int i) {
+    return i & -i;
+  }
 
-	public static void add(int i, int v) {
-		while (i <= n) {
-			tree[i] += v;
-			i += lowbit(i);
-		}
-	}
+  public static void add(int i, int v) {
+    while (i <= n) {
+      tree[i] += v;
+      i += lowbit(i);
+    }
+  }
 
-	public static int sum(int i) {
-		int ret = 0;
-		while (i > 0) {
-			ret += tree[i];
-			i -= lowbit(i);
-		}
-		return ret;
-	}
+  public static int sum(int i) {
+    int ret = 0;
+    while (i > 0) {
+      ret += tree[i];
+      i -= lowbit(i);
+    }
+    return ret;
+  }
 
-	public static int query(int l, int r) {
-		return sum(r) - sum(l - 1);
-	}
+  public static int query(int l, int r) {
+    return sum(r) - sum(l - 1);
+  }
 
-	// 整体二分的第二种写法
-	public static void compute(int ql, int qr, int vl, int vr) {
-		if (ql > qr) {
-			return;
-		}
-		if (vl == vr) {
-			for (int i = ql; i <= qr; i++) {
-				ans[qid[i]] = arr[vl][1];
-			}
-		} else {
-			int mid = (vl + vr) / 2;
-			// 数据不够就叠加
-			while (used < mid) {
-				used++;
-				add(arr[used][0], 1);
-			}
-			// 数据超了就撤销
-			while (used > mid) {
-				add(arr[used][0], -1);
-				used--;
-			}
-			int lsiz = 0, rsiz = 0;
-			for (int i = ql; i <= qr; i++) {
-				int id = qid[i];
-				int satisfy = query(l[id], r[id]);
-				if (satisfy >= k[id]) {
-					lset[++lsiz] = id;
-				} else {
-					rset[++rsiz] = id;
-				}
-			}
-			for (int i = 1; i <= lsiz; i++) {
-				qid[ql + i - 1] = lset[i];
-			}
-			for (int i = 1; i <= rsiz; i++) {
-				qid[ql + lsiz + i - 1] = rset[i];
-			}
-			compute(ql, ql + lsiz - 1, vl, mid);
-			compute(ql + lsiz, qr, mid + 1, vr);
-		}
-	}
+  // 整体二分的第二种写法
+  public static void compute(int ql, int qr, int vl, int vr) {
+    if (ql > qr) {
+      return;
+    }
+    if (vl == vr) {
+      for (int i = ql; i <= qr; i++) {
+        ans[qid[i]] = arr[vl][1];
+      }
+    } else {
+      int mid = (vl + vr) / 2;
+      // 数据不够就叠加
+      while (used < mid) {
+        used++;
+        add(arr[used][0], 1);
+      }
+      // 数据超了就撤销
+      while (used > mid) {
+        add(arr[used][0], -1);
+        used--;
+      }
+      int lsiz = 0, rsiz = 0;
+      for (int i = ql; i <= qr; i++) {
+        int id = qid[i];
+        int satisfy = query(l[id], r[id]);
+        if (satisfy >= k[id]) {
+          lset[++lsiz] = id;
+        } else {
+          rset[++rsiz] = id;
+        }
+      }
+      for (int i = 1; i <= lsiz; i++) {
+        qid[ql + i - 1] = lset[i];
+      }
+      for (int i = 1; i <= rsiz; i++) {
+        qid[ql + lsiz + i - 1] = rset[i];
+      }
+      compute(ql, ql + lsiz - 1, vl, mid);
+      compute(ql + lsiz, qr, mid + 1, vr);
+    }
+  }
 
-	public static void main(String[] args) throws Exception {
-		FastReader in = new FastReader(System.in);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		n = in.nextInt();
-		m = in.nextInt();
-		for (int i = 1; i <= n; i++) {
-			arr[i][0] = i;
-			arr[i][1] = in.nextInt();
-		}
-		for (int i = 1; i <= m; i++) {
-			qid[i] = i;
-			l[i] = in.nextInt();
-			r[i] = in.nextInt();
-			k[i] = in.nextInt();
-		}
-		Arrays.sort(arr, 1, n + 1, (a, b) -> a[1] - b[1]);
-		compute(1, m, 1, n);
-		for (int i = 1; i <= m; i++) {
-			out.println(ans[i]);
-		}
-		out.flush();
-		out.close();
-	}
+  public static void main(String[] args) throws Exception {
+    FastReader in = new FastReader(System.in);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    n = in.nextInt();
+    m = in.nextInt();
+    for (int i = 1; i <= n; i++) {
+      arr[i][0] = i;
+      arr[i][1] = in.nextInt();
+    }
+    for (int i = 1; i <= m; i++) {
+      qid[i] = i;
+      l[i] = in.nextInt();
+      r[i] = in.nextInt();
+      k[i] = in.nextInt();
+    }
+    Arrays.sort(arr, 1, n + 1, (a, b) -> a[1] - b[1]);
+    compute(1, m, 1, n);
+    for (int i = 1; i <= m; i++) {
+      out.println(ans[i]);
+    }
+    out.flush();
+    out.close();
+  }
 
-	// 读写工具类
-	static class FastReader {
-		private final byte[] buffer = new byte[1 << 16];
-		private int ptr = 0, len = 0;
-		private final InputStream in;
+  // 读写工具类
+  static class FastReader {
+    private final byte[] buffer = new byte[1 << 16];
+    private final InputStream in;
+    private int ptr = 0, len = 0;
 
-		FastReader(InputStream in) {
-			this.in = in;
-		}
+    FastReader(InputStream in) {
+      this.in = in;
+    }
 
-		private int readByte() throws IOException {
-			if (ptr >= len) {
-				len = in.read(buffer);
-				ptr = 0;
-				if (len <= 0)
-					return -1;
-			}
-			return buffer[ptr++];
-		}
+    private int readByte() throws IOException {
+      if (ptr >= len) {
+        len = in.read(buffer);
+        ptr = 0;
+        if (len <= 0) return -1;
+      }
+      return buffer[ptr++];
+    }
 
-		int nextInt() throws IOException {
-			int c;
-			do {
-				c = readByte();
-			} while (c <= ' ' && c != -1);
-			boolean neg = false;
-			if (c == '-') {
-				neg = true;
-				c = readByte();
-			}
-			int val = 0;
-			while (c > ' ' && c != -1) {
-				val = val * 10 + (c - '0');
-				c = readByte();
-			}
-			return neg ? -val : val;
-		}
-	}
-
+    int nextInt() throws IOException {
+      int c;
+      do {
+        c = readByte();
+      } while (c <= ' ' && c != -1);
+      boolean neg = false;
+      if (c == '-') {
+        neg = true;
+        c = readByte();
+      }
+      int val = 0;
+      while (c > ' ' && c != -1) {
+        val = val * 10 + (c - '0');
+        c = readByte();
+      }
+      return neg ? -val : val;
+    }
+  }
 }

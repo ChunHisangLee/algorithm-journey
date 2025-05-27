@@ -14,53 +14,52 @@ import java.util.PriorityQueue;
 // 测试链接 : https://leetcode.cn/problems/swim-in-rising-water/
 public class Code03_SwimInRisingWater {
 
-	// 0:上，1:右，2:下，3:左
-	public static int[] move = new int[] { -1, 0, 1, 0, -1 };
+  // 0:上，1:右，2:下，3:左
+  public static int[] move = new int[] {-1, 0, 1, 0, -1};
 
-	public static int swimInWater(int[][] grid) {
-		int n = grid.length;
-		int m = grid[0].length;
-		int[][] distance = new int[n][m];
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < m; j++) {
-				distance[i][j] = Integer.MAX_VALUE;
-			}
-		}
-		distance[0][0] = grid[0][0];
-		boolean[][] visited = new boolean[n][m];
-		// 0 : 格子的行
-		// 1 : 格子的列
-		// 2 : 源点到当前格子的代价
-		PriorityQueue<int[]> heap = new PriorityQueue<>((a, b) -> a[2] - b[2]);
-		heap.add(new int[] { 0, 0, grid[0][0] });
-		while (!heap.isEmpty()) {
-			int x = heap.peek()[0];
-			int y = heap.peek()[1];
-			int c = heap.peek()[2];
-			heap.poll();
-			if (visited[x][y]) {
-				continue;
-			}
-			visited[x][y] = true;
-			if (x == n - 1 && y == m - 1) {
-				// 常见剪枝
-				// 发现终点直接返回
-				// 不用等都结束
-				return c;
-			}
-			for (int i = 0, nx, ny, nc; i < 4; i++) {
-				nx = x + move[i];
-				ny = y + move[i + 1];
-				if (nx >= 0 && nx < n && ny >= 0 && ny < m && !visited[nx][ny]) {
-					nc = Math.max(c, grid[nx][ny]);
-					if (nc < distance[nx][ny]) {
-						distance[nx][ny] = nc;
-						heap.add(new int[] { nx, ny, nc });
-					}
-				}
-			}
-		}
-		return -1;
-	}
-
+  public static int swimInWater(int[][] grid) {
+    int n = grid.length;
+    int m = grid[0].length;
+    int[][] distance = new int[n][m];
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        distance[i][j] = Integer.MAX_VALUE;
+      }
+    }
+    distance[0][0] = grid[0][0];
+    boolean[][] visited = new boolean[n][m];
+    // 0 : 格子的行
+    // 1 : 格子的列
+    // 2 : 源点到当前格子的代价
+    PriorityQueue<int[]> heap = new PriorityQueue<>((a, b) -> a[2] - b[2]);
+    heap.add(new int[] {0, 0, grid[0][0]});
+    while (!heap.isEmpty()) {
+      int x = heap.peek()[0];
+      int y = heap.peek()[1];
+      int c = heap.peek()[2];
+      heap.poll();
+      if (visited[x][y]) {
+        continue;
+      }
+      visited[x][y] = true;
+      if (x == n - 1 && y == m - 1) {
+        // 常见剪枝
+        // 发现终点直接返回
+        // 不用等都结束
+        return c;
+      }
+      for (int i = 0, nx, ny, nc; i < 4; i++) {
+        nx = x + move[i];
+        ny = y + move[i + 1];
+        if (nx >= 0 && nx < n && ny >= 0 && ny < m && !visited[nx][ny]) {
+          nc = Math.max(c, grid[nx][ny]);
+          if (nc < distance[nx][ny]) {
+            distance[nx][ny] = nc;
+            heap.add(new int[] {nx, ny, nc});
+          }
+        }
+      }
+    }
+    return -1;
+  }
 }

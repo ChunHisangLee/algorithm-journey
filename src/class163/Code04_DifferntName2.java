@@ -12,74 +12,74 @@ package class163;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 100001;
-//int n, m;
+// const int MAXN = 100001;
+// int n, m;
 //
-//unordered_map<string, int> nameId;
-//bool root[MAXN];
-//int id[MAXN];
+// unordered_map<string, int> nameId;
+// bool root[MAXN];
+// int id[MAXN];
 //
-//int headg[MAXN];
-//int nextg[MAXN];
-//int tog[MAXN];
-//int cntg;
+// int headg[MAXN];
+// int nextg[MAXN];
+// int tog[MAXN];
+// int cntg;
 //
-//int headq[MAXN];
-//int nextq[MAXN];
-//int ansiq[MAXN];
-//int kq[MAXN];
-//int cntq;
+// int headq[MAXN];
+// int nextq[MAXN];
+// int ansiq[MAXN];
+// int kq[MAXN];
+// int cntq;
 //
-//int fa[MAXN];
-//int siz[MAXN];
-//int dep[MAXN];
-//int son[MAXN];
+// int fa[MAXN];
+// int siz[MAXN];
+// int dep[MAXN];
+// int son[MAXN];
 //
-//vector<unordered_set<int>> depSet;
-//int ans[MAXN];
+// vector<unordered_set<int>> depSet;
+// int ans[MAXN];
 //
-//int getNameId(const string &name) {
+// int getNameId(const string &name) {
 //    if (nameId.find(name) != nameId.end()) {
 //        return nameId[name];
 //    }
 //    int newId = nameId.size() + 1;
 //    nameId[name] = newId;
 //    return newId;
-//}
+// }
 //
-//void addId(int deep, int id) {
+// void addId(int deep, int id) {
 //    depSet[deep].insert(id);
-//}
+// }
 //
-//void removeId(int deep, int id) {
+// void removeId(int deep, int id) {
 //    depSet[deep].erase(id);
-//}
+// }
 //
-//int sizeOfDeep(int deep) {
+// int sizeOfDeep(int deep) {
 //    if (deep > n) {
 //        return 0;
 //    }
 //    return (int)depSet[deep].size();
-//}
+// }
 //
-//void addEdge(int u, int v) {
+// void addEdge(int u, int v) {
 //    nextg[++cntg] = headg[u];
 //    tog[cntg] = v;
 //    headg[u] = cntg;
-//}
+// }
 //
-//void addQuestion(int u, int ansi, int k) {
+// void addQuestion(int u, int ansi, int k) {
 //    nextq[++cntq] = headq[u];
 //    ansiq[cntq] = ansi;
 //    kq[cntq] = k;
 //    headq[u] = cntq;
-//}
+// }
 //
-//void dfs1(int u, int f) {
+// void dfs1(int u, int f) {
 //    fa[u] = f;
 //    siz[u] = 1;
 //    dep[u] = dep[f] + 1;
@@ -93,23 +93,23 @@ package class163;
 //            son[u] = v;
 //        }
 //    }
-//}
+// }
 //
-//void effect(int u) {
+// void effect(int u) {
 //    addId(dep[u], id[u]);
 //    for (int e = headg[u]; e > 0; e = nextg[e]) {
 //        effect(tog[e]);
 //    }
-//}
+// }
 //
-//void cancel(int u) {
+// void cancel(int u) {
 //    removeId(dep[u], id[u]);
 //    for (int e = headg[u]; e > 0; e = nextg[e]) {
 //        cancel(tog[e]);
 //    }
-//}
+// }
 //
-//void dfs2(int u, int keep) {
+// void dfs2(int u, int keep) {
 //    for (int e = headg[u], v; e > 0; e = nextg[e]) {
 //        v = tog[e];
 //        if (v != son[u]) {
@@ -132,9 +132,9 @@ package class163;
 //    if (keep == 0) {
 //        cancel(u);
 //    }
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n;
@@ -169,4 +169,4 @@ package class163;
 //        cout << ans[i] << "\n";
 //    }
 //    return 0;
-//}
+// }

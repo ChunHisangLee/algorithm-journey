@@ -14,21 +14,20 @@ import java.util.Arrays;
 // 测试链接 : https://leetcode.cn/problems/eliminate-maximum-number-of-monsters/
 public class Code01_EliminateMaximumMonsters {
 
-	public static int eliminateMaximum(int[] dist, int[] speed) {
-		int n = dist.length;
-		int[] time = new int[n];
-		for (int i = 0; i < n; i++) {
-			// a / b 向上取整 -> (a + b - 1) / b
-			time[i] = (dist[i] + speed[i] - 1) / speed[i];
-		}
-		Arrays.sort(time);
-		for (int i = 0; i < n; i++) {
-			// 当前来到i的时刻
-			if (time[i] <= i) {
-				return i;
-			}
-		}
-		return n;
-	}
-
+  public static int eliminateMaximum(int[] dist, int[] speed) {
+    int n = dist.length;
+    int[] time = new int[n];
+    for (int i = 0; i < n; i++) {
+      // a / b 向上取整 -> (a + b - 1) / b
+      time[i] = (dist[i] + speed[i] - 1) / speed[i];
+    }
+    Arrays.sort(time);
+    for (int i = 0; i < n; i++) {
+      // 当前来到i的时刻
+      if (time[i] <= i) {
+        return i;
+      }
+    }
+    return n;
+  }
 }

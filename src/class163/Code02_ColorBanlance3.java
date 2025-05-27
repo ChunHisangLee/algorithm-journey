@@ -10,30 +10,30 @@ package class163;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 200001;
-//int n;
-//int color[MAXN];
-//int head[MAXN];
-//int nxt[MAXN];
-//int to[MAXN];
-//int cnt = 0;
-//int siz[MAXN];
-//int son[MAXN];
-//int colorCnt[MAXN];
-//int colorNum[MAXN];
-//int ans = 0;
+// const int MAXN = 200001;
+// int n;
+// int color[MAXN];
+// int head[MAXN];
+// int nxt[MAXN];
+// int to[MAXN];
+// int cnt = 0;
+// int siz[MAXN];
+// int son[MAXN];
+// int colorCnt[MAXN];
+// int colorNum[MAXN];
+// int ans = 0;
 //
-//void addEdge(int u, int v) {
+// void addEdge(int u, int v) {
 //    nxt[++cnt] = head[u];
 //    to[cnt] = v;
 //    head[u] = cnt;
-//}
+// }
 //
-//void dfs1(int u) {
+// void dfs1(int u) {
 //    siz[u] = 1;
 //    for (int e = head[u]; e > 0; e = nxt[e]) {
 //        dfs1(to[e]);
@@ -45,27 +45,27 @@ package class163;
 //            son[u] = v;
 //        }
 //    }
-//}
+// }
 //
-//void effect(int u) {
+// void effect(int u) {
 //    colorCnt[color[u]]++;
 //    colorNum[colorCnt[color[u]] - 1]--;
 //    colorNum[colorCnt[color[u]]]++;
 //    for (int e = head[u]; e > 0; e = nxt[e]) {
 //        effect(to[e]);
 //    }
-//}
+// }
 //
-//void cancel(int u) {
+// void cancel(int u) {
 //    colorCnt[color[u]]--;
 //    colorNum[colorCnt[color[u]] + 1]--;
 //    colorNum[colorCnt[color[u]]]++;
 //    for (int e = head[u]; e > 0; e = nxt[e]) {
 //        cancel(to[e]);
 //    }
-//}
+// }
 //
-//void dfs2(int u, int keep) {
+// void dfs2(int u, int keep) {
 //    for (int e = head[u], v; e > 0; e = nxt[e]) {
 //        v = to[e];
 //        if (v != son[u]) {
@@ -90,9 +90,9 @@ package class163;
 //    if (keep == 0) {
 //        cancel(u);
 //    }
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n;
@@ -106,4 +106,4 @@ package class163;
 //    dfs2(1, 0);
 //    cout << ans << "\n";
 //    return 0;
-//}
+// }

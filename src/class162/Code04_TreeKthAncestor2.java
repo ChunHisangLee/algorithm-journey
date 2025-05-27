@@ -12,66 +12,66 @@ package class162;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//#define ui unsigned int
+// #define ui unsigned int
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 500001;
-//const int MAXH = 20;
-//int n, m;
-//ui s;
-//int root;
+// const int MAXN = 500001;
+// const int MAXH = 20;
+// int n, m;
+// ui s;
+// int root;
 //
-//int head[MAXN];
-//int nxt[MAXN];
-//int to[MAXN];
-//int cntg = 0;
+// int head[MAXN];
+// int nxt[MAXN];
+// int to[MAXN];
+// int cntg = 0;
 //
-//int stjump[MAXN][MAXH];
-//int dep[MAXN];
-//int len[MAXN];
-//int son[MAXN];
-//int top[MAXN];
-//int dfn[MAXN];
-//int cntd = 0;
+// int stjump[MAXN][MAXH];
+// int dep[MAXN];
+// int len[MAXN];
+// int son[MAXN];
+// int top[MAXN];
+// int dfn[MAXN];
+// int cntd = 0;
 //
-//int high[MAXN];
-//int up[MAXN];
-//int down[MAXN];
+// int high[MAXN];
+// int up[MAXN];
+// int down[MAXN];
 //
-//ui get(ui x) {
+// ui get(ui x) {
 //    x ^= x << 13;
 //    x ^= x >> 17;
 //    x ^= x << 5;
 //    s = x;
 //    return x;
-//}
+// }
 //
-//void setUp(int u, int i, int v) {
+// void setUp(int u, int i, int v) {
 //    up[dfn[u] + i] = v;
-//}
+// }
 //
-//int getUp(int u, int i) {
+// int getUp(int u, int i) {
 //    return up[dfn[u] + i];
-//}
+// }
 //
-//void setDown(int u, int i, int v) {
+// void setDown(int u, int i, int v) {
 //    down[dfn[u] + i] = v;
-//}
+// }
 //
-//int getDown(int u, int i) {
+// int getDown(int u, int i) {
 //    return down[dfn[u] + i];
-//}
+// }
 //
-//void addEdge(int u, int v) {
+// void addEdge(int u, int v) {
 //    nxt[++cntg] = head[u];
 //    to[cntg] = v;
 //    head[u] = cntg;
-//}
+// }
 //
-//void dfs1(int u, int f) {
+// void dfs1(int u, int f) {
 //    stjump[u][0] = f;
 //    for (int p = 1; p < MAXH; p++) {
 //        stjump[u][p] = stjump[stjump[u][p - 1]][p - 1];
@@ -92,9 +92,9 @@ package class162;
 //        }
 //    }
 //    len[u] = len[son[u]] + 1;
-//}
+// }
 //
-//void dfs2(int u, int t) {
+// void dfs2(int u, int t) {
 //    top[u] = t;
 //    dfn[u] = ++cntd;
 //    if (son[u] == 0) return;
@@ -105,9 +105,9 @@ package class162;
 //            dfs2(v, v);
 //        }
 //    }
-//}
+// }
 //
-//void prepare() {
+// void prepare() {
 //    dfs1(root, 0);
 //    dfs2(root, root);
 //    high[0] = -1;
@@ -122,9 +122,9 @@ package class162;
 //            }
 //        }
 //    }
-//}
+// }
 //
-//int query(int x, int k) {
+// int query(int x, int k) {
 //    if (k == 0) {
 //        return x;
 //    }
@@ -136,9 +136,9 @@ package class162;
 //    k -= dep[x] - dep[top[x]];
 //    x = top[x];
 //    return (k >= 0) ? getUp(x, k) : getDown(x, -k);
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> m >> s;
@@ -160,4 +160,4 @@ package class162;
 //    }
 //    cout << ans << '\n';
 //    return 0;
-//}
+// }

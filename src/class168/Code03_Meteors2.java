@@ -22,178 +22,176 @@ import java.io.PrintWriter;
 
 public class Code03_Meteors2 {
 
-	public static int MAXN = 300001;
-	public static int n, m, k;
+  public static int MAXN = 300001;
+  public static int n, m, k;
 
-	public static int[] qid = new int[MAXN];
-	public static int[] need = new int[MAXN];
+  public static int[] qid = new int[MAXN];
+  public static int[] need = new int[MAXN];
 
-	public static int[] rainl = new int[MAXN];
-	public static int[] rainr = new int[MAXN];
-	public static int[] num = new int[MAXN];
+  public static int[] rainl = new int[MAXN];
+  public static int[] rainr = new int[MAXN];
+  public static int[] num = new int[MAXN];
 
-	public static int[] head = new int[MAXN];
-	public static int[] next = new int[MAXN];
-	public static int[] to = new int[MAXN];
-	public static int cnt = 0;
+  public static int[] head = new int[MAXN];
+  public static int[] next = new int[MAXN];
+  public static int[] to = new int[MAXN];
+  public static int cnt = 0;
 
-	public static long[] tree = new long[MAXN << 1];
-	// 下了多少场陨石雨
-	public static int used = 0;
+  public static long[] tree = new long[MAXN << 1];
+  // 下了多少场陨石雨
+  public static int used = 0;
 
-	public static int[] lset = new int[MAXN];
-	public static int[] rset = new int[MAXN];
+  public static int[] lset = new int[MAXN];
+  public static int[] rset = new int[MAXN];
 
-	public static int[] ans = new int[MAXN];
+  public static int[] ans = new int[MAXN];
 
-	public static void addEdge(int i, int v) {
-		next[++cnt] = head[i];
-		to[cnt] = v;
-		head[i] = cnt;
-	}
+  public static void addEdge(int i, int v) {
+    next[++cnt] = head[i];
+    to[cnt] = v;
+    head[i] = cnt;
+  }
 
-	public static int lowbit(int i) {
-		return i & -i;
-	}
+  public static int lowbit(int i) {
+    return i & -i;
+  }
 
-	public static void add(int i, int v) {
-		int siz = m * 2;
-		while (i <= siz) {
-			tree[i] += v;
-			i += lowbit(i);
-		}
-	}
+  public static void add(int i, int v) {
+    int siz = m * 2;
+    while (i <= siz) {
+      tree[i] += v;
+      i += lowbit(i);
+    }
+  }
 
-	public static void add(int l, int r, int v) {
-		add(l, v);
-		add(r + 1, -v);
-	}
+  public static void add(int l, int r, int v) {
+    add(l, v);
+    add(r + 1, -v);
+  }
 
-	public static long query(int i) {
-		long ret = 0;
-		while (i > 0) {
-			ret += tree[i];
-			i -= lowbit(i);
-		}
-		return ret;
-	}
+  public static long query(int i) {
+    long ret = 0;
+    while (i > 0) {
+      ret += tree[i];
+      i -= lowbit(i);
+    }
+    return ret;
+  }
 
-	public static void compute(int ql, int qr, int vl, int vr) {
-		if (ql > qr) {
-			return;
-		}
-		if (vl == vr) {
-			for (int i = ql; i <= qr; i++) {
-				ans[qid[i]] = vl;
-			}
-		} else {
-			int mid = (vl + vr) >> 1;
-			int lsiz = 0, rsiz = 0;
-			while (used < mid) {
-				used++;
-				add(rainl[used], rainr[used], num[used]);
-			}
-			while (used > mid) {
-				add(rainl[used], rainr[used], -num[used]);
-				used--;
-			}
-			for (int i = ql; i <= qr; i++) {
-				int id = qid[i];
-				long satisfy = 0;
-				for (int e = head[id]; e > 0; e = next[e]) {
-					satisfy += query(to[e]) + query(to[e] + m);
-					if (satisfy >= need[id]) {
-						break;
-					}
-				}
-				if (satisfy >= need[id]) {
-					lset[++lsiz] = id;
-				} else {
-					rset[++rsiz] = id;
-				}
-			}
-			for (int i = 1; i <= lsiz; i++) {
-				qid[ql + i - 1] = lset[i];
-			}
-			for (int i = 1; i <= rsiz; i++) {
-				qid[ql + lsiz + i - 1] = rset[i];
-			}
-			compute(ql, ql + lsiz - 1, vl, mid);
-			compute(ql + lsiz, qr, mid + 1, vr);
-		}
-	}
+  public static void compute(int ql, int qr, int vl, int vr) {
+    if (ql > qr) {
+      return;
+    }
+    if (vl == vr) {
+      for (int i = ql; i <= qr; i++) {
+        ans[qid[i]] = vl;
+      }
+    } else {
+      int mid = (vl + vr) >> 1;
+      int lsiz = 0, rsiz = 0;
+      while (used < mid) {
+        used++;
+        add(rainl[used], rainr[used], num[used]);
+      }
+      while (used > mid) {
+        add(rainl[used], rainr[used], -num[used]);
+        used--;
+      }
+      for (int i = ql; i <= qr; i++) {
+        int id = qid[i];
+        long satisfy = 0;
+        for (int e = head[id]; e > 0; e = next[e]) {
+          satisfy += query(to[e]) + query(to[e] + m);
+          if (satisfy >= need[id]) {
+            break;
+          }
+        }
+        if (satisfy >= need[id]) {
+          lset[++lsiz] = id;
+        } else {
+          rset[++rsiz] = id;
+        }
+      }
+      for (int i = 1; i <= lsiz; i++) {
+        qid[ql + i - 1] = lset[i];
+      }
+      for (int i = 1; i <= rsiz; i++) {
+        qid[ql + lsiz + i - 1] = rset[i];
+      }
+      compute(ql, ql + lsiz - 1, vl, mid);
+      compute(ql + lsiz, qr, mid + 1, vr);
+    }
+  }
 
-	public static void main(String[] args) throws Exception {
-		FastReader in = new FastReader(System.in);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		n = in.nextInt();
-		m = in.nextInt();
-		for (int i = 1, nation; i <= m; i++) {
-			nation = in.nextInt();
-			addEdge(nation, i);
-		}
-		for (int i = 1; i <= n; i++) {
-			qid[i] = i;
-			need[i] = in.nextInt();
-		}
-		k = in.nextInt();
-		for (int i = 1; i <= k; i++) {
-			rainl[i] = in.nextInt();
-			rainr[i] = in.nextInt();
-			if (rainr[i] < rainl[i]) {
-				rainr[i] += m;
-			}
-			num[i] = in.nextInt();
-		}
-		compute(1, n, 1, k + 1);
-		for (int i = 1; i <= n; i++) {
-			if (ans[i] == k + 1) {
-				out.println("NIE");
-			} else {
-				out.println(ans[i]);
-			}
-		}
-		out.flush();
-		out.close();
-	}
+  public static void main(String[] args) throws Exception {
+    FastReader in = new FastReader(System.in);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    n = in.nextInt();
+    m = in.nextInt();
+    for (int i = 1, nation; i <= m; i++) {
+      nation = in.nextInt();
+      addEdge(nation, i);
+    }
+    for (int i = 1; i <= n; i++) {
+      qid[i] = i;
+      need[i] = in.nextInt();
+    }
+    k = in.nextInt();
+    for (int i = 1; i <= k; i++) {
+      rainl[i] = in.nextInt();
+      rainr[i] = in.nextInt();
+      if (rainr[i] < rainl[i]) {
+        rainr[i] += m;
+      }
+      num[i] = in.nextInt();
+    }
+    compute(1, n, 1, k + 1);
+    for (int i = 1; i <= n; i++) {
+      if (ans[i] == k + 1) {
+        out.println("NIE");
+      } else {
+        out.println(ans[i]);
+      }
+    }
+    out.flush();
+    out.close();
+  }
 
-	// 读写工具类
-	static class FastReader {
-		private final byte[] buffer = new byte[1 << 16];
-		private int ptr = 0, len = 0;
-		private final InputStream in;
+  // 读写工具类
+  static class FastReader {
+    private final byte[] buffer = new byte[1 << 16];
+    private final InputStream in;
+    private int ptr = 0, len = 0;
 
-		FastReader(InputStream in) {
-			this.in = in;
-		}
+    FastReader(InputStream in) {
+      this.in = in;
+    }
 
-		private int readByte() throws IOException {
-			if (ptr >= len) {
-				len = in.read(buffer);
-				ptr = 0;
-				if (len <= 0)
-					return -1;
-			}
-			return buffer[ptr++];
-		}
+    private int readByte() throws IOException {
+      if (ptr >= len) {
+        len = in.read(buffer);
+        ptr = 0;
+        if (len <= 0) return -1;
+      }
+      return buffer[ptr++];
+    }
 
-		int nextInt() throws IOException {
-			int c;
-			do {
-				c = readByte();
-			} while (c <= ' ' && c != -1);
-			boolean neg = false;
-			if (c == '-') {
-				neg = true;
-				c = readByte();
-			}
-			int val = 0;
-			while (c > ' ' && c != -1) {
-				val = val * 10 + (c - '0');
-				c = readByte();
-			}
-			return neg ? -val : val;
-		}
-	}
-
+    int nextInt() throws IOException {
+      int c;
+      do {
+        c = readByte();
+      } while (c <= ' ' && c != -1);
+      boolean neg = false;
+      if (c == '-') {
+        neg = true;
+        c = readByte();
+      }
+      int val = 0;
+      while (c > ' ' && c != -1) {
+        val = val * 10 + (c - '0');
+        c = readByte();
+      }
+      return neg ? -val : val;
+    }
+  }
 }

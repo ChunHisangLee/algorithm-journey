@@ -19,179 +19,172 @@ import java.util.Arrays;
 
 public class Code04_DifferentColors {
 
-	public static int MAXN = 1000001;
+  public static int MAXN = 1000001;
 
-	public static int[] arr = new int[MAXN];
+  public static int[] arr = new int[MAXN];
 
-	public static int[][] query = new int[MAXN][3];
+  public static int[][] query = new int[MAXN][3];
 
-	public static int[] ans = new int[MAXN];
+  public static int[] ans = new int[MAXN];
 
-	public static int[] map = new int[MAXN];
+  public static int[] map = new int[MAXN];
 
-	public static int[] tree = new int[MAXN];
+  public static int[] tree = new int[MAXN];
 
-	public static int n, m;
+  public static int n, m;
 
-	public static int lowbit(int i) {
-		return i & -i;
-	}
+  public static int lowbit(int i) {
+    return i & -i;
+  }
 
-	public static void add(int i, int v) {
-		while (i <= n) {
-			tree[i] += v;
-			i += lowbit(i);
-		}
-	}
+  public static void add(int i, int v) {
+    while (i <= n) {
+      tree[i] += v;
+      i += lowbit(i);
+    }
+  }
 
-	public static int sum(int i) {
-		int ans = 0;
-		while (i > 0) {
-			ans += tree[i];
-			i -= lowbit(i);
-		}
-		return ans;
-	}
+  public static int sum(int i) {
+    int ans = 0;
+    while (i > 0) {
+      ans += tree[i];
+      i -= lowbit(i);
+    }
+    return ans;
+  }
 
-	public static int range(int l, int r) {
-		return sum(r) - sum(l - 1);
-	}
+  public static int range(int l, int r) {
+    return sum(r) - sum(l - 1);
+  }
 
-	public static void compute() {
-		Arrays.sort(query, 1, m + 1, (a, b) -> a[1] - b[1]);
-		for (int s = 1, q = 1, l, r, i; q <= m; q++) {
-			r = query[q][1];
-			for (; s <= r; s++) {
-				int color = arr[s];
-				if (map[color] != 0) {
-					add(map[color], -1);
-				}
-				add(s, 1);
-				map[color] = s;
-			}
-			l = query[q][0];
-			i = query[q][2];
-			ans[i] = range(l, r);
-		}
-	}
+  public static void compute() {
+    Arrays.sort(query, 1, m + 1, (a, b) -> a[1] - b[1]);
+    for (int s = 1, q = 1, l, r, i; q <= m; q++) {
+      r = query[q][1];
+      for (; s <= r; s++) {
+        int color = arr[s];
+        if (map[color] != 0) {
+          add(map[color], -1);
+        }
+        add(s, 1);
+        map[color] = s;
+      }
+      l = query[q][0];
+      i = query[q][2];
+      ans[i] = range(l, r);
+    }
+  }
 
-	public static void main(String[] args) throws IOException {
-		FastReader in = new FastReader();
-		BufferedWriter out = new BufferedWriter(new OutputStreamWriter(System.out));
-		n = in.nextInt();
-		for (int i = 1; i <= n; i++) {
-			arr[i] = in.nextInt();
-		}
-		m = in.nextInt();
-		for (int i = 1; i <= m; i++) {
-			query[i][0] = in.nextInt();
-			query[i][1] = in.nextInt();
-			query[i][2] = i;
-		}
-		compute();
-		for (int i = 1; i <= m; i++) {
-			out.write(ans[i] + "\n");
-		}
-		out.flush();
-		out.close();
-	}
+  public static void main(String[] args) throws IOException {
+    FastReader in = new FastReader();
+    BufferedWriter out = new BufferedWriter(new OutputStreamWriter(System.out));
+    n = in.nextInt();
+    for (int i = 1; i <= n; i++) {
+      arr[i] = in.nextInt();
+    }
+    m = in.nextInt();
+    for (int i = 1; i <= m; i++) {
+      query[i][0] = in.nextInt();
+      query[i][1] = in.nextInt();
+      query[i][2] = i;
+    }
+    compute();
+    for (int i = 1; i <= m; i++) {
+      out.write(ans[i] + "\n");
+    }
+    out.flush();
+    out.close();
+  }
 
-	// 读写工具类
-	static class FastReader {
-		final private int BUFFER_SIZE = 1 << 16;
-		private final InputStream in;
-		private final byte[] buffer;
-		private int ptr, len;
+  // 读写工具类
+  static class FastReader {
+    private final int BUFFER_SIZE = 1 << 16;
+    private final InputStream in;
+    private final byte[] buffer;
+    private int ptr, len;
 
-		public FastReader() {
-			in = System.in;
-			buffer = new byte[BUFFER_SIZE];
-			ptr = len = 0;
-		}
+    public FastReader() {
+      in = System.in;
+      buffer = new byte[BUFFER_SIZE];
+      ptr = len = 0;
+    }
 
-		private boolean hasNextByte() throws IOException {
-			if (ptr < len)
-				return true;
-			ptr = 0;
-			len = in.read(buffer);
-			return len > 0;
-		}
+    private boolean hasNextByte() throws IOException {
+      if (ptr < len) return true;
+      ptr = 0;
+      len = in.read(buffer);
+      return len > 0;
+    }
 
-		private byte readByte() throws IOException {
-			if (!hasNextByte())
-				return -1;
-			return buffer[ptr++];
-		}
+    private byte readByte() throws IOException {
+      if (!hasNextByte()) return -1;
+      return buffer[ptr++];
+    }
 
-		public boolean hasNext() throws IOException {
-			while (hasNextByte()) {
-				byte b = buffer[ptr];
-				if (!isWhitespace(b))
-					return true;
-				ptr++;
-			}
-			return false;
-		}
+    public boolean hasNext() throws IOException {
+      while (hasNextByte()) {
+        byte b = buffer[ptr];
+        if (!isWhitespace(b)) return true;
+        ptr++;
+      }
+      return false;
+    }
 
-		public String next() throws IOException {
-			byte c;
-			do {
-				c = readByte();
-				if (c == -1)
-					return null;
-			} while (c <= ' ');
-			StringBuilder sb = new StringBuilder();
-			while (c > ' ') {
-				sb.append((char) c);
-				c = readByte();
-			}
-			return sb.toString();
-		}
+    public String next() throws IOException {
+      byte c;
+      do {
+        c = readByte();
+        if (c == -1) return null;
+      } while (c <= ' ');
+      StringBuilder sb = new StringBuilder();
+      while (c > ' ') {
+        sb.append((char) c);
+        c = readByte();
+      }
+      return sb.toString();
+    }
 
-		public int nextInt() throws IOException {
-			int num = 0;
-			byte b = readByte();
-			while (isWhitespace(b))
-				b = readByte();
-			boolean minus = false;
-			if (b == '-') {
-				minus = true;
-				b = readByte();
-			}
-			while (!isWhitespace(b) && b != -1) {
-				num = num * 10 + (b - '0');
-				b = readByte();
-			}
-			return minus ? -num : num;
-		}
+    public int nextInt() throws IOException {
+      int num = 0;
+      byte b = readByte();
+      while (isWhitespace(b)) b = readByte();
+      boolean minus = false;
+      if (b == '-') {
+        minus = true;
+        b = readByte();
+      }
+      while (!isWhitespace(b) && b != -1) {
+        num = num * 10 + (b - '0');
+        b = readByte();
+      }
+      return minus ? -num : num;
+    }
 
-		public double nextDouble() throws IOException {
-			double num = 0, div = 1;
-			byte b = readByte();
-			while (isWhitespace(b))
-				b = readByte();
-			boolean minus = false;
-			if (b == '-') {
-				minus = true;
-				b = readByte();
-			}
-			while (!isWhitespace(b) && b != '.' && b != -1) {
-				num = num * 10 + (b - '0');
-				b = readByte();
-			}
-			if (b == '.') {
-				b = readByte();
-				while (!isWhitespace(b) && b != -1) {
-					num += (b - '0') / (div *= 10);
-					b = readByte();
-				}
-			}
-			return minus ? -num : num;
-		}
+    public double nextDouble() throws IOException {
+      double num = 0, div = 1;
+      byte b = readByte();
+      while (isWhitespace(b)) b = readByte();
+      boolean minus = false;
+      if (b == '-') {
+        minus = true;
+        b = readByte();
+      }
+      while (!isWhitespace(b) && b != '.' && b != -1) {
+        num = num * 10 + (b - '0');
+        b = readByte();
+      }
+      if (b == '.') {
+        b = readByte();
+        while (!isWhitespace(b) && b != -1) {
+          num += (b - '0') / (div *= 10);
+          b = readByte();
+        }
+      }
+      return minus ? -num : num;
+    }
 
-		private boolean isWhitespace(byte b) {
-			return b == ' ' || b == '\n' || b == '\r' || b == '\t';
-		}
-	}
-
+    private boolean isWhitespace(byte b) {
+      return b == ' ' || b == '\n' || b == '\r' || b == '\t';
+    }
+  }
 }

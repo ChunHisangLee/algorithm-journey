@@ -13,40 +13,40 @@ package class161;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 100001;
-//int n, m;
-//int arr[MAXN];
+// const int MAXN = 100001;
+// int n, m;
+// int arr[MAXN];
 //
-//int head[MAXN];
-//int nxt[MAXN << 1];
-//int to[MAXN << 1];
-//int cntg = 0;
+// int head[MAXN];
+// int nxt[MAXN << 1];
+// int to[MAXN << 1];
+// int cntg = 0;
 //
-//int fa[MAXN];
-//int dep[MAXN];
-//int siz[MAXN];
-//int son[MAXN];
-//int top[MAXN];
-//int dfn[MAXN];
-//int seg[MAXN];
-//int cntd = 0;
+// int fa[MAXN];
+// int dep[MAXN];
+// int siz[MAXN];
+// int son[MAXN];
+// int top[MAXN];
+// int dfn[MAXN];
+// int seg[MAXN];
+// int cntd = 0;
 //
-//int sum[MAXN << 2];
-//int lcolor[MAXN << 2];
-//int rcolor[MAXN << 2];
-//int change[MAXN << 2];
+// int sum[MAXN << 2];
+// int lcolor[MAXN << 2];
+// int rcolor[MAXN << 2];
+// int change[MAXN << 2];
 //
-//void addEdge(int u, int v) {
+// void addEdge(int u, int v) {
 //    nxt[++cntg] = head[u];
 //    to[cntg] = v;
 //    head[u] = cntg;
-//}
+// }
 //
-//void dfs1(int u, int f) {
+// void dfs1(int u, int f) {
 //    fa[u] = f;
 //    dep[u] = dep[f] + 1;
 //    siz[u] = 1;
@@ -65,9 +65,9 @@ package class161;
 //            }
 //        }
 //    }
-//}
+// }
 //
-//void dfs2(int u, int t) {
+// void dfs2(int u, int t) {
 //    top[u] = t;
 //    dfn[u] = ++cntd;
 //    seg[cntd] = u;
@@ -81,33 +81,33 @@ package class161;
 //            dfs2(v, v);
 //        }
 //    }
-//}
+// }
 //
-//void up(int i) {
+// void up(int i) {
 //    sum[i] = sum[i << 1] + sum[i << 1 | 1];
 //    if (rcolor[i << 1] == lcolor[i << 1 | 1]) {
 //    	sum[i]--;
 //    }
 //    lcolor[i] = lcolor[i << 1];
 //    rcolor[i] = rcolor[i << 1 | 1];
-//}
+// }
 //
-//void lazy(int i, int v) {
+// void lazy(int i, int v) {
 //    sum[i] = 1;
 //    lcolor[i] = v;
 //    rcolor[i] = v;
 //    change[i] = v;
-//}
+// }
 //
-//void down(int i) {
+// void down(int i) {
 //    if (change[i] != 0) {
 //        lazy(i << 1, change[i]);
 //        lazy(i << 1 | 1, change[i]);
 //        change[i] = 0;
 //    }
-//}
+// }
 //
-//void build(int l, int r, int i) {
+// void build(int l, int r, int i) {
 //    if (l == r) {
 //        sum[i] = 1;
 //        lcolor[i] = arr[seg[l]];
@@ -118,9 +118,9 @@ package class161;
 //        build(mid + 1, r, i << 1 | 1);
 //        up(i);
 //    }
-//}
+// }
 //
-//void update(int jobl, int jobr, int jobv, int l, int r, int i) {
+// void update(int jobl, int jobr, int jobv, int l, int r, int i) {
 //    if (jobl <= l && r <= jobr) {
 //        lazy(i, jobv);
 //    } else {
@@ -134,9 +134,9 @@ package class161;
 //        }
 //        up(i);
 //    }
-//}
+// }
 //
-//int query(int jobl, int jobr, int l, int r, int i) {
+// int query(int jobl, int jobr, int l, int r, int i) {
 //    if (jobl <= l && r <= jobr) {
 //        return sum[i];
 //    }
@@ -154,9 +154,9 @@ package class161;
 //        }
 //        return ans;
 //    }
-//}
+// }
 //
-//int pointColor(int jobi, int l, int r, int i) {
+// int pointColor(int jobi, int l, int r, int i) {
 //    if (l == r) {
 //        return lcolor[i];
 //    }
@@ -167,9 +167,9 @@ package class161;
 //    } else {
 //        return pointColor(jobi, mid + 1, r, i << 1 | 1);
 //    }
-//}
+// }
 //
-//void pathUpdate(int x, int y, int v) {
+// void pathUpdate(int x, int y, int v) {
 //    while (top[x] != top[y]) {
 //        if (dep[top[x]] <= dep[top[y]]) {
 //            update(dfn[top[y]], dfn[y], v, 1, n, 1);
@@ -180,9 +180,9 @@ package class161;
 //        }
 //    }
 //    update(min(dfn[x], dfn[y]), max(dfn[x], dfn[y]), v, 1, n, 1);
-//}
+// }
 //
-//int pathColors(int x, int y) {
+// int pathColors(int x, int y) {
 //    int ans = 0, sonc, fac;
 //    while (top[x] != top[y]) {
 //        if (dep[top[x]] <= dep[top[y]]) {
@@ -202,9 +202,9 @@ package class161;
 //    }
 //    ans += query(min(dfn[x], dfn[y]), max(dfn[x], dfn[y]), 1, n, 1);
 //    return ans;
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> m;
@@ -233,4 +233,4 @@ package class161;
 //        }
 //    }
 //    return 0;
-//}
+// }

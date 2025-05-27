@@ -11,21 +11,21 @@ package class157;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <iostream>
+// #include <iostream>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 1000001;
-//const int MAXT = MAXN * 23;
-//int n, m;
-//int arr[MAXN];
-//int root[MAXN];
-//int ls[MAXT];
-//int rs[MAXT];
-//int value[MAXT];
-//int cnt = 0;
+// const int MAXN = 1000001;
+// const int MAXT = MAXN * 23;
+// int n, m;
+// int arr[MAXN];
+// int root[MAXN];
+// int ls[MAXT];
+// int rs[MAXT];
+// int value[MAXT];
+// int cnt = 0;
 //
-//int build(int l, int r) {
+// int build(int l, int r) {
 //    int rt = ++cnt;
 //    if (l == r) {
 //        value[rt] = arr[l];
@@ -35,9 +35,9 @@ package class157;
 //        rs[rt] = build(mid + 1, r);
 //    }
 //    return rt;
-//}
+// }
 //
-//int update(int jobi, int jobv, int l, int r, int i) {
+// int update(int jobi, int jobv, int l, int r, int i) {
 //    int rt = ++cnt;
 //    ls[rt] = ls[i];
 //    rs[rt] = rs[i];
@@ -53,9 +53,9 @@ package class157;
 //        }
 //    }
 //    return rt;
-//}
+// }
 //
-//int query(int jobi, int l, int r, int i) {
+// int query(int jobi, int l, int r, int i) {
 //    if (l == r) {
 //        return value[i];
 //    }
@@ -65,9 +65,9 @@ package class157;
 //    } else {
 //        return query(jobi, mid + 1, r, rs[i]);
 //    }
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> m;
@@ -86,4 +86,4 @@ package class157;
 //        }
 //    }
 //    return 0;
-//}
+// }

@@ -22,86 +22,84 @@ import java.io.StreamTokenizer;
 
 public class Code02_CollectDown {
 
-	public static int MAXN = 4001;
+  public static int MAXN = 4001;
 
-	public static int MAXM = 4001;
+  public static int MAXM = 4001;
 
-	public static int[][] dp = new int[MAXN][MAXM];
+  public static int[][] dp = new int[MAXN][MAXM];
 
-	public static int[] queue = new int[MAXM];
+  public static int[] queue = new int[MAXM];
 
-	public static int l, r;
+  public static int l, r;
+  public static int n, m, k, t;
 
-	public static int n, m, k, t;
+  public static void build() {
+    for (int i = 1; i <= n; i++) {
+      for (int j = 1; j <= m; j++) {
+        dp[i][j] = 0;
+      }
+    }
+  }
 
-	public static void build() {
-		for (int i = 1; i <= n; i++) {
-			for (int j = 1; j <= m; j++) {
-				dp[i][j] = 0;
-			}
-		}
-	}
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StreamTokenizer in = new StreamTokenizer(br);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    in.nextToken();
+    n = (int) in.nval;
+    in.nextToken();
+    m = (int) in.nval;
+    in.nextToken();
+    k = (int) in.nval;
+    in.nextToken();
+    t = (int) in.nval;
+    build();
+    for (int i = 1, r, c, v; i <= k; i++) {
+      in.nextToken();
+      r = (int) in.nval;
+      in.nextToken();
+      c = (int) in.nval;
+      in.nextToken();
+      v = (int) in.nval;
+      dp[r][c] = v;
+    }
+    out.println(compute());
+    out.flush();
+    out.close();
+    br.close();
+  }
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StreamTokenizer in = new StreamTokenizer(br);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		in.nextToken();
-		n = (int) in.nval;
-		in.nextToken();
-		m = (int) in.nval;
-		in.nextToken();
-		k = (int) in.nval;
-		in.nextToken();
-		t = (int) in.nval;
-		build();
-		for (int i = 1, r, c, v; i <= k; i++) {
-			in.nextToken();
-			r = (int) in.nval;
-			in.nextToken();
-			c = (int) in.nval;
-			in.nextToken();
-			v = (int) in.nval;
-			dp[r][c] = v;
-		}
-		out.println(compute());
-		out.flush();
-		out.close();
-		br.close();
-	}
+  public static int compute() {
+    for (int i = 2; i <= n; i++) {
+      l = r = 0;
+      for (int j = 1; j <= t; j++) {
+        add(i - 1, j);
+      }
+      for (int j = 1; j <= m; j++) {
+        add(i - 1, j + t);
+        overdue(j - t - 1);
+        dp[i][j] += dp[i - 1][queue[l]];
+      }
+    }
+    int ans = Integer.MIN_VALUE;
+    for (int j = 1; j <= m; j++) {
+      ans = Math.max(ans, dp[n][j]);
+    }
+    return ans;
+  }
 
-	public static int compute() {
-		for (int i = 2; i <= n; i++) {
-			l = r = 0;
-			for (int j = 1; j <= t; j++) {
-				add(i - 1, j);
-			}
-			for (int j = 1; j <= m; j++) {
-				add(i - 1, j + t);
-				overdue(j - t - 1);
-				dp[i][j] += dp[i - 1][queue[l]];
-			}
-		}
-		int ans = Integer.MIN_VALUE;
-		for (int j = 1; j <= m; j++) {
-			ans = Math.max(ans, dp[n][j]);
-		}
-		return ans;
-	}
+  public static void add(int i, int j) {
+    if (j <= m) {
+      while (l < r && dp[i][queue[r - 1]] <= dp[i][j]) {
+        r--;
+      }
+      queue[r++] = j;
+    }
+  }
 
-	public static void add(int i, int j) {
-		if (j <= m) {
-			while (l < r && dp[i][queue[r - 1]] <= dp[i][j]) {
-				r--;
-			}
-			queue[r++] = j;
-		}
-	}
-
-	public static void overdue(int t) {
-		if (l < r && queue[l] == t) {
-			l++;
-		}
-	}
-
+  public static void overdue(int t) {
+    if (l < r && queue[l] == t) {
+      l++;
+    }
+  }
 }

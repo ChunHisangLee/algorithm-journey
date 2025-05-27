@@ -24,91 +24,90 @@ import java.util.Arrays;
 // 讲解072 - 最长递增子序列及其扩展
 public class Code03_LIS {
 
-	public static int MAXN = 100001;
+  public static int MAXN = 100001;
 
-	public static int[] nums = new int[MAXN];
+  public static int[] nums = new int[MAXN];
 
-	public static int[] dp = new int[MAXN];
+  public static int[] dp = new int[MAXN];
 
-	public static int[] ends = new int[MAXN];
+  public static int[] ends = new int[MAXN];
 
-	public static int[] ans = new int[MAXN];
+  public static int[] ans = new int[MAXN];
 
-	public static int n, k;
+  public static int n, k;
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StreamTokenizer in = new StreamTokenizer(br);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		while (in.nextToken() != StreamTokenizer.TT_EOF) {
-			n = (int) in.nval;
-			for (int i = 0; i < n; i++) {
-				in.nextToken();
-				nums[i] = (int) in.nval;
-			}
-			lis();
-			for (int i = 0; i < k - 1; i++) {
-				out.print(ans[i] + " ");
-			}
-			out.println(ans[k - 1]);
-		}
-		out.flush();
-		out.close();
-		br.close();
-	}
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StreamTokenizer in = new StreamTokenizer(br);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    while (in.nextToken() != StreamTokenizer.TT_EOF) {
+      n = (int) in.nval;
+      for (int i = 0; i < n; i++) {
+        in.nextToken();
+        nums[i] = (int) in.nval;
+      }
+      lis();
+      for (int i = 0; i < k - 1; i++) {
+        out.print(ans[i] + " ");
+      }
+      out.println(ans[k - 1]);
+    }
+    out.flush();
+    out.close();
+    br.close();
+  }
 
-	// nums[...]
-	public static void lis() {
-		k = dp();
-		Arrays.fill(ans, 0, k, Integer.MAX_VALUE);
-		for (int i = 0; i < n; i++) {
-			if (dp[i] == k) {
-				// 注意这里
-				// 为什么不用判断直接设置
-				// 有讲究，课上重点讲了
-				ans[0] = nums[i];
-			} else {
-				if (ans[k - dp[i] - 1] < nums[i]) {
-					// 注意这里
-					// 为什么只需要判断比前一位(ans[k-dp[i]-1])大即可
-					// 有讲究，课上重点讲了
-					ans[k - dp[i]] = nums[i];
-				}
-			}
-		}
-	}
+  // nums[...]
+  public static void lis() {
+    k = dp();
+    Arrays.fill(ans, 0, k, Integer.MAX_VALUE);
+    for (int i = 0; i < n; i++) {
+      if (dp[i] == k) {
+        // 注意这里
+        // 为什么不用判断直接设置
+        // 有讲究，课上重点讲了
+        ans[0] = nums[i];
+      } else {
+        if (ans[k - dp[i] - 1] < nums[i]) {
+          // 注意这里
+          // 为什么只需要判断比前一位(ans[k-dp[i]-1])大即可
+          // 有讲究，课上重点讲了
+          ans[k - dp[i]] = nums[i];
+        }
+      }
+    }
+  }
 
-	// dp[i] : 必须以i位置的数字开头的情况下，最长递增子序列长度
-	// 填好dp表 + 返回最长递增子序列长度
-	public static int dp() {
-		int len = 0;
-		for (int i = n - 1, find; i >= 0; i--) {
-			find = bs(len, nums[i]);
-			if (find == -1) {
-				ends[len++] = nums[i];
-				dp[i] = len;
-			} else {
-				ends[find] = nums[i];
-				dp[i] = find + 1;
-			}
-		}
-		return len;
-	}
+  // dp[i] : 必须以i位置的数字开头的情况下，最长递增子序列长度
+  // 填好dp表 + 返回最长递增子序列长度
+  public static int dp() {
+    int len = 0;
+    for (int i = n - 1, find; i >= 0; i--) {
+      find = bs(len, nums[i]);
+      if (find == -1) {
+        ends[len++] = nums[i];
+        dp[i] = len;
+      } else {
+        ends[find] = nums[i];
+        dp[i] = find + 1;
+      }
+    }
+    return len;
+  }
 
-	// ends[有效区]从大到小的
-	// 二分的方式找<=num的最左位置
-	public static int bs(int len, int num) {
-		int l = 0, r = len - 1, m, ans = -1;
-		while (l <= r) {
-			m = (l + r) / 2;
-			if (ends[m] <= num) {
-				ans = m;
-				r = m - 1;
-			} else {
-				l = m + 1;
-			}
-		}
-		return ans;
-	}
-
+  // ends[有效区]从大到小的
+  // 二分的方式找<=num的最左位置
+  public static int bs(int len, int num) {
+    int l = 0, r = len - 1, m, ans = -1;
+    while (l <= r) {
+      m = (l + r) / 2;
+      if (ends[m] <= num) {
+        ans = m;
+        r = m - 1;
+      } else {
+        l = m + 1;
+      }
+    }
+    return ans;
+  }
 }

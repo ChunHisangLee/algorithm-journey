@@ -19,91 +19,90 @@ import java.io.StreamTokenizer;
 
 public class Code03_WaysOfRevert2 {
 
-	public static int MOD = 998244353;
+  public static int MOD = 998244353;
 
-	public static int MAXN = 10000;
+  public static int MAXN = 10000;
 
-	public static int[] arr = new int[MAXN + 1];
+  public static int[] arr = new int[MAXN + 1];
 
-	public static int n;
+  public static int n;
 
-	public static int m = 200;
+  public static int m = 200;
 
-	public static int[][] memo = new int[m + 1][2];
+  public static int[][] memo = new int[m + 1][2];
 
-	public static int[][] dp = new int[m + 1][2];
+  public static int[][] dp = new int[m + 1][2];
 
-	public static int[] suf0 = new int[m + 1];
+  public static int[] suf0 = new int[m + 1];
 
-	public static int[] pre1 = new int[m + 1];
+  public static int[] pre1 = new int[m + 1];
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StreamTokenizer in = new StreamTokenizer(br);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		while (in.nextToken() != StreamTokenizer.TT_EOF) {
-			n = (int) in.nval;
-			for (int i = 1; i <= n; i++) {
-				in.nextToken();
-				arr[i] = (int) in.nval;
-			}
-			out.println(compute());
-		}
-		out.flush();
-		out.close();
-		br.close();
-	}
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StreamTokenizer in = new StreamTokenizer(br);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    while (in.nextToken() != StreamTokenizer.TT_EOF) {
+      n = (int) in.nval;
+      for (int i = 1; i <= n; i++) {
+        in.nextToken();
+        arr[i] = (int) in.nval;
+      }
+      out.println(compute());
+    }
+    out.flush();
+    out.close();
+    br.close();
+  }
 
-	// 正式方法
-	// 优化枚举 + 空间压缩
-	// 时间复杂度O(n * m)，可以通过所有测试用例
-	public static int compute() {
-		for (int v = 0; v <= m; v++) {
-			memo[v][0] = 0;
-			memo[v][1] = 1;
-		}
-		for (int i = 1; i <= n; i++) {
-			prepare();
-			for (int v = 0; v <= m; v++) {
-				for (int s = 0; s <= 1; s++) {
-					int ans = 0;
-					if (arr[i] != 0) {
-						if (arr[i] >= v || s == 1) {
-							ans = memo[arr[i]][arr[i] > v ? 0 : 1];
-						}
-					} else {
-						if (v + 1 <= m) {
-							ans = (ans + suf0[v + 1]) % MOD;
-						}
-						if (v != 0) {
-							ans = (ans + memo[v][1]) % MOD;
-						}
-						if (s == 1) {
-							if (v - 1 >= 0) {
-								ans = (ans + pre1[v - 1]) % MOD;
-							}
-						}
-					}
-					dp[v][s] = ans;
-				}
-			}
-			int[][] tmp = memo;
-			memo = dp;
-			dp = tmp;
-		}
-		return memo[0][1];
-	}
+  // 正式方法
+  // 优化枚举 + 空间压缩
+  // 时间复杂度O(n * m)，可以通过所有测试用例
+  public static int compute() {
+    for (int v = 0; v <= m; v++) {
+      memo[v][0] = 0;
+      memo[v][1] = 1;
+    }
+    for (int i = 1; i <= n; i++) {
+      prepare();
+      for (int v = 0; v <= m; v++) {
+        for (int s = 0; s <= 1; s++) {
+          int ans = 0;
+          if (arr[i] != 0) {
+            if (arr[i] >= v || s == 1) {
+              ans = memo[arr[i]][arr[i] > v ? 0 : 1];
+            }
+          } else {
+            if (v + 1 <= m) {
+              ans = (ans + suf0[v + 1]) % MOD;
+            }
+            if (v != 0) {
+              ans = (ans + memo[v][1]) % MOD;
+            }
+            if (s == 1) {
+              if (v - 1 >= 0) {
+                ans = (ans + pre1[v - 1]) % MOD;
+              }
+            }
+          }
+          dp[v][s] = ans;
+        }
+      }
+      int[][] tmp = memo;
+      memo = dp;
+      dp = tmp;
+    }
+    return memo[0][1];
+  }
 
-	// 预处理结构优化枚举
-	public static void prepare() {
-		suf0[m] = memo[m][0];
-		for (int v = m - 1; v >= 0; v--) {
-			suf0[v] = (suf0[v + 1] + memo[v][0]) % MOD;
-		}
-		pre1[1] = memo[1][1];
-		for (int v = 2; v <= m; v++) {
-			pre1[v] = (pre1[v - 1] + memo[v][1]) % MOD;
-		}
-	}
-
+  // 预处理结构优化枚举
+  public static void prepare() {
+    suf0[m] = memo[m][0];
+    for (int v = m - 1; v >= 0; v--) {
+      suf0[v] = (suf0[v + 1] + memo[v][0]) % MOD;
+    }
+    pre1[1] = memo[1][1];
+    for (int v = 2; v <= m; v++) {
+      pre1[v] = (pre1[v - 1] + memo[v][1]) % MOD;
+    }
+  }
 }

@@ -7,23 +7,22 @@ package class092;
 // 测试链接 : https://leetcode.cn/problems/divide-array-into-increasing-sequences/
 public class Code05_DivideArrayIncreasingSequences {
 
-	public static boolean canDivideIntoSubsequences(int[] nums, int k) {
-		int cnt = 1;
-		// maxCnt : 最大词频
-		int maxCnt = 1;
-		// 在有序数组中，求某个数的最大词频
-		for (int i = 1; i < nums.length; i++) {
-			if (nums[i - 1] != nums[i]) {
-				maxCnt = Math.max(maxCnt, cnt);
-				cnt = 1;
-			} else {
-				cnt++;
-			}
-		}
-		maxCnt = Math.max(maxCnt, cnt);
-		// 向下取整如果满足 >= k
-		// 那么所有的递增子序列长度一定 >= k
-		return nums.length / maxCnt >= k;
-	}
-
+  public static boolean canDivideIntoSubsequences(int[] nums, int k) {
+    int cnt = 1;
+    // maxCnt : 最大词频
+    int maxCnt = 1;
+    // 在有序数组中，求某个数的最大词频
+    for (int i = 1; i < nums.length; i++) {
+      if (nums[i - 1] != nums[i]) {
+        maxCnt = Math.max(maxCnt, cnt);
+        cnt = 1;
+      } else {
+        cnt++;
+      }
+    }
+    maxCnt = Math.max(maxCnt, cnt);
+    // 向下取整如果满足 >= k
+    // 那么所有的递增子序列长度一定 >= k
+    return nums.length / maxCnt >= k;
+  }
 }

@@ -8,39 +8,37 @@ package class078;
 // 测试链接 : https://leetcode.cn/problems/diameter-of-binary-tree/
 public class Code03_DiameterOfBinaryTree {
 
-	// 不要提交这个类
-	public static class TreeNode {
-		public int val;
-		public TreeNode left;
-		public TreeNode right;
-	}
+  // 提交如下的方法
+  public static int diameterOfBinaryTree(TreeNode root) {
+    return f(root).diameter;
+  }
 
-	// 提交如下的方法
-	public static int diameterOfBinaryTree(TreeNode root) {
-		return f(root).diameter;
-	}
+  public static Info f(TreeNode x) {
+    if (x == null) {
+      return new Info(0, 0);
+    }
+    Info leftInfo = f(x.left);
+    Info rightInfo = f(x.right);
+    int height = Math.max(leftInfo.height, rightInfo.height) + 1;
+    int diameter = Math.max(leftInfo.diameter, rightInfo.diameter);
+    diameter = Math.max(diameter, leftInfo.height + rightInfo.height);
+    return new Info(diameter, height);
+  }
 
-	public static class Info {
-		public int diameter;
-		public int height;
+  // 不要提交这个类
+  public static class TreeNode {
+    public int val;
+    public TreeNode left;
+    public TreeNode right;
+  }
 
-		public Info(int a, int b) {
-			diameter = a;
-			height = b;
-		}
+  public static class Info {
+    public int diameter;
+    public int height;
 
-	}
-
-	public static Info f(TreeNode x) {
-		if (x == null) {
-			return new Info(0, 0);
-		}
-		Info leftInfo = f(x.left);
-		Info rightInfo = f(x.right);
-		int height = Math.max(leftInfo.height, rightInfo.height) + 1;
-		int diameter = Math.max(leftInfo.diameter, rightInfo.diameter);
-		diameter = Math.max(diameter, leftInfo.height + rightInfo.height);
-		return new Info(diameter, height);
-	}
-
+    public Info(int a, int b) {
+      diameter = a;
+      height = b;
+    }
+  }
 }

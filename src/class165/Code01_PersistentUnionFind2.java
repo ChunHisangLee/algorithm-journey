@@ -12,21 +12,21 @@ package class165;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXM = 200001;
-//const int MAXT = 8000001;
-//int n, m;
-//int rootfa[MAXM];
-//int rootsiz[MAXM];
-//int ls[MAXT];
-//int rs[MAXT];
-//int val[MAXT];
-//int cnt = 0;
+// const int MAXM = 200001;
+// const int MAXT = 8000001;
+// int n, m;
+// int rootfa[MAXM];
+// int rootsiz[MAXM];
+// int ls[MAXT];
+// int rs[MAXT];
+// int val[MAXT];
+// int cnt = 0;
 //
-//int buildfa(int l, int r) {
+// int buildfa(int l, int r) {
 //    int rt = ++cnt;
 //    if (l == r) {
 //        val[rt] = l;
@@ -36,9 +36,9 @@ package class165;
 //        rs[rt] = buildfa(mid + 1, r);
 //    }
 //    return rt;
-//}
+// }
 //
-//int buildsiz(int l, int r) {
+// int buildsiz(int l, int r) {
 //    int rt = ++cnt;
 //    if (l == r) {
 //        val[rt] = 1;
@@ -48,9 +48,9 @@ package class165;
 //        rs[rt] = buildsiz(mid + 1, r);
 //    }
 //    return rt;
-//}
+// }
 //
-//int update(int jobi, int jobv, int l, int r, int i) {
+// int update(int jobi, int jobv, int l, int r, int i) {
 //    int rt = ++cnt;
 //    ls[rt] = ls[i];
 //    rs[rt] = rs[i];
@@ -65,9 +65,9 @@ package class165;
 //        }
 //    }
 //    return rt;
-//}
+// }
 //
-//int query(int jobi, int l, int r, int i) {
+// int query(int jobi, int l, int r, int i) {
 //    if (l == r) {
 //        return val[i];
 //    }
@@ -77,18 +77,18 @@ package class165;
 //    } else {
 //        return query(jobi, mid + 1, r, rs[i]);
 //    }
-//}
+// }
 //
-//int find(int x, int v) {
+// int find(int x, int v) {
 //    int fa = query(x, 1, n, rootfa[v]);
 //    while(x != fa) {
 //        x = fa;
 //        fa = query(x, 1, n, rootfa[v]);
 //    }
 //    return x;
-//}
+// }
 //
-//void Union(int x, int y, int v) {
+// void Union(int x, int y, int v) {
 //    int fx = find(x, v);
 //    int fy = find(y, v);
 //    if (fx != fy) {
@@ -102,9 +102,9 @@ package class165;
 //            rootsiz[v] = update(fy, xsiz + ysiz, 1, n, rootsiz[v]);
 //        }
 //    }
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> m;
@@ -131,4 +131,4 @@ package class165;
 //        }
 //    }
 //    return 0;
-//}
+// }

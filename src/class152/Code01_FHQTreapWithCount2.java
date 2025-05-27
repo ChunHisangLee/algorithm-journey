@@ -14,29 +14,29 @@ package class152;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <iostream>
-//#include <cstdio>
-//#include <cstdlib>
-//#include <cstring>
-//#include <algorithm>
-//#include <climits>
-//using namespace std;
+// #include <iostream>
+// #include <cstdio>
+// #include <cstdlib>
+// #include <cstring>
+// #include <algorithm>
+// #include <climits>
+// using namespace std;
 //
-//const int MAXN = 100001;
-//int head = 0;
-//int cnt = 0;
-//int key[MAXN];
-//int key_count[MAXN];
-//int ls[MAXN];
-//int rs[MAXN];
-//int size[MAXN];
-//double priority[MAXN];
+// const int MAXN = 100001;
+// int head = 0;
+// int cnt = 0;
+// int key[MAXN];
+// int key_count[MAXN];
+// int ls[MAXN];
+// int rs[MAXN];
+// int size[MAXN];
+// double priority[MAXN];
 //
-//void up(int i) {
+// void up(int i) {
 //    size[i] = size[ls[i]] + size[rs[i]] + key_count[i];
-//}
+// }
 //
-//void split(int l, int r, int i, int num) {
+// void split(int l, int r, int i, int num) {
 //    if (i == 0) {
 //        rs[l] = ls[r] = 0;
 //    } else {
@@ -49,9 +49,9 @@ package class152;
 //        }
 //        up(i);
 //    }
-//}
+// }
 //
-//int merge(int l, int r) {
+// int merge(int l, int r) {
 //    if (l == 0 || r == 0) {
 //        return l + r;
 //    }
@@ -64,9 +64,9 @@ package class152;
 //        up(r);
 //        return r;
 //    }
-//}
+// }
 //
-//int find(int i, int num) {
+// int find(int i, int num) {
 //    if (i == 0) {
 //        return 0;
 //    }
@@ -77,9 +77,9 @@ package class152;
 //    } else {
 //        return find(rs[i], num);
 //    }
-//}
+// }
 //
-//void changeCount(int i, int num, int change) {
+// void changeCount(int i, int num, int change) {
 //    if (key[i] == num) {
 //        key_count[i] += change;
 //    } else if (key[i] > num) {
@@ -88,9 +88,9 @@ package class152;
 //        changeCount(rs[i], num, change);
 //    }
 //    up(i);
-//}
+// }
 //
-//void add(int num) {
+// void add(int num) {
 //    if (find(head, num) != 0) {
 //        changeCount(head, num, 1);
 //    } else {
@@ -100,9 +100,9 @@ package class152;
 //        priority[cnt] = (double)rand() / RAND_MAX;
 //        head = merge(merge(rs[0], cnt), ls[0]);
 //    }
-//}
+// }
 //
-//void remove(int num) {
+// void remove(int num) {
 //    int i = find(head, num);
 //    if (i != 0) {
 //        if (key_count[i] > 1) {
@@ -116,9 +116,9 @@ package class152;
 //            head = merge(l, r);
 //        }
 //    }
-//}
+// }
 //
-//int small(int i, int num) {
+// int small(int i, int num) {
 //    if (i == 0) {
 //        return 0;
 //    }
@@ -127,26 +127,26 @@ package class152;
 //    } else {
 //        return size[ls[i]] + key_count[i] + small(rs[i], num);
 //    }
-//}
+// }
 //
-//int getRank(int num) {
+// int getRank(int num) {
 //    return small(head, num) + 1;
-//}
+// }
 //
-//int index(int i, int x) {
+// int index(int i, int x) {
 //    if (size[ls[i]] >= x) {
 //        return index(ls[i], x);
 //    } else if (size[ls[i]] + key_count[i] < x) {
 //        return index(rs[i], x - size[ls[i]] - key_count[i]);
 //    }
 //    return key[i];
-//}
+// }
 //
-//int index(int x) {
+// int index(int x) {
 //    return index(head, x);
-//}
+// }
 //
-//int pre(int i, int num) {
+// int pre(int i, int num) {
 //    if (i == 0) {
 //        return INT_MIN;
 //    }
@@ -155,13 +155,13 @@ package class152;
 //    } else {
 //        return max(key[i], pre(rs[i], num));
 //    }
-//}
+// }
 //
-//int pre(int num) {
+// int pre(int num) {
 //    return pre(head, num);
-//}
+// }
 //
-//int post(int i, int num) {
+// int post(int i, int num) {
 //    if (i == 0) {
 //        return INT_MAX;
 //    }
@@ -170,13 +170,13 @@ package class152;
 //    } else {
 //        return min(key[i], post(ls[i], num));
 //    }
-//}
+// }
 //
-//int post(int num) {
+// int post(int num) {
 //    return post(head, num);
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    srand(time(0));
@@ -199,4 +199,4 @@ package class152;
 //        }
 //    }
 //    return 0;
-//}
+// }

@@ -21,68 +21,67 @@ import java.io.StreamTokenizer;
 
 public class Code02_FrogsMeeting {
 
-	// 扩展欧几里得算法
-	public static long d, x, y, px, py;
+  // 扩展欧几里得算法
+  public static long d, x, y, px, py;
 
-	public static void exgcd(long a, long b) {
-		if (b == 0) {
-			d = a;
-			x = 1;
-			y = 0;
-		} else {
-			exgcd(b, a % b);
-			px = x;
-			py = y;
-			x = py;
-			y = px - py * (a / b);
-		}
-	}
+  public static void exgcd(long a, long b) {
+    if (b == 0) {
+      d = a;
+      x = 1;
+      y = 0;
+    } else {
+      exgcd(b, a % b);
+      px = x;
+      py = y;
+      x = py;
+      y = px - py * (a / b);
+    }
+  }
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StreamTokenizer in = new StreamTokenizer(br);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		in.nextToken();
-		long x1 = (long) in.nval;
-		in.nextToken();
-		long x2 = (long) in.nval;
-		in.nextToken();
-		long m = (long) in.nval;
-		in.nextToken();
-		long n = (long) in.nval;
-		in.nextToken();
-		long l = (long) in.nval;
-		long a, c;
-		if (x1 < x2) {
-			a = m - n;
-			c = x2 - x1;
-		} else {
-			a = n - m;
-			c = x1 - x2;
-		}
-		if (a < 0) {
-			a = -a;
-			c = l - c;
-		}
-		exgcd(a, l);
-		if (c % d != 0) {
-			out.println("Impossible");
-		} else {
-			// 解出的特解
-			long x0 = x * c / d;
-			// 单次幅度
-			long xd = l / d;
-			// x0调整成>=1的最小正整数，处理办法和上一题一样
-			if (x0 < 0) {
-				x0 += (1 - x0 + xd - 1) / xd * xd;
-			} else {
-				x0 -= (x0 - 1) / xd * xd;
-			}
-			out.println(x0);
-		}
-		out.flush();
-		out.close();
-		br.close();
-	}
-
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StreamTokenizer in = new StreamTokenizer(br);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    in.nextToken();
+    long x1 = (long) in.nval;
+    in.nextToken();
+    long x2 = (long) in.nval;
+    in.nextToken();
+    long m = (long) in.nval;
+    in.nextToken();
+    long n = (long) in.nval;
+    in.nextToken();
+    long l = (long) in.nval;
+    long a, c;
+    if (x1 < x2) {
+      a = m - n;
+      c = x2 - x1;
+    } else {
+      a = n - m;
+      c = x1 - x2;
+    }
+    if (a < 0) {
+      a = -a;
+      c = l - c;
+    }
+    exgcd(a, l);
+    if (c % d != 0) {
+      out.println("Impossible");
+    } else {
+      // 解出的特解
+      long x0 = x * c / d;
+      // 单次幅度
+      long xd = l / d;
+      // x0调整成>=1的最小正整数，处理办法和上一题一样
+      if (x0 < 0) {
+        x0 += (1 - x0 + xd - 1) / xd * xd;
+      } else {
+        x0 -= (x0 - 1) / xd * xd;
+      }
+      out.println(x0);
+    }
+    out.flush();
+    out.close();
+    br.close();
+  }
 }

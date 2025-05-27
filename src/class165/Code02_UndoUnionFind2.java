@@ -11,42 +11,42 @@ package class165;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 200001;
-//int arr[MAXN][2];
+// const int MAXN = 200001;
+// int arr[MAXN][2];
 //
-//int head[MAXN];
-//int nxt[MAXN << 1];
-//int to[MAXN << 1];
-//int cnt;
+// int head[MAXN];
+// int nxt[MAXN << 1];
+// int to[MAXN << 1];
+// int cnt;
 //
-//int father[MAXN];
-//int siz[MAXN];
-//int edgeCnt[MAXN];
+// int father[MAXN];
+// int siz[MAXN];
+// int edgeCnt[MAXN];
 //
-//int rollback[MAXN][2];
-//int opsize = 0;
+// int rollback[MAXN][2];
+// int opsize = 0;
 //
-//int ans[MAXN];
-//int ball = 0;
+// int ans[MAXN];
+// int ball = 0;
 //
-//void addEdge(int u, int v) {
+// void addEdge(int u, int v) {
 //	nxt[++cnt] = head[u];
 //	to[cnt] = v;
 //    head[u] = cnt;
-//}
+// }
 //
-//int find(int i) {
+// int find(int i) {
 //	while(i != father[i]) {
 //		i = father[i];
 //	}
 //	return i;
-//}
+// }
 //
-//void Union(int x, int y) {
+// void Union(int x, int y) {
 //    int fx = find(x);
 //    int fy = find(y);
 //    if (siz[fx] < siz[fy]) {
@@ -59,17 +59,17 @@ package class165;
 //    edgeCnt[fx] += edgeCnt[fy] + 1;
 //    rollback[++opsize][0] = fx;
 //    rollback[opsize][1] = fy;
-//}
+// }
 //
-//void undo() {
+// void undo() {
 //    int fx = rollback[opsize][0];
 //    int fy = rollback[opsize--][1];
 //    father[fy] = fy;
 //    siz[fx] -= siz[fy];
 //    edgeCnt[fx] -= edgeCnt[fy] + 1;
-//}
+// }
 //
-//void dfs(int u, int fa) {
+// void dfs(int u, int fa) {
 //    int fx = find(arr[u][0]);
 //    int fy = find(arr[u][1]);
 //    bool added = false;
@@ -102,9 +102,9 @@ package class165;
 //    } else {
 //        edgeCnt[fx]--;
 //    }
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    int n;
@@ -128,4 +128,4 @@ package class165;
 //    }
 //    cout << ans[n] << "\n";
 //    return 0;
-//}
+// }

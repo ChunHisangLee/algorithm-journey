@@ -14,32 +14,32 @@ package class149;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <iostream>
-//#include <vector>
-//#include <algorithm>
-//#include <climits>
-//#include <cstdlib>
-//#include <cstring>
+// #include <iostream>
+// #include <vector>
+// #include <algorithm>
+// #include <climits>
+// #include <cstdlib>
+// #include <cstring>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXL = 20;
-//const int MAXN = 100001;
+// const int MAXL = 20;
+// const int MAXN = 100001;
 //
-//int cnt;
-//int key[MAXN];
-//int key_count[MAXN];
-//int level[MAXN];
-//int next_node[MAXN][MAXL + 1];
-//int len[MAXN][MAXL + 1];
+// int cnt;
+// int key[MAXN];
+// int key_count[MAXN];
+// int level[MAXN];
+// int next_node[MAXN][MAXL + 1];
+// int len[MAXN][MAXL + 1];
 //
-//void build() {
+// void build() {
 //    cnt = 1;
 //    key[cnt] = INT_MIN;
 //    level[cnt] = MAXL;
-//}
+// }
 //
-//void clear() {
+// void clear() {
 //    memset(key + 1, 0, cnt * sizeof(int));
 //    memset(key_count + 1, 0, cnt * sizeof(int));
 //    memset(level + 1, 0, cnt * sizeof(int));
@@ -48,17 +48,17 @@ package class149;
 //        memset(len[i], 0, (MAXL + 1) * sizeof(int));
 //    }
 //    cnt = 0;
-//}
+// }
 //
-//int randomLevel() {
+// int randomLevel() {
 //    int ans = 1;
 //    while ((std::rand() / double(RAND_MAX)) < 0.5) {
 //        ans++;
 //    }
 //    return min(ans, MAXL);
-//}
+// }
 //
-//int find(int i, int h, int num) {
+// int find(int i, int h, int num) {
 //    while (next_node[i][h] != 0 && key[next_node[i][h]] < num) {
 //        i = next_node[i][h];
 //    }
@@ -70,9 +70,9 @@ package class149;
 //        }
 //    }
 //    return find(i, h - 1, num);
-//}
+// }
 //
-//void addCount(int i, int h, int num) {
+// void addCount(int i, int h, int num) {
 //    while (next_node[i][h] != 0 && key[next_node[i][h]] < num) {
 //        i = next_node[i][h];
 //    }
@@ -82,9 +82,9 @@ package class149;
 //        addCount(i, h - 1, num);
 //    }
 //    len[i][h]++;
-//}
+// }
 //
-//int addNode(int i, int h, int j) {
+// int addNode(int i, int h, int j) {
 //    int rightCnt = 0;
 //    while (next_node[i][h] != 0 && key[next_node[i][h]] < key[j]) {
 //        rightCnt += len[i][h];
@@ -108,9 +108,9 @@ package class149;
 //        }
 //        return rightCnt + downCnt;
 //    }
-//}
+// }
 //
-//void add(int num) {
+// void add(int num) {
 //    if (find(1, MAXL, num) != 0) {
 //        addCount(1, MAXL, num);
 //    } else {
@@ -119,9 +119,9 @@ package class149;
 //        level[cnt] = randomLevel();
 //        addNode(1, MAXL, cnt);
 //    }
-//}
+// }
 //
-//void removeCount(int i, int h, int num) {
+// void removeCount(int i, int h, int num) {
 //    while (next_node[i][h] != 0 && key[next_node[i][h]] < num) {
 //        i = next_node[i][h];
 //    }
@@ -131,9 +131,9 @@ package class149;
 //        removeCount(i, h - 1, num);
 //    }
 //    len[i][h]--;
-//}
+// }
 //
-//void removeNode(int i, int h, int j) {
+// void removeNode(int i, int h, int j) {
 //    if (h < 1) {
 //        return;
 //    }
@@ -147,9 +147,9 @@ package class149;
 //        len[i][h] += len[j][h] - 1;
 //    }
 //    removeNode(i, h - 1, j);
-//}
+// }
 //
-//void remove(int num) {
+// void remove(int num) {
 //    int j = find(1, MAXL, num);
 //    if (j != 0) {
 //        if (key_count[j] > 1) {
@@ -158,9 +158,9 @@ package class149;
 //            removeNode(1, MAXL, j);
 //        }
 //    }
-//}
+// }
 //
-//int small(int i, int h, int num) {
+// int small(int i, int h, int num) {
 //    int rightCnt = 0;
 //    while (next_node[i][h] != 0 && key[next_node[i][h]] < num) {
 //        rightCnt += len[i][h];
@@ -171,13 +171,13 @@ package class149;
 //    } else {
 //        return rightCnt + small(i, h - 1, num);
 //    }
-//}
+// }
 //
-//int getRank(int num) {
+// int getRank(int num) {
 //    return small(1, MAXL, num) + 1;
-//}
+// }
 //
-//int index(int i, int h, int x) {
+// int index(int i, int h, int x) {
 //    int c = 0;
 //    while (next_node[i][h] != 0 && c + len[i][h] < x) {
 //        c += len[i][h];
@@ -188,13 +188,13 @@ package class149;
 //    } else {
 //        return index(i, h - 1, x - c);
 //    }
-//}
+// }
 //
-//int index(int x) {
+// int index(int x) {
 //    return index(1, MAXL, x);
-//}
+// }
 //
-//int pre(int i, int h, int num) {
+// int pre(int i, int h, int num) {
 //    while (next_node[i][h] != 0 && key[next_node[i][h]] < num) {
 //        i = next_node[i][h];
 //    }
@@ -203,13 +203,13 @@ package class149;
 //    } else {
 //        return pre(i, h - 1, num);
 //    }
-//}
+// }
 //
-//int pre(int num) {
+// int pre(int num) {
 //    return pre(1, MAXL, num);
-//}
+// }
 //
-//int post(int i, int h, int num) {
+// int post(int i, int h, int num) {
 //    while (next_node[i][h] != 0 && key[next_node[i][h]] < num) {
 //        i = next_node[i][h];
 //    }
@@ -229,13 +229,13 @@ package class149;
 //    } else {
 //        return post(i, h - 1, num);
 //    }
-//}
+// }
 //
-//int post(int num) {
+// int post(int num) {
 //    return post(1, MAXL, num);
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    srand(time(0));
@@ -260,4 +260,4 @@ package class149;
 //    }
 //    clear();
 //    return 0;
-//}
+// }

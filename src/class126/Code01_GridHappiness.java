@@ -14,99 +14,96 @@ package class126;
 // 有兴趣的同学可以自己改一下空间压缩的版本
 public class Code01_GridHappiness {
 
-	public static int MAXN = 5;
+  public static int MAXN = 5;
 
-	public static int MAXM = 5;
+  public static int MAXM = 5;
 
-	public static int MAXP = 7;
+  public static int MAXP = 7;
 
-	public static int MAXS = (int) Math.pow(3, MAXM);
+  public static int MAXS = (int) Math.pow(3, MAXM);
+  public static int[][][][][] dp = new int[MAXN][MAXM][MAXS][MAXP][MAXP];
+  public static int n;
+  public static int m;
+  public static int maxs;
 
-	public static int n;
+  public static int getMaxGridHappiness(int rows, int cols, int in, int ex) {
+    n = Math.max(rows, cols);
+    m = Math.min(rows, cols);
+    maxs = (int) Math.pow(3, m);
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        for (int s = 0; s < maxs; s++) {
+          for (int a = 0; a <= in; a++) {
+            for (int b = 0; b <= ex; b++) {
+              dp[i][j][s][a][b] = -1;
+            }
+          }
+        }
+      }
+    }
+    return f(0, 0, 0, in, ex, 1);
+  }
 
-	public static int m;
+  // 当前来到i行j列的格子
+  // s表示轮廓线的状态，可以得到左侧格子放了什么人，上侧格子放了什么人
+  // 内向的人还有a个，外向的人还有b个
+  // 返回最大的幸福感
+  // 注意 : bit等于3的j次方，bit不是关键可变参数，因为bit的值被j的值决定
+  public static int f(int i, int j, int s, int a, int b, int bit) {
+    if (i == n) {
+      return 0;
+    }
+    if (j == m) {
+      return f(i + 1, 0, s, a, b, 1);
+    }
+    if (dp[i][j][s][a][b] != -1) {
+      return dp[i][j][s][a][b];
+    }
+    // 当前格子不安置人
+    int ans = f(i, j + 1, set(s, bit, 0), a, b, bit * 3);
+    // 上方邻居的状态
+    int up = get(s, bit);
+    // 左方邻居的状态
+    int left = j == 0 ? 0 : get(s, bit / 3);
+    // 邻居人数
+    int neighbor = 0;
+    // 如果放置人，之前得到的幸福感要如何变化
+    int pre = 0;
+    if (up != 0) {
+      neighbor++;
+      // 上邻居是内向的人，幸福感要减30；是外向的人，幸福感要加20
+      pre += up == 1 ? -30 : 20;
+    }
+    if (left != 0) {
+      neighbor++;
+      // 左邻居是内向的人，幸福感要减30；是外向的人，幸福感要加20
+      pre += left == 1 ? -30 : 20;
+    }
+    if (a > 0) {
+      // 当前格子决定放内向的人
+      ans =
+          Math.max(ans, pre + 120 - neighbor * 30 + f(i, j + 1, set(s, bit, 1), a - 1, b, bit * 3));
+    }
+    if (b > 0) {
+      // 当前格子决定放外向的人
+      ans =
+          Math.max(ans, pre + 40 + neighbor * 20 + f(i, j + 1, set(s, bit, 2), a, b - 1, bit * 3));
+    }
+    dp[i][j][s][a][b] = ans;
+    return ans;
+  }
 
-	public static int maxs;
+  // s表示当前状态，按照3进制来理解
+  // 当前来到第j号格，3的j次方是bit
+  // 返回s第j号格的值
+  public static int get(int s, int bit) {
+    return s / bit % 3;
+  }
 
-	public static int[][][][][] dp = new int[MAXN][MAXM][MAXS][MAXP][MAXP];
-
-	public static int getMaxGridHappiness(int rows, int cols, int in, int ex) {
-		n = Math.max(rows, cols);
-		m = Math.min(rows, cols);
-		maxs = (int) Math.pow(3, m);
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < m; j++) {
-				for (int s = 0; s < maxs; s++) {
-					for (int a = 0; a <= in; a++) {
-						for (int b = 0; b <= ex; b++) {
-							dp[i][j][s][a][b] = -1;
-						}
-					}
-				}
-			}
-		}
-		return f(0, 0, 0, in, ex, 1);
-	}
-
-	// 当前来到i行j列的格子
-	// s表示轮廓线的状态，可以得到左侧格子放了什么人，上侧格子放了什么人
-	// 内向的人还有a个，外向的人还有b个
-	// 返回最大的幸福感
-	// 注意 : bit等于3的j次方，bit不是关键可变参数，因为bit的值被j的值决定
-	public static int f(int i, int j, int s, int a, int b, int bit) {
-		if (i == n) {
-			return 0;
-		}
-		if (j == m) {
-			return f(i + 1, 0, s, a, b, 1);
-		}
-		if (dp[i][j][s][a][b] != -1) {
-			return dp[i][j][s][a][b];
-		}
-		// 当前格子不安置人
-		int ans = f(i, j + 1, set(s, bit, 0), a, b, bit * 3);
-		// 上方邻居的状态
-		int up = get(s, bit);
-		// 左方邻居的状态
-		int left = j == 0 ? 0 : get(s, bit / 3);
-		// 邻居人数
-		int neighbor = 0;
-		// 如果放置人，之前得到的幸福感要如何变化
-		int pre = 0;
-		if (up != 0) {
-			neighbor++;
-			// 上邻居是内向的人，幸福感要减30；是外向的人，幸福感要加20
-			pre += up == 1 ? -30 : 20;
-		}
-		if (left != 0) {
-			neighbor++;
-			// 左邻居是内向的人，幸福感要减30；是外向的人，幸福感要加20
-			pre += left == 1 ? -30 : 20;
-		}
-		if (a > 0) {
-			// 当前格子决定放内向的人
-			ans = Math.max(ans, pre + 120 - neighbor * 30 + f(i, j + 1, set(s, bit, 1), a - 1, b, bit * 3));
-		}
-		if (b > 0) {
-			// 当前格子决定放外向的人
-			ans = Math.max(ans, pre + 40 + neighbor * 20 + f(i, j + 1, set(s, bit, 2), a, b - 1, bit * 3));
-		}
-		dp[i][j][s][a][b] = ans;
-		return ans;
-	}
-
-	// s表示当前状态，按照3进制来理解
-	// 当前来到第j号格，3的j次方是bit
-	// 返回s第j号格的值
-	public static int get(int s, int bit) {
-		return s / bit % 3;
-	}
-
-	// s表示当前状态，按照3进制来理解
-	// 当前来到第j号格，3的j次方是bit
-	// 把s第j号格的值设置成v，返回新状态
-	public static int set(int s, int bit, int v) {
-		return s - get(s, bit) * bit + v * bit;
-	}
-
+  // s表示当前状态，按照3进制来理解
+  // 当前来到第j号格，3的j次方是bit
+  // 把s第j号格的值设置成v，返回新状态
+  public static int set(int s, int bit, int v) {
+    return s - get(s, bit) * bit + v * bit;
+  }
 }

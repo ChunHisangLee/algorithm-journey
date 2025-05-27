@@ -23,43 +23,42 @@ import java.io.PrintWriter;
 
 public class Code02_Coloring {
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		String str = br.readLine();
-		out.println(strangePrinter(str));
-		out.flush();
-		out.close();
-		br.close();
-	}
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    String str = br.readLine();
+    out.println(strangePrinter(str));
+    out.flush();
+    out.close();
+    br.close();
+  }
 
-	// 时间复杂度O(n^3)
-	// 测试链接 : https://leetcode.cn/problems/strange-printer/
-	public static int strangePrinter(String str) {
-		char[] s = str.toCharArray();
-		int n = s.length;
-		int[][] dp = new int[n][n];
-		dp[n - 1][n - 1] = 1;
-		for (int i = 0; i < n - 1; i++) {
-			dp[i][i] = 1;
-			dp[i][i + 1] = s[i] == s[i + 1] ? 1 : 2;
-		}
-		for (int l = n - 3, ans; l >= 0; l--) {
-			for (int r = l + 2; r < n; r++) {
-				// dp[l][r]
-				if (s[l] == s[r]) {
-					dp[l][r] = dp[l][r - 1];
-					// dp[l][r] = dp[l + 1][r];
-				} else {
-					ans = Integer.MAX_VALUE;
-					for (int m = l; m < r; m++) {
-						ans = Math.min(ans, dp[l][m] + dp[m + 1][r]);
-					}
-					dp[l][r] = ans;
-				}
-			}
-		}
-		return dp[0][n - 1];
-	}
-
+  // 时间复杂度O(n^3)
+  // 测试链接 : https://leetcode.cn/problems/strange-printer/
+  public static int strangePrinter(String str) {
+    char[] s = str.toCharArray();
+    int n = s.length;
+    int[][] dp = new int[n][n];
+    dp[n - 1][n - 1] = 1;
+    for (int i = 0; i < n - 1; i++) {
+      dp[i][i] = 1;
+      dp[i][i + 1] = s[i] == s[i + 1] ? 1 : 2;
+    }
+    for (int l = n - 3, ans; l >= 0; l--) {
+      for (int r = l + 2; r < n; r++) {
+        // dp[l][r]
+        if (s[l] == s[r]) {
+          dp[l][r] = dp[l][r - 1];
+          // dp[l][r] = dp[l + 1][r];
+        } else {
+          ans = Integer.MAX_VALUE;
+          for (int m = l; m < r; m++) {
+            ans = Math.min(ans, dp[l][m] + dp[m + 1][r]);
+          }
+          dp[l][r] = ans;
+        }
+      }
+    }
+    return dp[0][n - 1];
+  }
 }

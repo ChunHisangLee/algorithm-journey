@@ -13,59 +13,59 @@ package class164;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//struct Edge {
+// struct Edge {
 //    int u, v, l, a;
-//};
+// };
 //
-//bool EdgeCmp(Edge x, Edge y) {
+// bool EdgeCmp(Edge x, Edge y) {
 //    return x.a > y.a; // 海拔高的边，排序排在数组前面
-//}
+// }
 //
-//struct HeapNode {
+// struct HeapNode {
 //    int cur, dis;
-//};
+// };
 //
-//struct HeapNodeCmp {
+// struct HeapNodeCmp {
 //    bool operator()(const HeapNode &x, const HeapNode &y) const {
 //        return x.dis > y.dis; // 谁距离大，谁在堆下方，C++的设定，其实是距离的小根堆
 //    }
-//};
+// };
 //
-//const int MAXN = 200001;
-//const int MAXK = 400001;
-//const int MAXM = 400001;
-//const int MAXH = 20;
-//int INF = 2000000001;
-//int t, n, m, q, k, s;
-//Edge edge[MAXM];
+// const int MAXN = 200001;
+// const int MAXK = 400001;
+// const int MAXM = 400001;
+// const int MAXH = 20;
+// int INF = 2000000001;
+// int t, n, m, q, k, s;
+// Edge edge[MAXM];
 //
-//int headg[MAXN];
-//int nextg[MAXM << 1];
-//int tog[MAXM << 1];
-//int weightg[MAXM << 1];
-//int cntg;
+// int headg[MAXN];
+// int nextg[MAXM << 1];
+// int tog[MAXM << 1];
+// int weightg[MAXM << 1];
+// int cntg;
 //
-//int dist[MAXN];
-//bool visit[MAXN];
-//priority_queue<HeapNode, vector<HeapNode>, HeapNodeCmp> heap;
+// int dist[MAXN];
+// bool visit[MAXN];
+// priority_queue<HeapNode, vector<HeapNode>, HeapNodeCmp> heap;
 //
-//int father[MAXK];
+// int father[MAXK];
 //
-//int headk[MAXK];
-//int nextk[MAXK];
-//int tok[MAXK];
-//int cntk;
-//int nodeKey[MAXK];
-//int cntu;
+// int headk[MAXK];
+// int nextk[MAXK];
+// int tok[MAXK];
+// int cntk;
+// int nodeKey[MAXK];
+// int cntu;
 //
-//int mindist[MAXK];
-//int stjump[MAXK][MAXH];
+// int mindist[MAXK];
+// int stjump[MAXK][MAXH];
 //
-//void clear() {
+// void clear() {
 //    cntg = 0;
 //    cntk = 0;
 //    for(int i = 1; i <= n; i++) {
@@ -74,16 +74,16 @@ package class164;
 //    for(int i = 1; i <= 2 * n; i++) {
 //        headk[i] = 0;
 //    }
-//}
+// }
 //
-//void addEdgeG(int u, int v, int w) {
+// void addEdgeG(int u, int v, int w) {
 //    nextg[++cntg] = headg[u];
 //    tog[cntg] = v;
 //    weightg[cntg] = w;
 //    headg[u] = cntg;
-//}
+// }
 //
-//void dijkstra() {
+// void dijkstra() {
 //    for(int i = 1; i <= m; i++) {
 //        addEdgeG(edge[i].u, edge[i].v, edge[i].l);
 //        addEdgeG(edge[i].v, edge[i].u, edge[i].l);
@@ -113,22 +113,22 @@ package class164;
 //            }
 //        }
 //    }
-//}
+// }
 //
-//void addEdgeK(int u, int v) {
+// void addEdgeK(int u, int v) {
 //    nextk[++cntk] = headk[u];
 //    tok[cntk] = v;
 //    headk[u] = cntk;
-//}
+// }
 //
-//int find(int i) {
+// int find(int i) {
 //    if(father[i] != i) {
 //        father[i] = find(father[i]);
 //    }
 //    return father[i];
-//}
+// }
 //
-//void kruskalRebuild() {
+// void kruskalRebuild() {
 //    for(int i = 1; i <= n; i++) {
 //        father[i] = i;
 //    }
@@ -147,9 +147,9 @@ package class164;
 //            addEdgeK(cntu, fy);
 //        }
 //    }
-//}
+// }
 //
-//void dfs(int u, int fa) {
+// void dfs(int u, int fa) {
 //    stjump[u][0] = fa;
 //    for(int p = 1; p < MAXH; p++) {
 //        stjump[u][p] = stjump[ stjump[u][p - 1] ][p - 1];
@@ -165,18 +165,18 @@ package class164;
 //    for(int e = headk[u]; e > 0; e = nextk[e]) {
 //        mindist[u] = min(mindist[u], mindist[tok[e]]);
 //    }
-//}
+// }
 //
-//int query(int node, int line) {
+// int query(int node, int line) {
 //    for(int p = MAXH - 1; p >= 0; p--) {
 //        if(stjump[node][p] > 0 && nodeKey[stjump[node][p]] > line) {
 //            node = stjump[node][p];
 //        }
 //    }
 //    return mindist[node];
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> t;
@@ -199,4 +199,4 @@ package class164;
 //        }
 //    }
 //    return 0;
-//}
+// }

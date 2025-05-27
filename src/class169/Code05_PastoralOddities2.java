@@ -12,41 +12,41 @@ package class169;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//struct Edge {
+// struct Edge {
 //    int x, y, w, tim, rak;
-//};
+// };
 //
-//bool EdgeCmp(Edge a, Edge b) {
+// bool EdgeCmp(Edge a, Edge b) {
 //    return a.w < b.w;
-//}
+// }
 //
-//const int MAXN = 100001;
-//const int MAXM = 300001;
-//int n, m;
+// const int MAXN = 100001;
+// const int MAXM = 300001;
+// int n, m;
 //
-//Edge edge[MAXM];
-//Edge wsort[MAXM];
+// Edge edge[MAXM];
+// Edge wsort[MAXM];
 //
-//int oddnum;
-//int father[MAXN];
-//int siz[MAXN];
-//int rollback[MAXN][2];
-//int opsize = 0;
+// int oddnum;
+// int father[MAXN];
+// int siz[MAXN];
+// int rollback[MAXN][2];
+// int opsize = 0;
 //
-//int ans[MAXM];
+// int ans[MAXM];
 //
-//int find(int i) {
+// int find(int i) {
 //    while (i != father[i]) {
 //        i = father[i];
 //    }
 //    return i;
-//}
+// }
 //
-//bool Union(int x, int y) {
+// bool Union(int x, int y) {
 //    int fx = find(x);
 //    int fy = find(y);
 //    if (fx == fy) {
@@ -65,9 +65,9 @@ package class169;
 //    rollback[++opsize][0] = fx;
 //    rollback[opsize][1] = fy;
 //    return true;
-//}
+// }
 //
-//void undo() {
+// void undo() {
 //    int fx = rollback[opsize][0];
 //    int fy = rollback[opsize--][1];
 //    father[fy] = fy;
@@ -75,9 +75,9 @@ package class169;
 //    if ((siz[fx] & 1) == 1 && (siz[fy] & 1) == 1) {
 //        oddnum += 2;
 //    }
-//}
+// }
 //
-//void compute(int el, int er, int vl, int vr) {
+// void compute(int el, int er, int vl, int vr) {
 //    if (el > er) {
 //        return;
 //    }
@@ -128,9 +128,9 @@ package class169;
 //            undo();
 //        }
 //    }
-//}
+// }
 //
-//void prepare() {
+// void prepare() {
 //    oddnum = n;
 //    for (int i = 1; i <= n; i++) {
 //        father[i] = i;
@@ -147,9 +147,9 @@ package class169;
 //        wsort[i].rak = i;
 //        edge[wsort[i].tim].rak = i;
 //    }
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> m;
@@ -167,4 +167,4 @@ package class169;
 //        }
 //    }
 //    return 0;
-//}
+// }

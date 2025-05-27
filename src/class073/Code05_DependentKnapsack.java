@@ -28,121 +28,127 @@ import java.util.Arrays;
 
 public class Code05_DependentKnapsack {
 
-	public static int MAXN = 33001;
+  public static int MAXN = 33001;
 
-	public static int MAXM = 61;
+  public static int MAXM = 61;
 
-	public static int[] cost = new int[MAXM];
+  public static int[] cost = new int[MAXM];
 
-	public static int[] val = new int[MAXM];
+  public static int[] val = new int[MAXM];
 
-	public static boolean[] king = new boolean[MAXM];
+  public static boolean[] king = new boolean[MAXM];
 
-	public static int[] fans = new int[MAXM];
+  public static int[] fans = new int[MAXM];
 
-	public static int[][] follows = new int[MAXM][2];
+  public static int[][] follows = new int[MAXM][2];
 
-	public static int[] dp = new int[MAXN];
+  public static int[] dp = new int[MAXN];
 
-	public static int n, m;
+  public static int n, m;
 
-	public static void clean() {
-		for (int i = 1; i <= m; i++) {
-			fans[i] = 0;
-		}
-	}
+  public static void clean() {
+    for (int i = 1; i <= m; i++) {
+      fans[i] = 0;
+    }
+  }
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StreamTokenizer in = new StreamTokenizer(br);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		while (in.nextToken() != StreamTokenizer.TT_EOF) {
-			n = (int) in.nval;
-			in.nextToken();
-			m = (int) in.nval;
-			clean();
-			for (int i = 1, v, p, q; i <= m; i++) {
-				in.nextToken(); v = (int) in.nval;
-				in.nextToken(); p = (int) in.nval;
-				in.nextToken(); q = (int) in.nval;
-				cost[i] = v;
-				val[i] = v * p;
-				king[i] = q == 0;
-				if (q != 0) {
-					follows[q][fans[q]++] = i;
-				}
-			}
-			out.println(compute2());
-		}
-		out.flush();
-		out.close();
-		br.close();
-	}
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StreamTokenizer in = new StreamTokenizer(br);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    while (in.nextToken() != StreamTokenizer.TT_EOF) {
+      n = (int) in.nval;
+      in.nextToken();
+      m = (int) in.nval;
+      clean();
+      for (int i = 1, v, p, q; i <= m; i++) {
+        in.nextToken();
+        v = (int) in.nval;
+        in.nextToken();
+        p = (int) in.nval;
+        in.nextToken();
+        q = (int) in.nval;
+        cost[i] = v;
+        val[i] = v * p;
+        king[i] = q == 0;
+        if (q != 0) {
+          follows[q][fans[q]++] = i;
+        }
+      }
+      out.println(compute2());
+    }
+    out.flush();
+    out.close();
+    br.close();
+  }
 
-	// 严格位置依赖的动态规划
-	public static int compute1() {
-		// dp[0][....] = 0 : 无商品的时候
-		int[][] dp = new int[m + 1][n + 1];
-		// p : 上次展开的主商品编号
-		int p = 0;
-		for (int i = 1, fan1, fan2; i <= m; i++) {
-			if (king[i]) {
-				for (int j = 0; j <= n; j++) {
-					// dp[i][j] : 0...i范围上，只关心主商品，并且进行展开
-					//            花费不超过j的情况下，获得的最大收益
-					// 可能性1 : 不考虑当前主商品
-					dp[i][j] = dp[p][j];
-					if (j - cost[i] >= 0) {
-						// 可能性2 : 考虑当前主商品，只要主
-						dp[i][j] = Math.max(dp[i][j], dp[p][j - cost[i]] + val[i]);
-					}
-					// fan1 : 如果有附1商品，编号给fan1，如果没有，fan1 == -1
-					// fan2 : 如果有附2商品，编号给fan2，如果没有，fan2 == -1
-					fan1 = fans[i] >= 1 ? follows[i][0] : -1;
-					fan2 = fans[i] >= 2 ? follows[i][1] : -1;
-					if (fan1 != -1 && j - cost[i] - cost[fan1] >= 0) {
-						// 可能性3 : 主 + 附1
-						dp[i][j] = Math.max(dp[i][j], dp[p][j - cost[i] - cost[fan1]] + val[i] + val[fan1]);
-					}
-					if (fan2 != -1 && j - cost[i] - cost[fan2] >= 0) {
-						// 可能性4 : 主 + 附2
-						dp[i][j] = Math.max(dp[i][j], dp[p][j - cost[i] - cost[fan2]] + val[i] + val[fan2]);
-					}
-					if (fan1 != -1 && fan2 != -1 && j - cost[i] - cost[fan1] - cost[fan2] >= 0) {
-						// 可能性5 : 主 + 附1 + 附2
-						dp[i][j] = Math.max(dp[i][j],
-								dp[p][j - cost[i] - cost[fan1] - cost[fan2]] + val[i] + val[fan1] + val[fan2]);
-					}
-				}
-				p = i;
-			}
-		}
-		return dp[p][n];
-	}
+  // 严格位置依赖的动态规划
+  public static int compute1() {
+    // dp[0][....] = 0 : 无商品的时候
+    int[][] dp = new int[m + 1][n + 1];
+    // p : 上次展开的主商品编号
+    int p = 0;
+    for (int i = 1, fan1, fan2; i <= m; i++) {
+      if (king[i]) {
+        for (int j = 0; j <= n; j++) {
+          // dp[i][j] : 0...i范围上，只关心主商品，并且进行展开
+          //            花费不超过j的情况下，获得的最大收益
+          // 可能性1 : 不考虑当前主商品
+          dp[i][j] = dp[p][j];
+          if (j - cost[i] >= 0) {
+            // 可能性2 : 考虑当前主商品，只要主
+            dp[i][j] = Math.max(dp[i][j], dp[p][j - cost[i]] + val[i]);
+          }
+          // fan1 : 如果有附1商品，编号给fan1，如果没有，fan1 == -1
+          // fan2 : 如果有附2商品，编号给fan2，如果没有，fan2 == -1
+          fan1 = fans[i] >= 1 ? follows[i][0] : -1;
+          fan2 = fans[i] >= 2 ? follows[i][1] : -1;
+          if (fan1 != -1 && j - cost[i] - cost[fan1] >= 0) {
+            // 可能性3 : 主 + 附1
+            dp[i][j] = Math.max(dp[i][j], dp[p][j - cost[i] - cost[fan1]] + val[i] + val[fan1]);
+          }
+          if (fan2 != -1 && j - cost[i] - cost[fan2] >= 0) {
+            // 可能性4 : 主 + 附2
+            dp[i][j] = Math.max(dp[i][j], dp[p][j - cost[i] - cost[fan2]] + val[i] + val[fan2]);
+          }
+          if (fan1 != -1 && fan2 != -1 && j - cost[i] - cost[fan1] - cost[fan2] >= 0) {
+            // 可能性5 : 主 + 附1 + 附2
+            dp[i][j] =
+                Math.max(
+                    dp[i][j],
+                    dp[p][j - cost[i] - cost[fan1] - cost[fan2]] + val[i] + val[fan1] + val[fan2]);
+          }
+        }
+        p = i;
+      }
+    }
+    return dp[p][n];
+  }
 
-	// 空间压缩
-	public static int compute2() {
-		Arrays.fill(dp, 0, n + 1, 0);
-		for (int i = 1, fan1, fan2; i <= m; i++) {
-			if (king[i]) {
-				for (int j = n; j >= cost[i]; j--) {
-					dp[j] = Math.max(dp[j], dp[j - cost[i]] + val[i]);
-					fan1 = fans[i] >= 1 ? follows[i][0] : -1;
-					fan2 = fans[i] >= 2 ? follows[i][1] : -1;
-					if (fan1 != -1 && j - cost[i] - cost[fan1] >= 0) {
-						dp[j] = Math.max(dp[j], dp[j - cost[i] - cost[fan1]] + val[i] + val[fan1]);
-					}
-					if (fan2 != -1 && j - cost[i] - cost[fan2] >= 0) {
-						dp[j] = Math.max(dp[j], dp[j - cost[i] - cost[fan2]] + val[i] + val[fan2]);
-					}
-					if (fan1 != -1 && fan2 != -1 && j - cost[i] - cost[fan1] - cost[fan2] >= 0) {
-						dp[j] = Math.max(dp[j],
-								dp[j - cost[i] - cost[fan1] - cost[fan2]] + val[i] + val[fan1] + val[fan2]);
-					}
-				}
-			}
-		}
-		return dp[n];
-	}
-
+  // 空间压缩
+  public static int compute2() {
+    Arrays.fill(dp, 0, n + 1, 0);
+    for (int i = 1, fan1, fan2; i <= m; i++) {
+      if (king[i]) {
+        for (int j = n; j >= cost[i]; j--) {
+          dp[j] = Math.max(dp[j], dp[j - cost[i]] + val[i]);
+          fan1 = fans[i] >= 1 ? follows[i][0] : -1;
+          fan2 = fans[i] >= 2 ? follows[i][1] : -1;
+          if (fan1 != -1 && j - cost[i] - cost[fan1] >= 0) {
+            dp[j] = Math.max(dp[j], dp[j - cost[i] - cost[fan1]] + val[i] + val[fan1]);
+          }
+          if (fan2 != -1 && j - cost[i] - cost[fan2] >= 0) {
+            dp[j] = Math.max(dp[j], dp[j - cost[i] - cost[fan2]] + val[i] + val[fan2]);
+          }
+          if (fan1 != -1 && fan2 != -1 && j - cost[i] - cost[fan1] - cost[fan2] >= 0) {
+            dp[j] =
+                Math.max(
+                    dp[j],
+                    dp[j - cost[i] - cost[fan1] - cost[fan2]] + val[i] + val[fan1] + val[fan2]);
+          }
+        }
+      }
+    }
+    return dp[n];
+  }
 }

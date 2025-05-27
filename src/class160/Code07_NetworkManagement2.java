@@ -12,47 +12,47 @@ package class160;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 80001;
-//const int MAXT = MAXN * 110;
-//const int MAXH = 18;
-//int n, m, s;
+// const int MAXN = 80001;
+// const int MAXT = MAXN * 110;
+// const int MAXH = 18;
+// int n, m, s;
 //
-//int arr[MAXN];
-//int ques[MAXN][3];
-//int sorted[MAXN << 1];
+// int arr[MAXN];
+// int ques[MAXN][3];
+// int sorted[MAXN << 1];
 //
-//int head[MAXN];
-//int nxt[MAXN << 1];
-//int to[MAXN << 1];
-//int cntg;
+// int head[MAXN];
+// int nxt[MAXN << 1];
+// int to[MAXN << 1];
+// int cntg;
 //
-//int root[MAXN];
-//int ls[MAXT];
-//int rs[MAXT];
-//int sum[MAXT];
-//int cntt;
+// int root[MAXN];
+// int ls[MAXT];
+// int rs[MAXT];
+// int sum[MAXT];
+// int cntt;
 //
-//int deep[MAXN];
-//int size[MAXN];
-//int dfn[MAXN];
-//int stjump[MAXN][MAXH];
-//int cntd;
+// int deep[MAXN];
+// int size[MAXN];
+// int dfn[MAXN];
+// int stjump[MAXN][MAXH];
+// int cntd;
 //
-//int addTree[MAXN];
-//int minusTree[MAXN];
-//int cntadd, cntminus;
+// int addTree[MAXN];
+// int minusTree[MAXN];
+// int cntadd, cntminus;
 //
-//void addEdge(int u, int v) {
+// void addEdge(int u, int v) {
 //    nxt[++cntg] = head[u];
 //    to[cntg] = v;
 //    head[u] = cntg;
-//}
+// }
 //
-//int kth(int num) {
+// int kth(int num) {
 //    int ls = 1, rs = s, mid;
 //    while (ls <= rs) {
 //        mid = (ls + rs) / 2;
@@ -61,13 +61,13 @@ package class160;
 //        else rs = mid - 1;
 //    }
 //    return -1;
-//}
+// }
 //
-//int lowbit(int i) {
+// int lowbit(int i) {
 //    return i & -i;
-//}
+// }
 //
-//void dfs(int u, int fa) {
+// void dfs(int u, int fa) {
 //    deep[u] = deep[fa] + 1;
 //    size[u] = 1;
 //    dfn[u] = ++cntd;
@@ -81,9 +81,9 @@ package class160;
 //    for (int e = head[u]; e; e = nxt[e]) {
 //        if (to[e] != fa) size[u] += size[to[e]];
 //    }
-//}
+// }
 //
-//int lca(int a, int b) {
+// int lca(int a, int b) {
 //    if (deep[a] < deep[b]) swap(a, b);
 //    for (int p = MAXH - 1; p >= 0; p--) {
 //        if (deep[stjump[a][p]] >= deep[b]) {
@@ -98,9 +98,9 @@ package class160;
 //        }
 //    }
 //    return stjump[a][0];
-//}
+// }
 //
-//int innerAdd(int jobi, int jobv, int l, int r, int i) {
+// int innerAdd(int jobi, int jobv, int l, int r, int i) {
 //    if (i == 0) i = ++cntt;
 //    if (l == r) {
 //        sum[i] += jobv;
@@ -114,9 +114,9 @@ package class160;
 //        sum[i] = sum[ls[i]] + sum[rs[i]];
 //    }
 //    return i;
-//}
+// }
 //
-//int innerQuery(int jobk, int l, int r) {
+// int innerQuery(int jobk, int l, int r) {
 //    if (l == r) return l;
 //    int mid = (l + r) / 2;
 //    int leftsum = 0;
@@ -143,23 +143,23 @@ package class160;
 //        }
 //        return innerQuery(jobk - leftsum, mid + 1, r);
 //    }
-//}
+// }
 //
-//void add(int i, int val, int cnt) {
+// void add(int i, int val, int cnt) {
 //    for (; i <= n; i += lowbit(i)) {
 //        root[i] = innerAdd(val, cnt, 1, s, root[i]);
 //    }
-//}
+// }
 //
-//void update(int i, int v) {
+// void update(int i, int v) {
 //    add(dfn[i], arr[i], -1);
 //    add(dfn[i] + size[i], arr[i], 1);
 //    arr[i] = kth(v);
 //    add(dfn[i], arr[i], 1);
 //    add(dfn[i] + size[i], arr[i], -1);
-//}
+// }
 //
-//int query(int x, int y, int k) {
+// int query(int x, int y, int k) {
 //    int xylca = lca(x, y);
 //    int lcafa = stjump[xylca][0];
 //    int num = deep[x] + deep[y] - deep[xylca] - deep[lcafa];
@@ -178,9 +178,9 @@ package class160;
 //        minusTree[++cntminus] = root[i];
 //    }
 //    return sorted[innerQuery(num - k + 1, 1, s)];
-//}
+// }
 //
-//void prepare() {
+// void prepare() {
 //    s = 0;
 //    for (int i = 1; i <= n; i++) sorted[++s] = arr[i];
 //    for (int i = 1; i <= m; i++) {
@@ -194,9 +194,9 @@ package class160;
 //        add(dfn[i], arr[i], 1);
 //        add(dfn[i] + size[i], arr[i], -1);
 //    }
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> m;
@@ -224,4 +224,4 @@ package class160;
 //        }
 //    }
 //    return 0;
-//}
+// }

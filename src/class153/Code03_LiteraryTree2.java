@@ -9,34 +9,34 @@ package class153;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <iostream>
+// #include <iostream>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 100005;
+// const int MAXN = 100005;
 //
-//int head = 0;
-//int cnt = 0;
-//int num[MAXN];
-//int fa[MAXN];
-//int ls[MAXN];
-//int rs[MAXN];
-//int size[MAXN];
-//bool rev[MAXN];
-//int sta[MAXN];
-//int si;
-//int ans[MAXN];
-//int ai;
+// int head = 0;
+// int cnt = 0;
+// int num[MAXN];
+// int fa[MAXN];
+// int ls[MAXN];
+// int rs[MAXN];
+// int size[MAXN];
+// bool rev[MAXN];
+// int sta[MAXN];
+// int si;
+// int ans[MAXN];
+// int ai;
 //
-//void up(int i) {
+// void up(int i) {
 //    size[i] = size[ls[i]] + size[rs[i]] + 1;
-//}
+// }
 //
-//int lr(int i) {
+// int lr(int i) {
 //    return rs[fa[i]] == i ? 1 : 0;
-//}
+// }
 //
-//void rotate(int i) {
+// void rotate(int i) {
 //    int f = fa[i], g = fa[f], soni = lr(i), sonf = lr(f);
 //    if (soni == 1) {
 //        rs[f] = ls[i];
@@ -62,9 +62,9 @@ package class153;
 //    fa[i] = g;
 //    up(f);
 //    up(i);
-//}
+// }
 //
-//void splay(int i, int goal) {
+// void splay(int i, int goal) {
 //    int f = fa[i], g = fa[f];
 //    while (f != goal) {
 //        if (g != goal) {
@@ -81,9 +81,9 @@ package class153;
 //    if (goal == 0) {
 //        head = i;
 //    }
-//}
+// }
 //
-//void down(int i) {
+// void down(int i) {
 //    if (rev[i]) {
 //        rev[ls[i]] = !rev[ls[i]];
 //        rev[rs[i]] = !rev[rs[i]];
@@ -92,9 +92,9 @@ package class153;
 //        rs[i] = tmp;
 //        rev[i] = false;
 //    }
-//}
+// }
 //
-//int find(int rank) {
+// int find(int rank) {
 //    int i = head;
 //    while (i != 0) {
 //        down(i);
@@ -108,34 +108,34 @@ package class153;
 //        }
 //    }
 //    return 0;
-//}
+// }
 //
-//void add(int x) {
+// void add(int x) {
 //    num[++cnt] = x;
 //    size[cnt] = 1;
 //    fa[cnt] = head;
 //    rs[head] = cnt;
 //    splay(cnt, 0);
-//}
+// }
 //
-//void reverse(int l, int r) {
+// void reverse(int l, int r) {
 //    int i = find(l - 1);
 //    int j = find(r + 1);
 //    splay(i, 0);
 //    splay(j, i);
 //    rev[ls[rs[head]]] = !rev[ls[rs[head]]];
-//}
+// }
 //
-//void inorder(int i) {
+// void inorder(int i) {
 //    if (i != 0) {
 //        down(i);
 //        inorder(ls[i]);
 //        ans[++ai] = num[i];
 //        inorder(rs[i]);
 //    }
-//}
+// }
 //
-//void inorder() {
+// void inorder() {
 //    si = 0;
 //    int i = head;
 //    while (si != 0 || i != 0) {
@@ -149,9 +149,9 @@ package class153;
 //            i = rs[i];
 //        }
 //    }
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    int n, m;
@@ -173,4 +173,4 @@ package class153;
 //    }
 //    cout << endl;
 //    return 0;
-//}
+// }

@@ -10,61 +10,61 @@ package class168;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//struct Number {
+// struct Number {
 //    int i, v;
-//};
+// };
 //
-//bool NumberCmp(Number x, Number y) {
+// bool NumberCmp(Number x, Number y) {
 //    return x.v < y.v;
-//}
+// }
 //
-//const int MAXN = 200001;
-//int n, m;
+// const int MAXN = 200001;
+// int n, m;
 //
-//Number arr[MAXN];
+// Number arr[MAXN];
 //
-//int qid[MAXN];
-//int l[MAXN];
-//int r[MAXN];
-//int k[MAXN];
+// int qid[MAXN];
+// int l[MAXN];
+// int r[MAXN];
+// int k[MAXN];
 //
-//int tree[MAXN];
-//int used = 0;
+// int tree[MAXN];
+// int used = 0;
 //
-//int lset[MAXN];
-//int rset[MAXN];
+// int lset[MAXN];
+// int rset[MAXN];
 //
-//int ans[MAXN];
+// int ans[MAXN];
 //
-//int lowbit(int i) {
+// int lowbit(int i) {
 //    return i & -i;
-//}
+// }
 //
-//void add(int i, int v) {
+// void add(int i, int v) {
 //    while (i <= n) {
 //        tree[i] += v;
 //        i += lowbit(i);
 //    }
-//}
+// }
 //
-//int sum(int i) {
+// int sum(int i) {
 //    int ret = 0;
 //    while (i > 0) {
 //        ret += tree[i];
 //        i -= lowbit(i);
 //    }
 //    return ret;
-//}
+// }
 //
-//int query(int l, int r) {
+// int query(int l, int r) {
 //    return sum(r) - sum(l - 1);
-//}
+// }
 //
-//void compute(int ql, int qr, int vl, int vr) {
+// void compute(int ql, int qr, int vl, int vr) {
 //    if (ql > qr) {
 //        return;
 //    }
@@ -101,9 +101,9 @@ package class168;
 //        compute(ql, ql + lsiz - 1, vl, mid);
 //        compute(ql + lsiz, qr, mid + 1, vr);
 //    }
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> m;
@@ -121,4 +121,4 @@ package class168;
 //        cout << ans[i] << '\n';
 //    }
 //    return 0;
-//}
+// }

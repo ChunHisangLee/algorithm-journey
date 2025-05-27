@@ -20,130 +20,129 @@ import java.io.StreamTokenizer;
 
 public class Code04_Dispatch1 {
 
-	public static int MAXN = 100001;
+  public static int MAXN = 100001;
 
-	public static int n, m;
+  public static int n, m;
 
-	// 上级
-	public static int[] leader = new int[MAXN];
+  // 上级
+  public static int[] leader = new int[MAXN];
 
-	// 薪水
-	public static long[] cost = new long[MAXN];
+  // 薪水
+  public static long[] cost = new long[MAXN];
 
-	// 能力
-	public static long[] ability = new long[MAXN];
+  // 能力
+  public static long[] ability = new long[MAXN];
 
-	// 左孩子
-	public static int[] left = new int[MAXN];
+  // 左孩子
+  public static int[] left = new int[MAXN];
 
-	// 右孩子
-	public static int[] right = new int[MAXN];
+  // 右孩子
+  public static int[] right = new int[MAXN];
 
-	// 距离
-	public static int[] dist = new int[MAXN];
+  // 距离
+  public static int[] dist = new int[MAXN];
 
-	// 寻找堆顶需要
-	public static int[] father = new int[MAXN];
+  // 寻找堆顶需要
+  public static int[] father = new int[MAXN];
 
-	// 堆的大小
-	public static int[] size = new int[MAXN];
+  // 堆的大小
+  public static int[] size = new int[MAXN];
 
-	// 堆的费用和
-	public static long[] sum = new long[MAXN];
+  // 堆的费用和
+  public static long[] sum = new long[MAXN];
 
-	public static void prepare() {
-		dist[0] = -1;
-		for (int i = 1; i <= n; i++) {
-			left[i] = right[i] = dist[i] = 0;
-			size[i] = 1;
-			sum[i] = cost[i];
-			father[i] = i;
-		}
-	}
+  public static void prepare() {
+    dist[0] = -1;
+    for (int i = 1; i <= n; i++) {
+      left[i] = right[i] = dist[i] = 0;
+      size[i] = 1;
+      sum[i] = cost[i];
+      father[i] = i;
+    }
+  }
 
-	public static int find(int i) {
-		father[i] = father[i] == i ? i : find(father[i]);
-		return father[i];
-	}
+  public static int find(int i) {
+    father[i] = father[i] == i ? i : find(father[i]);
+    return father[i];
+  }
 
-	public static int merge(int i, int j) {
-		if (i == 0 || j == 0) {
-			return i + j;
-		}
-		int tmp;
-		// 维护大根堆
-		if (cost[i] < cost[j]) {
-			tmp = i;
-			i = j;
-			j = tmp;
-		}
-		right[i] = merge(right[i], j);
-		if (dist[left[i]] < dist[right[i]]) {
-			tmp = left[i];
-			left[i] = right[i];
-			right[i] = tmp;
-		}
-		dist[i] = dist[right[i]] + 1;
-		father[left[i]] = father[right[i]] = i;
-		return i;
-	}
+  public static int merge(int i, int j) {
+    if (i == 0 || j == 0) {
+      return i + j;
+    }
+    int tmp;
+    // 维护大根堆
+    if (cost[i] < cost[j]) {
+      tmp = i;
+      i = j;
+      j = tmp;
+    }
+    right[i] = merge(right[i], j);
+    if (dist[left[i]] < dist[right[i]]) {
+      tmp = left[i];
+      left[i] = right[i];
+      right[i] = tmp;
+    }
+    dist[i] = dist[right[i]] + 1;
+    father[left[i]] = father[right[i]] = i;
+    return i;
+  }
 
-	public static int pop(int i) {
-		father[left[i]] = left[i];
-		father[right[i]] = right[i];
-		father[i] = merge(left[i], right[i]);
-		left[i] = right[i] = dist[i] = 0;
-		return father[i];
-	}
+  public static int pop(int i) {
+    father[left[i]] = left[i];
+    father[right[i]] = right[i];
+    father[i] = merge(left[i], right[i]);
+    left[i] = right[i] = dist[i] = 0;
+    return father[i];
+  }
 
-	public static long compute() {
-		long ans = 0;
-		int p, psize, h, hsize;
-		long hsum, psum;
-		for (int i = n; i >= 1; i--) {
-			h = find(i);
-			hsize = size[h];
-			hsum = sum[h];
-			while (hsum > m) {
-				pop(h);
-				hsize--;
-				hsum -= cost[h];
-				h = find(i);
-			}
-			ans = Math.max(ans, (long) hsize * ability[i]);
-			if (i > 1) {
-				p = find(leader[i]);
-				psize = size[p];
-				psum = sum[p];
-				father[p] = father[h] = merge(p, h);
-				size[father[p]] = psize + hsize;
-				sum[father[p]] = psum + hsum;
-			}
-		}
-		return ans;
-	}
+  public static long compute() {
+    long ans = 0;
+    int p, psize, h, hsize;
+    long hsum, psum;
+    for (int i = n; i >= 1; i--) {
+      h = find(i);
+      hsize = size[h];
+      hsum = sum[h];
+      while (hsum > m) {
+        pop(h);
+        hsize--;
+        hsum -= cost[h];
+        h = find(i);
+      }
+      ans = Math.max(ans, (long) hsize * ability[i]);
+      if (i > 1) {
+        p = find(leader[i]);
+        psize = size[p];
+        psum = sum[p];
+        father[p] = father[h] = merge(p, h);
+        size[father[p]] = psize + hsize;
+        sum[father[p]] = psum + hsum;
+      }
+    }
+    return ans;
+  }
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StreamTokenizer in = new StreamTokenizer(br);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		in.nextToken();
-		n = (int) in.nval;
-		in.nextToken();
-		m = (int) in.nval;
-		for (int i = 1; i <= n; i++) {
-			in.nextToken();
-			leader[i] = (int) in.nval;
-			in.nextToken();
-			cost[i] = (int) in.nval;
-			in.nextToken();
-			ability[i] = (int) in.nval;
-		}
-		prepare();
-		out.println(compute());
-		out.flush();
-		out.close();
-		br.close();
-	}
-
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StreamTokenizer in = new StreamTokenizer(br);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    in.nextToken();
+    n = (int) in.nval;
+    in.nextToken();
+    m = (int) in.nval;
+    for (int i = 1; i <= n; i++) {
+      in.nextToken();
+      leader[i] = (int) in.nval;
+      in.nextToken();
+      cost[i] = (int) in.nval;
+      in.nextToken();
+      ability[i] = (int) in.nval;
+    }
+    prepare();
+    out.println(compute());
+    out.flush();
+    out.close();
+    br.close();
+  }
 }

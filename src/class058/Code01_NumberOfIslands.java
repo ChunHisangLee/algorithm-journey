@@ -7,34 +7,33 @@ package class058;
 // 测试链接 : https://leetcode.cn/problems/number-of-islands/
 public class Code01_NumberOfIslands {
 
-	// 洪水填充的做法
-	// board : n * m
-	// O(n*m)最优解！
-	public static int numIslands(char[][] board) {
-		int n = board.length;
-		int m = board[0].length;
-		int islands = 0;
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < m; j++) {
-				if (board[i][j] == '1') {
-					islands++;
-					dfs(board, n, m, i, j);
-				}
-			}
-		}
-		return islands;
-	}
+  // 洪水填充的做法
+  // board : n * m
+  // O(n*m)最优解！
+  public static int numIslands(char[][] board) {
+    int n = board.length;
+    int m = board[0].length;
+    int islands = 0;
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        if (board[i][j] == '1') {
+          islands++;
+          dfs(board, n, m, i, j);
+        }
+      }
+    }
+    return islands;
+  }
 
-	public static void dfs(char[][] board, int n, int m, int i, int j) {
-		if (i < 0 || i == n || j < 0 || j == m || board[i][j] != '1') {
-			return;
-		}
-		// board[i][j] = '1'
-		board[i][j] = 0;
-		dfs(board, n, m, i - 1, j);
-		dfs(board, n, m, i + 1, j);
-		dfs(board, n, m, i, j - 1);
-		dfs(board, n, m, i, j + 1);
-	}
-
+  public static void dfs(char[][] board, int n, int m, int i, int j) {
+    if (i < 0 || i == n || j < 0 || j == m || board[i][j] != '1') {
+      return;
+    }
+    // board[i][j] = '1'
+    board[i][j] = 0;
+    dfs(board, n, m, i - 1, j);
+    dfs(board, n, m, i + 1, j);
+    dfs(board, n, m, i, j - 1);
+    dfs(board, n, m, i, j + 1);
+  }
 }

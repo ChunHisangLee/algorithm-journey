@@ -11,20 +11,19 @@ import java.util.Arrays;
 // 测试链接 : https://leetcode.cn/problems/two-city-scheduling/
 public class Code02_TwoCityScheduling {
 
-	public static int twoCitySchedCost(int[][] costs) {
-		int n = costs.length;
-		int[] arr = new int[n];
-		int sum = 0;
-		for (int i = 0; i < n; i++) {
-			arr[i] = costs[i][1] - costs[i][0];
-			sum += costs[i][0];
-		}
-		Arrays.sort(arr);
-		int m = n / 2;
-		for (int i = 0; i < m; i++) {
-			sum += arr[i];
-		}
-		return sum;
-	}
-
+  public static int twoCitySchedCost(int[][] costs) {
+    int n = costs.length;
+    int[] arr = new int[n];
+    int sum = 0;
+    for (int i = 0; i < n; i++) {
+      arr[i] = costs[i][1] - costs[i][0];
+      sum += costs[i][0];
+    }
+    Arrays.sort(arr);
+    int m = n / 2;
+    for (int i = 0; i < m; i++) {
+      sum += arr[i];
+    }
+    return sum;
+  }
 }

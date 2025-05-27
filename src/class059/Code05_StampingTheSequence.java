@@ -18,66 +18,65 @@ import java.util.Arrays;
 // 测试链接 : https://leetcode.cn/problems/stamping-the-sequence/
 public class Code05_StampingTheSequence {
 
-	public static int[] movesToStamp(String stamp, String target) {
-		char[] s = stamp.toCharArray();
-		char[] t = target.toCharArray();
-		int m = s.length;
-		int n = t.length;
-		int[] indegree = new int[n - m + 1];
-		Arrays.fill(indegree, m);
-		ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
-		for (int i = 0; i < n; i++) {
-			graph.add(new ArrayList<>());
-		}
-		int[] queue = new int[n - m + 1];
-		int l = 0, r = 0;
-		// O(n*m)
-		for (int i = 0; i <= n - m; i++) {
-			// i开头....(m个)
-			// i+0 i+1 i+m-1
-			for (int j = 0; j < m; j++) {
-				if (t[i + j] == s[j]) {
-					if (--indegree[i] == 0) {
-						queue[r++] = i;
-					}
-				} else {
-					// i + j 
-					// from : 错误的位置
-					// to : i开头的下标
-					graph.get(i + j).add(i);
-				}
-			}
-		}
-		// 同一个位置取消错误不要重复统计
-		boolean[] visited = new boolean[n];
-		int[] path = new int[n - m + 1];
-		int size = 0;
-		while (l < r) {
-			int cur = queue[l++];
-			path[size++] = cur;
-			for (int i = 0; i < m; i++) {
-				// cur : 开头位置
-				// cur + 0 cur + 1 cur + 2 ... cur + m - 1
-				if (!visited[cur + i]) {
-					visited[cur + i] = true;
-					for (int next : graph.get(cur + i)) {
-						if (--indegree[next] == 0) {
-							queue[r++] = next;
-						}
-					}
-				}
-			}
-		}
-		if (size != n - m + 1) {
-			return new int[0];
-		}
-		// path逆序调整
-		for (int i = 0, j = size - 1; i < j; i++, j--) {
-			int tmp = path[i];
-			path[i] = path[j];
-			path[j] = tmp;
-		}
-		return path;
-	}
-
+  public static int[] movesToStamp(String stamp, String target) {
+    char[] s = stamp.toCharArray();
+    char[] t = target.toCharArray();
+    int m = s.length;
+    int n = t.length;
+    int[] indegree = new int[n - m + 1];
+    Arrays.fill(indegree, m);
+    ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      graph.add(new ArrayList<>());
+    }
+    int[] queue = new int[n - m + 1];
+    int l = 0, r = 0;
+    // O(n*m)
+    for (int i = 0; i <= n - m; i++) {
+      // i开头....(m个)
+      // i+0 i+1 i+m-1
+      for (int j = 0; j < m; j++) {
+        if (t[i + j] == s[j]) {
+          if (--indegree[i] == 0) {
+            queue[r++] = i;
+          }
+        } else {
+          // i + j
+          // from : 错误的位置
+          // to : i开头的下标
+          graph.get(i + j).add(i);
+        }
+      }
+    }
+    // 同一个位置取消错误不要重复统计
+    boolean[] visited = new boolean[n];
+    int[] path = new int[n - m + 1];
+    int size = 0;
+    while (l < r) {
+      int cur = queue[l++];
+      path[size++] = cur;
+      for (int i = 0; i < m; i++) {
+        // cur : 开头位置
+        // cur + 0 cur + 1 cur + 2 ... cur + m - 1
+        if (!visited[cur + i]) {
+          visited[cur + i] = true;
+          for (int next : graph.get(cur + i)) {
+            if (--indegree[next] == 0) {
+              queue[r++] = next;
+            }
+          }
+        }
+      }
+    }
+    if (size != n - m + 1) {
+      return new int[0];
+    }
+    // path逆序调整
+    for (int i = 0, j = size - 1; i < j; i++, j--) {
+      int tmp = path[i];
+      path[i] = path[j];
+      path[j] = tmp;
+    }
+    return path;
+  }
 }

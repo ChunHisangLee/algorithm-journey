@@ -13,47 +13,46 @@ package class099;
 // 测试链接 : https://leetcode.cn/problems/number-of-music-playlists/
 public class Code06_NumberOfMusicPlaylists {
 
-	public static int MOD = 1000000007;
+  public static int MOD = 1000000007;
 
-	public static int LIMIT = 100;
+  public static int LIMIT = 100;
 
-	public static long[] fac = new long[LIMIT + 1];
+  public static long[] fac = new long[LIMIT + 1];
 
-	public static long[] inv = new long[LIMIT + 1];
+  public static long[] inv = new long[LIMIT + 1];
 
-	static {
-		fac[0] = 1;
-		for (int i = 1; i <= LIMIT; i++) {
-			fac[i] = ((long) i * fac[i - 1]) % MOD;
-		}
-		inv[LIMIT] = power(fac[LIMIT], MOD - 2);
-		for (int i = LIMIT - 1; i >= 0; i--) {
-			inv[i] = ((long) (i + 1) * inv[i + 1]) % MOD;
-		}
-	}
+  static {
+    fac[0] = 1;
+    for (int i = 1; i <= LIMIT; i++) {
+      fac[i] = ((long) i * fac[i - 1]) % MOD;
+    }
+    inv[LIMIT] = power(fac[LIMIT], MOD - 2);
+    for (int i = LIMIT - 1; i >= 0; i--) {
+      inv[i] = ((long) (i + 1) * inv[i + 1]) % MOD;
+    }
+  }
 
-	public static long power(long x, int n) {
-		long ans = 1;
-		while (n > 0) {
-			if ((n & 1) == 1) {
-				ans = (ans * x) % MOD;
-			}
-			x = (x * x) % MOD;
-			n >>= 1;
-		}
-		return ans;
-	}
+  public static long power(long x, int n) {
+    long ans = 1;
+    while (n > 0) {
+      if ((n & 1) == 1) {
+        ans = (ans * x) % MOD;
+      }
+      x = (x * x) % MOD;
+      n >>= 1;
+    }
+    return ans;
+  }
 
-	public static int numMusicPlaylists(int n, int l, int k) {
-		long cur, ans = 0, sign = 1;
-		for (int i = 0; i < n - k; i++, sign = sign == 1 ? (MOD - 1) : 1) {
-			cur = (sign * power(n - i - k, l - k)) % MOD;
-			cur = (cur * fac[n]) % MOD;
-			cur = (cur * inv[i]) % MOD;
-			cur = (cur * inv[n - i - k]) % MOD;
-			ans = (ans + cur) % MOD;
-		}
-		return (int) ans;
-	}
-
+  public static int numMusicPlaylists(int n, int l, int k) {
+    long cur, ans = 0, sign = 1;
+    for (int i = 0; i < n - k; i++, sign = sign == 1 ? (MOD - 1) : 1) {
+      cur = (sign * power(n - i - k, l - k)) % MOD;
+      cur = (cur * fac[n]) % MOD;
+      cur = (cur * inv[i]) % MOD;
+      cur = (cur * inv[n - i - k]) % MOD;
+      ans = (ans + cur) % MOD;
+    }
+    return (int) ans;
+  }
 }

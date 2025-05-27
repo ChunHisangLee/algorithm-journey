@@ -14,48 +14,48 @@ package class167;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXM = 50001;
-//const int MAXP = 501;
-//const int MAXT = 1000001;
-//const int DEEP = 20;
-//int m, p;
+// const int MAXM = 50001;
+// const int MAXP = 501;
+// const int MAXT = 1000001;
+// const int DEEP = 20;
+// int m, p;
 //
-//int op[MAXM];
-//int x[MAXM];
-//int y[MAXM];
+// int op[MAXM];
+// int x[MAXM];
+// int y[MAXM];
 //
-//deque<array<int,3>> knapsack;
+// deque<array<int,3>> knapsack;
 //
-//int head[MAXM << 2];
-//int nxt[MAXT];
-//int tow[MAXT];
-//int tov[MAXT];
-//int cnt = 0;
+// int head[MAXM << 2];
+// int nxt[MAXT];
+// int tow[MAXT];
+// int tov[MAXT];
+// int cnt = 0;
 //
-//long long pre[MAXP];
-//long long dp[MAXP];
-//long long backup[DEEP][MAXP];
+// long long pre[MAXP];
+// long long dp[MAXP];
+// long long backup[DEEP][MAXP];
 //
-//long long ans[MAXM];
+// long long ans[MAXM];
 //
-//void clone(long long* a, long long* b) {
+// void clone(long long* a, long long* b) {
 //    for (int i = 0; i <= p; i++) {
 //        a[i] = b[i];
 //    }
-//}
+// }
 //
-//void addEdge(int i, int w, int v) {
+// void addEdge(int i, int w, int v) {
 //    nxt[++cnt] = head[i];
 //    tow[cnt] = w;
 //    tov[cnt] = v;
 //    head[i] = cnt;
-//}
+// }
 //
-//void add(int jobl, int jobr, int jobw, int jobv, int l, int r, int i) {
+// void add(int jobl, int jobr, int jobw, int jobv, int l, int r, int i) {
 //    if (jobl <= l && r <= jobr) {
 //        addEdge(i, jobw, jobv);
 //    } else {
@@ -67,9 +67,9 @@ package class167;
 //            add(jobl, jobr, jobw, jobv, mid + 1, r, i << 1 | 1);
 //        }
 //    }
-//}
+// }
 //
-//void dfs(int l, int r, int i, int dep) {
+// void dfs(int l, int r, int i, int dep) {
 //    clone(backup[dep], dp);
 //    for (int e = head[i], w, v; e > 0; e = nxt[e]) {
 //        w = tow[e];
@@ -95,9 +95,9 @@ package class167;
 //        dfs(mid + 1, r, i << 1 | 1, dep + 1);
 //    }
 //    clone(dp, backup[dep]);
-//}
+// }
 //
-//void prepare() {
+// void prepare() {
 //    array<int,3> equip;
 //    for (int i = 1; i <= m; i++) {
 //        if (op[i] == 1) {
@@ -123,9 +123,9 @@ package class167;
 //        dp[i] = -1;
 //    }
 //    dp[0] = 0;
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    int tmp;
@@ -157,4 +157,4 @@ package class167;
 //        }
 //    }
 //    return 0;
-//}
+// }

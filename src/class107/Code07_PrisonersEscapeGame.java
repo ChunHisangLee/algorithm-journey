@@ -18,74 +18,73 @@ package class107;
 // 如今该题变成了流行题，还有大量科普视频
 public class Code07_PrisonersEscapeGame {
 
-	// 通过多次模拟实验得到的概率
-	public static double escape1(int people, int tryTimes, int testTimes) {
-		int escape = 0;
-		for (int i = 0; i < testTimes; i++) {
-			int[] arr = generateRandomArray(people);
-			if (maxCircle(arr) <= tryTimes) {
-				escape++;
-			}
-		}
-		return (double) escape / (double) testTimes;
-	}
+  // 通过多次模拟实验得到的概率
+  public static double escape1(int people, int tryTimes, int testTimes) {
+    int escape = 0;
+    for (int i = 0; i < testTimes; i++) {
+      int[] arr = generateRandomArray(people);
+      if (maxCircle(arr) <= tryTimes) {
+        escape++;
+      }
+    }
+    return (double) escape / (double) testTimes;
+  }
 
-	// 求arr中最大环的长度
-	public static int maxCircle(int[] arr) {
-		int maxCircle = 1;
-		for (int i = 0; i < arr.length; i++) {
-			int curCircle = 1;
-			while (i != arr[i]) {
-				swap(arr, i, arr[i]);
-				curCircle++;
-			}
-			maxCircle = Math.max(maxCircle, curCircle);
-		}
-		return maxCircle;
-	}
+  // 求arr中最大环的长度
+  public static int maxCircle(int[] arr) {
+    int maxCircle = 1;
+    for (int i = 0; i < arr.length; i++) {
+      int curCircle = 1;
+      while (i != arr[i]) {
+        swap(arr, i, arr[i]);
+        curCircle++;
+      }
+      maxCircle = Math.max(maxCircle, curCircle);
+    }
+    return maxCircle;
+  }
 
-	// 生成随机arr
-	// 原本每个位置的数都等概率出现在自己或者其他位置
-	public static int[] generateRandomArray(int len) {
-		int[] arr = new int[len];
-		for (int i = 0; i < len; i++) {
-			arr[i] = i;
-		}
-		for (int i = len - 1; i > 0; i--) {
-			swap(arr, i, (int) (Math.random() * (i + 1)));
-		}
-		return arr;
-	}
+  // 生成随机arr
+  // 原本每个位置的数都等概率出现在自己或者其他位置
+  public static int[] generateRandomArray(int len) {
+    int[] arr = new int[len];
+    for (int i = 0; i < len; i++) {
+      arr[i] = i;
+    }
+    for (int i = len - 1; i > 0; i--) {
+      swap(arr, i, (int) (Math.random() * (i + 1)));
+    }
+    return arr;
+  }
 
-	public static void swap(int[] arr, int i, int j) {
-		int tmp = arr[i];
-		arr[i] = arr[j];
-		arr[j] = tmp;
-	}
+  public static void swap(int[] arr, int i, int j) {
+    int tmp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = tmp;
+  }
 
-	// 公式版
-	// 一定要保证tryTimes大于等于people的一半，否则该函数失效
-	// 导致死亡的情况数 : C(r,100) * (r-1)! * (100-r)!，r从51~100，累加起来
-	// 死亡概率 : C(r,100) * (r-1)! * (100-r)! / 100!，r从51~100，累加起来
-	// 化简后的死亡概率 : 1/r，r从51~100，累加起来
-	public static double escape2(int people, int tryTimes) {
-		double a = 0;
-		for (int r = tryTimes + 1; r <= people; r++) {
-			a += (double) 1 / (double) r;
-		}
-		return (double) 1 - a;
-	}
+  // 公式版
+  // 一定要保证tryTimes大于等于people的一半，否则该函数失效
+  // 导致死亡的情况数 : C(r,100) * (r-1)! * (100-r)!，r从51~100，累加起来
+  // 死亡概率 : C(r,100) * (r-1)! * (100-r)! / 100!，r从51~100，累加起来
+  // 化简后的死亡概率 : 1/r，r从51~100，累加起来
+  public static double escape2(int people, int tryTimes) {
+    double a = 0;
+    for (int r = tryTimes + 1; r <= people; r++) {
+      a += (double) 1 / (double) r;
+    }
+    return (double) 1 - a;
+  }
 
-	public static void main(String[] args) {
-		int people = 100;
-		// 一定要保证tryTimes大于等于people的一半
-		int tryTimes = 50;
-		int testTimes = 100000;
-		System.out.println("参与游戏的人数 : " + people);
-		System.out.println("每人的尝试次数 : " + tryTimes);
-		System.out.println("模拟实验的次数 : " + testTimes);
-		System.out.println("通过模拟实验得到的概率为 : " + escape1(people, tryTimes, testTimes));
-		System.out.println("通过公式计算得到的概率为 : " + escape2(people, tryTimes));
-	}
-
+  public static void main(String[] args) {
+    int people = 100;
+    // 一定要保证tryTimes大于等于people的一半
+    int tryTimes = 50;
+    int testTimes = 100000;
+    System.out.println("参与游戏的人数 : " + people);
+    System.out.println("每人的尝试次数 : " + tryTimes);
+    System.out.println("模拟实验的次数 : " + testTimes);
+    System.out.println("通过模拟实验得到的概率为 : " + escape1(people, tryTimes, testTimes));
+    System.out.println("通过公式计算得到的概率为 : " + escape2(people, tryTimes));
+  }
 }

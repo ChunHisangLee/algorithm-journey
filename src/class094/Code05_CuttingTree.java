@@ -21,59 +21,58 @@ import java.util.Arrays;
 
 public class Code05_CuttingTree {
 
-	// 树的个数、天数最大值，不超过的量
-	public static int MAXN = 251;
+  // 树的个数、天数最大值，不超过的量
+  public static int MAXN = 251;
 
-	// 树的编号为1 ~ n
-	// tree[i][0] : 第i棵树第一天的初始重量
-	// tree[i][1] : 第i棵树每天的增长重量
-	public static int[][] tree = new int[MAXN][2];
+  // 树的编号为1 ~ n
+  // tree[i][0] : 第i棵树第一天的初始重量
+  // tree[i][1] : 第i棵树每天的增长重量
+  public static int[][] tree = new int[MAXN][2];
 
-	// dp[i][j] : 在j天内，从前i棵树中选若干棵树进行砍伐，最大收益是多少
-	public static int[][] dp = new int[MAXN][MAXN];
+  // dp[i][j] : 在j天内，从前i棵树中选若干棵树进行砍伐，最大收益是多少
+  public static int[][] dp = new int[MAXN][MAXN];
 
-	public static int t, n, m;
+  public static int t, n, m;
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StreamTokenizer in = new StreamTokenizer(br);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		in.nextToken();
-		t = (int) in.nval;
-		for (int i = 1; i <= t; i++) {
-			in.nextToken();
-			n = (int) in.nval;
-			in.nextToken();
-			m = (int) in.nval;
-			for (int j = 1; j <= n; j++) {
-				in.nextToken();
-				tree[j][0] = (int) in.nval;
-			}
-			for (int j = 1; j <= n; j++) {
-				in.nextToken();
-				tree[j][1] = (int) in.nval;
-			}
-			out.println(compute());
-		}
-		out.flush();
-		out.close();
-		br.close();
-	}
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StreamTokenizer in = new StreamTokenizer(br);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    in.nextToken();
+    t = (int) in.nval;
+    for (int i = 1; i <= t; i++) {
+      in.nextToken();
+      n = (int) in.nval;
+      in.nextToken();
+      m = (int) in.nval;
+      for (int j = 1; j <= n; j++) {
+        in.nextToken();
+        tree[j][0] = (int) in.nval;
+      }
+      for (int j = 1; j <= n; j++) {
+        in.nextToken();
+        tree[j][1] = (int) in.nval;
+      }
+      out.println(compute());
+    }
+    out.flush();
+    out.close();
+    br.close();
+  }
 
-	// 讲解073 - 01背包
-	public static int compute() {
-		// 树的初始重量不决定树的顺序，因为任何树砍了，就获得固定的初始量，和砍伐的顺序无关
-		// 根据增长速度排序，增长量小的在前，增长量大的在后
-		// 认为越靠后的树，越要尽量晚的砍伐，课上的重点内容
-		Arrays.sort(tree, 1, n + 1, (o1, o2) -> o1[1] - o2[1]);
-		// dp[0][...] = 0 : 表示如果没有树，不管过去多少天，收益都是0
-		// dp[...][0] = 0 : 表示不管有几棵树，没有时间砍树，收益都是0
-		for (int i = 1; i <= n; i++) {
-			for (int j = 1; j <= m; j++) {
-				dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - 1] + tree[i][0] + tree[i][1] * (j - 1));
-			}
-		}
-		return dp[n][m];
-	}
-
+  // 讲解073 - 01背包
+  public static int compute() {
+    // 树的初始重量不决定树的顺序，因为任何树砍了，就获得固定的初始量，和砍伐的顺序无关
+    // 根据增长速度排序，增长量小的在前，增长量大的在后
+    // 认为越靠后的树，越要尽量晚的砍伐，课上的重点内容
+    Arrays.sort(tree, 1, n + 1, (o1, o2) -> o1[1] - o2[1]);
+    // dp[0][...] = 0 : 表示如果没有树，不管过去多少天，收益都是0
+    // dp[...][0] = 0 : 表示不管有几棵树，没有时间砍树，收益都是0
+    for (int i = 1; i <= n; i++) {
+      for (int j = 1; j <= m; j++) {
+        dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - 1] + tree[i][0] + tree[i][1] * (j - 1));
+      }
+    }
+    return dp[n][m];
+  }
 }

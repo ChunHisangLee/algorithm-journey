@@ -23,119 +23,117 @@ import java.io.StreamTokenizer;
 
 public class Code03_AdjacentDifferent2 {
 
-	public static int LIMIT1 = 100001;
+  public static int LIMIT1 = 100001;
 
-	public static int LIMIT2 = 8;
+  public static int LIMIT2 = 8;
 
-	public static int MOD = 376544743;
+  public static int MOD = 376544743;
 
-	public static int[] start = new int[LIMIT1];
+  public static int[] start = new int[LIMIT1];
 
-	public static int[] end = new int[LIMIT1];
+  public static int[] end = new int[LIMIT1];
 
-	public static int[][] dp = new int[LIMIT2 + 1][1 << (LIMIT2 << 1)];
+  public static int[][] dp = new int[LIMIT2 + 1][1 << (LIMIT2 << 1)];
 
-	public static int[] prepare = new int[1 << (LIMIT2 << 1)];
+  public static int[] prepare = new int[1 << (LIMIT2 << 1)];
 
-	public static int startStatus, endStatus;
+  public static int startStatus, endStatus;
+  public static int n, m, k, maxs;
 
-	public static int n, m, k, maxs;
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StreamTokenizer in = new StreamTokenizer(br);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    in.nextToken();
+    n = (int) in.nval;
+    in.nextToken();
+    m = (int) in.nval;
+    in.nextToken();
+    k = (int) in.nval;
+    maxs = 1 << (m << 1);
+    for (int i = 0; i < m; i++) {
+      in.nextToken();
+      start[i] = (int) in.nval;
+    }
+    for (int i = 0; i < m; i++) {
+      in.nextToken();
+      end[i] = (int) in.nval;
+    }
+    if (k == 2) {
+      out.println(special());
+    } else {
+      out.println(compute());
+    }
+    out.flush();
+    out.close();
+    br.close();
+  }
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StreamTokenizer in = new StreamTokenizer(br);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		in.nextToken();
-		n = (int) in.nval;
-		in.nextToken();
-		m = (int) in.nval;
-		in.nextToken();
-		k = (int) in.nval;
-		maxs = 1 << (m << 1);
-		for (int i = 0; i < m; i++) {
-			in.nextToken();
-			start[i] = (int) in.nval;
-		}
-		for (int i = 0; i < m; i++) {
-			in.nextToken();
-			end[i] = (int) in.nval;
-		}
-		if (k == 2) {
-			out.println(special());
-		} else {
-			out.println(compute());
-		}
-		out.flush();
-		out.close();
-		br.close();
-	}
+  public static int special() {
+    if ((n & 1) == 0) {
+      for (int i = 0; i < m; i++) {
+        if (start[i] == end[i]) {
+          return 0;
+        }
+      }
+    } else {
+      for (int i = 0; i < m; i++) {
+        if (start[i] != end[i]) {
+          return 0;
+        }
+      }
+    }
+    return 1;
+  }
 
-	public static int special() {
-		if ((n & 1) == 0) {
-			for (int i = 0; i < m; i++) {
-				if (start[i] == end[i]) {
-					return 0;
-				}
-			}
-		} else {
-			for (int i = 0; i < m; i++) {
-				if (start[i] != end[i]) {
-					return 0;
-				}
-			}
-		}
-		return 1;
-	}
+  public static int compute() {
+    startStatus = endStatus = 0;
+    for (int j = 0; j < m; j++) {
+      startStatus = set(startStatus, j, start[j]);
+      endStatus = set(endStatus, j, end[j]);
+    }
+    for (int s = 0; s < maxs; s++) {
+      prepare[s] = different(s, endStatus) ? 1 : 0;
+    }
+    for (int i = n - 2; i >= 1; i--) {
+      // j == m
+      for (int s = 0; s < maxs; s++) {
+        dp[m][s] = prepare[s];
+      }
+      // 普通位置
+      for (int j = m - 1; j >= 0; j--) {
+        for (int s = 0; s < maxs; s++) {
+          int ans = 0;
+          for (int color = 0; color < k; color++) {
+            if ((j == 0 || get(s, j - 1) != color) && get(s, j) != color) {
+              ans = (ans + dp[j + 1][set(s, j, color)]) % MOD;
+            }
+          }
+          dp[j][s] = ans;
+        }
+      }
+      // 设置prepare
+      for (int s = 0; s < maxs; s++) {
+        prepare[s] = dp[0][s];
+      }
+    }
+    return dp[0][startStatus];
+  }
 
-	public static int compute() {
-		startStatus = endStatus = 0;
-		for (int j = 0; j < m; j++) {
-			startStatus = set(startStatus, j, start[j]);
-			endStatus = set(endStatus, j, end[j]);
-		}
-		for (int s = 0; s < maxs; s++) {
-			prepare[s] = different(s, endStatus) ? 1 : 0;
-		}
-		for (int i = n - 2; i >= 1; i--) {
-			// j == m
-			for (int s = 0; s < maxs; s++) {
-				dp[m][s] = prepare[s];
-			}
-			// 普通位置
-			for (int j = m - 1; j >= 0; j--) {
-				for (int s = 0; s < maxs; s++) {
-					int ans = 0;
-					for (int color = 0; color < k; color++) {
-						if ((j == 0 || get(s, j - 1) != color) && get(s, j) != color) {
-							ans = (ans + dp[j + 1][set(s, j, color)]) % MOD;
-						}
-					}
-					dp[j][s] = ans;
-				}
-			}
-			// 设置prepare
-			for (int s = 0; s < maxs; s++) {
-				prepare[s] = dp[0][s];
-			}
-		}
-		return dp[0][startStatus];
-	}
+  public static boolean different(int a, int b) {
+    for (int j = 0; j < m; j++) {
+      if (get(a, j) == get(b, j)) {
+        return false;
+      }
+    }
+    return true;
+  }
 
-	public static boolean different(int a, int b) {
-		for (int j = 0; j < m; j++) {
-			if (get(a, j) == get(b, j)) {
-				return false;
-			}
-		}
-		return true;
-	}
+  public static int get(int s, int j) {
+    return (s >> (j << 1)) & 3;
+  }
 
-	public static int get(int s, int j) {
-		return (s >> (j << 1)) & 3;
-	}
-
-	public static int set(int s, int j, int v) {
-		return s & (~(3 << (j << 1))) | (v << (j << 1));
-	}
-
+  public static int set(int s, int j, int v) {
+    return s & (~(3 << (j << 1))) | (v << (j << 1));
+  }
 }

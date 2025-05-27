@@ -17,43 +17,42 @@ import java.io.PrintWriter;
 
 public class Code01_RepeatMinimumLength {
 
-	public static int MAXN = 1000001;
+  public static int MAXN = 1000001;
 
-	public static int[] next = new int[MAXN];
+  public static int[] next = new int[MAXN];
 
-	public static int n;
+  public static int n;
 
-	public static char[] s;
+  public static char[] s;
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		n = Integer.valueOf(in.readLine());
-		s = in.readLine().toCharArray();
-		out.println(compute());
-		out.flush();
-		out.close();
-		in.close();
-	}
+  public static void main(String[] args) throws IOException {
+    BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    n = Integer.valueOf(in.readLine());
+    s = in.readLine().toCharArray();
+    out.println(compute());
+    out.flush();
+    out.close();
+    in.close();
+  }
 
-	public static int compute() {
-		nextArray();
-		return n - next[n];
-	}
+  public static int compute() {
+    nextArray();
+    return n - next[n];
+  }
 
-	public static void nextArray() {
-		next[0] = -1;
-		next[1] = 0;
-		int i = 2, cn = 0;
-		while (i <= n) {
-			if (s[i - 1] == s[cn]) {
-				next[i++] = ++cn;
-			} else if (cn > 0) {
-				cn = next[cn];
-			} else {
-				next[i++] = 0;
-			}
-		}
-	}
-
+  public static void nextArray() {
+    next[0] = -1;
+    next[1] = 0;
+    int i = 2, cn = 0;
+    while (i <= n) {
+      if (s[i - 1] == s[cn]) {
+        next[i++] = ++cn;
+      } else if (cn > 0) {
+        cn = next[cn];
+      } else {
+        next[i++] = 0;
+      }
+    }
+  }
 }

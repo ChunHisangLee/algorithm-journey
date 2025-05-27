@@ -22,26 +22,25 @@ import java.io.StreamTokenizer;
 
 public class Code02_PrimePowerStones {
 
-	public static int t, n;
+  public static int t, n;
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StreamTokenizer in = new StreamTokenizer(br);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		in.nextToken();
-		t = (int) in.nval;
-		for (int i = 0; i < t; i++) {
-			in.nextToken();
-			n = (int) in.nval;
-			out.println(compute(n));
-		}
-		out.flush();
-		out.close();
-		br.close();
-	}
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StreamTokenizer in = new StreamTokenizer(br);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    in.nextToken();
+    t = (int) in.nval;
+    for (int i = 0; i < t; i++) {
+      in.nextToken();
+      n = (int) in.nval;
+      out.println(compute(n));
+    }
+    out.flush();
+    out.close();
+    br.close();
+  }
 
-	public static String compute(int n) {
-		return n % 6 != 0 ? "October wins!" : "Roy wins!";
-	}
-
+  public static String compute(int n) {
+    return n % 6 != 0 ? "October wins!" : "Roy wins!";
+  }
 }

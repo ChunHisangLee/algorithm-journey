@@ -13,22 +13,22 @@ package class157;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 100001;
-//const int MAXT = MAXN * 25;
-//int n, m, t = 0;
-//long long arr[MAXN];
-//int root[MAXN];
-//int ls[MAXT];
-//int rs[MAXT];
-//long long sum[MAXT];
-//long long addTag[MAXT];
-//int cnt = 0;
+// const int MAXN = 100001;
+// const int MAXT = MAXN * 25;
+// int n, m, t = 0;
+// long long arr[MAXN];
+// int root[MAXN];
+// int ls[MAXT];
+// int rs[MAXT];
+// long long sum[MAXT];
+// long long addTag[MAXT];
+// int cnt = 0;
 //
-//int build(int l, int r) {
+// int build(int l, int r) {
 //    int rt = ++cnt;
 //    addTag[rt] = 0;
 //    if (l == r) {
@@ -40,9 +40,9 @@ package class157;
 //        sum[rt] = sum[ls[rt]] + sum[rs[rt]];
 //    }
 //    return rt;
-//}
+// }
 //
-//int add(int jobl, int jobr, long long jobv, int l, int r, int i) {
+// int add(int jobl, int jobr, long long jobv, int l, int r, int i) {
 //    int rt = ++cnt, a = max(jobl, l), b = min(jobr, r);
 //    ls[rt] = ls[i];
 //    rs[rt] = rs[i];
@@ -60,9 +60,9 @@ package class157;
 //        }
 //    }
 //    return rt;
-//}
+// }
 //
-//long long query(int jobl, int jobr, long long addHistory, int l, int r, int i) {
+// long long query(int jobl, int jobr, long long addHistory, int l, int r, int i) {
 //    if (jobl <= l && r <= jobr) {
 //        return sum[i] + addHistory * (r - l + 1);
 //    }
@@ -75,9 +75,9 @@ package class157;
 //        ans += query(jobl, jobr, addHistory + addTag[i], mid + 1, r, rs[i]);
 //    }
 //    return ans;
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> m;
@@ -106,4 +106,4 @@ package class157;
 //        }
 //    }
 //    return 0;
-//}
+// }

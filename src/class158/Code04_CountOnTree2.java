@@ -14,32 +14,32 @@ package class158;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 100001;
-//const int MAXH = 20;
-//const int MAXT = MAXN * MAXH;
-//int n, m, s;
-//int arr[MAXN];
-//int sorted[MAXN];
+// const int MAXN = 100001;
+// const int MAXH = 20;
+// const int MAXT = MAXN * MAXH;
+// int n, m, s;
+// int arr[MAXN];
+// int sorted[MAXN];
 //
-//int head[MAXN];
-//int to[MAXN << 1];
-//int nxt[MAXN << 1];
-//int cntg = 0;
+// int head[MAXN];
+// int to[MAXN << 1];
+// int nxt[MAXN << 1];
+// int cntg = 0;
 //
-//int root[MAXN];
-//int ls[MAXT];
-//int rs[MAXT];
-//int size[MAXT];
-//int cntt = 0;
+// int root[MAXN];
+// int ls[MAXT];
+// int rs[MAXT];
+// int size[MAXT];
+// int cntt = 0;
 //
-//int deep[MAXN];
-//int stjump[MAXN][MAXH];
+// int deep[MAXN];
+// int stjump[MAXN][MAXH];
 //
-//int kth(int num) {
+// int kth(int num) {
 //    int left = 1, right = s, mid;
 //    while (left <= right) {
 //        mid = (left + right) / 2;
@@ -52,9 +52,9 @@ package class158;
 //        }
 //    }
 //    return -1;
-//}
+// }
 //
-//int build(int l, int r) {
+// int build(int l, int r) {
 //    int rt = ++cntt;
 //    size[rt] = 0;
 //    if (l < r) {
@@ -63,9 +63,9 @@ package class158;
 //        rs[rt] = build(mid + 1, r);
 //    }
 //    return rt;
-//}
+// }
 //
-//void prepare() {
+// void prepare() {
 //    for (int i = 1; i <= n; i++) {
 //        sorted[i] = arr[i];
 //    }
@@ -77,15 +77,15 @@ package class158;
 //        }
 //    }
 //    root[0] = build(1, s);
-//}
+// }
 //
-//void addEdge(int u, int v) {
+// void addEdge(int u, int v) {
 //    nxt[++cntg] = head[u];
 //    to[cntg] = v;
 //    head[u] = cntg;
-//}
+// }
 //
-//int insert(int jobi, int l, int r, int i) {
+// int insert(int jobi, int l, int r, int i) {
 //    int rt = ++cntt;
 //    ls[rt] = ls[i];
 //    rs[rt] = rs[i];
@@ -99,9 +99,9 @@ package class158;
 //        }
 //    }
 //    return rt;
-//}
+// }
 //
-//int query(int jobk, int l, int r, int u, int v, int lca, int lcafa) {
+// int query(int jobk, int l, int r, int u, int v, int lca, int lcafa) {
 //    if (l == r) {
 //        return l;
 //    }
@@ -112,9 +112,9 @@ package class158;
 //    } else {
 //        return query(jobk - lsize, mid + 1, r, rs[u], rs[v], rs[lca], rs[lcafa]);
 //    }
-//}
+// }
 //
-//void dfs(int u, int f) {
+// void dfs(int u, int f) {
 //    root[u] = insert(kth(arr[u]), 1, s, root[f]);
 //    deep[u] = deep[f] + 1;
 //    stjump[u][0] = f;
@@ -126,9 +126,9 @@ package class158;
 //            dfs(to[ei], u);
 //        }
 //    }
-//}
+// }
 //
-//int lca(int a, int b) {
+// int lca(int a, int b) {
 //    if (deep[a] < deep[b]) {
 //        swap(a, b);
 //    }
@@ -147,15 +147,15 @@ package class158;
 //        }
 //    }
 //    return stjump[a][0];
-//}
+// }
 //
-//int kth(int u, int v, int k) {
+// int kth(int u, int v, int k) {
 //    int lcaNode = lca(u, v);
 //    int i = query(k, 1, s, root[u], root[v], root[lcaNode], root[stjump[lcaNode][0]]);
 //    return sorted[i];
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> m;
@@ -176,4 +176,4 @@ package class158;
 //        cout << lastAns << '\n';
 //    }
 //    return 0;
-//}
+// }

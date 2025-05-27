@@ -14,37 +14,37 @@ package class155;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 300001;
-//int n, m;
-//int num[MAXN];
-//int up[MAXN];
-//int ls[MAXN];
-//int rs[MAXN];
-//int dist[MAXN];
-//int fa[MAXN];
-//int siz[MAXN]; 
-//int add[MAXN];
-//int sta[MAXN];
-//multiset<int> heads;
-//int addAll = 0;
+// const int MAXN = 300001;
+// int n, m;
+// int num[MAXN];
+// int up[MAXN];
+// int ls[MAXN];
+// int rs[MAXN];
+// int dist[MAXN];
+// int fa[MAXN];
+// int siz[MAXN];
+// int add[MAXN];
+// int sta[MAXN];
+// multiset<int> heads;
+// int addAll = 0;
 //
-//void minusHead(int h) {
+// void minusHead(int h) {
 //    if (h != 0) {
 //        heads.erase(heads.find(num[h] + add[h]));
 //    }
-//}
+// }
 //
-//void addHead(int h) {
+// void addHead(int h) {
 //    if (h != 0) {
 //        heads.insert(num[h] + add[h]);
 //    }
-//}
+// }
 //
-//void prepare() {
+// void prepare() {
 //    dist[0] = -1;
 //    heads.clear();
 //    for (int i = 1; i <= n; i++) {
@@ -55,14 +55,14 @@ package class155;
 //        addHead(i);
 //    }
 //    addAll = 0;
-//}
+// }
 //
-//int find(int i) {
+// int find(int i) {
 //    fa[i] = fa[i] == i ? i : find(fa[i]);
 //    return fa[i];
-//}
+// }
 //
-//int merge(int i, int j) {
+// int merge(int i, int j) {
 //    if (i == 0 || j == 0) return i + j;
 //    if (num[i] < num[j]) {
 //        swap(i, j);
@@ -76,9 +76,9 @@ package class155;
 //    fa[ls[i]] = i;
 //    fa[rs[i]] = i;
 //    return i;
-//}
+// }
 //
-//int remove(int i) {
+// int remove(int i) {
 //    int h = find(i);
 //    fa[ls[i]] = ls[i];
 //    fa[rs[i]] = rs[i];
@@ -102,9 +102,9 @@ package class155;
 //    }
 //    up[i] = ls[i] = rs[i] = dist[i] = 0;
 //    return fa[s];
-//}
+// }
 //
-//void down(int i, int v) {
+// void down(int i, int v) {
 //    if (i != 0) {
 //        add[i] = 0;
 //        int size = 0;
@@ -116,9 +116,9 @@ package class155;
 //            if (ls[i] != 0) sta[++size] = ls[i];
 //        }
 //    }
-//}
+// }
 //
-//void u(int i, int j) {
+// void u(int i, int j) {
 //    int l = find(i);
 //    int r = find(j);
 //    if (l == r) return;
@@ -138,9 +138,9 @@ package class155;
 //    siz[h] = lsize + rsize;
 //    add[h] = addTag;
 //    addHead(h);
-//}
+// }
 //
-//void a1(int i, int v) {
+// void a1(int i, int v) {
 //    int h = find(i);
 //    minusHead(h);
 //    int l = remove(i);
@@ -155,33 +155,33 @@ package class155;
 //    add[i] = 0;
 //    addHead(i);
 //    u(l, i);
-//}
+// }
 //
-//void a2(int i, int v) {
+// void a2(int i, int v) {
 //    int h = find(i);
 //    minusHead(h);
 //    add[h] += v;
 //    addHead(h);
-//}
+// }
 //
-//void a3(int v) {
+// void a3(int v) {
 //    addAll += v;
-//}
+// }
 //
-//int f1(int i) {
+// int f1(int i) {
 //    return num[i] + add[find(i)] + addAll;
-//}
+// }
 //
-//int f2(int i) {
+// int f2(int i) {
 //    int h = find(i);
 //    return num[h] + add[h] + addAll;
-//}
+// }
 //
-//int f3() {
+// int f3() {
 //    return (*heads.rbegin()) + addAll;
-//}
+// }
 //
-//int main(){
+// int main(){
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n;
@@ -189,7 +189,7 @@ package class155;
 //    prepare();
 //    cin >> m;
 //    for (int i = 1; i <= m; i++) {
-//        string op; 
+//        string op;
 //        cin >> op;
 //        if (op == "F3") {
 //            cout << f3() << "\n";
@@ -214,4 +214,4 @@ package class155;
 //        }
 //    }
 //    return 0;
-//}
+// }

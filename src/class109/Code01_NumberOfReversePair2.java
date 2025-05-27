@@ -22,90 +22,89 @@ import java.util.Arrays;
 
 public class Code01_NumberOfReversePair2 {
 
-	public static int MAXN = 500001;
+  public static int MAXN = 500001;
 
-	public static int[] arr = new int[MAXN];
+  public static int[] arr = new int[MAXN];
 
-	public static int[] sort = new int[MAXN];
+  public static int[] sort = new int[MAXN];
 
-	public static int[] tree = new int[MAXN];
+  public static int[] tree = new int[MAXN];
 
-	public static int n, m;
+  public static int n, m;
 
-	public static int lowbit(int i) {
-		return i & -i;
-	}
+  public static int lowbit(int i) {
+    return i & -i;
+  }
 
-	public static void add(int i, int v) {
-		while (i <= m) {
-			tree[i] += v;
-			i += lowbit(i);
-		}
-	}
+  public static void add(int i, int v) {
+    while (i <= m) {
+      tree[i] += v;
+      i += lowbit(i);
+    }
+  }
 
-	// 1~i范围的累加和
-	public static long sum(int i) {
-		long ans = 0;
-		while (i > 0) {
-			ans += tree[i];
-			i -= lowbit(i);
-		}
-		return ans;
-	}
+  // 1~i范围的累加和
+  public static long sum(int i) {
+    long ans = 0;
+    while (i > 0) {
+      ans += tree[i];
+      i -= lowbit(i);
+    }
+    return ans;
+  }
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StreamTokenizer in = new StreamTokenizer(br);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		in.nextToken();
-		n = (int) in.nval;
-		for (int i = 1; i <= n; i++) {
-			in.nextToken();
-			arr[i] = (int) in.nval;
-			sort[i] = arr[i];
-		}
-		out.println(compute());
-		out.flush();
-		out.close();
-		br.close();
-	}
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StreamTokenizer in = new StreamTokenizer(br);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    in.nextToken();
+    n = (int) in.nval;
+    for (int i = 1; i <= n; i++) {
+      in.nextToken();
+      arr[i] = (int) in.nval;
+      sort[i] = arr[i];
+    }
+    out.println(compute());
+    out.flush();
+    out.close();
+    br.close();
+  }
 
-	public static long compute() {
-		Arrays.sort(sort, 1, n + 1);
-		m = 1;
-		for (int i = 2; i <= n; i++) {
-			if (sort[m] != sort[i]) {
-				sort[++m] = sort[i];
-			}
-		}
-		for (int i = 1; i <= n; i++) {
-			arr[i] = rank(arr[i]);
-		}
-		long ans = 0;
-		for (int i = n; i >= 1; i--) {
-			// 右边有多少数字是 <= 当前数值 - 1
-			ans += sum(arr[i] - 1);
-			// 增加当前数字的词频
-			add(arr[i], 1);
-		}
-		return ans;
-	}
+  public static long compute() {
+    Arrays.sort(sort, 1, n + 1);
+    m = 1;
+    for (int i = 2; i <= n; i++) {
+      if (sort[m] != sort[i]) {
+        sort[++m] = sort[i];
+      }
+    }
+    for (int i = 1; i <= n; i++) {
+      arr[i] = rank(arr[i]);
+    }
+    long ans = 0;
+    for (int i = n; i >= 1; i--) {
+      // 右边有多少数字是 <= 当前数值 - 1
+      ans += sum(arr[i] - 1);
+      // 增加当前数字的词频
+      add(arr[i], 1);
+    }
+    return ans;
+  }
 
-	// 给定原始值v
-	// 返回排名值(排序部分1~m中的下标)
-	public static int rank(int v) {
-		int l = 1, r = m, mid;
-		int ans = 0;
-		while (l <= r) {
-			mid = (l + r) / 2;
-			if (sort[mid] >= v) {
-				ans = mid;
-				r = mid - 1;
-			} else {
-				l = mid + 1;
-			}
-		}
-		return ans;
-	}
-
+  // 给定原始值v
+  // 返回排名值(排序部分1~m中的下标)
+  public static int rank(int v) {
+    int l = 1, r = m, mid;
+    int ans = 0;
+    while (l <= r) {
+      mid = (l + r) / 2;
+      if (sort[mid] >= v) {
+        ans = mid;
+        r = mid - 1;
+      } else {
+        l = mid + 1;
+      }
+    }
+    return ans;
+  }
 }

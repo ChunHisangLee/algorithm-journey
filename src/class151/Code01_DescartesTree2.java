@@ -12,24 +12,24 @@ package class151;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <iostream>
-//#include <vector>
-//#include <stack>
-//#include <cstdio>
+// #include <iostream>
+// #include <vector>
+// #include <stack>
+// #include <cstdio>
 //
-//#define LL long long
+// #define LL long long
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 10000001;
+// const int MAXN = 10000001;
 //
-//int arr[MAXN];
-//int ls[MAXN];
-//int rs[MAXN];
-//int sta[MAXN];
-//int n;
+// int arr[MAXN];
+// int ls[MAXN];
+// int rs[MAXN];
+// int sta[MAXN];
+// int n;
 //
-//void build() {
+// void build() {
 //    int top = 0;
 //    for (int i = 1; i <= n; i++) {
 //        int pos = top;
@@ -45,9 +45,9 @@ package class151;
 //        sta[++pos] = i;
 //        top = pos;
 //    }
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n;
@@ -62,4 +62,4 @@ package class151;
 //    }
 //    cout << ans1 << " " << ans2 << endl;
 //    return 0;
-//}
+// }

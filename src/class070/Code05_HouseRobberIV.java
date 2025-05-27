@@ -12,73 +12,72 @@ package class070;
 // 测试链接 : https://leetcode.cn/problems/house-robber-iv/
 public class Code05_HouseRobberIV {
 
-	public static int minCapability(int[] nums, int k) {
-		int n = nums.length, l = nums[0], r = nums[0];
-		for (int i = 1; i < n; i++) {
-			l = Math.min(l, nums[i]);
-			r = Math.max(r, nums[i]);
-		}
-		// l....r
-		int m, ans = 0;
-		while (l <= r) {
-			m = (l + r) / 2;
-			if (mostRob1(nums, n, m) >= k) {
-				ans = m;
-				r = m - 1;
-			} else {
-				l = m + 1;
-			}
-		}
-		return ans;
-	}
+  public static int minCapability(int[] nums, int k) {
+    int n = nums.length, l = nums[0], r = nums[0];
+    for (int i = 1; i < n; i++) {
+      l = Math.min(l, nums[i]);
+      r = Math.max(r, nums[i]);
+    }
+    // l....r
+    int m, ans = 0;
+    while (l <= r) {
+      m = (l + r) / 2;
+      if (mostRob1(nums, n, m) >= k) {
+        ans = m;
+        r = m - 1;
+      } else {
+        l = m + 1;
+      }
+    }
+    return ans;
+  }
 
-	// 盗贼能力为ability时
-	// 返回盗贼最多能窃取多少间房屋
-	// 注意限制 : 不能窃取相邻房屋
-	public static int mostRob1(int[] nums, int n, int ability) {
-		if (n == 1) {
-			return nums[0] <= ability ? 1 : 0;
-		}
-		if (n == 2) {
-			return (nums[0] <= ability || nums[1] <= ability) ? 1 : 0;
-		}
-		int[] dp = new int[n];
-		dp[0] = nums[0] <= ability ? 1 : 0;
-		dp[1] = (nums[0] <= ability || nums[1] <= ability) ? 1 : 0;
-		for (int i = 2; i < n; i++) {
-			dp[i] = Math.max(dp[i - 1], (nums[i] <= ability ? 1 : 0) + dp[i - 2]);
-		}
-		return dp[n - 1];
-	}
+  // 盗贼能力为ability时
+  // 返回盗贼最多能窃取多少间房屋
+  // 注意限制 : 不能窃取相邻房屋
+  public static int mostRob1(int[] nums, int n, int ability) {
+    if (n == 1) {
+      return nums[0] <= ability ? 1 : 0;
+    }
+    if (n == 2) {
+      return (nums[0] <= ability || nums[1] <= ability) ? 1 : 0;
+    }
+    int[] dp = new int[n];
+    dp[0] = nums[0] <= ability ? 1 : 0;
+    dp[1] = (nums[0] <= ability || nums[1] <= ability) ? 1 : 0;
+    for (int i = 2; i < n; i++) {
+      dp[i] = Math.max(dp[i - 1], (nums[i] <= ability ? 1 : 0) + dp[i - 2]);
+    }
+    return dp[n - 1];
+  }
 
-	// 继续空间压缩优化
-	public static int mostRob2(int[] nums, int n, int ability) {
-		if (n == 1) {
-			return nums[0] <= ability ? 1 : 0;
-		}
-		if (n == 2) {
-			return (nums[0] <= ability || nums[1] <= ability) ? 1 : 0;
-		}
-		int prepre = nums[0] <= ability ? 1 : 0;
-		int pre = (nums[0] <= ability || nums[1] <= ability) ? 1 : 0;
-		for (int i = 2, cur; i < n; i++) {
-			cur = Math.max(pre, (nums[i] <= ability ? 1 : 0) + prepre);
-			prepre = pre;
-			pre = cur;
-		}
-		return pre;
-	}
+  // 继续空间压缩优化
+  public static int mostRob2(int[] nums, int n, int ability) {
+    if (n == 1) {
+      return nums[0] <= ability ? 1 : 0;
+    }
+    if (n == 2) {
+      return (nums[0] <= ability || nums[1] <= ability) ? 1 : 0;
+    }
+    int prepre = nums[0] <= ability ? 1 : 0;
+    int pre = (nums[0] <= ability || nums[1] <= ability) ? 1 : 0;
+    for (int i = 2, cur; i < n; i++) {
+      cur = Math.max(pre, (nums[i] <= ability ? 1 : 0) + prepre);
+      prepre = pre;
+      pre = cur;
+    }
+    return pre;
+  }
 
-	// 继续贪心优化
-	public static int mostRob3(int[] nums, int n, int ability) {
-		int ans = 0;
-		for (int i = 0; i < n; i++) {
-			if (nums[i] <= ability) {
-				ans++;
-				i++;
-			}
-		}
-		return ans;
-	}
-
+  // 继续贪心优化
+  public static int mostRob3(int[] nums, int n, int ability) {
+    int ans = 0;
+    for (int i = 0; i < n; i++) {
+      if (nums[i] <= ability) {
+        ans++;
+        i++;
+      }
+    }
+    return ans;
+  }
 }

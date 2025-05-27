@@ -13,39 +13,39 @@ package class161;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 30001;
-//const int INF = 10000001;
-//int n, m;
-//int arr[MAXN];
+// const int MAXN = 30001;
+// const int INF = 10000001;
+// int n, m;
+// int arr[MAXN];
 //
-//int head[MAXN];
-//int nxt[MAXN << 1];
-//int to[MAXN << 1];
-//int cntg = 0;
+// int head[MAXN];
+// int nxt[MAXN << 1];
+// int to[MAXN << 1];
+// int cntg = 0;
 //
-//int fa[MAXN];
-//int dep[MAXN];
-//int siz[MAXN];
-//int son[MAXN];
-//int top[MAXN];
-//int dfn[MAXN];
-//int seg[MAXN];
-//int cntd = 0;
+// int fa[MAXN];
+// int dep[MAXN];
+// int siz[MAXN];
+// int son[MAXN];
+// int top[MAXN];
+// int dfn[MAXN];
+// int seg[MAXN];
+// int cntd = 0;
 //
-//int maxv[MAXN << 2];
-//int sumv[MAXN << 2];
+// int maxv[MAXN << 2];
+// int sumv[MAXN << 2];
 //
-//void addEdge(int u, int v) {
+// void addEdge(int u, int v) {
 //    nxt[++cntg] = head[u];
 //    to[cntg] = v;
 //    head[u] = cntg;
-//}
+// }
 //
-//void dfs1(int u, int f) {
+// void dfs1(int u, int f) {
 //    fa[u] = f;
 //    dep[u] = dep[f] + 1;
 //    siz[u] = 1;
@@ -64,9 +64,9 @@ package class161;
 //            }
 //        }
 //    }
-//}
+// }
 //
-//void dfs2(int u, int t) {
+// void dfs2(int u, int t) {
 //    top[u] = t;
 //    dfn[u] = ++cntd;
 //    seg[cntd] = u;
@@ -78,14 +78,14 @@ package class161;
 //            dfs2(v, v);
 //        }
 //    }
-//}
+// }
 //
-//void up(int i) {
+// void up(int i) {
 //    sumv[i] = sumv[i << 1] + sumv[i << 1 | 1];
 //    maxv[i] = max(maxv[i << 1], maxv[i << 1 | 1]);
-//}
+// }
 //
-//void build(int l, int r, int i) {
+// void build(int l, int r, int i) {
 //    if (l == r) {
 //        sumv[i] = maxv[i] = arr[seg[l]];
 //    } else {
@@ -94,9 +94,9 @@ package class161;
 //        build(mid + 1, r, i << 1 | 1);
 //        up(i);
 //    }
-//}
+// }
 //
-//void update(int jobi, int jobv, int l, int r, int i) {
+// void update(int jobi, int jobv, int l, int r, int i) {
 //    if (l == r) {
 //        sumv[i] = maxv[i] = jobv;
 //    } else {
@@ -108,9 +108,9 @@ package class161;
 //        }
 //        up(i);
 //    }
-//}
+// }
 //
-//int queryMax(int jobl, int jobr, int l, int r, int i) {
+// int queryMax(int jobl, int jobr, int l, int r, int i) {
 //    if (jobl <= l && r <= jobr) {
 //        return maxv[i];
 //    }
@@ -122,9 +122,9 @@ package class161;
 //        ans = max(ans, queryMax(jobl, jobr, mid + 1, r, i << 1 | 1));
 //    }
 //    return ans;
-//}
+// }
 //
-//int querySum(int jobl, int jobr, int l, int r, int i) {
+// int querySum(int jobl, int jobr, int l, int r, int i) {
 //    if (jobl <= l && r <= jobr) {
 //        return sumv[i];
 //    }
@@ -136,13 +136,13 @@ package class161;
 //        ans += querySum(jobl, jobr, mid + 1, r, i << 1 | 1);
 //    }
 //    return ans;
-//}
+// }
 //
-//void pointUpdate(int u, int v) {
+// void pointUpdate(int u, int v) {
 //    update(dfn[u], v, 1, n, 1);
-//}
+// }
 //
-//int pathMax(int x, int y) {
+// int pathMax(int x, int y) {
 //    int ans = -INF;
 //    while (top[x] != top[y]) {
 //        if (dep[top[x]] <= dep[top[y]]) {
@@ -154,9 +154,9 @@ package class161;
 //        }
 //    }
 //    return max(ans, queryMax(min(dfn[x], dfn[y]), max(dfn[x], dfn[y]), 1, n, 1));
-//}
+// }
 //
-//int pathSum(int x, int y) {
+// int pathSum(int x, int y) {
 //    int ans = 0;
 //    while (top[x] != top[y]) {
 //        if (dep[top[x]] <= dep[top[y]]) {
@@ -168,9 +168,9 @@ package class161;
 //        }
 //    }
 //    return ans + querySum(min(dfn[x], dfn[y]), max(dfn[x], dfn[y]), 1, n, 1);
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n;
@@ -199,4 +199,4 @@ package class161;
 //        }
 //    }
 //    return 0;
-//}
+// }

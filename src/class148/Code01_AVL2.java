@@ -14,48 +14,48 @@ package class148;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <iostream>
-//#include <algorithm>
-//#include <climits>
-//#include <cstring>
+// #include <iostream>
+// #include <algorithm>
+// #include <climits>
+// #include <cstring>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 100001;
+// const int MAXN = 100001;
 //
-//int cnt = 0;
-//int head = 0;
-//int key[MAXN];
-//int height[MAXN];
-//int ls[MAXN];
-//int rs[MAXN];
-//int key_count[MAXN];
-//int size[MAXN];
+// int cnt = 0;
+// int head = 0;
+// int key[MAXN];
+// int height[MAXN];
+// int ls[MAXN];
+// int rs[MAXN];
+// int key_count[MAXN];
+// int size[MAXN];
 //
-//void up(int i) {
+// void up(int i) {
 //    size[i] = size[ls[i]] + size[rs[i]] + key_count[i];
 //    height[i] = max(height[ls[i]], height[rs[i]]) + 1;
-//}
+// }
 //
-//int leftRotate(int i) {
+// int leftRotate(int i) {
 //    int r = rs[i];
 //    rs[i] = ls[r];
 //    ls[r] = i;
 //    up(i);
 //    up(r);
 //    return r;
-//}
+// }
 //
-//int rightRotate(int i) {
+// int rightRotate(int i) {
 //    int l = ls[i];
 //    ls[i] = rs[l];
 //    rs[l] = i;
 //    up(i);
 //    up(l);
 //    return l;
-//}
+// }
 //
-//int maintain(int i) {
+// int maintain(int i) {
 //    int lh = height[ls[i]];
 //    int rh = height[rs[i]];
 //    if (lh - rh > 1) {
@@ -74,9 +74,9 @@ package class148;
 //        }
 //    }
 //    return i;
-//}
+// }
 //
-//int add(int i, int num) {
+// int add(int i, int num) {
 //    if (i == 0) {
 //        key[++cnt] = num;
 //        key_count[cnt] = size[cnt] = height[cnt] = 1;
@@ -91,13 +91,13 @@ package class148;
 //    }
 //    up(i);
 //    return maintain(i);
-//}
+// }
 //
-//void add(int num) {
+// void add(int num) {
 //    head = add(head, num);
-//}
+// }
 //
-//int getRank(int i, int num) {
+// int getRank(int i, int num) {
 //    if (i == 0) {
 //        return 0;
 //    }
@@ -106,13 +106,13 @@ package class148;
 //    } else {
 //        return size[ls[i]] + key_count[i] + getRank(rs[i], num);
 //    }
-//}
+// }
 //
-//int getRank(int num) {
+// int getRank(int num) {
 //    return getRank(head, num) + 1;
-//}
+// }
 //
-//int removeMostLeft(int i, int mostLeft) {
+// int removeMostLeft(int i, int mostLeft) {
 //    if (i == mostLeft) {
 //        return rs[i];
 //    } else {
@@ -120,9 +120,9 @@ package class148;
 //        up(i);
 //        return maintain(i);
 //    }
-//}
+// }
 //
-//int remove(int i, int num) {
+// int remove(int i, int num) {
 //    if (key[i] < num) {
 //        rs[i] = remove(rs[i], num);
 //    } else if (key[i] > num) {
@@ -151,28 +151,28 @@ package class148;
 //    }
 //    up(i);
 //    return maintain(i);
-//}
+// }
 //
-//void remove(int num) {
+// void remove(int num) {
 //    if (getRank(num) != getRank(num + 1)) {
 //        head = remove(head, num);
 //    }
-//}
+// }
 //
-//int index(int i, int x) {
+// int index(int i, int x) {
 //    if (size[ls[i]] >= x) {
 //        return index(ls[i], x);
 //    } else if (size[ls[i]] + key_count[i] < x) {
 //        return index(rs[i], x - size[ls[i]] - key_count[i]);
 //    }
 //    return key[i];
-//}
+// }
 //
-//int index(int x) {
+// int index(int x) {
 //    return index(head, x);
-//}
+// }
 //
-//int pre(int i, int num) {
+// int pre(int i, int num) {
 //    if (i == 0) {
 //        return INT_MIN;
 //    }
@@ -181,13 +181,13 @@ package class148;
 //    } else {
 //        return max(key[i], pre(rs[i], num));
 //    }
-//}
+// }
 //
-//int pre(int num) {
+// int pre(int num) {
 //    return pre(head, num);
-//}
+// }
 //
-//int post(int i, int num) {
+// int post(int i, int num) {
 //    if (i == 0) {
 //        return INT_MAX;
 //    }
@@ -196,13 +196,13 @@ package class148;
 //    } else {
 //        return min(key[i], post(ls[i], num));
 //    }
-//}
+// }
 //
-//int post(int num) {
+// int post(int num) {
 //    return post(head, num);
-//}
+// }
 //
-//void clear() {
+// void clear() {
 //    memset(key + 1, 0, cnt * sizeof(int));
 //    memset(height + 1, 0, cnt * sizeof(int));
 //    memset(ls + 1, 0, cnt * sizeof(int));
@@ -211,9 +211,9 @@ package class148;
 //    memset(size + 1, 0, cnt * sizeof(int));
 //    cnt = 0;
 //    head = 0;
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    int n;
@@ -236,4 +236,4 @@ package class148;
 //    }
 //    clear();
 //    return 0;
-//}
+// }

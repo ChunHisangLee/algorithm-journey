@@ -14,48 +14,48 @@ package class151;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <iostream>
-//#include <algorithm>
-//#include <cstring>
-//#include <random>
-//#include <climits>
+// #include <iostream>
+// #include <algorithm>
+// #include <cstring>
+// #include <random>
+// #include <climits>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 100001;
+// const int MAXN = 100001;
 //
-//int cnt = 0;
-//int head = 0;
-//int key[MAXN];
-//int key_count[MAXN];
-//int ls[MAXN];
-//int rs[MAXN];
-//int size[MAXN];
-//double priority[MAXN];
+// int cnt = 0;
+// int head = 0;
+// int key[MAXN];
+// int key_count[MAXN];
+// int ls[MAXN];
+// int rs[MAXN];
+// int size[MAXN];
+// double priority[MAXN];
 //
-//void up(int i) {
+// void up(int i) {
 //    size[i] = size[ls[i]] + size[rs[i]] + key_count[i];
-//}
+// }
 //
-//int leftRotate(int i) {
+// int leftRotate(int i) {
 //    int r = rs[i];
 //    rs[i] = ls[r];
 //    ls[r] = i;
 //    up(i);
 //    up(r);
 //    return r;
-//}
+// }
 //
-//int rightRotate(int i) {
+// int rightRotate(int i) {
 //    int l = ls[i];
 //    ls[i] = rs[l];
 //    rs[l] = i;
 //    up(i);
 //    up(l);
 //    return l;
-//}
+// }
 //
-//int add(int i, int num) {
+// int add(int i, int num) {
 //    if (i == 0) {
 //        key[++cnt] = num;
 //        key_count[cnt] = size[cnt] = 1;
@@ -77,13 +77,13 @@ package class151;
 //        return leftRotate(i);
 //    }
 //    return i;
-//}
+// }
 //
-//void add(int num) {
+// void add(int num) {
 //    head = add(head, num);
-//}
+// }
 //
-//int small(int i, int num) {
+// int small(int i, int num) {
 //    if (i == 0) {
 //        return 0;
 //    }
@@ -92,26 +92,26 @@ package class151;
 //    } else {
 //        return size[ls[i]] + key_count[i] + small(rs[i], num);
 //    }
-//}
+// }
 //
-//int getRank(int num) {
+// int getRank(int num) {
 //    return small(head, num) + 1;
-//}
+// }
 //
-//int index(int i, int x) {
+// int index(int i, int x) {
 //    if (size[ls[i]] >= x) {
 //        return index(ls[i], x);
 //    } else if (size[ls[i]] + key_count[i] < x) {
 //        return index(rs[i], x - size[ls[i]] - key_count[i]);
 //    }
 //    return key[i];
-//}
+// }
 //
-//int index(int x) {
+// int index(int x) {
 //    return index(head, x);
-//}
+// }
 //
-//int pre(int i, int num) {
+// int pre(int i, int num) {
 //    if (i == 0) {
 //        return INT_MIN;
 //    }
@@ -120,13 +120,13 @@ package class151;
 //    } else {
 //        return max(key[i], pre(rs[i], num));
 //    }
-//}
+// }
 //
-//int pre(int num) {
+// int pre(int num) {
 //    return pre(head, num);
-//}
+// }
 //
-//int post(int i, int num) {
+// int post(int i, int num) {
 //    if (i == 0) {
 //        return INT_MAX;
 //    }
@@ -135,13 +135,13 @@ package class151;
 //    } else {
 //        return min(key[i], post(ls[i], num));
 //    }
-//}
+// }
 //
-//int post(int num) {
+// int post(int num) {
 //    return post(head, num);
-//}
+// }
 //
-//int remove(int i, int num) {
+// int remove(int i, int num) {
 //    if (key[i] < num) {
 //        rs[i] = remove(rs[i], num);
 //    } else if (key[i] > num) {
@@ -169,15 +169,15 @@ package class151;
 //    }
 //    up(i);
 //    return i;
-//}
+// }
 //
-//void remove(int num) {
+// void remove(int num) {
 //    if (getRank(num) != getRank(num + 1)) {
 //        head = remove(head, num);
 //    }
-//}
+// }
 //
-//void clear() {
+// void clear() {
 //    fill(key + 1, key + cnt + 1, 0);
 //    fill(key_count + 1, key_count + cnt + 1, 0);
 //    fill(ls + 1, ls + cnt + 1, 0);
@@ -186,9 +186,9 @@ package class151;
 //    fill(priority + 1, priority + cnt + 1, 0);
 //    cnt = 0;
 //    head = 0;
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    srand(time(0));
@@ -212,4 +212,4 @@ package class151;
 //    }
 //    clear();
 //    return 0;
-//}
+// }

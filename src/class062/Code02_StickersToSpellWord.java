@@ -14,91 +14,89 @@ import java.util.HashSet;
 // 测试链接 : https://leetcode.cn/problems/stickers-to-spell-word/
 public class Code02_StickersToSpellWord {
 
-	public static int MAXN = 401;
+  public static int MAXN = 401;
 
-	public static String[] queue = new String[MAXN];
+  public static String[] queue = new String[MAXN];
 
-	public static int l, r;
+  public static int l, r;
 
-	// 下标0 -> a
-	// 下标1 -> b
-	// 下标2 -> c
-	// ...
-	// 下标25 -> z
-	public static ArrayList<ArrayList<String>> graph = new ArrayList<>();
+  // 下标0 -> a
+  // 下标1 -> b
+  // 下标2 -> c
+  // ...
+  // 下标25 -> z
+  public static ArrayList<ArrayList<String>> graph = new ArrayList<>();
+  public static HashSet<String> visited = new HashSet<>();
 
-	static {
-		for (int i = 0; i < 26; i++) {
-			graph.add(new ArrayList<>());
-		}
-	}
+  static {
+    for (int i = 0; i < 26; i++) {
+      graph.add(new ArrayList<>());
+    }
+  }
 
-	public static HashSet<String> visited = new HashSet<>();
+  // 宽度优先遍历的解法
+  // 也可以使用动态规划
+  // 后续课程会有动态规划专题讲解
+  public static int minStickers(String[] stickers, String target) {
+    for (int i = 0; i < 26; i++) {
+      graph.get(i).clear();
+    }
+    visited.clear();
+    for (String str : stickers) {
+      str = sort(str);
+      for (int i = 0; i < str.length(); i++) {
+        if (i == 0 || str.charAt(i) != str.charAt(i - 1)) {
+          graph.get(str.charAt(i) - 'a').add(str);
+        }
+      }
+    }
+    target = sort(target);
+    visited.add(target);
+    l = r = 0;
+    queue[r++] = target;
+    int level = 1;
+    // 使用队列的形式是整层弹出
+    while (l < r) {
+      int size = r - l;
+      for (int i = 0; i < size; i++) {
+        String cur = queue[l++];
+        for (String s : graph.get(cur.charAt(0) - 'a')) {
+          String next = next(cur, s);
+          if (next.equals("")) {
+            return level;
+          } else if (!visited.contains(next)) {
+            visited.add(next);
+            queue[r++] = next;
+          }
+        }
+      }
+      level++;
+    }
+    return -1;
+  }
 
-	// 宽度优先遍历的解法
-	// 也可以使用动态规划
-	// 后续课程会有动态规划专题讲解
-	public static int minStickers(String[] stickers, String target) {
-		for (int i = 0; i < 26; i++) {
-			graph.get(i).clear();
-		}
-		visited.clear();
-		for (String str : stickers) {
-			str = sort(str);
-			for (int i = 0; i < str.length(); i++) {
-				if (i == 0 || str.charAt(i) != str.charAt(i - 1)) {
-					graph.get(str.charAt(i) - 'a').add(str);
-				}
-			}
-		}
-		target = sort(target);
-		visited.add(target);
-		l = r = 0;
-		queue[r++] = target;
-		int level = 1;
-		// 使用队列的形式是整层弹出
-		while (l < r) {
-			int size = r - l;
-			for (int i = 0; i < size; i++) {
-				String cur = queue[l++];
-				for (String s : graph.get(cur.charAt(0) - 'a')) {
-					String next = next(cur, s);
-					if (next.equals("")) {
-						return level;
-					} else if (!visited.contains(next)) {
-						visited.add(next);
-						queue[r++] = next;
-					}
-				}
-			}
-			level++;
-		}
-		return -1;
-	}
+  public static String sort(String str) {
+    char[] s = str.toCharArray();
+    Arrays.sort(s);
+    return String.valueOf(s);
+  }
 
-	public static String sort(String str) {
-		char[] s = str.toCharArray();
-		Arrays.sort(s);
-		return String.valueOf(s);
-	}
-
-	public static String next(String t, String s) {
-		StringBuilder builder = new StringBuilder();
-		for (int i = 0, j = 0; i < t.length();) {
-			if (j == s.length()) {
-				builder.append(t.charAt(i++));
-			} else {
-				if (t.charAt(i) < s.charAt(j)) {
-					builder.append(t.charAt(i++));
-				} else if (t.charAt(i) > s.charAt(j)) {
-					j++;
-				} else {
-					i++;
-					j++;
-				}
-			}
-		}
-		return builder.toString();
-	}
-
+  public static String next(String t, String s) {
+    StringBuilder builder = new StringBuilder();
+    for (int i = 0, j = 0; i < t.length(); ) {
+      if (j == s.length()) {
+        builder.append(t.charAt(i++));
+      } else {
+        if (t.charAt(i) < s.charAt(j)) {
+          builder.append(t.charAt(i++));
+        } else if (t.charAt(i) > s.charAt(j)) {
+          j++;
+        } else {
+          i++;
+          j++;
+        }
+      }
+    }
+    return builder.toString();
+  }
 }

@@ -19,323 +19,316 @@ import java.io.PrintWriter;
 
 public class Code05_EightVerticalHorizontal1 {
 
-	public static int MAXN = 501;
-	public static int MAXQ = 1001;
-	public static int MAXT = 10001;
-	public static int BIT = 999;
-	public static int INT_BIT = 32;
+  public static int MAXN = 501;
+  public static int MAXQ = 1001;
+  public static int MAXT = 10001;
+  public static int BIT = 999;
+  public static int INT_BIT = 32;
+  public static int n, m, q;
+  public static int[] x = new int[MAXQ];
+  public static int[] y = new int[MAXQ];
+  public static BitSet[] w = new BitSet[MAXQ];
+  public static int edgeCnt = 0;
+  public static int[] last = new int[MAXQ];
+  // 可撤销线性基
+  public static BitSet[] basis = new BitSet[BIT + 1];
+  public static int[] inspos = new int[BIT + 1];
+  public static int basiz = 0;
+  // 经典带权并查集，只做扁平化，不做小挂大
+  public static int[] father = new int[MAXN];
+  public static BitSet[] eor = new BitSet[MAXN];
+  // 时间轴线段树上的区间任务列表
+  public static int[] head = new int[MAXQ << 2];
+  public static int[] next = new int[MAXT];
+  public static int[] tox = new int[MAXT];
+  public static int[] toy = new int[MAXT];
+  public static BitSet[] tow = new BitSet[MAXT];
+  public static int cnt = 0;
+  // 每一步的最大异或值
+  public static BitSet[] ans = new BitSet[MAXQ];
 
-	// 位图
-	static class BitSet {
+  // num插入线性基
+  public static void insert(BitSet num) {
+    for (int i = BIT; i >= 0; i--) {
+      if (num.get(i) == 1) {
+        if (basis[i].get(i) == 0) {
+          basis[i] = num;
+          inspos[basiz++] = i;
+          return;
+        }
+        num.eor(basis[i]);
+      }
+    }
+  }
 
-		public int len;
+  // 0这个数字结合线性基，得到的最大异或值返回
+  public static BitSet maxEor() {
+    BitSet ans = new BitSet();
+    for (int i = BIT; i >= 0; i--) {
+      if (ans.get(i) == 0 && basis[i].get(i) == 1) {
+        ans.eor(basis[i]);
+      }
+    }
+    return ans;
+  }
 
-		public int[] arr;
+  // 线性基的撤销
+  public static void cancel(int oldsiz) {
+    while (basiz > oldsiz) {
+      basis[inspos[--basiz]].clear();
+    }
+  }
 
-		public BitSet() {
-			len = BIT / INT_BIT + 1;
-			arr = new int[len];
-		}
+  // 扁平化优化，find的同时修改eor，就是经典的带权并查集
+  public static int find(int i) {
+    if (i != father[i]) {
+      int tmp = father[i];
+      father[i] = find(tmp);
+      eor[i].eor(eor[tmp]);
+    }
+    return father[i];
+  }
 
-		public BitSet(String s) {
-			len = BIT / INT_BIT + 1;
-			arr = new int[len];
-			for (int i = 0, j = s.length() - 1; i < s.length(); i++, j--) {
-				set(i, s.charAt(j) - '0');
-			}
-		}
+  public static BitSet getEor(int i) {
+    find(i);
+    return eor[i];
+  }
 
-		// 返回第i位的状态
-		public int get(int i) {
-			return (arr[i / INT_BIT] >> (i % INT_BIT)) & 1;
-		}
+  public static void union(int u, int v, BitSet w) {
+    int fu = find(u);
+    int fv = find(v);
+    BitSet weight = new BitSet();
+    weight.eor(getEor(u));
+    weight.eor(getEor(v));
+    weight.eor(w);
+    if (fu == fv) {
+      insert(weight);
+    } else {
+      father[fv] = fu;
+      eor[fv] = weight;
+    }
+  }
 
-		// 设置第i位的状态
-		public void set(int i, int v) {
-			if (v == 0) {
-				arr[i / INT_BIT] &= ~(1 << (i % INT_BIT));
-			} else {
-				arr[i / INT_BIT] |= 1 << (i % INT_BIT);
-			}
-		}
+  public static void addEdge(int i, int x, int y, BitSet w) {
+    next[++cnt] = head[i];
+    tox[cnt] = x;
+    toy[cnt] = y;
+    tow[cnt] = w;
+    head[i] = cnt;
+  }
 
-		// 异或other每一位
-		public void eor(BitSet other) {
-			for (int i = 0; i < len; i++) {
-				arr[i] ^= other.arr[i];
-			}
-		}
+  public static void add(int jobl, int jobr, int jobx, int joby, BitSet jobw, int l, int r, int i) {
+    if (jobl <= l && r <= jobr) {
+      addEdge(i, jobx, joby, jobw);
+    } else {
+      int mid = (l + r) >> 1;
+      if (jobl <= mid) {
+        add(jobl, jobr, jobx, joby, jobw, l, mid, i << 1);
+      }
+      if (jobr > mid) {
+        add(jobl, jobr, jobx, joby, jobw, mid + 1, r, i << 1 | 1);
+      }
+    }
+  }
 
-		// 清空每一位
-		public void clear() {
-			for (int i = 0; i < len; i++) {
-				arr[i] = 0;
-			}
-		}
+  public static void dfs(int l, int r, int i) {
+    int oldsiz = basiz;
+    for (int e = head[i]; e > 0; e = next[e]) {
+      union(tox[e], toy[e], tow[e]);
+    }
+    if (l == r) {
+      ans[l] = maxEor();
+    } else {
+      int mid = (l + r) / 2;
+      dfs(l, mid, i << 1);
+      dfs(mid + 1, r, i << 1 | 1);
+    }
+    cancel(oldsiz);
+  }
 
-	}
+  public static void print(BitSet bs, PrintWriter out) {
+    boolean flag = false;
+    for (int i = BIT, s; i >= 0; i--) {
+      s = bs.get(i);
+      if (s == 1) {
+        flag = true;
+      }
+      if (flag) {
+        out.print(s);
+      }
+    }
+    if (!flag) {
+      out.print(0);
+    }
+    out.println();
+  }
 
-	public static int n, m, q;
-	public static int[] x = new int[MAXQ];
-	public static int[] y = new int[MAXQ];
-	public static BitSet[] w = new BitSet[MAXQ];
-	public static int edgeCnt = 0;
-	public static int[] last = new int[MAXQ];
+  public static void main(String[] args) throws IOException {
+    FastReader in = new FastReader();
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    n = in.nextInt();
+    m = in.nextInt();
+    q = in.nextInt();
+    for (int i = 0; i <= BIT; i++) {
+      basis[i] = new BitSet();
+    }
+    for (int i = 1; i <= n; i++) {
+      father[i] = i;
+      eor[i] = new BitSet();
+    }
+    for (int i = 1; i <= m; i++) {
+      int u = in.nextInt();
+      int v = in.nextInt();
+      BitSet w = new BitSet(in.nextString());
+      union(u, v, w);
+    }
+    ans[0] = maxEor();
+    String op;
+    for (int i = 1; i <= q; i++) {
+      op = in.nextString();
+      if (op.equals("Add")) {
+        edgeCnt++;
+        x[edgeCnt] = in.nextInt();
+        y[edgeCnt] = in.nextInt();
+        w[edgeCnt] = new BitSet(in.nextString());
+        last[edgeCnt] = i;
+      } else if (op.equals("Cancel")) {
+        int k = in.nextInt();
+        add(last[k], i - 1, x[k], y[k], w[k], 1, q, 1);
+        last[k] = 0;
+      } else {
+        int k = in.nextInt();
+        add(last[k], i - 1, x[k], y[k], w[k], 1, q, 1);
+        w[k] = new BitSet(in.nextString());
+        last[k] = i;
+      }
+    }
+    for (int i = 1; i <= edgeCnt; i++) {
+      if (last[i] != 0) {
+        add(last[i], q, x[i], y[i], w[i], 1, q, 1);
+      }
+    }
+    if (q > 0) {
+      dfs(1, q, 1);
+    }
+    for (int i = 0; i <= q; i++) {
+      print(ans[i], out);
+    }
+    out.flush();
+    out.close();
+  }
 
-	// 可撤销线性基
-	public static BitSet[] basis = new BitSet[BIT + 1];
-	public static int[] inspos = new int[BIT + 1];
-	public static int basiz = 0;
+  // 位图
+  static class BitSet {
 
-	// 经典带权并查集，只做扁平化，不做小挂大
-	public static int[] father = new int[MAXN];
-	public static BitSet[] eor = new BitSet[MAXN];
+    public int len;
 
-	// 时间轴线段树上的区间任务列表
-	public static int[] head = new int[MAXQ << 2];
-	public static int[] next = new int[MAXT];
-	public static int[] tox = new int[MAXT];
-	public static int[] toy = new int[MAXT];
-	public static BitSet[] tow = new BitSet[MAXT];
-	public static int cnt = 0;
+    public int[] arr;
 
-	// 每一步的最大异或值
-	public static BitSet[] ans = new BitSet[MAXQ];
+    public BitSet() {
+      len = BIT / INT_BIT + 1;
+      arr = new int[len];
+    }
 
-	// num插入线性基
-	public static void insert(BitSet num) {
-		for (int i = BIT; i >= 0; i--) {
-			if (num.get(i) == 1) {
-				if (basis[i].get(i) == 0) {
-					basis[i] = num;
-					inspos[basiz++] = i;
-					return;
-				}
-				num.eor(basis[i]);
-			}
-		}
-	}
+    public BitSet(String s) {
+      len = BIT / INT_BIT + 1;
+      arr = new int[len];
+      for (int i = 0, j = s.length() - 1; i < s.length(); i++, j--) {
+        set(i, s.charAt(j) - '0');
+      }
+    }
 
-	// 0这个数字结合线性基，得到的最大异或值返回
-	public static BitSet maxEor() {
-		BitSet ans = new BitSet();
-		for (int i = BIT; i >= 0; i--) {
-			if (ans.get(i) == 0 && basis[i].get(i) == 1) {
-				ans.eor(basis[i]);
-			}
-		}
-		return ans;
-	}
+    // 返回第i位的状态
+    public int get(int i) {
+      return (arr[i / INT_BIT] >> (i % INT_BIT)) & 1;
+    }
 
-	// 线性基的撤销
-	public static void cancel(int oldsiz) {
-		while (basiz > oldsiz) {
-			basis[inspos[--basiz]].clear();
-		}
-	}
+    // 设置第i位的状态
+    public void set(int i, int v) {
+      if (v == 0) {
+        arr[i / INT_BIT] &= ~(1 << (i % INT_BIT));
+      } else {
+        arr[i / INT_BIT] |= 1 << (i % INT_BIT);
+      }
+    }
 
-	// 扁平化优化，find的同时修改eor，就是经典的带权并查集
-	public static int find(int i) {
-		if (i != father[i]) {
-			int tmp = father[i];
-			father[i] = find(tmp);
-			eor[i].eor(eor[tmp]);
-		}
-		return father[i];
-	}
+    // 异或other每一位
+    public void eor(BitSet other) {
+      for (int i = 0; i < len; i++) {
+        arr[i] ^= other.arr[i];
+      }
+    }
 
-	public static BitSet getEor(int i) {
-		find(i);
-		return eor[i];
-	}
+    // 清空每一位
+    public void clear() {
+      for (int i = 0; i < len; i++) {
+        arr[i] = 0;
+      }
+    }
+  }
 
-	public static void union(int u, int v, BitSet w) {
-		int fu = find(u);
-		int fv = find(v);
-		BitSet weight = new BitSet();
-		weight.eor(getEor(u));
-		weight.eor(getEor(v));
-		weight.eor(w);
-		if (fu == fv) {
-			insert(weight);
-		} else {
-			father[fv] = fu;
-			eor[fv] = weight;
-		}
-	}
+  // 读写工具类
+  static class FastReader {
+    private static final int BUFFER_SIZE = 1 << 16;
+    private final InputStream in;
+    private final byte[] buffer;
+    private int ptr, len;
 
-	public static void addEdge(int i, int x, int y, BitSet w) {
-		next[++cnt] = head[i];
-		tox[cnt] = x;
-		toy[cnt] = y;
-		tow[cnt] = w;
-		head[i] = cnt;
-	}
+    public FastReader() {
+      in = System.in;
+      buffer = new byte[BUFFER_SIZE];
+      ptr = len = 0;
+    }
 
-	public static void add(int jobl, int jobr, int jobx, int joby, BitSet jobw, int l, int r, int i) {
-		if (jobl <= l && r <= jobr) {
-			addEdge(i, jobx, joby, jobw);
-		} else {
-			int mid = (l + r) >> 1;
-			if (jobl <= mid) {
-				add(jobl, jobr, jobx, joby, jobw, l, mid, i << 1);
-			}
-			if (jobr > mid) {
-				add(jobl, jobr, jobx, joby, jobw, mid + 1, r, i << 1 | 1);
-			}
-		}
-	}
+    private boolean hasNextByte() throws IOException {
+      if (ptr < len) {
+        return true;
+      }
+      ptr = 0;
+      len = in.read(buffer);
+      return len > 0;
+    }
 
-	public static void dfs(int l, int r, int i) {
-		int oldsiz = basiz;
-		for (int e = head[i]; e > 0; e = next[e]) {
-			union(tox[e], toy[e], tow[e]);
-		}
-		if (l == r) {
-			ans[l] = maxEor();
-		} else {
-			int mid = (l + r) / 2;
-			dfs(l, mid, i << 1);
-			dfs(mid + 1, r, i << 1 | 1);
-		}
-		cancel(oldsiz);
-	}
+    private byte readByte() throws IOException {
+      if (!hasNextByte()) {
+        return -1;
+      }
+      return buffer[ptr++];
+    }
 
-	public static void print(BitSet bs, PrintWriter out) {
-		boolean flag = false;
-		for (int i = BIT, s; i >= 0; i--) {
-			s = bs.get(i);
-			if (s == 1) {
-				flag = true;
-			}
-			if (flag) {
-				out.print(s);
-			}
-		}
-		if (!flag) {
-			out.print(0);
-		}
-		out.println();
-	}
+    public int nextInt() throws IOException {
+      int num = 0;
+      byte b = readByte();
+      while (isWhitespace(b)) {
+        b = readByte();
+      }
+      boolean minus = false;
+      if (b == '-') {
+        minus = true;
+        b = readByte();
+      }
+      while (!isWhitespace(b) && b != -1) {
+        num = num * 10 + (b - '0');
+        b = readByte();
+      }
+      return minus ? -num : num;
+    }
 
-	public static void main(String[] args) throws IOException {
-		FastReader in = new FastReader();
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		n = in.nextInt();
-		m = in.nextInt();
-		q = in.nextInt();
-		for (int i = 0; i <= BIT; i++) {
-			basis[i] = new BitSet();
-		}
-		for (int i = 1; i <= n; i++) {
-			father[i] = i;
-			eor[i] = new BitSet();
-		}
-		for (int i = 1; i <= m; i++) {
-			int u = in.nextInt();
-			int v = in.nextInt();
-			BitSet w = new BitSet(in.nextString());
-			union(u, v, w);
-		}
-		ans[0] = maxEor();
-		String op;
-		for (int i = 1; i <= q; i++) {
-			op = in.nextString();
-			if (op.equals("Add")) {
-				edgeCnt++;
-				x[edgeCnt] = in.nextInt();
-				y[edgeCnt] = in.nextInt();
-				w[edgeCnt] = new BitSet(in.nextString());
-				last[edgeCnt] = i;
-			} else if (op.equals("Cancel")) {
-				int k = in.nextInt();
-				add(last[k], i - 1, x[k], y[k], w[k], 1, q, 1);
-				last[k] = 0;
-			} else {
-				int k = in.nextInt();
-				add(last[k], i - 1, x[k], y[k], w[k], 1, q, 1);
-				w[k] = new BitSet(in.nextString());
-				last[k] = i;
-			}
-		}
-		for (int i = 1; i <= edgeCnt; i++) {
-			if (last[i] != 0) {
-				add(last[i], q, x[i], y[i], w[i], 1, q, 1);
-			}
-		}
-		if (q > 0) {
-			dfs(1, q, 1);
-		}
-		for (int i = 0; i <= q; i++) {
-			print(ans[i], out);
-		}
-		out.flush();
-		out.close();
-	}
+    public String nextString() throws IOException {
+      byte b = readByte();
+      while (isWhitespace(b)) {
+        b = readByte();
+      }
+      StringBuilder sb = new StringBuilder(1000);
+      while (!isWhitespace(b) && b != -1) {
+        sb.append((char) b);
+        b = readByte();
+      }
+      return sb.toString();
+    }
 
-	// 读写工具类
-	static class FastReader {
-		private static final int BUFFER_SIZE = 1 << 16;
-		private final InputStream in;
-		private final byte[] buffer;
-		private int ptr, len;
-
-		public FastReader() {
-			in = System.in;
-			buffer = new byte[BUFFER_SIZE];
-			ptr = len = 0;
-		}
-
-		private boolean hasNextByte() throws IOException {
-			if (ptr < len) {
-				return true;
-			}
-			ptr = 0;
-			len = in.read(buffer);
-			return len > 0;
-		}
-
-		private byte readByte() throws IOException {
-			if (!hasNextByte()) {
-				return -1;
-			}
-			return buffer[ptr++];
-		}
-
-		public int nextInt() throws IOException {
-			int num = 0;
-			byte b = readByte();
-			while (isWhitespace(b)) {
-				b = readByte();
-			}
-			boolean minus = false;
-			if (b == '-') {
-				minus = true;
-				b = readByte();
-			}
-			while (!isWhitespace(b) && b != -1) {
-				num = num * 10 + (b - '0');
-				b = readByte();
-			}
-			return minus ? -num : num;
-		}
-
-		public String nextString() throws IOException {
-			byte b = readByte();
-			while (isWhitespace(b)) {
-				b = readByte();
-			}
-			StringBuilder sb = new StringBuilder(1000);
-			while (!isWhitespace(b) && b != -1) {
-				sb.append((char) b);
-				b = readByte();
-			}
-			return sb.toString();
-		}
-
-		private boolean isWhitespace(byte b) {
-			return b == ' ' || b == '\n' || b == '\r' || b == '\t';
-		}
-	}
-
+    private boolean isWhitespace(byte b) {
+      return b == ' ' || b == '\n' || b == '\r' || b == '\t';
+    }
+  }
 }

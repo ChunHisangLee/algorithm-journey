@@ -15,29 +15,29 @@ package class155;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 300001;
-//int n, m;
-//long long defend[MAXN];
-//int belong[MAXN];
-//int type[MAXN];       
-//long long gain[MAXN];
-//long long attack[MAXN];
-//int first[MAXN];
-//int deep[MAXN];
-//int top[MAXN];
-//int sacrifice[MAXN];
-//int die[MAXN];
-//int ls[MAXN];
-//int rs[MAXN];
-//int dist[MAXN];
-//long long mul[MAXN];
-//long long add[MAXN];
+// const int MAXN = 300001;
+// int n, m;
+// long long defend[MAXN];
+// int belong[MAXN];
+// int type[MAXN];
+// long long gain[MAXN];
+// long long attack[MAXN];
+// int first[MAXN];
+// int deep[MAXN];
+// int top[MAXN];
+// int sacrifice[MAXN];
+// int die[MAXN];
+// int ls[MAXN];
+// int rs[MAXN];
+// int dist[MAXN];
+// long long mul[MAXN];
+// long long add[MAXN];
 //
-//void prepare() {
+// void prepare() {
 //    dist[0] = -1;
 //    for (int i = 1; i <= m; i++) {
 //        ls[i] = rs[i] = dist[i] = 0;
@@ -47,9 +47,9 @@ package class155;
 //    for (int i = 1; i <= n; i++) {
 //        sacrifice[i] = top[i] = 0;
 //    }
-//}
+// }
 //
-//void upgrade(int i, int t, long long v) {
+// void upgrade(int i, int t, long long v) {
 //    if (t == 0) {
 //        attack[i] += v;
 //        add[i] += v;
@@ -58,9 +58,9 @@ package class155;
 //        mul[i] *= v;
 //        add[i] *= v;
 //    }
-//}
+// }
 //
-//void down(int i) {
+// void down(int i) {
 //    if (mul[i] != 1 || add[i] != 0) {
 //        int l = ls[i];
 //        int r = rs[i];
@@ -77,9 +77,9 @@ package class155;
 //        mul[i] = 1;
 //        add[i] = 0;
 //    }
-//}
+// }
 //
-//int merge(int i, int j) {
+// int merge(int i, int j) {
 //    if (i == 0 || j == 0) {
 //        return i + j;
 //    }
@@ -93,16 +93,16 @@ package class155;
 //    }
 //    dist[i] = dist[rs[i]] + 1;
 //    return i;
-//}
+// }
 //
-//int pop(int i) {
+// int pop(int i) {
 //    down(i);
 //    int ans = merge(ls[i], rs[i]);
 //    ls[i] = rs[i] = dist[i] = 0;
 //    return ans;
-//}
+// }
 //
-//void compute() {
+// void compute() {
 //    deep[1] = 1;
 //    for (int i = 2; i <= n; i++) {
 //        deep[i] = deep[belong[i]] + 1;
@@ -129,9 +129,9 @@ package class155;
 //            }
 //        }
 //    }
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> m;
@@ -153,4 +153,4 @@ package class155;
 //        cout << deep[first[i]] - deep[die[i]] << endl;
 //    }
 //    return 0;
-//}
+// }

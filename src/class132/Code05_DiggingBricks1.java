@@ -24,59 +24,58 @@ import java.io.StreamTokenizer;
 
 public class Code05_DiggingBricks1 {
 
-	public static int MAXN = 51;
+  public static int MAXN = 51;
 
-	public static int MAXM = 1301;
+  public static int MAXM = 1301;
 
-	public static int[][] grid = new int[MAXN][MAXN];
+  public static int[][] grid = new int[MAXN][MAXN];
 
-	public static int[][][] dp = new int[MAXN][MAXN][MAXM];
+  public static int[][][] dp = new int[MAXN][MAXN][MAXM];
 
-	public static int n, m;
+  public static int n, m;
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StreamTokenizer in = new StreamTokenizer(br);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		in.nextToken();
-		n = (int) in.nval;
-		in.nextToken();
-		m = (int) in.nval;
-		for (int j = 1; j <= n; j++) {
-			for (int i = n; i >= j; i--) {
-				in.nextToken();
-				grid[i][j] = (int) in.nval;
-			}
-		}
-		out.println(compute());
-		out.flush();
-		out.close();
-		br.close();
-	}
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StreamTokenizer in = new StreamTokenizer(br);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    in.nextToken();
+    n = (int) in.nval;
+    in.nextToken();
+    m = (int) in.nval;
+    for (int j = 1; j <= n; j++) {
+      for (int i = n; i >= j; i--) {
+        in.nextToken();
+        grid[i][j] = (int) in.nval;
+      }
+    }
+    out.println(compute());
+    out.flush();
+    out.close();
+    br.close();
+  }
 
-	// 只展示核心思路，不优化枚举，不做空间压缩
-	// 时间复杂度O(n^3 * m)
-	public static int compute() {
-		int ans = 0;
-		for (int i = 1, cur, max; i <= n; i++) {
-			// cur是当前行的收益
-			cur = 0;
-			for (int j = 0; j <= i; j++) {
-				cur += grid[i][j];
-				// 想挖到j号砖，总共挖的数量一定不少于
-				// (j + 1) * j / 2，也就是等差数列
-				// 如果k小于这个值无意义，认为收益是0
-				for (int k = (j + 1) * j / 2; k <= m; k++) {
-					max = 0;
-					for (int p = Math.max(0, j - 1); p <= i - 1; p++) {
-						max = Math.max(max, dp[i - 1][p][k - j]);
-					}
-					dp[i][j][k] = max + cur;
-					ans = Math.max(ans, dp[i][j][k]);
-				}
-			}
-		}
-		return ans;
-	}
-
+  // 只展示核心思路，不优化枚举，不做空间压缩
+  // 时间复杂度O(n^3 * m)
+  public static int compute() {
+    int ans = 0;
+    for (int i = 1, cur, max; i <= n; i++) {
+      // cur是当前行的收益
+      cur = 0;
+      for (int j = 0; j <= i; j++) {
+        cur += grid[i][j];
+        // 想挖到j号砖，总共挖的数量一定不少于
+        // (j + 1) * j / 2，也就是等差数列
+        // 如果k小于这个值无意义，认为收益是0
+        for (int k = (j + 1) * j / 2; k <= m; k++) {
+          max = 0;
+          for (int p = Math.max(0, j - 1); p <= i - 1; p++) {
+            max = Math.max(max, dp[i - 1][p][k - j]);
+          }
+          dp[i][j][k] = max + cur;
+          ans = Math.max(ans, dp[i][j][k]);
+        }
+      }
+    }
+    return ans;
+  }
 }

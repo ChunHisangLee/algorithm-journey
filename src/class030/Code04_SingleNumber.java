@@ -5,12 +5,11 @@ package class030;
 // 测试链接 : https://leetcode.cn/problems/single-number/
 public class Code04_SingleNumber {
 
-	public static int singleNumber(int[] nums) {
-		int eor = 0;
-		for (int num : nums) {
-			eor ^= num;
-		}
-		return eor;
-	}
-
+  public static int singleNumber(int[] nums) {
+    int eor = 0;
+    for (int num : nums) {
+      eor ^= num;
+    }
+    return eor;
+  }
 }

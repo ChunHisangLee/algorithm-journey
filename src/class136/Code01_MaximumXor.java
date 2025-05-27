@@ -17,58 +17,57 @@ import java.io.StreamTokenizer;
 
 public class Code01_MaximumXor {
 
-	public static int MAXN = 51;
+  public static int MAXN = 51;
 
-	public static int BIT = 50;
+  public static int BIT = 50;
 
-	public static long[] arr = new long[MAXN];
+  public static long[] arr = new long[MAXN];
 
-	public static long[] basis = new long[BIT + 1];
+  public static long[] basis = new long[BIT + 1];
 
-	public static int n;
+  public static int n;
 
-	// 普通消元
-	// 计算最大异或和
-	public static long compute() {
-		for (int i = 1; i <= n; i++) {
-			insert(arr[i]);
-		}
-		long ans = 0;
-		for (int i = BIT; i >= 0; i--) {
-			ans = Math.max(ans, ans ^ basis[i]);
-		}
-		return ans;
-	}
+  // 普通消元
+  // 计算最大异或和
+  public static long compute() {
+    for (int i = 1; i <= n; i++) {
+      insert(arr[i]);
+    }
+    long ans = 0;
+    for (int i = BIT; i >= 0; i--) {
+      ans = Math.max(ans, ans ^ basis[i]);
+    }
+    return ans;
+  }
 
-	// 线性基里插入num，如果线性基增加了返回true，否则返回false
-	public static boolean insert(long num) {
-		for (int i = BIT; i >= 0; i--) {
-			if (num >> i == 1) {
-				if (basis[i] == 0) {
-					basis[i] = num;
-					return true;
-				}
-				num ^= basis[i];
-			}
-		}
-		return false;
-	}
+  // 线性基里插入num，如果线性基增加了返回true，否则返回false
+  public static boolean insert(long num) {
+    for (int i = BIT; i >= 0; i--) {
+      if (num >> i == 1) {
+        if (basis[i] == 0) {
+          basis[i] = num;
+          return true;
+        }
+        num ^= basis[i];
+      }
+    }
+    return false;
+  }
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StreamTokenizer in = new StreamTokenizer(br);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		in.nextToken();
-		n = (int) in.nval;
-		for (int i = 1; i <= n; i++) {
-			in.nextToken();
-			arr[i] = (long) in.nval;
-		}
-		compute();
-		out.println(compute());
-		out.flush();
-		out.close();
-		br.close();
-	}
-
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StreamTokenizer in = new StreamTokenizer(br);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    in.nextToken();
+    n = (int) in.nval;
+    for (int i = 1; i <= n; i++) {
+      in.nextToken();
+      arr[i] = (long) in.nval;
+    }
+    compute();
+    out.println(compute());
+    out.flush();
+    out.close();
+    br.close();
+  }
 }

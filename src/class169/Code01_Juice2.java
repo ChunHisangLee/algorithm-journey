@@ -11,42 +11,42 @@ package class169;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//struct Juice {
+// struct Juice {
 //    int d, p, l;
-//};
+// };
 //
-//bool JuiceCmp(Juice x, Juice y) {
+// bool JuiceCmp(Juice x, Juice y) {
 //    return x.d > y.d;
-//}
+// }
 //
-//const int MAXN = 100001;
-//int n, m;
+// const int MAXN = 100001;
+// int n, m;
 //
-//Juice juice[MAXN];
-//int qid[MAXN];
-//long long money[MAXN];
-//long long least[MAXN];
+// Juice juice[MAXN];
+// int qid[MAXN];
+// long long money[MAXN];
+// long long least[MAXN];
 //
-//int maxp = 0;
-//long long suml[MAXN << 2];
-//long long cost[MAXN << 2];
-//int used = 0;
+// int maxp = 0;
+// long long suml[MAXN << 2];
+// long long cost[MAXN << 2];
+// int used = 0;
 //
-//int lset[MAXN];
-//int rset[MAXN];
+// int lset[MAXN];
+// int rset[MAXN];
 //
-//int ans[MAXN];
+// int ans[MAXN];
 //
-//void up(int i) {
+// void up(int i) {
 //    suml[i] = suml[i << 1] + suml[i << 1 | 1];
 //    cost[i] = cost[i << 1] + cost[i << 1 | 1];
-//}
+// }
 //
-//void add(int jobi, int jobv, int l, int r, int i) {
+// void add(int jobi, int jobv, int l, int r, int i) {
 //    if (l == r) {
 //        suml[i] += jobv;
 //        cost[i] = suml[i] * l;
@@ -59,9 +59,9 @@ package class169;
 //        }
 //        up(i);
 //    }
-//}
+// }
 //
-//long long query(long long volume, int l, int r, int i) {
+// long long query(long long volume, int l, int r, int i) {
 //    if (l == r) {
 //        return volume * l;
 //    }
@@ -71,9 +71,9 @@ package class169;
 //    } else {
 //        return cost[i << 1] + query(volume - suml[i << 1], mid + 1, r, i << 1 | 1);
 //    }
-//}
+// }
 //
-//void compute(int ql, int qr, int vl, int vr) {
+// void compute(int ql, int qr, int vl, int vr) {
 //    if (ql > qr) {
 //        return;
 //    }
@@ -109,9 +109,9 @@ package class169;
 //        compute(ql, ql + lsiz - 1, vl, mid);
 //        compute(ql + lsiz, qr, mid + 1, vr);
 //    }
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> m;
@@ -133,4 +133,4 @@ package class169;
 //        }
 //    }
 //    return 0;
-//}
+// }

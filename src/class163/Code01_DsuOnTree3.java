@@ -9,34 +9,34 @@ package class163;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 100001;
-//int n, m;
-//int arr[MAXN];
+// const int MAXN = 100001;
+// int n, m;
+// int arr[MAXN];
 //
-//int head[MAXN];
-//int nxt[MAXN << 1];
-//int to[MAXN << 1];
-//int cnt = 0;
+// int head[MAXN];
+// int nxt[MAXN << 1];
+// int to[MAXN << 1];
+// int cnt = 0;
 //
-//int fa[MAXN];
-//int siz[MAXN];
-//int son[MAXN];
+// int fa[MAXN];
+// int siz[MAXN];
+// int son[MAXN];
 //
-//int colorCnt[MAXN];
-//int ans[MAXN];
-//int diffColors = 0;
+// int colorCnt[MAXN];
+// int ans[MAXN];
+// int diffColors = 0;
 //
-//void addEdge(int u, int v) {
+// void addEdge(int u, int v) {
 //    nxt[++cnt] = head[u];
 //    to[cnt] = v;
 //    head[u] = cnt;
-//}
+// }
 //
-//void dfs1(int u, int f) {
+// void dfs1(int u, int f) {
 //    fa[u] = f;
 //    siz[u] = 1;
 //    for (int e = head[u], v; e > 0; e = nxt[e]) {
@@ -54,9 +54,9 @@ package class163;
 //            }
 //        }
 //    }
-//}
+// }
 //
-//void effect(int u) {
+// void effect(int u) {
 //    if (++colorCnt[arr[u]] == 1) {
 //        diffColors++;
 //    }
@@ -66,9 +66,9 @@ package class163;
 //            effect(v);
 //        }
 //    }
-//}
+// }
 //
-//void cancel(int u) {
+// void cancel(int u) {
 //    colorCnt[arr[u]] = 0;
 //    for (int e = head[u], v; e > 0; e = nxt[e]) {
 //        v = to[e];
@@ -76,9 +76,9 @@ package class163;
 //            cancel(v);
 //        }
 //    }
-//}
+// }
 //
-//void dfs2(int u, int keep) {
+// void dfs2(int u, int keep) {
 //    for (int e = head[u], v; e > 0; e = nxt[e]) {
 //        v = to[e];
 //        if (v != fa[u] && v != son[u]) {
@@ -102,9 +102,9 @@ package class163;
 //        diffColors = 0;
 //        cancel(u);
 //    }
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n;
@@ -124,4 +124,4 @@ package class163;
 //        cout << ans[cur] << "\n";
 //    }
 //    return 0;
-//}
+// }

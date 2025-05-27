@@ -13,42 +13,42 @@ package class161;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 50001;
-//const int INF  = 1000000001;
-//int n, m;
-//int arr[MAXN];
+// const int MAXN = 50001;
+// const int INF  = 1000000001;
+// int n, m;
+// int arr[MAXN];
 //
-//int head[MAXN];
-//int nxt[MAXN << 1];
-//int to[MAXN << 1];
-//int cntg = 0;
+// int head[MAXN];
+// int nxt[MAXN << 1];
+// int to[MAXN << 1];
+// int cntg = 0;
 //
-//int fa[MAXN];
-//int dep[MAXN];
-//int siz[MAXN];
-//int son[MAXN];
-//int top[MAXN];
-//int dfn[MAXN];
-//int seg[MAXN];
-//int cntd = 0;
+// int fa[MAXN];
+// int dep[MAXN];
+// int siz[MAXN];
+// int son[MAXN];
+// int top[MAXN];
+// int dfn[MAXN];
+// int seg[MAXN];
+// int cntd = 0;
 //
-//int maxv[MAXN << 2];
-//int minv[MAXN << 2];
-//int lprofit[MAXN << 2];
-//int rprofit[MAXN << 2];
-//int addTag[MAXN << 2];
+// int maxv[MAXN << 2];
+// int minv[MAXN << 2];
+// int lprofit[MAXN << 2];
+// int rprofit[MAXN << 2];
+// int addTag[MAXN << 2];
 //
-//void addEdge(int u, int v) {
+// void addEdge(int u, int v) {
 //    nxt[++cntg] = head[u];
 //    to[cntg] = v;
 //    head[u] = cntg;
-//}
+// }
 //
-//void dfs1(int u, int f) {
+// void dfs1(int u, int f) {
 //    fa[u] = f;
 //    dep[u] = dep[f] + 1;
 //    siz[u] = 1;
@@ -67,9 +67,9 @@ package class161;
 //            }
 //        }
 //    }
-//}
+// }
 //
-//void dfs2(int u, int t) {
+// void dfs2(int u, int t) {
 //    top[u] = t;
 //    dfn[u] = ++cntd;
 //    seg[cntd] = u;
@@ -83,32 +83,32 @@ package class161;
 //            dfs2(v, v);
 //        }
 //    }
-//}
+// }
 //
-//void up(int i) {
+// void up(int i) {
 //    int l = i << 1;
 //    int r = i << 1 | 1;
 //    maxv[i] = max(maxv[l], maxv[r]);
 //    minv[i] = min(minv[l], minv[r]);
 //    lprofit[i] = max({lprofit[l], lprofit[r], maxv[r] - minv[l]});
 //    rprofit[i] = max({rprofit[l], rprofit[r], maxv[l] - minv[r]});
-//}
+// }
 //
-//void lazy(int i, int v) {
+// void lazy(int i, int v) {
 //    maxv[i] += v;
 //    minv[i] += v;
 //    addTag[i] += v;
-//}
+// }
 //
-//void down(int i) {
+// void down(int i) {
 //    if (addTag[i] != 0) {
 //        lazy(i << 1, addTag[i]);
 //        lazy(i << 1 | 1, addTag[i]);
 //        addTag[i] = 0;
 //    }
-//}
+// }
 //
-//void build(int l, int r, int i) {
+// void build(int l, int r, int i) {
 //    if (l == r) {
 //        maxv[i] = minv[i] = arr[seg[l]];
 //    } else {
@@ -117,9 +117,9 @@ package class161;
 //        build(mid + 1, r, i << 1 | 1);
 //        up(i);
 //    }
-//}
+// }
 //
-//void add(int jobl, int jobr, int jobv, int l, int r, int i) {
+// void add(int jobl, int jobr, int jobv, int l, int r, int i) {
 //    if (jobl <= l && r <= jobr) {
 //        lazy(i, jobv);
 //    } else {
@@ -133,9 +133,9 @@ package class161;
 //        }
 //        up(i);
 //    }
-//}
+// }
 //
-//void merge(int ans[], int rmax, int rmin, int rlpro, int rrpro) {
+// void merge(int ans[], int rmax, int rmin, int rlpro, int rrpro) {
 //    int lmax  = ans[0];
 //    int lmin  = ans[1];
 //    int llpro = ans[2];
@@ -144,9 +144,9 @@ package class161;
 //    ans[1] = min(lmin, rmin);
 //    ans[2] = max({llpro, rlpro, rmax - lmin});
 //    ans[3] = max({lrpro, rrpro, lmax - rmin});
-//}
+// }
 //
-//void query(int ans[], int jobl, int jobr, int l, int r, int i) {
+// void query(int ans[], int jobl, int jobr, int l, int r, int i) {
 //    if (jobl <= l && r <= jobr) {
 //        merge(ans, maxv[i], minv[i], lprofit[i], rprofit[i]);
 //    } else {
@@ -159,24 +159,24 @@ package class161;
 //            query(ans, jobl, jobr, mid + 1, r, i << 1 | 1);
 //        }
 //    }
-//}
+// }
 //
-//void query(int ans[], int jobl, int jobr) {
+// void query(int ans[], int jobl, int jobr) {
 //    ans[0] = -INF;
 //    ans[1] =  INF;
 //    ans[2] =  0;
 //    ans[3] =  0;
 //    query(ans, jobl, jobr, 1, n, 1);
-//}
+// }
 //
-//void clone(int *a, int *b) {
+// void clone(int *a, int *b) {
 //    a[0] = b[0];
 //    a[1] = b[1];
 //    a[2] = b[2];
 //    a[3] = b[3];
-//}
+// }
 //
-//int compute(int x, int y, int v) {
+// int compute(int x, int y, int v) {
 //    int tmpx = x;
 //    int tmpy = y;
 //    int xpath[4] = {-INF, INF, 0, 0};
@@ -218,9 +218,9 @@ package class161;
 //    }
 //    add(min(dfn[x], dfn[y]), max(dfn[x], dfn[y]), v, 1, n, 1);
 //    return ans;
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n;
@@ -243,4 +243,4 @@ package class161;
 //        cout << compute(x, y, v) << "\n";
 //    }
 //    return 0;
-//}
+// }

@@ -16,42 +16,41 @@ import java.util.PriorityQueue;
 // 测试链接 : https://leetcode.cn/problems/minimum-number-of-refueling-stops/
 public class Code06_MinimumNumberRefuelingStops {
 
-	public static int minRefuelStops(int target, int startFuel, int[][] stations) {
-		if (startFuel >= target) {
-			return 0;
-		}
-		// 大根堆
-		PriorityQueue<Integer> heap = new PriorityQueue<>((a, b) -> b - a);
-		// 包括初始油量 + 沿途加的油，能让你达到什么位置，to
-		int to = startFuel;
-		int cnt = 0;
-		for (int[] station : stations) {
-			int position = station[0];
-			int fuel = station[1];
-			if (to < position) {
-				while (!heap.isEmpty() && to < position) {
-					to += heap.poll();
-					cnt++;
-					if (to >= target) {
-						return cnt;
-					}
-				}
-				if (to < position) {
-					return -1;
-				}
-			}
-			heap.add(fuel);
-		}
-		// 代码能走到这里，说明还没到达target
-		// 如果还有油，看看能不能冲到target
-		while (!heap.isEmpty()) {
-			to += heap.poll();
-			cnt++;
-			if (to >= target) {
-				return cnt;
-			}
-		}
-		return -1;
-	}
-
+  public static int minRefuelStops(int target, int startFuel, int[][] stations) {
+    if (startFuel >= target) {
+      return 0;
+    }
+    // 大根堆
+    PriorityQueue<Integer> heap = new PriorityQueue<>((a, b) -> b - a);
+    // 包括初始油量 + 沿途加的油，能让你达到什么位置，to
+    int to = startFuel;
+    int cnt = 0;
+    for (int[] station : stations) {
+      int position = station[0];
+      int fuel = station[1];
+      if (to < position) {
+        while (!heap.isEmpty() && to < position) {
+          to += heap.poll();
+          cnt++;
+          if (to >= target) {
+            return cnt;
+          }
+        }
+        if (to < position) {
+          return -1;
+        }
+      }
+      heap.add(fuel);
+    }
+    // 代码能走到这里，说明还没到达target
+    // 如果还有油，看看能不能冲到target
+    while (!heap.isEmpty()) {
+      to += heap.poll();
+      cnt++;
+      if (to >= target) {
+        return cnt;
+      }
+    }
+    return -1;
+  }
 }

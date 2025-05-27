@@ -14,23 +14,23 @@ package class159;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 50001;
-//const int MAXT = MAXN * 20;
-//const int BIT = 30;
-//const int MOD = 1000000007;
-//const int INV2 = 500000004;
-//int n, k;
-//int arr[MAXN];
-//int tree[MAXT][2];
-//int pass[MAXT];
-//int cnt = 1;
-//int sum[MAXT][BIT + 1];
+// const int MAXN = 50001;
+// const int MAXT = MAXN * 20;
+// const int BIT = 30;
+// const int MOD = 1000000007;
+// const int INV2 = 500000004;
+// int n, k;
+// int arr[MAXN];
+// int tree[MAXT][2];
+// int pass[MAXT];
+// int cnt = 1;
+// int sum[MAXT][BIT + 1];
 //
-//void insert(int num) {
+// void insert(int num) {
 //    int cur = 1;
 //    pass[1]++;
 //    for (int b = BIT; b >= 0; b--) {
@@ -41,9 +41,9 @@ package class159;
 //        cur = tree[cur][path];
 //        pass[cur]++;
 //    }
-//}
+// }
 //
-//void dfs(int i, int h, int s) {
+// void dfs(int i, int h, int s) {
 //    if (!i) {
 //        return;
 //    }
@@ -60,9 +60,9 @@ package class159;
 //            sum[i][j] = sum[tree[i][0]][j] + sum[tree[i][1]][j];
 //        }
 //    }
-//}
+// }
 //
-//long long moreEqual(int x) {
+// long long moreEqual(int x) {
 //    long long ans = 0;
 //    for (int i = 1; i <= n; i++) {
 //        int num = arr[i];
@@ -87,9 +87,9 @@ package class159;
 //        ans -= n;
 //    }
 //    return ans / 2;
-//}
+// }
 //
-//int maxKth() {
+// int maxKth() {
 //    int l = 0, r = 1 << BIT, ans = 0;
 //    while (l <= r) {
 //        int m = (l + r) >> 1;
@@ -101,9 +101,9 @@ package class159;
 //        }
 //    }
 //    return ans;
-//}
+// }
 //
-//long long compute() {
+// long long compute() {
 //    int kth = maxKth();
 //    long long ans = 0;
 //    for (int i = 1, cur; i <= n; i++) {
@@ -116,7 +116,8 @@ package class159;
 //                if (tree[cur][best]) {
 //                    for (int j = 0; j <= BIT; j++) {
 //                        if ((arr[i] >> j) & 1) {
-//                            ans = (ans + ((long long)pass[tree[cur][best]] - sum[tree[cur][best]][j]) * (1LL << j)) % MOD;
+//                            ans = (ans + ((long long)pass[tree[cur][best]] -
+// sum[tree[cur][best]][j]) * (1LL << j)) % MOD;
 //                        } else {
 //                            ans = (ans + ((long long)sum[tree[cur][best]][j]) * (1LL << j)) % MOD;
 //                        }
@@ -134,20 +135,20 @@ package class159;
 //            ans = (ans + (long long)pass[cur] * kth) % MOD;
 //        }
 //    }
-//    ans = ans * INV2 % MOD;    
+//    ans = ans * INV2 % MOD;
 //    ans = ((ans - ((moreEqual(kth) - k) * kth) % MOD) % MOD + MOD) % MOD;
 //    return ans;
-//}
+// }
 //
-//void prepare() {
+// void prepare() {
 //    for (int i = 1; i <= n; i++) {
 //        insert(arr[i]);
 //    }
 //    dfs(tree[1][0], BIT, 0);
 //    dfs(tree[1][1], BIT, 1 << BIT);
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> k;
@@ -161,4 +162,4 @@ package class159;
 //        cout << compute() << "\n";
 //    }
 //    return 0;
-//}
+// }

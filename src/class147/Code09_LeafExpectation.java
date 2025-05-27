@@ -17,16 +17,15 @@ import java.io.StreamTokenizer;
 
 public class Code09_LeafExpectation {
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StreamTokenizer in = new StreamTokenizer(br);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		in.nextToken();
-		double n = in.nval;
-		out.printf("%.9f", n * (n + 1) / ((2 * n - 1) * 2));
-		out.flush();
-		out.close();
-		br.close();
-	}
-
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StreamTokenizer in = new StreamTokenizer(br);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    in.nextToken();
+    double n = in.nval;
+    out.printf("%.9f", n * (n + 1) / ((2 * n - 1) * 2));
+    out.flush();
+    out.close();
+    br.close();
+  }
 }

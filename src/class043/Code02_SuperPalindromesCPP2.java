@@ -10,13 +10,13 @@ package class043;
 // 测试链接 : https://leetcode.cn/problems/super-palindromes/
 // 如下实现是课上讲的superpalindromesInRange2方法的C++版本，提交如下代码可以直接通过
 
-//#include <string>
-//#include <vector>
+// #include <string>
+// #include <vector>
 //
-//using namespace std;
+// using namespace std;
 //
-//class Solution {
-//public:
+// class Solution {
+// public:
 //    int superpalindromesInRange(string left, string right) {
 //        long long l = stoll(left);
 //        long long r = stoll(right);
@@ -31,7 +31,7 @@ package class043;
 //        return (j >= i) ? (j - i + 1) : 0;
 //    }
 //
-//private:
+// private:
 //    const vector<long long> record = {
 //        1L, 4L, 9L, 121L, 484L, 10201L, 12321L, 14641L, 40804L, 44944L,
 //        1002001L, 1234321L, 4008004L, 100020001L, 102030201L, 104060401L,
@@ -57,4 +57,4 @@ package class043;
 //        1212203226223022121L, 1212445458545442121L, 1232100246420012321L,
 //        1232344458544432321L, 1234323468643234321L, 4000000008000000004L
 //    };
-//};
+// };

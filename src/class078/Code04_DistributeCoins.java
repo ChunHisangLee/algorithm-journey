@@ -10,40 +10,40 @@ package class078;
 // 测试链接 : https://leetcode.cn/problems/distribute-coins-in-binary-tree/
 public class Code04_DistributeCoins {
 
-	// 不要提交这个类
-	public static class TreeNode {
-		public int val;
-		public TreeNode left;
-		public TreeNode right;
-	}
+  // 提交如下的方法
+  public static int distributeCoins(TreeNode root) {
+    return f(root).move;
+  }
 
-	// 提交如下的方法
-	public static int distributeCoins(TreeNode root) {
-		return f(root).move;
-	}
+  public static Info f(TreeNode x) {
+    if (x == null) {
+      return new Info(0, 0, 0);
+    }
+    Info infol = f(x.left);
+    Info infor = f(x.right);
+    int cnts = infol.cnt + infor.cnt + 1;
+    int sums = infol.sum + infor.sum + x.val;
+    int moves =
+        infol.move + infor.move + Math.abs(infol.cnt - infol.sum) + Math.abs(infor.cnt - infor.sum);
+    return new Info(cnts, sums, moves);
+  }
 
-	public static class Info {
-		public int cnt;
-		public int sum;
-		public int move;
+  // 不要提交这个类
+  public static class TreeNode {
+    public int val;
+    public TreeNode left;
+    public TreeNode right;
+  }
 
-		public Info(int a, int b, int c) {
-			cnt = a;
-			sum = b;
-			move = c;
-		}
-	}
+  public static class Info {
+    public int cnt;
+    public int sum;
+    public int move;
 
-	public static Info f(TreeNode x) {
-		if (x == null) {
-			return new Info(0, 0, 0);
-		}
-		Info infol = f(x.left);
-		Info infor = f(x.right);
-		int cnts = infol.cnt + infor.cnt + 1;
-		int sums = infol.sum + infor.sum + x.val;
-		int moves = infol.move + infor.move + Math.abs(infol.cnt - infol.sum) + Math.abs(infor.cnt - infor.sum);
-		return new Info(cnts, sums, moves);
-	}
-
+    public Info(int a, int b, int c) {
+      cnt = a;
+      sum = b;
+      move = c;
+    }
+  }
 }

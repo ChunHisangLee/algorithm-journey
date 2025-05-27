@@ -19,103 +19,102 @@ import java.util.Arrays;
 
 public class Code03_ChooseCapital {
 
-	public static int MAXN = 200001;
+  public static int MAXN = 200001;
 
-	public static int n;
+  public static int n;
 
-	public static int[] head = new int[MAXN];
+  public static int[] head = new int[MAXN];
 
-	public static int[] next = new int[MAXN << 1];
+  public static int[] next = new int[MAXN << 1];
 
-	public static int[] to = new int[MAXN << 1];
+  public static int[] to = new int[MAXN << 1];
 
-	public static int[] weight = new int[MAXN << 1];
+  public static int[] weight = new int[MAXN << 1];
 
-	public static int cnt;
+  public static int cnt;
 
-	// reverse[u] : u到所有子节点需要逆转的边数
-	public static int[] reverse = new int[MAXN];
+  // reverse[u] : u到所有子节点需要逆转的边数
+  public static int[] reverse = new int[MAXN];
 
-	// dp[u] : u做根到全树节点需要逆转的边数
-	public static int[] dp = new int[MAXN];
+  // dp[u] : u做根到全树节点需要逆转的边数
+  public static int[] dp = new int[MAXN];
 
-	public static void build() {
-		cnt = 1;
-		Arrays.fill(head, 1, n + 1, 0);
-		Arrays.fill(reverse, 1, n + 1, 0);
-		Arrays.fill(dp, 1, n + 1, 0);
-	}
+  public static void build() {
+    cnt = 1;
+    Arrays.fill(head, 1, n + 1, 0);
+    Arrays.fill(reverse, 1, n + 1, 0);
+    Arrays.fill(dp, 1, n + 1, 0);
+  }
 
-	public static void addEdge(int u, int v, int w) {
-		next[cnt] = head[u];
-		to[cnt] = v;
-		weight[cnt] = w;
-		head[u] = cnt++;
-	}
+  public static void addEdge(int u, int v, int w) {
+    next[cnt] = head[u];
+    to[cnt] = v;
+    weight[cnt] = w;
+    head[u] = cnt++;
+  }
 
-	public static void dfs1(int u, int f) {
-		for (int e = head[u], v, w; e != 0; e = next[e]) {
-			v = to[e];
-			w = weight[e];
-			if (v != f) {
-				dfs1(v, u);
-				reverse[u] += reverse[v] + w;
-			}
-		}
-	}
+  public static void dfs1(int u, int f) {
+    for (int e = head[u], v, w; e != 0; e = next[e]) {
+      v = to[e];
+      w = weight[e];
+      if (v != f) {
+        dfs1(v, u);
+        reverse[u] += reverse[v] + w;
+      }
+    }
+  }
 
-	public static void dfs2(int u, int f) {
-		for (int e = head[u], v, w; e != 0; e = next[e]) {
-			v = to[e];
-			w = weight[e];
-			if (v != f) {
-				if (w == 0) {
-					// 边的方向 : u -> v
-					dp[v] = dp[u] + 1;
-				} else {
-					// 边的方向 : v -> u
-					dp[v] = dp[u] - 1;
-				}
-				dfs2(v, u);
-			}
-		}
-	}
+  public static void dfs2(int u, int f) {
+    for (int e = head[u], v, w; e != 0; e = next[e]) {
+      v = to[e];
+      w = weight[e];
+      if (v != f) {
+        if (w == 0) {
+          // 边的方向 : u -> v
+          dp[v] = dp[u] + 1;
+        } else {
+          // 边的方向 : v -> u
+          dp[v] = dp[u] - 1;
+        }
+        dfs2(v, u);
+      }
+    }
+  }
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StreamTokenizer in = new StreamTokenizer(br);
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		while (in.nextToken() != StreamTokenizer.TT_EOF) {
-			n = (int) in.nval;
-			build();
-			for (int i = 1, u, v; i < n; i++) {
-				in.nextToken();
-				u = (int) in.nval;
-				in.nextToken();
-				v = (int) in.nval;
-				addEdge(u, v, 0);
-				addEdge(v, u, 1);
-			}
-			dfs1(1, 0);
-			dp[1] = reverse[1];
-			dfs2(1, 0);
-			int min = Integer.MAX_VALUE;
-			for (int i = 1; i <= n; i++) {
-				if (min > dp[i]) {
-					min = dp[i];
-				}
-			}
-			out.println(min);
-			for (int i = 1; i <= n; i++) {
-				if (min == dp[i]) {
-					out.print(i + " ");
-				}
-			}
-			out.println();
-		}
-		out.flush();
-		out.close();
-		br.close();
-	}
-
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StreamTokenizer in = new StreamTokenizer(br);
+    PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+    while (in.nextToken() != StreamTokenizer.TT_EOF) {
+      n = (int) in.nval;
+      build();
+      for (int i = 1, u, v; i < n; i++) {
+        in.nextToken();
+        u = (int) in.nval;
+        in.nextToken();
+        v = (int) in.nval;
+        addEdge(u, v, 0);
+        addEdge(v, u, 1);
+      }
+      dfs1(1, 0);
+      dp[1] = reverse[1];
+      dfs2(1, 0);
+      int min = Integer.MAX_VALUE;
+      for (int i = 1; i <= n; i++) {
+        if (min > dp[i]) {
+          min = dp[i];
+        }
+      }
+      out.println(min);
+      for (int i = 1; i <= n; i++) {
+        if (min == dp[i]) {
+          out.print(i + " ");
+        }
+      }
+      out.println();
+    }
+    out.flush();
+    out.close();
+    br.close();
+  }
 }

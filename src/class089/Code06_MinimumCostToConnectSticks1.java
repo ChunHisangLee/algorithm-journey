@@ -12,20 +12,19 @@ import java.util.PriorityQueue;
 // 测试链接 : https://leetcode.cn/problems/minimum-cost-to-connect-sticks/
 public class Code06_MinimumCostToConnectSticks1 {
 
-	public static int connectSticks(int[] arr) {
-		// 小根堆
-		PriorityQueue<Integer> heap = new PriorityQueue<>();
-		for (int i = 0; i < arr.length; i++) {
-			heap.add(arr[i]);
-		}
-		int sum = 0;
-		int cur = 0;
-		while (heap.size() > 1) {
-			cur = heap.poll() + heap.poll();
-			sum += cur;
-			heap.add(cur);
-		}
-		return sum;
-	}
-
+  public static int connectSticks(int[] arr) {
+    // 小根堆
+    PriorityQueue<Integer> heap = new PriorityQueue<>();
+    for (int i = 0; i < arr.length; i++) {
+      heap.add(arr[i]);
+    }
+    int sum = 0;
+    int cur = 0;
+    while (heap.size() > 1) {
+      cur = heap.poll() + heap.poll();
+      sum += cur;
+      heap.add(cur);
+    }
+    return sum;
+  }
 }

@@ -10,22 +10,22 @@ package class159;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 200001;
-//const int MAXT = 4000001;
-//const int BIT = 18;
-//int n, m, s;
-//int arr[MAXN];
-//int root[MAXN];
-//int ls[MAXT];
-//int rs[MAXT];
-//int size[MAXT];
-//int cnt;
+// const int MAXN = 200001;
+// const int MAXT = 4000001;
+// const int BIT = 18;
+// int n, m, s;
+// int arr[MAXN];
+// int root[MAXN];
+// int ls[MAXT];
+// int rs[MAXT];
+// int size[MAXT];
+// int cnt;
 //
-//int build(int l, int r) {
+// int build(int l, int r) {
 //    int rt = ++cnt;
 //    size[rt] = 0;
 //    if (l < r) {
@@ -34,9 +34,9 @@ package class159;
 //        rs[rt] = build(mid + 1, r);
 //    }
 //    return rt;
-//}
+// }
 //
-//int insert(int jobi, int l, int r, int i) {
+// int insert(int jobi, int l, int r, int i) {
 //    int rt = ++cnt;
 //    ls[rt] = ls[i];
 //    rs[rt] = rs[i];
@@ -50,9 +50,9 @@ package class159;
 //        }
 //    }
 //    return rt;
-//}
+// }
 //
-//int query(int jobl, int jobr, int l, int r, int u, int v) {
+// int query(int jobl, int jobr, int l, int r, int u, int v) {
 //    if (jobr < l || jobl > r) {
 //        return 0;
 //    }
@@ -68,9 +68,9 @@ package class159;
 //        ans += query(jobl, jobr, mid + 1, r, rs[u], rs[v]);
 //    }
 //    return ans;
-//}
+// }
 //
-//void prepare() {
+// void prepare() {
 //    cnt = 0;
 //    s = 0;
 //    for (int i = 1; i <= n; i++) {
@@ -80,9 +80,9 @@ package class159;
 //    for (int i = 1; i <= n; i++) {
 //        root[i] = insert(arr[i], 0, s, root[i - 1]);
 //    }
-//}
+// }
 //
-//int compute(int b, int x, int l, int r) {
+// int compute(int b, int x, int l, int r) {
 //    int best = 0;
 //    for (int i = BIT; i >= 0; i--) {
 //        if (((b >> i) & 1) == 1) {
@@ -90,15 +90,16 @@ package class159;
 //                best += 1 << i;
 //            }
 //        } else {
-//            if (query(best + (1 << i) - x, best + (1 << (i + 1)) - 1 - x, 0, s, root[l - 1], root[r]) != 0) {
+//            if (query(best + (1 << i) - x, best + (1 << (i + 1)) - 1 - x, 0, s, root[l - 1],
+// root[r]) != 0) {
 //                best += 1 << i;
 //            }
 //        }
 //    }
 //    return best ^ b;
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> m;
@@ -111,4 +112,4 @@ package class159;
 //        cout << compute(b, x, l, r) << "\n";
 //    }
 //    return 0;
-//}
+// }

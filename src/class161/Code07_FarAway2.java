@@ -12,39 +12,39 @@ package class161;
 // 如下实现是C++的版本，C++版本和java版本逻辑完全一样
 // 提交如下代码，可以通过所有测试用例
 
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 //
-//using namespace std;
+// using namespace std;
 //
-//const int MAXN = 100001;
-//int n, m;
-//int arr[MAXN];
+// const int MAXN = 100001;
+// int n, m;
+// int arr[MAXN];
 //
-//int head[MAXN];
-//int nxt[MAXN << 1];
-//int to[MAXN << 1];
-//int cntg = 0;
+// int head[MAXN];
+// int nxt[MAXN << 1];
+// int to[MAXN << 1];
+// int cntg = 0;
 //
-//int fa[MAXN];
-//int dep[MAXN];
-//int siz[MAXN];
-//int son[MAXN];
-//int top[MAXN];
-//int dfn[MAXN];
-//int seg[MAXN];
-//int cntd = 0;
+// int fa[MAXN];
+// int dep[MAXN];
+// int siz[MAXN];
+// int son[MAXN];
+// int top[MAXN];
+// int dfn[MAXN];
+// int seg[MAXN];
+// int cntd = 0;
 //
-//int minv[MAXN << 2];
-//int change[MAXN << 2];
+// int minv[MAXN << 2];
+// int change[MAXN << 2];
 //
-//void addEdge(int u, int v) {
+// void addEdge(int u, int v) {
 //    ++cntg;
 //    nxt[cntg] = head[u];
 //    to[cntg] = v;
 //    head[u] = cntg;
-//}
+// }
 //
-//void dfs1(int u, int f) {
+// void dfs1(int u, int f) {
 //    fa[u] = f;
 //    dep[u] = dep[f] + 1;
 //    siz[u] = 1;
@@ -63,9 +63,9 @@ package class161;
 //            }
 //        }
 //    }
-//}
+// }
 //
-//void dfs2(int u, int t) {
+// void dfs2(int u, int t) {
 //    top[u] = t;
 //    dfn[u] = ++cntd;
 //    seg[cntd] = u;
@@ -79,26 +79,26 @@ package class161;
 //            dfs2(v, v);
 //        }
 //    }
-//}
+// }
 //
-//void up(int i) {
+// void up(int i) {
 //    minv[i] = min(minv[i << 1], minv[i << 1 | 1]);
-//}
+// }
 //
-//void lazy(int i, int v) {
+// void lazy(int i, int v) {
 //    minv[i] = v;
 //    change[i] = v;
-//}
+// }
 //
-//void down(int i) {
+// void down(int i) {
 //    if (change[i] != 0) {
 //        lazy(i << 1, change[i]);
 //        lazy(i << 1 | 1, change[i]);
 //        change[i] = 0;
 //    }
-//}
+// }
 //
-//void build(int l, int r, int i) {
+// void build(int l, int r, int i) {
 //    if (l == r) {
 //        minv[i] = arr[seg[l]];
 //    } else {
@@ -107,9 +107,9 @@ package class161;
 //        build(mid + 1, r, i << 1 | 1);
 //        up(i);
 //    }
-//}
+// }
 //
-//void update(int jobl, int jobr, int jobv, int l, int r, int i) {
+// void update(int jobl, int jobr, int jobv, int l, int r, int i) {
 //    if (jobl <= l && r <= jobr) {
 //        lazy(i, jobv);
 //    } else {
@@ -123,9 +123,9 @@ package class161;
 //        }
 //        up(i);
 //    }
-//}
+// }
 //
-//int query(int jobl, int jobr, int l, int r, int i) {
+// int query(int jobl, int jobr, int l, int r, int i) {
 //    if (jobl <= l && r <= jobr) {
 //        return minv[i];
 //    }
@@ -139,9 +139,9 @@ package class161;
 //        ans = min(ans, query(jobl, jobr, mid + 1, r, i << 1 | 1));
 //    }
 //    return ans;
-//}
+// }
 //
-//void pathUpdate(int x, int y, int v) {
+// void pathUpdate(int x, int y, int v) {
 //    while (top[x] != top[y]) {
 //        if (dep[top[x]] <= dep[top[y]]) {
 //            update(dfn[top[y]], dfn[y], v, 1, n, 1);
@@ -152,9 +152,9 @@ package class161;
 //        }
 //    }
 //    update(min(dfn[x], dfn[y]), max(dfn[x], dfn[y]), v, 1, n, 1);
-//}
+// }
 //
-//int findSon(int root, int u) {
+// int findSon(int root, int u) {
 //    while (top[root] != top[u]) {
 //        if (fa[top[root]] == u) {
 //            return top[root];
@@ -162,9 +162,9 @@ package class161;
 //        root = fa[top[root]];
 //    }
 //    return son[u];
-//}
+// }
 //
-//int treeQuery(int root, int u) {
+// int treeQuery(int root, int u) {
 //    if (root == u) {
 //        return minv[1];
 //    } else if (dfn[root] < dfn[u] || dfn[u] + siz[u] <= dfn[root]) {
@@ -180,9 +180,9 @@ package class161;
 //        }
 //        return ans;
 //    }
-//}
+// }
 //
-//int main() {
+// int main() {
 //    ios::sync_with_stdio(false);
 //    cin.tie(nullptr);
 //    cin >> n >> m;
@@ -213,4 +213,4 @@ package class161;
 //        }
 //    }
 //    return 0;
-//}
+// }

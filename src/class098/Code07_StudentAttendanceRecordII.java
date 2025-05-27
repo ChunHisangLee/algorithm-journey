@@ -15,61 +15,60 @@ package class098;
 // 测试链接 : https://leetcode.cn/problems/student-attendance-record-ii/
 public class Code07_StudentAttendanceRecordII {
 
-	// 正式方法
-	// 矩阵快速幂
-	// 时间复杂度O(logn)
-	public static int MOD = 1000000007;
+  // 正式方法
+  // 矩阵快速幂
+  // 时间复杂度O(logn)
+  public static int MOD = 1000000007;
 
-	public static int checkRecord(int n) {
-		// 1天的情况下，各种状态的合法数量
-		int[][] start = { { 1, 1, 0, 1, 0, 0 } };
-		int[][] base = {
-				{ 1, 1, 0, 1, 0, 0 },
-				{ 1, 0, 1, 1, 0, 0 },
-				{ 1, 0, 0, 1, 0, 0 },
-				{ 0, 0, 0, 1, 1, 0 },
-				{ 0, 0, 0, 1, 0, 1 },
-				{ 0, 0, 0, 1, 0, 0 }
-				};
-		int[][] ans = multiply(start, power(base, n - 1));
-		int ret = 0;
-		for (int a : ans[0]) {
-			ret = (ret + a) % MOD;
-		}
-		return ret;
-	}
+  public static int checkRecord(int n) {
+    // 1天的情况下，各种状态的合法数量
+    int[][] start = {{1, 1, 0, 1, 0, 0}};
+    int[][] base = {
+      {1, 1, 0, 1, 0, 0},
+      {1, 0, 1, 1, 0, 0},
+      {1, 0, 0, 1, 0, 0},
+      {0, 0, 0, 1, 1, 0},
+      {0, 0, 0, 1, 0, 1},
+      {0, 0, 0, 1, 0, 0}
+    };
+    int[][] ans = multiply(start, power(base, n - 1));
+    int ret = 0;
+    for (int a : ans[0]) {
+      ret = (ret + a) % MOD;
+    }
+    return ret;
+  }
 
-	// 矩阵相乘 + 乘法取模
-	// a的列数一定要等于b的行数
-	public static int[][] multiply(int[][] a, int[][] b) {
-		int n = a.length;
-		int m = b[0].length;
-		int k = a[0].length;
-		int[][] ans = new int[n][m];
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < m; j++) {
-				for (int c = 0; c < k; c++) {
-					ans[i][j] = (int) (((long) a[i][c] * b[c][j] + ans[i][j]) % MOD);
-				}
-			}
-		}
-		return ans;
-	}
+  // 矩阵相乘 + 乘法取模
+  // a的列数一定要等于b的行数
+  public static int[][] multiply(int[][] a, int[][] b) {
+    int n = a.length;
+    int m = b[0].length;
+    int k = a[0].length;
+    int[][] ans = new int[n][m];
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        for (int c = 0; c < k; c++) {
+          ans[i][j] = (int) (((long) a[i][c] * b[c][j] + ans[i][j]) % MOD);
+        }
+      }
+    }
+    return ans;
+  }
 
-	// 矩阵快速幂
-	public static int[][] power(int[][] m, int p) {
-		int n = m.length;
-		int[][] ans = new int[n][n];
-		for (int i = 0; i < n; i++) {
-			ans[i][i] = 1;
-		}
-		for (; p != 0; p >>= 1) {
-			if ((p & 1) != 0) {
-				ans = multiply(ans, m);
-			}
-			m = multiply(m, m);
-		}
-		return ans;
-	}
-
+  // 矩阵快速幂
+  public static int[][] power(int[][] m, int p) {
+    int n = m.length;
+    int[][] ans = new int[n][n];
+    for (int i = 0; i < n; i++) {
+      ans[i][i] = 1;
+    }
+    for (; p != 0; p >>= 1) {
+      if ((p & 1) != 0) {
+        ans = multiply(ans, m);
+      }
+      m = multiply(m, m);
+    }
+    return ans;
+  }
 }
