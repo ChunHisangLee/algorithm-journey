@@ -7,7 +7,7 @@ package class011;
 // 测试链接：https://leetcode.cn/problems/add-two-numbers/
 public class AddTwoNumbers {
 
-  // 不要提交这个类
+  /** 链表节点定义。题目已提供，此处仅为示例。 */
   public static class ListNode {
     public int val;
     public ListNode next;
@@ -17,26 +17,31 @@ public class AddTwoNumbers {
     }
 
     public ListNode(int val, ListNode next) {
-      this.val = val;
+      this(val);
       this.next = next;
     }
   }
 
-  class Solution {
+  /** 方案类，用于实现两个逆序存储的数相加。 */
+  public static class Solution {
 
-    // 也可以复用老链表
-    // 不过这个实现没有这么做，都是生成的新节点(为了教学好懂)
+    /**
+     * 将两个以逆序方式存储的非空链表表示的非负整数相加，返回相同形式的新链表。
+     *
+     * <p>逐位相加并处理进位，若最后有余进位则追加新节点。 不复用原节点，所有节点均为新创建，便于教学说明。
+     *
+     * @param h1 第一个链表头节点
+     * @param h2 第二个链表头节点
+     * @return 表示和的逆序链表头节点
+     */
     public static ListNode addTwoNumbers(ListNode h1, ListNode h2) {
       ListNode ans = null, cur = null;
       int carry = 0;
-      for (int sum, val; // 声明变量
-          h1 != null || h2 != null; // 终止条件
-          h1 = h1 == null ? null : h1.next, // 每一步h1的跳转
-              h2 = h2 == null ? null : h2.next // 每一步h2的跳转
-      ) {
-
-        sum = (h1 == null ? 0 : h1.val) + (h2 == null ? 0 : h2.val) + carry;
-
+      // 同时遍历两个链表
+      for (int sum, val;
+          h1 != null || h2 != null;
+          h1 = (h1 != null ? h1.next : null), h2 = (h2 != null ? h2.next : null)) {
+        sum = (h1 != null ? h1.val : 0) + (h2 != null ? h2.val : 0) + carry;
         val = sum % 10;
         carry = sum / 10;
         if (ans == null) {
@@ -47,8 +52,9 @@ public class AddTwoNumbers {
           cur = cur.next;
         }
       }
-      if (carry == 1) {
-        cur.next = new ListNode(1);
+      // 最后若有进位则追加
+      if (carry > 0) {
+        cur.next = new ListNode(carry);
       }
       return ans;
     }
