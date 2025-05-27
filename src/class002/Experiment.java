@@ -1,6 +1,7 @@
 package class002;
 
 import java.util.Arrays;
+import java.util.concurrent.ThreadLocalRandom;
 
 // 一开始有100个人，每个人都有100元
 // 在每一轮都做如下的事情 :
@@ -9,6 +10,11 @@ import java.util.Arrays;
 // 发生很多很多轮之后，这100人的社会财富分布很均匀吗？
 public class Experiment {
 
+  /**
+   * 程序入口，运行财富分配实验并计算基尼系数。
+   *
+   * @param args 命令行参数（未使用）
+   */
   public static void main(String[] args) {
     System.out.println("一个社会的基尼系数是一个在0~1之间的小数");
     System.out.println("基尼系数为0代表所有人的财富完全一样");
@@ -20,34 +26,40 @@ public class Experiment {
     System.out.println("社会可能会因此陷入危机，比如大量的犯罪或者经历社会动荡");
     System.out.println("测试开始");
     int n = 100;
-    int t = 1000000;
+    int t = 1_000_000;
     System.out.println("人数 : " + n);
     System.out.println("轮数 : " + t);
     experiment(n, t);
     System.out.println("测试结束");
   }
 
-  // 完全按照说的来实验
+  /**
+   * 完全按照描述进行实验：每轮每个有钱的人随机给出1元至其他人。
+   *
+   * <p>最终排序并打印每个人的财富，以及计算该社会的基尼系数。
+   *
+   * @param n 社会总人数
+   * @param t 轮次
+   */
   public static void experiment(int n, int t) {
     double[] wealth = new double[n];
     Arrays.fill(wealth, 100);
     boolean[] hasMoney = new boolean[n];
-    for (int i = 0; i < t; i++) {
+    for (int round = 0; round < t; round++) {
       Arrays.fill(hasMoney, false);
-      for (int j = 0; j < n; j++) {
-        if (wealth[j] > 0) {
-          hasMoney[j] = true;
+      for (int i = 0; i < n; i++) {
+        if (wealth[i] > 0) {
+          hasMoney[i] = true;
         }
       }
-      for (int j = 0; j < n; j++) {
-        if (hasMoney[j]) {
-          int other = j;
+      for (int i = 0; i < n; i++) {
+        if (hasMoney[i]) {
+          int other;
           do {
-            // (int) (Math.random() * n);
-            // int : 0 ~ n-1，等概率随机
-            other = (int) (Math.random() * n);
-          } while (other == j);
-          wealth[j]--;
+            // 随机选取受赠者，范围 0~n-1
+            other = ThreadLocalRandom.current().nextInt(n);
+          } while (other == i);
+          wealth[i]--;
           wealth[other]++;
         }
       }
@@ -64,8 +76,12 @@ public class Experiment {
     System.out.println("这个社会的基尼系数为 : " + calculateGini(wealth));
   }
 
-  // 计算基尼系数
-  // 看代码就可以轻易知道怎么算的
+  /**
+   * 计算给定财富数组的基尼系数。
+   *
+   * @param wealth 已排序或未排序的财富数组
+   * @return 基尼系数，范围 [0,1]
+   */
   public static double calculateGini(double[] wealth) {
     double sumOfAbsoluteDifferences = 0;
     double sumOfWealth = 0;
@@ -76,6 +92,7 @@ public class Experiment {
         sumOfAbsoluteDifferences += Math.abs(wealth[i] - wealth[j]);
       }
     }
+    // 基尼系数公式：绝对差值总和 / (2 * n * 总财富)
     return sumOfAbsoluteDifferences / (2 * n * sumOfWealth);
   }
 }
