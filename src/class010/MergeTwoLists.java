@@ -5,60 +5,54 @@ package class010;
 // 测试链接 : https://leetcode.cn/problems/merge-two-sorted-lists/
 public class MergeTwoLists {
 
-  /** 链表节点定义。 不要提交此类，题目已提供。 */
-  public static class ListNode {
-    public int val;
-    public ListNode next;
+	// 不要提交这个类
+	public static class ListNode {
+		public int val;
+		public ListNode next;
 
-    public ListNode(int val) {
-      this.val = val;
-    }
+		public ListNode(int val) {
+			this.val = val;
+		}
 
-    public ListNode(int val, ListNode next) {
-      this(val);
-      this.next = next;
-    }
-  }
+		public ListNode(int val, ListNode next) {
+			this.val = val;
+			this.next = next;
+		}
+	}
 
-  /** 方案类，用于合并两个有序链表。 */
-  public static class Solution {
+	class Solution {
+        /**
+         * Merges two sorted singly-linked lists and returns the head of the merged list.
+         *
+         * @param head1 the head of the first sorted list
+         * @param head2 the head of the second sorted list
+         * @return the head of the merged sorted list
+         */
+        public static ListNode mergeTwoLists(ListNode head1, ListNode head2) {
+            // Dummy node to simplify edge cases
+            ListNode dummy = new ListNode(0);
+            ListNode tail = dummy;
 
-    /**
-     * 将两个升序链表合并为一个新的升序链表，并返回新链表头节点。
-     *
-     * <p>通过比较两个链表当前节点值，小者接入结果链表，直至一方耗尽， 最后将剩余节点全部拼接到结果链表尾。
-     *
-     * @param head1 第一个升序链表头节点
-     * @param head2 第二个升序链表头节点
-     * @return 合并后的升序链表头节点
-     */
-    public static ListNode mergeTwoLists(ListNode head1, ListNode head2) {
-      if (head1 == null) {
-        return head2;
-      }
-      if (head2 == null) {
-        return head1;
-      }
-      // 确定合并链表的初始头节点
-      ListNode head = head1.val <= head2.val ? head1 : head2;
-      // 分别指向两个链表下一比较位置
-      ListNode cur1 = head == head1 ? head1.next : head1;
-      ListNode cur2 = head == head2 ? head2.next : head2;
-      ListNode pre = head;
-      // 交替合并
-      while (cur1 != null && cur2 != null) {
-        if (cur1.val <= cur2.val) {
-          pre.next = cur1;
-          cur1 = cur1.next;
-        } else {
-          pre.next = cur2;
-          cur2 = cur2.next;
+            // While both lists have nodes, append the smaller one
+            while (head1 != null && head2 != null) {
+                if (head1.val <= head2.val) {
+                    tail.next = head1;
+                    head1 = head1.next;
+                } else {
+                    tail.next = head2;
+                    head2 = head2.next;
+                }
+                tail = tail.next;
+            }
+
+            // Attach the remaining nodes (only one of these will be non-null)
+            if (head1 != null) {
+                tail.next = head1;
+            } else {
+                tail.next = head2;
+            }
+
+            return dummy.next;
         }
-        pre = pre.next;
-      }
-      // 拼接剩余部分
-      pre.next = cur1 != null ? cur1 : cur2;
-      return head;
     }
-  }
 }

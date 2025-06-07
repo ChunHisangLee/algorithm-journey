@@ -1,121 +1,106 @@
 package class015;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 // 最小栈
 // 测试链接 : https://leetcode.cn/problems/min-stack/
 public class GetMinStack {
 
-  /**
-   * 基于两个栈实现的最小栈。
-   *
-   * <p>data 栈保存所有元素，min 栈在每次 push 时同步保存当前最小值， 以保证 peek 和 getMin 均为 O(1)。
-   */
-  public static class MinStack1 {
-    private final Stack<Integer> data;
-    private final Stack<Integer> min;
+	// 提交时把类名、构造方法改成MinStack
+    class MinStack {
+        private final Deque<Integer> stack;
+        private final Deque<Integer> minStack;
 
-    /** 构造方法，初始化数据栈和最小值栈。 */
-    public MinStack1() {
-      data = new Stack<>();
-      min = new Stack<>();
-    }
+        /**
+         * Initialize your data structure here.
+         */
+        public MinStack() {
+            stack = new ArrayDeque<>();
+            minStack = new ArrayDeque<>();
+        }
 
-    /**
-     * 添加元素并更新最小值栈。
-     *
-     * @param val 待添加的整数
-     */
-    public void push(int val) {
-      data.push(val);
-      if (min.isEmpty() || val <= min.peek()) {
-        min.push(val);
-      } else {
-        min.push(min.peek());
-      }
-    }
+        /**
+         * Pushes the element val onto the stack.
+         *
+         * @param val the value to push
+		 */
+		public void push(int val) {
+            stack.push(val);
+            // If minStack is empty or new val is <= current min, push onto minStack
+            if (minStack.isEmpty() || val <= minStack.peek()) {
+                minStack.push(val);
+            }
+        }
 
-    /** 删除栈顶元素，同时弹出最小值栈顶。 */
-    public void pop() {
-      data.pop();
-      min.pop();
-    }
+        /**
+         * Removes the element on the top of the stack.
+		 */
+		public void pop() {
+            int removed = stack.pop();
+            // If the popped value equals the current minimum, pop it from minStack too
+            if (removed == minStack.peek()) {
+                minStack.pop();
+            }
+        }
 
-    /**
-     * 获取栈顶元素。
-     *
-     * @return 栈顶的整数
-     */
-    public int top() {
-      return data.peek();
-    }
+        /**
+         * Gets the top element.
+         *
+         * @return the element on top of the stack
+		 */
+		public int top() {
+            return stack.peek();
+        }
 
-    /**
-     * 查询当前栈中的最小值。
-     *
-     * @return 最小值
-     */
-    public int getMin() {
-      return min.peek();
-    }
-  }
-
-  /**
-   * 基于数组实现的最小栈。
-   *
-   * <p>假设最多有 MAXN 个元素入栈，使用同步数组保存最小值。
-   */
-  public static class MinStack2 {
-    /** 最大容量，根据测试情况调整。 */
-    private static final int MAXN = 8001;
-
-    private final int[] data;
-    private final int[] min;
-    private int size;
-
-    /** 构造方法，初始化容量和指针。 */
-    public MinStack2() {
-      data = new int[MAXN];
-      min = new int[MAXN];
-      size = 0;
-    }
-
-    /**
-     * 添加元素并更新最小值数组。
-     *
-     * @param val 待添加的整数
-     */
-    public void push(int val) {
-      data[size] = val;
-      if (size == 0 || val <= min[size - 1]) {
-        min[size] = val;
-      } else {
-        min[size] = min[size - 1];
-      }
-      size++;
-    }
-
-    /** 删除栈顶元素。 */
-    public void pop() {
-      size--;
-    }
-
-    /**
-     * 获取栈顶元素。
-     *
-     * @return 栈顶的整数
-     */
-    public int top() {
-      return data[size - 1];
-    }
-
-    /**
-     * 查询当前最小值。
-     *
-     * @return 当前栈中的最小值
-     */
-    public int getMin() {
-      return min[size - 1];
+        /**
+         * Retrieves the minimum element in the stack.
+         *
+         * @return the minimum element
+		 */
+		public int getMin() {
+            return minStack.peek();
     }
   }
+
+	// 提交时把类名、构造方法改成MinStack
+	class MinStack2 {
+		// leetcode的数据在测试时，同时在栈里的数据不超过这个值
+		// 这是几次提交实验出来的，哈哈
+		// 如果leetcode补测试数据了，超过这个量导致出错，就调大
+		public final int MAXN = 8001;
+
+		public int[] data;
+		public int[] min;
+		int size;
+
+		public MinStack2() {
+			data = new int[MAXN];
+			min = new int[MAXN];
+			size = 0;
+		}
+
+		public void push(int val) {
+			data[size] = val;
+			if (size == 0 || val <= min[size - 1]) {
+				min[size] = val;
+			} else {
+				min[size] = min[size - 1];
+			}
+			size++;
+		}
+
+		public void pop() {
+			size--;
+		}
+
+		public int top() {
+			return data[size - 1];
+		}
+
+		public int getMin() {
+			return min[size - 1];
+		}
+	}
+
 }

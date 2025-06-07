@@ -7,56 +7,55 @@ package class011;
 // 测试链接：https://leetcode.cn/problems/add-two-numbers/
 public class AddTwoNumbers {
 
-  /** 链表节点定义。题目已提供，此处仅为示例。 */
-  public static class ListNode {
-    public int val;
-    public ListNode next;
+	// 不要提交这个类
+	public static class ListNode {
+		public int val;
+		public ListNode next;
 
-    public ListNode(int val) {
-      this.val = val;
+		public ListNode(int val) {
+			this.val = val;
+		}
+
+		public ListNode(int val, ListNode next) {
+			this.val = val;
+			this.next = next;
+		}
     }
 
-    public ListNode(int val, ListNode next) {
-      this(val);
-      this.next = next;
-    }
-  }
+    class Solution {
+        /**
+         * Adds two numbers represented by linked lists in reverse order.
+         *
+         * @param l1 head of the first list
+         * @param l2 head of the second list
+         * @return head of the list representing their sum
+         */
+        public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+            ListNode dummy = new ListNode(0);
+            ListNode tail = dummy;
+            int carry = 0;
 
-  /** 方案类，用于实现两个逆序存储的数相加。 */
-  public static class Solution {
+            // Traverse both lists until both are exhausted and no carry remains
+            while (l1 != null || l2 != null || carry != 0) {
+                int sum = carry;
+                if (l1 != null) {
+                    sum += l1.val;
+                    l1 = l1.next;
+                }
+                if (l2 != null) {
+                    sum += l2.val;
+                    l2 = l2.next;
+                }
+                // Compute a new digit and carry
+                carry = sum / 10;
+                int digit = sum % 10;
 
-    /**
-     * 将两个以逆序方式存储的非空链表表示的非负整数相加，返回相同形式的新链表。
-     *
-     * <p>逐位相加并处理进位，若最后有余进位则追加新节点。 不复用原节点，所有节点均为新创建，便于教学说明。
-     *
-     * @param h1 第一个链表头节点
-     * @param h2 第二个链表头节点
-     * @return 表示和的逆序链表头节点
-     */
-    public static ListNode addTwoNumbers(ListNode h1, ListNode h2) {
-      ListNode ans = null, cur = null;
-      int carry = 0;
-      // 同时遍历两个链表
-      for (int sum, val;
-          h1 != null || h2 != null;
-          h1 = (h1 != null ? h1.next : null), h2 = (h2 != null ? h2.next : null)) {
-        sum = (h1 != null ? h1.val : 0) + (h2 != null ? h2.val : 0) + carry;
-        val = sum % 10;
-        carry = sum / 10;
-        if (ans == null) {
-          ans = new ListNode(val);
-          cur = ans;
-        } else {
-          cur.next = new ListNode(val);
-          cur = cur.next;
+                // Append new node
+                tail.next = new ListNode(digit);
+                tail = tail.next;
+            }
+
+            return dummy.next;
         }
-      }
-      // 最后若有进位则追加
-      if (carry > 0) {
-        cur.next = new ListNode(carry);
-      }
-      return ans;
     }
-  }
 }
