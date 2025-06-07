@@ -1,59 +1,84 @@
 package class034;
 
-// 每k个节点一组翻转链表
-// 测试链接：https://leetcode.cn/problems/reverse-nodes-in-k-group/
+// 每 k 個節點一組翻轉鏈表
+// 要求：時間複雜度 O(n)，額外空間複雜度 O(1)
+// 測試連結 : https://leetcode.cn/problems/reverse-nodes-in-k-group/
 public class Code02_ReverseNodesInkGroup {
 
-  // 提交如下的方法
+  /**
+   * 使用虛擬頭節點(dummy)簡化頭部處理，迭代反轉每個 k 節點子鏈表 步驟： 1. 計算鏈表長度 2. 預先創建 dummy 指向 head，並用 prevGroupEnd
+   * 標記前一組尾節點 3. 對於每組 k 節點： - 確定 start = prevGroupEnd.next, end = move(start, k-1) - 保存
+   * nextGroupHead = end.next - 反轉區間 [start, end] - 令 prevGroupEnd.next = end，start.next =
+   * nextGroupHead (連接後續) - 更新 prevGroupEnd = start 4. 返回 dummy.next
+   *
+   * @param head 原始鏈表頭
+   * @param k 每組大小
+   * @return 處理後的新鏈表頭
+   */
   public static ListNode reverseKGroup(ListNode head, int k) {
-    ListNode start = head;
-    ListNode end = teamEnd(start, k);
-    if (end == null) {
-      return head;
+    if (head == null || k <= 1) return head;
+
+    // dummy 節點
+    ListNode dummy = new ListNode(0);
+    dummy.next = head;
+    ListNode prevGroupEnd = dummy;
+
+    // 計算鏈表總長
+    int length = 0;
+    ListNode p = head;
+    while (p != null) {
+      length++;
+      p = p.next;
     }
-    // 第一组很特殊因为牵扯到换头的问题
-    head = end;
-    reverse(start, end);
-    // 翻转之后start变成了上一组的结尾节点
-    ListNode lastTeamEnd = start;
-    while (lastTeamEnd.next != null) {
-      start = lastTeamEnd.next;
-      end = teamEnd(start, k);
-      if (end == null) {
-        return head;
-      }
-      reverse(start, end);
-      lastTeamEnd.next = end;
-      lastTeamEnd = start;
+
+    // 處理每個一組長度為 k 的子鏈表
+    int groups = length / k;
+    ListNode start, end, nextGroupHead;
+    p = dummy;
+    for (int i = 0; i < groups; i++) {
+      start = prevGroupEnd.next;
+      end = move(start, k - 1);
+      nextGroupHead = end.next;
+      // 斷開並反轉[start, end]
+      end.next = null;
+      ListNode revHead = reverseList(start);
+      // 連接上前後
+      prevGroupEnd.next = revHead;
+      start.next = nextGroupHead;
+      // 更新 prevGroupEnd
+      prevGroupEnd = start;
     }
-    return head;
+
+    return dummy.next;
   }
 
-  // 当前组的开始节点是s，往下数k个找到当前组的结束节点返回
-  public static ListNode teamEnd(ListNode s, int k) {
-    while (--k != 0 && s != null) {
-      s = s.next;
+  /** 向後移動步數步，返回到達節點；若不足，返回最後節點 */
+  private static ListNode move(ListNode node, int steps) {
+    while (steps-- > 0 && node != null) {
+      node = node.next;
     }
-    return s;
+    return node;
   }
 
-  // s -> a -> b -> c -> e -> 下一组的开始节点
-  // 上面的链表通过如下的reverse方法调整成 : e -> c -> b -> a -> s -> 下一组的开始节点
-  public static void reverse(ListNode s, ListNode e) {
-    e = e.next;
-    ListNode pre = null, cur = s, next = null;
-    while (cur != e) {
-      next = cur.next;
-      cur.next = pre;
-      pre = cur;
-      cur = next;
+  /** 反轉整條單鏈表，返回新的頭節點 */
+  private static ListNode reverseList(ListNode head) {
+    ListNode prev = null, curr = head;
+    while (curr != null) {
+      ListNode next = curr.next;
+      curr.next = prev;
+      prev = curr;
+      curr = next;
     }
-    s.next = e;
+    return prev;
   }
 
-  // 不要提交这个类
+  // 單鏈表節點定義
   public static class ListNode {
     public int val;
     public ListNode next;
+
+    public ListNode(int val) {
+      this.val = val;
+    }
   }
 }

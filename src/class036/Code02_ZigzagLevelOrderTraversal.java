@@ -1,58 +1,53 @@
 package class036;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
+import java.util.Collections;
 
-// 二叉树的锯齿形层序遍历
-// 测试链接 : https://leetcode.cn/problems/binary-tree-zigzag-level-order-traversal/
+// 二叉樹的鋸齒形層序遍歷
+// 要求：沿每層順序交替進行從左到右及從右到左的遍歷
+// 測試連結 : https://leetcode.cn/problems/binary-tree-zigzag-level-order-traversal/
 public class Code02_ZigzagLevelOrderTraversal {
 
-  // 提交以下的方法
-  // 用每次处理一层的优化bfs就非常容易实现
-  // 如果测试数据量变大了就修改这个值
-  public static int MAXN = 2001;
-  public static TreeNode[] queue = new TreeNode[MAXN];
-  public static int l, r;
-
+  /** 使用 BFS，每層收集節點值後根據旗標做順序或反序 時間複雜度 O(n)，空間複雜度 O(n) */
   public static List<List<Integer>> zigzagLevelOrder(TreeNode root) {
     List<List<Integer>> ans = new ArrayList<>();
-    if (root != null) {
-      l = r = 0;
-      queue[r++] = root;
-      // false 代表从左往右
-      // true 代表从右往左
-      boolean reverse = false;
-      while (l < r) {
-        int size = r - l;
-        ArrayList<Integer> list = new ArrayList<Integer>();
-        // reverse == false, 左 -> 右， l....r-1, 收集size个
-        // reverse == true,  右 -> 左， r-1....l, 收集size个
-        // 左 -> 右, i = i + 1
-        // 右 -> 左, i = i - 1
-        for (int i = reverse ? r - 1 : l, j = reverse ? -1 : 1, k = 0; k < size; i += j, k++) {
-          TreeNode cur = queue[i];
-          list.add(cur.val);
-        }
-        for (int i = 0; i < size; i++) {
-          TreeNode cur = queue[l++];
-          if (cur.left != null) {
-            queue[r++] = cur.left;
-          }
-          if (cur.right != null) {
-            queue[r++] = cur.right;
-          }
-        }
-        ans.add(list);
-        reverse = !reverse;
+    if (root == null) return ans;
+
+    Deque<TreeNode> queue = new ArrayDeque<>();
+    queue.offer(root);
+    boolean reverse = false; // false: L->R, true: R->L
+
+    while (!queue.isEmpty()) {
+      int size = queue.size();
+      List<Integer> level = new ArrayList<>(size);
+      // 收集層內值
+      for (int i = 0; i < size; i++) {
+        TreeNode node = queue.poll();
+        level.add(node.val);
+        if (node.left != null) queue.offer(node.left);
+        if (node.right != null) queue.offer(node.right);
       }
+      // 若需反序，使用 Collections.reverse
+      if (reverse) {
+        Collections.reverse(level);
+      }
+      ans.add(level);
+      reverse = !reverse;
     }
     return ans;
   }
 
-  // 不提交这个类
+  // 標準二叉樹節點定義
   public static class TreeNode {
     public int val;
     public TreeNode left;
     public TreeNode right;
+
+    public TreeNode(int v) {
+      val = v;
+    }
   }
 }

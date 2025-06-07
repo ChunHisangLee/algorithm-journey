@@ -1,7 +1,12 @@
 package class036;
 
-// 二叉树先序序列化和反序列化
-// 测试链接 : https://leetcode.cn/problems/serialize-and-deserialize-binary-tree/
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
+
+// 二叉樹的先序序列化與反序列化
+// 要求：可將二叉樹轉為字串並還原，支援任意結構
+// 測試連結 : https://leetcode.cn/problems/serialize-and-deserialize-binary-tree/
 public class Code05_PreorderSerializeAndDeserialize {
 
   // 不提交这个类
@@ -26,45 +31,58 @@ public class Code05_PreorderSerializeAndDeserialize {
   //       1__
   //          \
   //           2
-  // 补足空位置的中序遍历结果都是{ null, 1, null, 2, null}
-  // 提交这个类
-  public class Codec {
+  // 補足空位置的中序遍歷結果都是 { null, 1, null, 2, null }
+  // 提交這個類
+  public static class Codec {
+    private static final String NULL = "#";
+    private static final String SEP = ",";
 
-    // 当前数组消费到哪了
-    public static int cnt;
-
+    /**
+     * 將二叉樹轉為字串
+     *
+     * @param root 樹根
+     * @return 序列化後字串
+     */
     public String serialize(TreeNode root) {
-      StringBuilder builder = new StringBuilder();
-      f(root, builder);
-      return builder.toString();
+      StringBuilder sb = new StringBuilder();
+      buildString(root, sb);
+      return sb.toString();
     }
 
-    void f(TreeNode root, StringBuilder builder) {
-      if (root == null) {
-        builder.append("#,");
+    // 先序遞迴構建字串
+    private void buildString(TreeNode node, StringBuilder sb) {
+      if (node == null) {
+        sb.append(NULL).append(SEP);
       } else {
-        builder.append(root.val + ",");
-        f(root.left, builder);
-        f(root.right, builder);
+        sb.append(node.val).append(SEP);
+        buildString(node.left, sb);
+        buildString(node.right, sb);
       }
     }
 
+    /**
+     * 將字串還原為二叉樹
+     *
+     * @param data 序列化字串
+     * @return 還原後的樹根
+     */
     public TreeNode deserialize(String data) {
-      String[] vals = data.split(",");
-      cnt = 0;
-      return g(vals);
+      if (data == null || data.isEmpty()) return null;
+      String[] tokens = data.split(SEP);
+      Queue<String> queue = new LinkedList<>(Arrays.asList(tokens));
+      return buildTree(queue);
     }
 
-    TreeNode g(String[] vals) {
-      String cur = vals[cnt++];
-      if (cur.equals("#")) {
+    // 從隊列中按先序遞迴構建樹
+    private TreeNode buildTree(Queue<String> queue) {
+      String val = queue.poll();
+      if (NULL.equals(val)) {
         return null;
-      } else {
-        TreeNode head = new TreeNode(Integer.valueOf(cur));
-        head.left = g(vals);
-        head.right = g(vals);
-        return head;
       }
+      TreeNode node = new TreeNode(Integer.parseInt(val));
+      node.left = buildTree(queue);
+      node.right = buildTree(queue);
+      return node;
     }
   }
 }

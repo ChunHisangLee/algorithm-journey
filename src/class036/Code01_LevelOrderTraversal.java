@@ -1,77 +1,71 @@
 package class036;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
-// 二叉树的层序遍历
-// 测试链接 : https://leetcode.cn/problems/binary-tree-level-order-traversal/
+// 二叉樹的層序遍歷
+// 測試連結 : https://leetcode.cn/problems/binary-tree-level-order-traversal/
+// 提交時請將方法名改為 levelOrder
 public class Code01_LevelOrderTraversal {
 
-  // 如果测试数据量变大了就修改这个值
-  public static int MAXN = 2001;
-  public static TreeNode[] queue = new TreeNode[MAXN];
-  public static int l, r;
-
-  // 提交时把方法名改为levelOrder，此方法为普通bfs，此题不推荐
+  /** 方法一：使用 Java 內建隊列與 Map 記錄層級（普通 BFS，不推薦） 時間複雜度 O(n)，空間複雜度 O(n) */
   public static List<List<Integer>> levelOrder1(TreeNode root) {
     List<List<Integer>> ans = new ArrayList<>();
-    if (root != null) {
-      Queue<TreeNode> queue = new LinkedList<>();
-      HashMap<TreeNode, Integer> levels = new HashMap<>();
-      queue.add(root);
-      levels.put(root, 0);
-      while (!queue.isEmpty()) {
-        TreeNode cur = queue.poll();
-        int level = levels.get(cur);
-        if (ans.size() == level) {
-          ans.add(new ArrayList<>());
-        }
-        ans.get(level).add(cur.val);
-        if (cur.left != null) {
-          queue.add(cur.left);
-          levels.put(cur.left, level + 1);
-        }
-        if (cur.right != null) {
-          queue.add(cur.right);
-          levels.put(cur.right, level + 1);
-        }
+    if (root == null) return ans;
+
+    Deque<TreeNode> queue = new ArrayDeque<>();
+    // levels 紀錄每個節點所屬層級
+    Map<TreeNode, Integer> levels = new HashMap<>();
+    queue.offer(root);
+    levels.put(root, 0);
+
+    while (!queue.isEmpty()) {
+      TreeNode cur = queue.poll();
+      int level = levels.get(cur);
+      if (ans.size() == level) {
+        ans.add(new ArrayList<>());
+      }
+      ans.get(level).add(cur.val);
+      if (cur.left != null) {
+        queue.offer(cur.left);
+        levels.put(cur.left, level + 1);
+      }
+      if (cur.right != null) {
+        queue.offer(cur.right);
+        levels.put(cur.right, level + 1);
       }
     }
     return ans;
   }
 
-  // 提交时把方法名改为levelOrder，此方法为每次处理一层的优化bfs，此题推荐
+  /** 方法二：優化版 BFS，每次處理一整層，推薦使用 時間複雜度 O(n)，空間複雜度 O(n) */
   public static List<List<Integer>> levelOrder2(TreeNode root) {
     List<List<Integer>> ans = new ArrayList<>();
-    if (root != null) {
-      l = r = 0;
-      queue[r++] = root;
-      while (l < r) { // 队列里还有东西
-        int size = r - l;
-        ArrayList<Integer> list = new ArrayList<Integer>();
-        for (int i = 0; i < size; i++) {
-          TreeNode cur = queue[l++];
-          list.add(cur.val);
-          if (cur.left != null) {
-            queue[r++] = cur.left;
-          }
-          if (cur.right != null) {
-            queue[r++] = cur.right;
-          }
-        }
-        ans.add(list);
+    if (root == null) return ans;
+
+    Deque<TreeNode> queue = new ArrayDeque<>();
+    queue.offer(root);
+    while (!queue.isEmpty()) {
+      int sz = queue.size();
+      ArrayList<Integer> levelList = new ArrayList<>(sz);
+      for (int i = 0; i < sz; i++) {
+        TreeNode cur = queue.poll();
+        levelList.add(cur.val);
+        if (cur.left != null) queue.offer(cur.left);
+        if (cur.right != null) queue.offer(cur.right);
       }
+      ans.add(levelList);
     }
     return ans;
   }
 
-  // 不提交这个类
+  // 標準二叉樹節點
   public static class TreeNode {
     public int val;
     public TreeNode left;
     public TreeNode right;
+
+    public TreeNode(int v) {
+      val = v;
+    }
   }
 }

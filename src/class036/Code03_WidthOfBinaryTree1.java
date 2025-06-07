@@ -1,45 +1,70 @@
 package class036;
 
-// 二叉树的最大特殊宽度，java版
-// 测试链接 : https://leetcode.cn/problems/maximum-width-of-binary-tree/
+import java.util.ArrayDeque;
+import java.util.Deque;
+
+// 二叉樹的最大特殊寬度
+// 給定一棵二元樹，計算每層的「位置寬度」，返回所有層中的最大值
+// 範例連結 : https://leetcode.cn/problems/maximum-width-of-binary-tree/
 public class Code03_WidthOfBinaryTree1 {
 
-  // 提交以下的方法
-  // 用每次处理一层的优化bfs就非常容易实现
-  // 如果测试数据量变大了就修改这个值
-  public static int MAXN = 3001;
-  public static TreeNode[] nq = new TreeNode[MAXN];
-  public static long[] iq = new long[MAXN];
-  public static int l, r;
-
+  /**
+   * 用 BFS 記錄每個節點在完全二元樹中的假想「序號」 - 根節點序號設為 1 - 若節點序號為 idx，則左子為 idx*2，右子為 idx*2+1 同層最寬度 = 最後節點序號 -
+   * 首節點序號 + 1
+   */
   public static int widthOfBinaryTree(TreeNode root) {
-    int ans = 1;
-    l = r = 0;
-    nq[r] = root;
-    iq[r++] = 1;
-    while (l < r) {
-      int size = r - l;
-      ans = Math.max(ans, (int) (iq[r - 1] - iq[l] + 1));
+    if (root == null) return 0;
+
+    // 存放當前層節點與其序號
+    Deque<NodeIndex> queue = new ArrayDeque<>();
+    queue.offer(new NodeIndex(root, 1L));
+    int maxWidth = 0;
+
+    while (!queue.isEmpty()) {
+      int size = queue.size();
+      long levelHeadIndex = queue.peek().index; // 本層的第一個序號
+      long firstIndex = 0, lastIndex = 0;
       for (int i = 0; i < size; i++) {
-        TreeNode node = nq[l];
-        long id = iq[l++];
+        NodeIndex ni = queue.poll();
+        TreeNode node = ni.node;
+        // 減去 levelHeadIndex 後縮小數值範圍，避免 long 過快溢位
+        long currIndex = ni.index - levelHeadIndex;
+        if (i == 0) firstIndex = currIndex;
+        if (i == size - 1) lastIndex = currIndex;
+
         if (node.left != null) {
-          nq[r] = node.left;
-          iq[r++] = id * 2;
+          queue.offer(new NodeIndex(node.left, currIndex * 2 + 1));
         }
         if (node.right != null) {
-          nq[r] = node.right;
-          iq[r++] = id * 2 + 1;
+          queue.offer(new NodeIndex(node.right, currIndex * 2 + 2));
         }
       }
+      // 計算本層寬度（offset 後的 idx 差值 +1）
+      int width = (int) (lastIndex - firstIndex + 1);
+      maxWidth = Math.max(maxWidth, width);
     }
-    return ans;
+    return maxWidth;
   }
 
-  // 不提交这个类
+  // 內部輔助類：綁定節點與其序號
+  private static class NodeIndex {
+    final TreeNode node;
+    final long index;
+
+    NodeIndex(TreeNode n, long idx) {
+      node = n;
+      index = idx;
+    }
+  }
+
+  // 標準二叉樹節點定義
   public static class TreeNode {
     public int val;
     public TreeNode left;
     public TreeNode right;
+
+    public TreeNode(int v) {
+      val = v;
+    }
   }
 }
