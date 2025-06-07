@@ -7,36 +7,23 @@ package class006;
 // 你可以假设 nums[-1] = nums[n] = 无穷小
 // 你必须实现时间复杂度为 O(log n) 的算法来解决此问题。
 public class Code04_FindPeakElement {
-
-	// 测试链接 : https://leetcode.cn/problems/find-peak-element/
-	class Solution {
-
-		public static int findPeakElement(int[] arr) {
-			int n = arr.length;
-			if (arr.length == 1) {
-				return 0;
-			}
-			if (arr[0] > arr[1]) {
-				return 0;
-			}
-			if (arr[n - 1] > arr[n - 2]) {
-				return n - 1;
-			}
-			int l = 1, r = n - 2, m = 0, ans = -1;
-			while (l <= r) {
-				m = (l + r) / 2;
-				if (arr[m - 1] > arr[m]) {
-					r = m - 1;
-				} else if (arr[m] < arr[m + 1]) {
-					l = m + 1;
-				} else {
-					ans = m;
-					break;
-				}
-			}
-			return ans;
-		}
-
-	}
-
+    // 测试链接 : https://leetcode.cn/problems/find-peak-element/
+    class Solution {
+        public int findPeakElement(int[] arr) {
+            int left = 0;
+            int right = arr.length - 1;
+            while (left < right) {
+                int mid = left + ((right - left) >> 1);
+                if (arr[mid] > arr[mid + 1]) {
+                    // 峰在左邊（包含 mid）
+                    right = mid;
+                } else {
+                    // 峰在右邊（不包含 mid）
+                    left = mid + 1;
+                }
+            }
+            // left==right 時一定指向一個 peak
+            return left;
+        }
+    }
 }

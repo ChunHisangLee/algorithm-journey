@@ -22,39 +22,39 @@ public class PartitionList {
 	}
 
 	class Solution {
+        /**
+         * Partitions a list so that all nodes less than x come before nodes greater than or equal to x,
+         * preserving the original relative order.
+         *
+         * @param head the head of the input list
+         * @param x    the pivot value
+         * @return the head of the partitioned list
+         */
+        public ListNode partition(ListNode head, int x) {
+            // Dummy heads for before and after lists
+            ListNode beforeDummy = new ListNode(0);
+            ListNode afterDummy = new ListNode(0);
+            ListNode before = beforeDummy;
+            ListNode after = afterDummy;
 
-		public static ListNode partition(ListNode head, int x) {
-			ListNode leftHead = null, leftTail = null; // < x的区域
-			ListNode rightHead = null, rightTail = null; // >=x的区域
-			ListNode next = null;
-			while (head != null) {
-				next = head.next;
-				head.next = null;
-				if (head.val < x) {
-					if (leftHead == null) {
-						leftHead = head;
-					} else {
-						leftTail.next = head;
-					}
-					leftTail = head;
-				} else {
-					if (rightHead == null) {
-						rightHead = head;
-					} else {
-						rightTail.next = head;
-					}
-					rightTail = head;
-				}
-				head = next;
-			}
-			if (leftHead == null) {
-				return rightHead;
-			}
-			// < x的区域有内容！
-			leftTail.next = rightHead;
-			return leftHead;
-		}
+            // Partition nodes into before and after lists
+            while (head != null) {
+                if (head.val < x) {
+                    before.next = head;
+                    before = before.next;
+                } else {
+                    after.next = head;
+                    after = after.next;
+                }
+                head = head.next;
+            }
 
-	}
+            // Terminate the 'after' list
+            after.next = null;
+            // Link before a list to an after list
+            before.next = afterDummy.next;
 
+            return beforeDummy.next;
+        }
+    }
 }

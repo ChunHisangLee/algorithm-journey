@@ -1,7 +1,7 @@
 package class013;
 
-import java.util.Queue;
 import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 public class QueueStackAndCircularQueue {
@@ -150,77 +150,100 @@ public class QueueStackAndCircularQueue {
 		public int size() {
 			return size;
 		}
+    }
 
-	}
+    // 设计循环队列
+    // 测试链接 : https://leetcode.cn/problems/design-circular-queue/
 
-	// 设计循环队列
-	// 测试链接 : https://leetcode.cn/problems/design-circular-queue/
-	class MyCircularQueue {
+    class MyCircularQueue {
+        private final int[] data;
+        private final int capacity;
+        private int head;
+        private int tail;
+        private int size;
 
-		public int[] queue;
+        /**
+         * Initializes the circular queue with the given capacity k.
+         *
+         * @param k the maximum number of elements the queue can hold
+         */
+        public MyCircularQueue(int k) {
+            this.capacity = k;
+            this.data = new int[k];
+            this.head = 0;
+            this.tail = 0;
+            this.size = 0;
+        }
 
-		public int l, r, size, limit;
+        /**
+         * Inserts an element into the circular queue.
+         *
+         * @param value the value to insert
+         * @return true if the insertion is successful, false if the queue is full
+         */
+        public boolean enQueue(int value) {
+            if (isFull()) {
+                return false;
+            }
+            data[tail] = value;
+            tail = (tail + 1) % capacity;
+            size++;
+            return true;
+        }
 
-		// 同时在队列里的数字个数，不要超过k
-		public MyCircularQueue(int k) {
-			queue = new int[k];
-			l = r = size = 0;
-			limit = k;
-		}
+        /**
+         * Deletes an element from the circular queue.
+         *
+         * @return true if the deletion is successful, false if the queue is empty
+         */
+        public boolean deQueue() {
+            if (isEmpty()) {
+                return false;
+            }
+            head = (head + 1) % capacity;
+            size--;
+            return true;
+        }
 
-		// 如果队列满了，什么也不做，返回false
-		// 如果队列没满，加入value，返回true
-		public boolean enQueue(int value) {
-			if (isFull()) {
-				return false;
-			} else {
-				queue[r] = value;
-				// r++, 结束了，跳回0
-				r = r == limit - 1 ? 0 : (r + 1);
-				size++;
-				return true;
-			}
-		}
+        /**
+         * Gets the front item from the queue.
+         *
+         * @return the value at the front, or -1 if the queue is empty
+         */
+        public int Front() {
+            return isEmpty() ? -1 : data[head];
+        }
 
-		// 如果队列空了，什么也不做，返回false
-		// 如果队列没空，弹出头部的数字，返回true
-		public boolean deQueue() {
-			if (isEmpty()) {
-				return false;
-			} else {
-				// l++, 结束了，跳回0
-				l = l == limit - 1 ? 0 : (l + 1);
-				size--;
-				return true;
-			}
-		}
+        /**
+         * Gets the last item from the queue.
+         *
+         * @return the value at the rear, or -1 if the queue is empty
+         */
+        public int Rear() {
+            if (isEmpty()) {
+                return -1;
+            }
+            // tail points to the next insertion index, so the last element is at tail-1
+            int idx = (tail - 1 + capacity) % capacity;
+            return data[idx];
+        }
 
-		// 返回队列头部的数字（不弹出），如果没有数返回-1
-		public int Front() {
-			if (isEmpty()) {
-				return -1;
-			} else {
-				return queue[l];
-			}
-		}
+        /**
+         * Checks whether the circular queue is empty.
+         *
+         * @return true if the queue is empty, false otherwise
+         */
+        public boolean isEmpty() {
+            return size == 0;
+        }
 
-		public int Rear() {
-			if (isEmpty()) {
-				return -1;
-			} else {
-				int last = r == 0 ? (limit - 1) : (r - 1);
-				return queue[last];
-			}
-		}
-
-		public boolean isEmpty() {
-			return size == 0;
-		}
-
-		public boolean isFull() {
-			return size == limit;
-		}
-
-	}
-
+        /**
+         * Checks whether the circular queue is full.
+         *
+         * @return true if the queue is full, false otherwise
+         */
+        public boolean isFull() {
+            return size == capacity;
+        }
+    }
 }

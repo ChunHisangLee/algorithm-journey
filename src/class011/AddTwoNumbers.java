@@ -20,41 +20,42 @@ public class AddTwoNumbers {
 			this.val = val;
 			this.next = next;
 		}
-	}
+    }
 
-	class Solution {
+    class Solution {
+        /**
+         * Adds two numbers represented by linked lists in reverse order.
+         *
+         * @param l1 head of the first list
+         * @param l2 head of the second list
+         * @return head of the list representing their sum
+         */
+        public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+            ListNode dummy = new ListNode(0);
+            ListNode tail = dummy;
+            int carry = 0;
 
-		// 也可以复用老链表
-		// 不过这个实现没有这么做，都是生成的新节点(为了教学好懂)
-		public static ListNode addTwoNumbers(ListNode h1, ListNode h2) {
-			ListNode ans = null, cur = null;
-			int carry = 0;
-			for (int sum, val; // 声明变量
-					h1 != null || h2 != null; // 终止条件
-					h1 = h1 == null ? null : h1.next, // 每一步h1的跳转
-					h2 = h2 == null ? null : h2.next // 每一步h2的跳转
-					) {
+            // Traverse both lists until both are exhausted and no carry remains
+            while (l1 != null || l2 != null || carry != 0) {
+                int sum = carry;
+                if (l1 != null) {
+                    sum += l1.val;
+                    l1 = l1.next;
+                }
+                if (l2 != null) {
+                    sum += l2.val;
+                    l2 = l2.next;
+                }
+                // Compute a new digit and carry
+                carry = sum / 10;
+                int digit = sum % 10;
 
-				sum = (h1 == null ? 0 : h1.val)
-						+ (h2 == null ? 0 : h2.val)
-						+ carry;
+                // Append new node
+                tail.next = new ListNode(digit);
+                tail = tail.next;
+            }
 
-				val = sum % 10;
-				carry = sum / 10;
-				if (ans == null) {
-					ans = new ListNode(val);
-					cur = ans;
-				} else {
-					cur.next = new ListNode(val);
-					cur = cur.next;
-				}
-			}
-			if (carry == 1) {
-				cur.next = new ListNode(1);
-			}
-			return ans;
-		}
-
-	}
-
+            return dummy.next;
+        }
+    }
 }

@@ -16,8 +16,8 @@ public class ConvertQueueAndStack {
 		public Stack<Integer> out;
 
 		public MyQueue() {
-			in = new Stack<Integer>();
-			out = new Stack<Integer>();
+            in = new Stack<>();
+            out = new Stack<>();
 		}
 
 		// 倒数据
@@ -59,7 +59,7 @@ public class ConvertQueueAndStack {
 		Queue<Integer> queue;
 
 		public MyStack() {
-			queue = new LinkedList<Integer>();
+            queue = new LinkedList<>();
 		}
 
 		// O(n)

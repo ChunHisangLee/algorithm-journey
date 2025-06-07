@@ -8,34 +8,30 @@ package class019;
 // 这是输入输出处理效率很高的写法
 // 提交以下的code，提交时请把类名改成"Main"，可以直接通过
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
+import java.io.*;
 
 public class Code04_ReadByLine {
 
-	public static String line;
+    public static String line;
 
-	public static String[] parts;
+    public static String[] parts;
 
-	public static int sum;
+    public static int sum;
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-		PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
-		while ((line = in.readLine()) != null) {
-			parts = line.split(" ");
-			sum = 0;
-			for (String num : parts) {
-				sum += Integer.valueOf(num);
-			}
-			out.println(sum);
-		}
-		out.flush();
-		in.close();
-		out.close();
-	}
+    public static void main(String[] args) throws IOException {
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));
+        while ((line = in.readLine()) != null) {
+            parts = line.split(" ");
+            sum = 0;
+            for (String num : parts) {
+                sum += Integer.valueOf(num);
+            }
+            out.println(sum);
+        }
+        out.flush();
+        in.close();
+        out.close();
+    }
 
 }

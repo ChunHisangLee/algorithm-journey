@@ -7,17 +7,11 @@ import java.util.Stack;
 // 不用递归，用迭代的方式实现二叉树的三序遍历
 public class BinaryTreeTraversalIteration {
 
-	public static class TreeNode {
-		public int val;
-		public TreeNode left;
-		public TreeNode right;
-
-		public TreeNode(int v) {
-			val = v;
-		}
-	}
-
-	// 先序打印所有节点，非递归版
+    /**
+     * 先序打印所有节点，非递归版。
+     *
+     * @param head 树根节点
+     */
 	public static void preOrder(TreeNode head) {
 		if (head != null) {
 			Stack<TreeNode> stack = new Stack<>();
@@ -33,10 +27,14 @@ public class BinaryTreeTraversalIteration {
 				}
 			}
 			System.out.println();
-		}
-	}
+        }
+    }
 
-	// 中序打印所有节点，非递归版
+    /**
+     * 中序打印所有节点，非递归版。
+     *
+     * @param head 树根节点
+	 */
 	public static void inOrder(TreeNode head) {
 		if (head != null) {
 			Stack<TreeNode> stack = new Stack<>();
@@ -51,11 +49,14 @@ public class BinaryTreeTraversalIteration {
 				}
 			}
 			System.out.println();
-		}
-	}
+        }
+    }
 
-	// 后序打印所有节点，非递归版
-	// 这是用两个栈的方法
+    /**
+     * 后序打印所有节点，非递归版。使用两个栈实现。
+     *
+     * @param head 树根节点
+	 */
 	public static void posOrderTwoStacks(TreeNode head) {
 		if (head != null) {
 			Stack<TreeNode> stack = new Stack<>();
@@ -75,36 +76,39 @@ public class BinaryTreeTraversalIteration {
 				System.out.print(collect.pop().val + " ");
 			}
 			System.out.println();
-		}
-	}
+        }
+    }
 
-	// 后序打印所有节点，非递归版
-	// 这是用一个栈的方法
+    /**
+     * 后序打印所有节点，非递归版。使用一个栈实现。
+     *
+     * @param h 树根节点
+	 */
 	public static void posOrderOneStack(TreeNode h) {
 		if (h != null) {
 			Stack<TreeNode> stack = new Stack<>();
 			stack.push(h);
-			// 如果始终没有打印过节点，h就一直是头节点
-			// 一旦打印过节点，h就变成打印节点
-			// 之后h的含义 : 上一次打印的节点
+            // h 保存上一个已打印节点
 			while (!stack.isEmpty()) {
 				TreeNode cur = stack.peek();
 				if (cur.left != null && h != cur.left && h != cur.right) {
-					// 有左树且左树没处理过
+                    // 左子树未处理
 					stack.push(cur.left);
 				} else if (cur.right != null && h != cur.right) {
-					// 有右树且右树没处理过
+                    // 右子树未处理
 					stack.push(cur.right);
 				} else {
-					// 左树、右树 没有 或者 都处理过了
 					System.out.print(cur.val + " ");
 					h = stack.pop();
 				}
 			}
 			System.out.println();
-		}
-	}
+        }
+    }
 
+    /**
+     * 构造示例二叉树并演示所有遍历方法。
+	 */
 	public static void main(String[] args) {
 		TreeNode head = new TreeNode(1);
 		head.left = new TreeNode(2);
@@ -121,10 +125,14 @@ public class BinaryTreeTraversalIteration {
 		System.out.println("后序遍历非递归版 - 2个栈实现");
 		posOrderOneStack(head);
 		System.out.println("后序遍历非递归版 - 1个栈实现");
-	}
+    }
 
-	// 用一个栈完成先序遍历
-	// 测试链接 : https://leetcode.cn/problems/binary-tree-preorder-traversal/
+    /**
+     * 用一个栈完成先序遍历，返回遍历结果列表。
+     *
+     * @param head 树根节点
+     * @return 先序遍历节点值列表
+	 */
 	public static List<Integer> preorderTraversal(TreeNode head) {
 		List<Integer> ans = new ArrayList<>();
 		if (head != null) {
@@ -142,10 +150,14 @@ public class BinaryTreeTraversalIteration {
 			}
 		}
 		return ans;
-	}
+    }
 
-	// 用一个栈完成中序遍历
-	// 测试链接 : https://leetcode.cn/problems/binary-tree-inorder-traversal/
+    /**
+     * 用一个栈完成中序遍历，返回遍历结果列表。
+     *
+     * @param head 树根节点
+     * @return 中序遍历节点值列表
+	 */
 	public static List<Integer> inorderTraversal(TreeNode head) {
 		List<Integer> ans = new ArrayList<>();
 		if (head != null) {
@@ -162,11 +174,14 @@ public class BinaryTreeTraversalIteration {
 			}
 		}
 		return ans;
-	}
+    }
 
-	// 用两个栈完成后序遍历
-	// 提交时函数名改为postorderTraversal
-	// 测试链接 : https://leetcode.cn/problems/binary-tree-postorder-traversal/
+    /**
+     * 用两个栈完成后序遍历，返回遍历结果列表。
+     *
+     * @param head 树根节点
+     * @return 后序遍历节点值列表
+	 */
 	public static List<Integer> postorderTraversalTwoStacks(TreeNode head) {
 		List<Integer> ans = new ArrayList<>();
 		if (head != null) {
@@ -188,11 +203,14 @@ public class BinaryTreeTraversalIteration {
 			}
 		}
 		return ans;
-	}
+    }
 
-	// 用一个栈完成后序遍历
-	// 提交时函数名改为postorderTraversal
-	// 测试链接 : https://leetcode.cn/problems/binary-tree-postorder-traversal/
+    /**
+     * 用一个栈完成后序遍历，返回遍历结果列表。
+     *
+     * @param h 树根节点
+     * @return 后序遍历节点值列表
+	 */
 	public static List<Integer> postorderTraversalOneStack(TreeNode h) {
 		List<Integer> ans = new ArrayList<>();
 		if (h != null) {
@@ -211,6 +229,24 @@ public class BinaryTreeTraversalIteration {
 			}
 		}
 		return ans;
+    }
+
+    /**
+     * 二叉树节点定义。
+     */
+    public static class TreeNode {
+        public int val;
+        public TreeNode left;
+        public TreeNode right;
+
+        /**
+         * 构造函数，初始化节点值。
+         *
+         * @param v 节点值
+         */
+        public TreeNode(int v) {
+            val = v;
+		}
 	}
 
 }

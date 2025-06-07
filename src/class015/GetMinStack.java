@@ -1,43 +1,67 @@
 package class015;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 // 最小栈
 // 测试链接 : https://leetcode.cn/problems/min-stack/
 public class GetMinStack {
 
 	// 提交时把类名、构造方法改成MinStack
-	class MinStack1 {
-		public Stack<Integer> data;
-		public Stack<Integer> min;
+    class MinStack {
+        private final Deque<Integer> stack;
+        private final Deque<Integer> minStack;
 
-		public MinStack1() {
-			data = new Stack<Integer>();
-			min = new Stack<Integer>();
-		}
+        /**
+         * Initialize your data structure here.
+         */
+        public MinStack() {
+            stack = new ArrayDeque<>();
+            minStack = new ArrayDeque<>();
+        }
 
+        /**
+         * Pushes the element val onto the stack.
+         *
+         * @param val the value to push
+		 */
 		public void push(int val) {
-			data.push(val);
-			if (min.isEmpty() || val <= min.peek()) {
-				min.push(val);
-			} else { // !min.isEmpty() && val > min.peek()
-				min.push(min.peek());
-			}
-		}
+            stack.push(val);
+            // If minStack is empty or new val is <= current min, push onto minStack
+            if (minStack.isEmpty() || val <= minStack.peek()) {
+                minStack.push(val);
+            }
+        }
 
+        /**
+         * Removes the element on the top of the stack.
+		 */
 		public void pop() {
-			data.pop();
-			min.pop();
-		}
+            int removed = stack.pop();
+            // If the popped value equals the current minimum, pop it from minStack too
+            if (removed == minStack.peek()) {
+                minStack.pop();
+            }
+        }
 
+        /**
+         * Gets the top element.
+         *
+         * @return the element on top of the stack
+		 */
 		public int top() {
-			return data.peek();
-		}
+            return stack.peek();
+        }
 
+        /**
+         * Retrieves the minimum element in the stack.
+         *
+         * @return the minimum element
+		 */
 		public int getMin() {
-			return min.peek();
-		}
-	}
+            return minStack.peek();
+    }
+  }
 
 	// 提交时把类名、构造方法改成MinStack
 	class MinStack2 {
