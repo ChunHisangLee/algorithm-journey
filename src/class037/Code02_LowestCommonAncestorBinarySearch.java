@@ -1,30 +1,42 @@
 package class037;
 
-// 搜索二叉树上寻找两个节点的最近公共祖先
-// 测试链接 : https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-search-tree/
+// 在二叉搜尋樹上尋找兩個節點的最近公共祖先（LCA）
+// 採用直接比較，推薦在面試中使用
 public class Code02_LowestCommonAncestorBinarySearch {
 
-  // 提交如下的方法
+  /**
+   * BST 特性：左子樹 < 根 < 右子樹 迭代法： - 若 root.val 大於 p.val 和 q.val，答案在左側 - 若 root.val 小於 p.val 和
+   * q.val，答案在右側 - 否則 root 就是最近公共祖先
+   *
+   * @param root BST 根節點
+   * @param p 節點 p
+   * @param q 節點 q
+   * @return LCA 節點
+   */
   public static TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-    // root从上到下
-    // 如果先遇到了p，说明p是答案
-    // 如果先遇到了q，说明q是答案
-    // 如果root在p~q的值之间，不用管p和q谁大谁小，只要root在中间，那么此时的root就是答案
-    // 如果root在p~q的值的左侧，那么root往右移动
-    // 如果root在p~q的值的右侧，那么root往左移动
-    while (root.val != p.val && root.val != q.val) {
-      if (Math.min(p.val, q.val) < root.val && root.val < Math.max(p.val, q.val)) {
-        break;
+    while (root != null) {
+      if (root.val > p.val && root.val > q.val) {
+        // p, q 均在左子樹
+        root = root.left;
+      } else if (root.val < p.val && root.val < q.val) {
+        // p, q 均在右子樹
+        root = root.right;
+      } else {
+        // root 位於 p 和 q 之間，或等於其中一個，即為 LCA
+        return root;
       }
-      root = root.val < Math.min(p.val, q.val) ? root.right : root.left;
     }
-    return root;
+    return null;
   }
 
-  // 不提交这个类
+  // 標準 BST 節點
   public static class TreeNode {
     public int val;
     public TreeNode left;
     public TreeNode right;
+
+    public TreeNode(int v) {
+      this.val = v;
+    }
   }
 }
