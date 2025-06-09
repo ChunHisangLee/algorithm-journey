@@ -4,41 +4,52 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-// 给你一个整数数组 nums ，其中可能包含重复元素，请你返回该数组所有可能的组合
-// 答案 不能 包含重复的组合。返回的答案中，组合可以按 任意顺序 排列
-// 注意其实要求返回的不是子集，因为子集一定是不包含相同元素的，要返回的其实是不重复的组合
-// 比如输入：nums = [1,2,2]
-// 输出：[[],[1],[1,2],[1,2,2],[2],[2,2]]
-// 测试链接 : https://leetcode.cn/problems/subsets-ii/
+/**
+ * 類 Code02_Combinations
+ * 
+ * 提供一個方法來生成給定整數陣列所有可能的組合，該陣列可能包含重複元素，
+ * 且結果中不能包含重複的組合。組合的順序不做限制。
+ * 
+ * <p>例如，輸入 nums = [1, 2, 2]，輸出：
+ * [[], [1], [1, 2], [1, 2, 2], [2], [2, 2]]</p>
+ * 
+ * <p>題目鏈接：https://leetcode.cn/problems/subsets-ii/</p>
+ */
 public class Code02_Combinations {
 
-  public static List<List<Integer>> subsetsWithDup(int[] nums) {
-    List<List<Integer>> ans = new ArrayList<>();
-    Arrays.sort(nums);
-    f(nums, 0, new int[nums.length], 0, ans);
-    return ans;
-  }
-
-  public static void f(int[] nums, int i, int[] path, int size, List<List<Integer>> ans) {
-    if (i == nums.length) {
-      ArrayList<Integer> cur = new ArrayList<>();
-      for (int j = 0; j < size; j++) {
-        cur.add(path[j]);
-      }
-      ans.add(cur);
-    } else {
-      // 下一组的第一个数的位置
-      int j = i + 1;
-      while (j < nums.length && nums[i] == nums[j]) {
-        j++;
-      }
-      // 当前数x，要0个
-      f(nums, j, path, size, ans);
-      // 当前数x，要1个、要2个、要3个...都尝试
-      for (; i < j; i++) {
-        path[size++] = nums[i];
-        f(nums, j, path, size, ans);
-      }
+    /**
+     * 返回整數陣列 nums 的所有不重複組合。
+     *
+     * @param nums 包含可能重複元素的整數陣列
+     * @return 所有可能的組合，每個組合為 List<Integer>，整體以 List<List<Integer>> 封裝
+     */
+    public static List<List<Integer>> subsetsWithDup(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<>();
+        // 先對陣列進行排序，便於後續跳過重複元素
+        Arrays.sort(nums);
+        backtrack(nums, 0, new ArrayList<>(), ans);
+        return ans;
     }
-  }
+
+    /**
+     * 回溯函數，用於構造所有組合。
+     *
+     * @param nums     已排序的整數陣列
+     * @param start    下一步可選元素的起始索引
+     * @param tempList 當前已構造的組合
+     * @param ans      最終結果集，收集所有不重複組合
+     */
+    private static void backtrack(int[] nums, int start, List<Integer> tempList, List<List<Integer>> ans) {
+        // 每次進入即添加當前組合的拷貝
+        ans.add(new ArrayList<>(tempList));
+        for (int i = start; i < nums.length; i++) {
+            // 如果當前元素與前一元素相同，且前一元素已在同一層被處理過，就跳過，以避免重複
+            if (i > start && nums[i] == nums[i - 1]) {
+                continue;
+            }
+            tempList.add(nums[i]);
+            backtrack(nums, i + 1, tempList, ans);
+            tempList.remove(tempList.size() - 1);
+        }
+    }
 }
